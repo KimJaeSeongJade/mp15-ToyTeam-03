@@ -242,6 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab81af3ce6970204593fe3f17fd9e01b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 10
+  _goldDropPrefab: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}
 --- !u!1 &716039857
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,41 +707,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 9061598467559536980, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _skillRandge
-      value: 25
+    - target: {fileID: 7735846054338725324, guid: 0883c668193b36940b1c02b705557596, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7735846054338725324, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2543709129744794539}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0883c668193b36940b1c02b705557596, type: 3}
---- !u!1 &2543709129744794538 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7735846054338725324, guid: 0883c668193b36940b1c02b705557596, type: 3}
-  m_PrefabInstance: {fileID: 2543709129744794537}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2543709129744794539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2543709129744794538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab7aa6e02ae84747a22587dd8f8b896, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _level: 1
-  _exp: 0
-  _atk: 1
-  _moveSpeed: 5
-  _dashSpeed: 10
-  _gold: 0
 --- !u!1001 &4922474302387764471
 PrefabInstance:
   m_ObjectHideFlags: 0
