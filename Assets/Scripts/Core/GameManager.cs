@@ -13,7 +13,9 @@ public class GameManager : SingletonBehaviour<GameManager>
     public GameState currentState;
     [SerializeField] private GameObject _startPanel;
     [SerializeField] private GameObject _pausePanel;
-
+    [SerializeField] private GameObject _inGameUI;
+    
+    
     private bool IsPause;
     
     // ---- 이벤트 함수 ---------------------------------------
@@ -27,6 +29,8 @@ public class GameManager : SingletonBehaviour<GameManager>
         _startPanel.gameObject.SetActive(true);
         // 일시정지 판넬은 꺼진 상태
         _pausePanel.gameObject.SetActive(false);
+        // 인게임 판넬도 꺼진 상태
+        _inGameUI.SetActive(false);
         // 게임 시간 정지
         Pause();
         IsPause = false;
@@ -78,10 +82,10 @@ public class GameManager : SingletonBehaviour<GameManager>
             case GameState.Ready:
                 // 준비 상태 로직
                 break;
-            case GameState.Preparation:
+            case GameState.WavePreparation:
                 // 라운드 시작 전 로직
                 break;
-            case GameState.Playing:
+            case GameState.OnWave:
                 // 플레이 시작 로직
                 break;
             case GameState.Paused:
@@ -125,6 +129,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         _startPanel.gameObject.SetActive(false);
         // 게임 시간 시작
         Run();
+        _inGameUI.SetActive(true);
     }
 }
 
@@ -132,8 +137,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 public enum GameState
 {
     Ready,
-    Preparation,
-    Playing,
+    WavePreparation,
+    OnWave,
     Paused,
     GameOver
 }
