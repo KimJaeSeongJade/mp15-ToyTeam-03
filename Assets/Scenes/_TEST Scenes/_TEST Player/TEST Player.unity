@@ -653,11 +653,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _curretTurret: {fileID: 0}
---- !u!4 &1558784816 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2451385753596297110, guid: 0883c668193b36940b1c02b705557596, type: 3}
-  m_PrefabInstance: {fileID: 2543709129744794537}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2543709129744794537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -706,13 +701,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7349751491184764522, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _attackMuzzle
-      value: 
-      objectReference: {fileID: 1558784816}
     - target: {fileID: 7735846054338725324, guid: 0883c668193b36940b1c02b705557596, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061598467559536980, guid: 0883c668193b36940b1c02b705557596, type: 3}
+      propertyPath: _skillRandge
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
