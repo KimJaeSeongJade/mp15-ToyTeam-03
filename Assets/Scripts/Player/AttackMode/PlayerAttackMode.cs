@@ -4,18 +4,52 @@ using UnityEngine;
 
 public class PlayerAttackMode : MonoBehaviour
 {
+    [SerializeField] private BasicAttack _basicAttack;
+    [SerializeField] private ObjectPool<BasicAttack> _attackPools;
+    [SerializeField] private SkillAttack _skillAttack;
+    [SerializeField] private int _initMaxCount;
+    [SerializeField] private Transform _migicMuzzle;
+    [SerializeField] private float _fireTime;
+    [SerializeField] private float _skillTime;
+
     private PlayerInputReader _inputReader;
     private PlayerBuildMode _buildMode;
 
+    private float _elapseTime;
+    private float _elapseSkillTime;
+
+    private bool canFire => _elapseTime >= _fireTime;
+    private bool canSkill => _elapseSkillTime >= _skillTime;
     private bool isAttackMode = true;
+
 
     private void Awake() => CacheComponenet();
     private void Start() => Init();
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        FireCoolDown();
+        Attack();
+
         AttackModeEnd();
+    }
+
+
+    // TODO: 스킬 구현
+    private void FireCoolDown()
+    {
+        if (canFire) return;
+
+        _elapseTime += Time.deltaTime;
+    }
+
+    private void Attack()
+    {
+        if (!canFire || !_inputReader.isPressedAttack) return;
+
+        _basicAttack = _attackPools.Pop();
+
+        _elapseTime = 0;
     }
 
     // TODO: 추후 변경 가능성 있음. 키 입력 구독 처리로 refac 예정
@@ -25,7 +59,6 @@ public class PlayerAttackMode : MonoBehaviour
             && !_inputReader.isPressedSub
             && !_inputReader.isPressedThird
             && !_inputReader.isPressedForth) return;
-
 
         if (_inputReader.isPressedPrimary)
         {
@@ -71,5 +104,22 @@ public class PlayerAttackMode : MonoBehaviour
     private void Init()
     {
         enabled = isAttackMode;
+
+        _attackPools = new ObjectPool<BasicAttack>(
+            _basicAttack,
+            _initMaxCount,
+            _migicMuzzle,
+            _basicAttack =>
+            {
+                AttackPoolInit(_basicAttack);
+            }
+            );
+
+        _elapseTime = _fireTime;
+    }
+
+    private void AttackPoolInit(BasicAttack basicAttack)
+    {
+        basicAttack.InitTransform();
     }
 }
