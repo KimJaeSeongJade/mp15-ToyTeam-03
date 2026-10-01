@@ -212,6 +212,12 @@ PR이 기본 Branch에 Merge되면 GitHub 자동화에 의해:
 
 따라서 Merge 이후 Issue Close와 Done 변경은 수동으로 하지 않는다.
 
+### Merge 양식
+
+Merge하는 경우 제목은 다음과 같이 설정한다.
+
+> `Merge branch 'main' ← '본인이 작업한 브랜치명'`
+
 ---
 
 ## 10. 다시 작업해야 하는 경우
