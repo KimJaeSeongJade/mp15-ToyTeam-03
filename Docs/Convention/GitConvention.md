@@ -1,5 +1,6 @@
 # Git 협업 규칙
 
+
 ## 1. 기본 원칙
 
 모든 개발 작업은 아래 흐름을 기준으로 진행한다.
@@ -21,8 +22,8 @@ GitHub Projects와 Issue, Pull Request는 서로 연결하여 관리되며,
 
 프로젝트의 기본 개발 흐름은 다음과 같다.
 
-main
-└─ main-develop
+main\
+└─ main-develop\
     └─ 작업 Branch
 
 - `main`은 최종 결과물을 관리한다.
@@ -46,8 +47,9 @@ Issue가 생성되면 Projects Board의 `Todo` 상태로 관리한다.
 
 작업을 시작하면 `In Progress`로 변경한다.
 
+### Sub Issue
 
-양식 작성하기
+
 
 ---
 
@@ -80,8 +82,7 @@ Branch 이름은 다음 형식을 따른다.
 | docs | 문서 작업 |
 | test | 테스트 |
 
-작업 내용은 가능한 한 짧고 명확하게 작성하며,
-여러 단어는 `-`로 구분한다.
+>### 작업 내용은 가능한 한 짧고 명확하게 작성하며, 여러 단어는 `-`로 구분한다.
 
 ---
 
@@ -120,11 +121,11 @@ Commit은 의미 있는 작업 단위로 나누어 작성한다.
 
 ## 6. Pull Request
 
-작업 단위가 완료되면 Pull Request를 생성한다.
+작업 단위가 완료되면 Pull Request를 생성한다. (이하 `PR`)
 
-PR의 Base Branch는 `main-develop`으로 설정한다.
+`PR`의 `Base Branch`는 `main-develop`으로 설정한다.
 
-PR 본문에는 반드시 연결할 Issue 번호를 작성한다.
+`PR` 본문에는 반드시 연결할 Issue 번호를 작성한다.
 
 예:`Closes #12`
 
@@ -132,8 +133,8 @@ PR 본문에는 반드시 연결할 Issue 번호를 작성한다.
 
 `Closes #12, Closes #15`
 
-PR과 Issue가 연결되면 Projects에서 해당 작업의 상태가
-`In Progress`로 관리된다.
+`PR`과 Issue가 연결되면 Projects에서 해당 작업의 상태가
+`TODO` → `In Progress`로 관리된다.
 
 ---
 
@@ -145,7 +146,7 @@ PR에는 아래 내용을 작성한다.
 
 구현하거나 수정한 기능을 작성한다.
 
-관련 Script, Prefab, Scene이 있다면 함께 작성한다.
+관련 `Script, Prefab, Scene`이 있다면 함께 작성한다.
 
 ### 왜 했나요?
 
@@ -159,12 +160,14 @@ PR에는 아래 내용을 작성한다.
 - 관계없는 파일 포함 여부
 - Scene / Prefab 변경 여부
 
-### 사용 방법
 
+
+
+### 작성 방법 및 유의사항
+
+위 양식에 따라 PR을 작성한다.
 다른 팀원이 사용해야 하는 코드 또는 기능이라면
 사용 방법을 스크린샷 등을 활용하여 작성한다.
-
-### 리뷰어에게
 
 확인이 필요한 사항 또는 주의 사항을 작성한다.
 
@@ -221,3 +224,6 @@ Issue를 Reopen하면 Projects 상태가 다시 `In Progress`로 변경된다.
 Projects Board에서 Done 카드를 직접 다른 상태로 옮기기만 하면
 Issue는 닫힌 상태로 남을 수 있으므로,
 재작업 시에는 반드시 Issue에서 Reopen한다.
+
+
+## 작성 예시 및 양식
