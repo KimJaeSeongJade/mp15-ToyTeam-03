@@ -21,7 +21,7 @@ public class PlayerInputReader : MonoBehaviour
     public bool isPressedSkillUp => Input.GetKeyUp(_skillKey);
     public bool isPressedSkill => Input.GetKey(_skillKey);
     public bool isPressedSkillDown => Input.GetKeyDown(_skillKey);
-    public bool isPressedExitBuild => Input.GetKey(_exitBuildKey);
+    public bool isPressedExitBuild => Input.GetKeyDown(_exitBuildKey);
     public bool isPressedDashKey => Input.GetKey(_dashkey);
     public bool isPressedJumpKey => Input.GetKeyDown(_jumpKey);
     public bool isPressedPrimary => Input.GetKeyDown(_primaryKey);

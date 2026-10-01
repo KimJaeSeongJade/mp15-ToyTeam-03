@@ -21,6 +21,8 @@ public class TurretCompination
 
 public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
 {
+    [SerializeField] private List <TurretBuildTest> _baseTurretlist;
+
     [SerializeField] private List<TurretCompination> _combinationsViewer;
 
     [SerializeField] private Dictionary<(TurretType, TurretType), GameObject> _lookup = new();
@@ -49,5 +51,23 @@ public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
     public bool TryGetResult(TurretType existType, TurretType addType, out GameObject result)
     {
         return _lookup.TryGetValue((existType, addType), out result);
+    }
+
+    // TODO: 리펙토링 가능성 연구 필요
+    public TurretBuildTest GetSelectedTurret(int num)
+    {
+        switch (num)
+        {
+            case 0:
+                return _baseTurretlist[0];
+            case 1:
+                return _baseTurretlist[1];
+            case 2:
+                return _baseTurretlist[2];
+            case 3:
+                return _baseTurretlist[3];
+        }
+
+        return null;
     }
 }
