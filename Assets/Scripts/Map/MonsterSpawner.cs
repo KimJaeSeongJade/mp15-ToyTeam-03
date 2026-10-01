@@ -5,13 +5,13 @@ using System;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    //[SerializeField] private WaypointPath _waypointPath;
+    [SerializeField] private WaypointPath _waypointPath;
     [SerializeField] private int _count;
-    private int _correntCount;
-     
     [SerializeField] private GameObject _monsterPrefab;
-    private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     
+    
+    private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
+    private int _correntCount;
     
     public void SpawnWave(int waveNumber, Action onMonsterSpawn, Action onSpawnEnd)
     {
