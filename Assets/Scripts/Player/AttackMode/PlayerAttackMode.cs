@@ -6,23 +6,26 @@ public class PlayerAttackMode : MonoBehaviour
 {
     [SerializeField] private BasicAttack _basicAttack;
     [SerializeField] private ObjectPool<BasicAttack> _attackPools;
+    [SerializeField] private SkillAttack _skillAttack;
     [SerializeField] private int _initMaxCount;
     [SerializeField] private Transform _migicMuzzle;
     [SerializeField] private float _fireTime;
+    [SerializeField] private float _skillTime;
 
     private PlayerInputReader _inputReader;
     private PlayerBuildMode _buildMode;
 
     private float _elapseTime;
+    private float _elapseSkillTime;
 
     private bool canFire => _elapseTime >= _fireTime;
+    private bool canSkill => _elapseSkillTime >= _skillTime;
     private bool isAttackMode = true;
 
 
     private void Awake() => CacheComponenet();
     private void Start() => Init();
 
-    // Update is called once per frame
     private void Update()
     {
         FireCoolDown();
@@ -31,6 +34,8 @@ public class PlayerAttackMode : MonoBehaviour
         AttackModeEnd();
     }
 
+
+    // TODO: 스킬 구현
     private void FireCoolDown()
     {
         if (canFire) return;

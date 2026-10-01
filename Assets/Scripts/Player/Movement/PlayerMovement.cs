@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform _cameraPivot;
+    [SerializeField] private Transform _attackMuzzle;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _dashSpeed;
     [SerializeField] private float _mouseSensitivity;
@@ -82,6 +83,9 @@ public class PlayerMovement : MonoBehaviour
 
         _pitch = Mathf.Clamp(_pitch + input.x, _minPitch, _maxPitch);
 
+        _cameraPivot.localRotation = Quaternion.Euler(_pitch, 0f, _cameraPivot.localEulerAngles.z);
+
+        _attackMuzzle.localRotation = Quaternion.Euler(_pitch, 0f, 0f);
         _cameraPivot.localRotation = Quaternion.Euler(_pitch, 0f, _cameraPivot.localEulerAngles.z);
     }
 
