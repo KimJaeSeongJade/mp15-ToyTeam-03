@@ -129,9 +129,11 @@ PR이 올라오면 본인 기능과 관련된 작업자들이 내용을 확인�
 2. 팀장
 3. 팀장이 확인하기 어려운 경우 PM
 
-최종 확인이 끝난 뒤 `Merge`를 진행한다.
+최종 확인이 끝난 뒤 `Merge`를 진행하기 전
+> ## Base Branch가 `main-develop`인지 확인한다.
+> ### `main`으로 `Merge`하지 않는다.
 
-Merge를 진행하면 :
+Merge를 진행하게되면 :
 
 - 연결된 Issue가 `Close` 처리된다.
 - Kanban Board의 상태를 `Done`으로 변경한다.
