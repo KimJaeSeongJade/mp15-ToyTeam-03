@@ -212,11 +212,19 @@ PR이 기본 Branch에 Merge되면 GitHub 자동화에 의해:
 
 따라서 Merge 이후 Issue Close와 Done 변경은 수동으로 하지 않는다.
 
+
+### Merge 주의사항
+
+Merge 진행 시에 `main-develop` 브랜치로 병합을 진행하려는 것인지 확인한다.
+
+
 ### Merge 양식
 
 Merge하는 경우 제목은 다음과 같이 설정한다.
 
-> `Merge branch 'main' ← '본인이 작업한 브랜치명'`
+> `Merge branch 'main-develop' ← '본인이 작업한 브랜치명'`
+> 
+> 세부내용 : 작업 중에 Issue 작업 당시와 변경점이 있다면 작성해주세요.
 
 ---
 
@@ -230,6 +238,3 @@ Issue를 Reopen하면 Projects 상태가 다시 `In Progress`로 변경된다.
 Projects Board에서 Done 카드를 직접 다른 상태로 옮기기만 하면
 Issue는 닫힌 상태로 남을 수 있으므로,
 재작업 시에는 반드시 Issue에서 Reopen한다.
-
-
-## 작성 예시 및 양식
