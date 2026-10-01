@@ -9,9 +9,11 @@ public class TurretPreview : MonoBehaviour
 
     void Start()
     {
-        _previewRenderer = GetComponent<Renderer>();
+        _previewRenderer = GetComponentInChildren<Renderer>();
+        _previewMat = _previewRenderer.material;
     }
 
+    // TODO: 메터리얼 참조 방식 변경 해야함
     public void StartPreview(TurretBuildTest turret, bool value)
     {
         switch(value)
@@ -31,6 +33,6 @@ public class TurretPreview : MonoBehaviour
 
     public void EndPreview(TurretBuildTest turret)
     {
-        turret.GetComponent<Renderer>().material = null;
+        turret.GetComponentInChildren<Renderer>().material = null;
     }
 }

@@ -8,13 +8,14 @@ public class PlayerBuildMode : MonoBehaviour
 {
     // TODO: 터렛 선택 추후 연결시 터렛 클래스로 변경
     [SerializeField] private TurretBuildTest _selectedTurret;
-    [SerializeField] private TurretBuildTest _previewTurret;
 
     [SerializeField] private LayerMask _targetMask;
     [SerializeField] private float _rayDistance;
 
     private PlayerInputReader _inputReader;
     private PlayerAttackMode _attackMode;
+    private TurretBuildTest _previewTurret;
+    private TowerTest _towerTest;
 
     private Ray ray;
     private bool isBuildMode = false;
@@ -26,6 +27,7 @@ public class PlayerBuildMode : MonoBehaviour
     {
         SetSelectedTurret();
         RayToBuildPoint();
+        TurretBuild();
 
         BuildModeEnd();
     }
@@ -45,9 +47,9 @@ public class PlayerBuildMode : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, _rayDistance, _targetMask))
         {
             // TODO: 디버그용 임시 코드. 추후 연결시 삭제
-            if (hit.transform.TryGetComponent(out TowerTest tower))
+            if (hit.transform.TryGetComponent(out _towerTest))
             {
-                tower.CallbackDebugLog();
+                _towerTest.CallbackDebugLog();
                 _previewTurret.CanBuild(true);
 
 #if UNITY_EDITOR
@@ -57,6 +59,7 @@ public class PlayerBuildMode : MonoBehaviour
             }
             else
             {
+                _towerTest = null;
                 _previewTurret.CanBuild(false);
 
 #if UNITY_EDITOR
@@ -110,6 +113,16 @@ public class PlayerBuildMode : MonoBehaviour
 
         Destroy(_previewTurret.gameObject);
         _previewTurret = Instantiate(_selectedTurret);
+    }
+
+    private void TurretBuild()
+    {
+        if (_towerTest == null || !_inputReader.isPressedAttackDown) return;
+
+        _towerTest.Build(_previewTurret);
+        _previewTurret.TryBuild();
+        _previewTurret = null;
+
     }
 
     private void BuildModeEnd()

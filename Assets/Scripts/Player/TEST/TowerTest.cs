@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TowerTest : MonoBehaviour
 {
+    // 확인용 터렛 설치 위치
     [SerializeField] private TurretBuildTest _curretTurret;
 
     public void CallbackDebugLog()
