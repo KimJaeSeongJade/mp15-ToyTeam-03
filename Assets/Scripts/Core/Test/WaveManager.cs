@@ -8,6 +8,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     [SerializeField] private float _prepareTime = 30f;
 
     // 정보 받아와야하면 추후에 수정
+    
     private int _currentWave = 0;   
     private float _remainingTime;   
     private int _aliveMonsterCount;
@@ -17,6 +18,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     public float RemainingTime => _remainingTime;
 
     // 웨이브 시작 / 종료 액션처리
+    // delegate
     public event Action OnWaveStarted;
     public event Action OnWaveEnded;
     public event Action<int> OnWaveChanged;
@@ -133,6 +135,12 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         StartCoroutine(PrepareNextWave());
     }
 
+
+    private void CacheComponents()
+    {
+        // _player = GetComponent<>(Player); 
+    }
+
     private void RefreshGold()
     {
         //Player.OnGoldChange += RefreshGoldUI;
@@ -141,8 +149,9 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private void RefreshGoldUI(int gold)
     {
         Debug.Log($"Gold : {gold}");
-        //Player.gold = gold.ToString();
+        //_playerGoldText.text = gold.ToString();
     }
+    // fps 실습때 진행한 playerWeapon과 UI로 확인
 }
 
 
