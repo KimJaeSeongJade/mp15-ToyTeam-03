@@ -7,14 +7,15 @@ using static UnityEngine.GraphicsBuffer;
 public class PlayerBuildMode : MonoBehaviour
 {
     // TODO: 터렛 선택 추후 연결시 터렛 클래스로 변경
-    [SerializeField] private TurretBuildTest _selectedTurret;
+    [SerializeField] private BaseTurret _selectedTurret;
 
     [SerializeField] private LayerMask _targetMask;
     [SerializeField] private float _rayDistance;
 
+    private BuildPoint _buildPoint;
     private PlayerInputReader _inputReader;
     private PlayerAttackMode _attackMode;
-    private TurretBuildTest _previewTurret;
+    private BaseTurret _previewTurret;
     private TowerTest _towerTest;
 
     private Ray ray;
@@ -47,10 +48,10 @@ public class PlayerBuildMode : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, _rayDistance, _targetMask))
         {
             // TODO: 디버그용 임시 코드. 추후 연결시 삭제
-            if (hit.transform.TryGetComponent(out _towerTest))
+            if (hit.transform.TryGetComponent(out _buildPoint))
             {
                 _towerTest.CallbackDebugLog();
-                _previewTurret.CanBuild(true);
+                //_previewTurret.CanBuild(true);
 
 #if UNITY_EDITOR
                 Debug.Log("설치 영역 감지됨: " + hit.collider.gameObject.name);
@@ -60,7 +61,7 @@ public class PlayerBuildMode : MonoBehaviour
             else
             {
                 _towerTest = null;
-                _previewTurret.CanBuild(false);
+                //_previewTurret.CanBuild(false);
 
 #if UNITY_EDITOR
                 Debug.Log("감지된 설치 영역 없음");
@@ -117,9 +118,9 @@ public class PlayerBuildMode : MonoBehaviour
 
     private void TurretBuild()
     {
-        if (_towerTest == null || !_inputReader.isPressedAttackDown) return;
+        if (_buildPoint == null || !_inputReader.isPressedAttackDown) return;
 
-        _towerTest.Build(_previewTurret);
+        //_buildPoint.CheckCurrentTurret(_previewTurret);
         _previewTurret.TryBuild();
         _previewTurret = null;
 

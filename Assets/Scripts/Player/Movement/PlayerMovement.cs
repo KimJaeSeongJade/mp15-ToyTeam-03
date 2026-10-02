@@ -3,14 +3,14 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform _cameraPivot;
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _dashSpeed;
+    [SerializeField] private Transform _attackMuzzle;
     [SerializeField] private float _mouseSensitivity;
     [SerializeField] private float _minPitch;
     [SerializeField] private float _maxPitch;
     [SerializeField] private float _groundStickSpeed = 2f;
 
     private PlayerInputReader _inputReader;
+    private PlayerStatus _status;
 
     private PlayerJump _playerJump;
     private PlayerGroundChecker _groundChecker;
@@ -46,9 +46,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _groundChecker.CheckGround();
 
-        float moveDash =
-            _inputReader.isPressedDashKey == true 
-            ? _dashSpeed : _moveSpeed;
+        float moveSpeed = _inputReader.isPressedDashKey
+            ? _status.DashSpeed : _status.MoveSpeed;
 
         Vector3 input = _inputReader.GetMoveNormalInput();
 
@@ -61,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
             direction = Vector3.ProjectOnPlane(direction, _groundChecker.GroundNormal).normalized;
         }
 
-        Vector3 newVelocity = direction * moveDash;
+        Vector3 newVelocity = direction * moveSpeed;
 
         bool isJumping = _playerJump != null && _playerJump.IsJumping;
         if (!isGroundMoving || isJumping)
@@ -86,6 +85,9 @@ public class PlayerMovement : MonoBehaviour
         _pitch = Mathf.Clamp(_pitch + input.x, _minPitch, _maxPitch);
 
         _cameraPivot.localRotation = Quaternion.Euler(_pitch, 0f, _cameraPivot.localEulerAngles.z);
+
+        _attackMuzzle.localRotation = Quaternion.Euler(_pitch, 0f, 0f);
+        _cameraPivot.localRotation = Quaternion.Euler(_pitch, 0f, _cameraPivot.localEulerAngles.z);
     }
 
     private void CacheComponent()
@@ -97,6 +99,11 @@ public class PlayerMovement : MonoBehaviour
         _cameraPivot.localPosition = new Vector3(0f, pivotPosition.y, 0f);
 
         _inputReader = GetComponent<PlayerInputReader>();
+        _status = GetComponent<PlayerStatus>();
+        if (_status == null)
+        {
+            _status = gameObject.AddComponent<PlayerStatus>();
+        }
         _groundChecker = GetComponent<PlayerGroundChecker>();
         _playerJump = GetComponent<PlayerJump>();
         _rb = GetComponent<Rigidbody>();
