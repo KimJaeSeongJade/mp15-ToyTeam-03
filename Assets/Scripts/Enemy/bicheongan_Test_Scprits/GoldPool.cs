@@ -2,22 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoldTurret : MonoBehaviour
+public class GoldPool : MonoBehaviour
 {
     [SerializeField] private GameObject _goldPrefab;
     [SerializeField] private int _initialSize = 10;
     private List<GameObject> _golds = new List<GameObject>();
 
-    public static GoldPool Instance { get; private set; }
-
     private void Start()
     {
-        Instance = this; //인스턴스는 자기 자신
+        //Instance = this;
         FillPool(); //시작시 풀 채우기
     }
     private void Update() // 추가 생성이 되는지 확인
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Take();
         }
@@ -35,7 +33,7 @@ public class GoldTurret : MonoBehaviour
     }
     public GameObject Take() //담긴 오브젝트 꺼내기
     {
-        foreach (GameObject gold in _golds) // 순회 돌아 비활성화이면 활성화로 변환
+        foreach (GameObject gold in _golds) // 순회 돌아 비활성화 르 활성화로 변환
         {
             if (!gold.activeSelf)
             {
@@ -48,5 +46,11 @@ public class GoldTurret : MonoBehaviour
         newgold.SetActive(true);
         _golds.Add(newgold);
         return newgold;
+    }
+
+    // 골드 반환
+    public void ReturnToPool(GameObject gold)
+    {
+        gold.SetActive(false);
     }
 }
