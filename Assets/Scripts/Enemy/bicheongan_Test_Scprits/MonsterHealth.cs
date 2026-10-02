@@ -8,11 +8,13 @@ public class MonsterHealth : MonoBehaviour, IDamagable
     [SerializeField] private float _hp;
     [SerializeField] private GoldDrop _goldPrabas;
     private ObjectPool<GoldDrop> goldPool;
+    private BaseEnemy Cacheenemy;
 
     private bool _isDead;
 
     private void Awake()
     {
+        CacheComponent();
         goldPool = new ObjectPool<GoldDrop>(_goldPrabas, 20);
     }
 
@@ -32,17 +34,14 @@ public class MonsterHealth : MonoBehaviour, IDamagable
         {
             Debug.Log("죽음");
             _isDead = true;
-            //DropGold();
             goldPool.PopAll();
-            Destroy(gameObject);// 몬스터 오브젝트 풀 만들시 풀 반환으로 변경 
+            Cacheenemy.ReturnToPool();
+            //Destroy(gameObject);// 몬스터 오브젝트 풀 만들시 풀 반환으로 변경 
         }
     }
-    /*private void DropGold()
+    private void CacheComponent()
     {
+        Cacheenemy = GetComponent<BaseEnemy>();
+    }
 
-        if (gold == null)
-            return;
-
-        gold.transform.position = transform.position;
-    }*/
 }
