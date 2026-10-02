@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyTest : MonoBehaviour
+public class EnemyTest : MonoBehaviour, IDamageable
 {
     [SerializeField] private float _maxHealth = 10f;
     [SerializeField] private GoldDrop _goldDropPrefab;

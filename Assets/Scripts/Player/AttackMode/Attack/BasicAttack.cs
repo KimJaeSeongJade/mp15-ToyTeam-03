@@ -45,7 +45,7 @@ public class BasicAttack : PoolObject
 
     protected virtual void DetectTaraget(RaycastHit hit)
     {
-        if (hit.transform.TryGetComponent<IDamagable>(out var damageable))
+        if (hit.transform.TryGetComponent<IDamageable>(out var damageable))
         {
             Hit(damageable);
         }
@@ -53,7 +53,7 @@ public class BasicAttack : PoolObject
         ReturnToPool();
     }
 
-    protected void Hit(IDamagable damageable)
+    protected void Hit(IDamageable damageable)
     {
         damageable.TakeDamage(_damage);
     }
