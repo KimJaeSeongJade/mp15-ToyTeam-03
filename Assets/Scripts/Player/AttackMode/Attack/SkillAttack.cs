@@ -40,11 +40,11 @@ public class SkillAttack : MonoBehaviour
             _targetMask,
             QueryTriggerInteraction.Collide);
 
-        var damagedTargets = new HashSet<IDamagable>();
+        var damagedTargets = new HashSet<IDamageable>();
 
         foreach (Collider hit in hits)
         {
-            IDamagable target = hit.GetComponentInParent<IDamagable>();
+            IDamageable target = hit.GetComponentInParent<IDamageable>();
             if (target != null && damagedTargets.Add(target))
             {
                 target.TakeDamage(_damage);

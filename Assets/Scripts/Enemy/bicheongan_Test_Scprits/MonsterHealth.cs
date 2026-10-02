@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class MonsterHealth : MonoBehaviour, IDamagable
+public class MonsterHealth : MonoBehaviour, IDamageable
 {
     [SerializeField] private float _hp;
     [SerializeField] private GoldDrop _goldPrabas;
