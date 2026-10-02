@@ -13,14 +13,6 @@ public class BaseTurret : MonoBehaviour
     public int Cost => _goldCost;
     public TurretType Type => _turretType;
 
-    public enum TurretType
-    {
-        Attack,
-        Defence,
-        Support,
-        Gold
-    }
-
     public virtual void Attack()
     {
         
