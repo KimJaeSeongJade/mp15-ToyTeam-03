@@ -134,6 +134,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 }
 
 // esc 누르면 판넬 나오고 종료/재개
+
 public enum GameState
 {
     Ready,
