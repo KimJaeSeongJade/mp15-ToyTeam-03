@@ -12,8 +12,8 @@
   <component name="ChangeListManager">
     <list default="true" id="522593d3-ccb6-424c-b3fc-31aff01e8e40" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.mp15-ToyTeam-03/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.mp15-ToyTeam-03/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/_TEST Scenes/_TEST Map/WaypointPath.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/_TEST Scenes/_TEST Map/WaypointPath.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MonsterSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/MonsterSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/GoalChecker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/GoalChecker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MonsterPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/MonsterPool.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,61 +33,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.621745091623785E-201" />
-      <entry key="MS500" value="6.950187458771467E-41" />
-      <entry key="S2" value="9.130596053822643E-11" />
-      <entry key="S5" value="9.642722218611314E-5" />
-      <entry key="S10" value="0.00982151862513977" />
-      <entry key="S30" value="0.25327570647738024" />
-      <entry key="S60" value="1.181652090221097" />
-      <entry key="M2" value="5.346833338443239" />
-      <entry key="M5" value="24.47960651189086" />
-      <entry key="M10" value="49.273910183356854" />
-      <entry key="M15" value="64.70639658421449" />
-      <entry key="M30" value="90.31367722662958" />
-      <entry key="H1" value="113.13785944565488" />
-      <entry key="H2" value="130.24974250807847" />
-      <entry key="H4" value="141.0989537998087" />
-      <entry key="D1" value="151.68645558992344" />
-      <entry key="W1" value="153.66518585519555" />
+      <entry key="MS100" value="1.0000000009058556" />
+      <entry key="MS500" value="1.015538596385519" />
+      <entry key="S2" value="1.3530636010961887" />
+      <entry key="S5" value="1.6593882115263177" />
+      <entry key="S10" value="1.8120272233899044" />
+      <entry key="S30" value="1.9329467649630572" />
+      <entry key="S60" value="1.9658917498426947" />
+      <entry key="M2" value="1.98313417127918" />
+      <entry key="M5" value="2.1627976464416534" />
+      <entry key="M10" value="5.753214782237002" />
+      <entry key="M15" value="14.049355145577298" />
+      <entry key="M30" value="44.064263039297195" />
+      <entry key="H1" value="85.52708773814749" />
+      <entry key="H2" value="123.01083587852601" />
+      <entry key="H4" value="149.038151649231" />
+      <entry key="D1" value="175.93647786525244" />
+      <entry key="W1" value="181.1184806605785" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000000004423784" />
-      <entry key="S5" value="1.0001812665076306" />
-      <entry key="S10" value="1.0134648050589399" />
-      <entry key="S30" value="1.259813507011181" />
-      <entry key="S60" value="1.7636974870932565" />
-      <entry key="M2" value="2.9737415958529496" />
-      <entry key="M5" value="6.49045542610063" />
-      <entry key="M10" value="9.952098155696861" />
-      <entry key="M15" value="11.83033157371598" />
-      <entry key="M30" value="14.821223377517107" />
-      <entry key="H1" value="17.753261375301918" />
-      <entry key="H2" value="20.219343870833548" />
-      <entry key="H4" value="21.898191783163597" />
-      <entry key="D1" value="23.615152422297854" />
-      <entry key="W1" value="23.944098515520103" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="6.881609885085714E-233" />
+      <entry key="S5" value="1.3648220163738849E-93" />
+      <entry key="S10" value="3.694349761966081E-47" />
+      <entry key="S30" value="3.330524790471205E-16" />
+      <entry key="S60" value="1.8250920873310715E-8" />
+      <entry key="M2" value="1.3802693265113625E-4" />
+      <entry key="M5" value="0.058992808436442355" />
+      <entry key="M10" value="0.9649595805059659" />
+      <entry key="M15" value="2.7488424902019393" />
+      <entry key="M30" value="8.398567999313643" />
+      <entry key="H1" value="15.576622571130715" />
+      <entry key="H2" value="21.928520622904195" />
+      <entry key="H4" value="26.349990638012063" />
+      <entry key="D1" value="30.955468874216095" />
+      <entry key="W1" value="31.847989485080568" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="2.178743959020137E-7" />
-      <entry key="MS500" value="0.046520164223954365" />
-      <entry key="S2" value="0.46441935414211766" />
-      <entry key="S5" value="0.7360448135533579" />
-      <entry key="S10" value="0.8791537143495197" />
-      <entry key="S30" value="1.4475566106642943" />
-      <entry key="S60" value="2.8904157963425314" />
-      <entry key="M2" value="8.257901473952202" />
-      <entry key="M5" value="30.893700398970758" />
-      <entry key="M10" value="59.15859806146115" />
-      <entry key="M15" value="76.48036646171667" />
-      <entry key="M30" value="105.09722431182172" />
-      <entry key="H1" value="130.8677454316325" />
-      <entry key="H2" value="150.45558005741879" />
-      <entry key="H4" value="162.98979252360436" />
-      <entry key="D1" value="175.30028237417363" />
-      <entry key="W1" value="177.60909228376013" />
+      <entry key="MS100" value="5.814450103321246E-5" />
+      <entry key="MS500" value="0.15203469390206978" />
+      <entry key="S2" value="0.9289881241974159" />
+      <entry key="S5" value="1.4526944941396682" />
+      <entry key="S10" value="1.7007427811635738" />
+      <entry key="S30" value="1.8938745730926392" />
+      <entry key="S60" value="1.946093586108066" />
+      <entry key="M2" value="1.9733034071071018" />
+      <entry key="M5" value="2.2171865759103104" />
+      <entry key="M10" value="6.710278570813191" />
+      <entry key="M15" value="16.78495656760715" />
+      <entry key="M30" value="52.44263691307184" />
+      <entry key="H1" value="101.08449562262952" />
+      <entry key="H2" value="144.92561803070572" />
+      <entry key="H4" value="175.3798254653883" />
+      <entry key="D1" value="206.89030895369916" />
+      <entry key="W1" value="212.96622921058457" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -114,7 +114,7 @@
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/ChouChou1008/MonsterSpawner&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/ChouChou1008/GoalChecker&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -130,6 +130,26 @@
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.62f3\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\user\AppData\Local\GitHubDesktop\app-3.6.6\mp15-ToyTeam-03 -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\user\AppData\Local\GitHubDesktop\app-3.6.6\mp15-ToyTeam-03" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.62f3\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\SAMSUNG\OneDrive\문서\GitHub\mp15-ToyTeam-03 -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\SAMSUNG\OneDrive\문서\GitHub\mp15-ToyTeam-03" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.62f3\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\SAMSUNG\OneDrive\문서\GitHub\mp15-ToyTeam-03 -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\SAMSUNG\OneDrive\문서\GitHub\mp15-ToyTeam-03" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
