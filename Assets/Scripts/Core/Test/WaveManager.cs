@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class WaveManager : SingletonBehaviour<WaveManager>
 {
+    [SerializeField] private MonsterSpawner _monsterSpawner;
+    
     // 웨이브 대기 시간
     [SerializeField] private float _prepareTime = 30f;
-    private GameManager _gameManager;
+    [SerializeField] private GameManager _gameManager;
     
     // 정보 받아와야하면 추후에 수정
     
     private int _currentWave = 0;   
     private float _remainingTime;   
-    private int _aliveMonsterCount;
-    private bool _isSpawnFinished;
-
+    [SerializeField] private int _aliveMonsterCount;
+    [SerializeField] private bool _isSpawnFinished;
+    
     public int CurrentWave => _currentWave;
     public float RemainingTime => _remainingTime;
 
@@ -43,7 +45,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private void OnEnable()
     {
         if (!_gameManager.IsStarted) return;
-        StartFirstWavePrepare();
+        //StartFirstWavePrepare();
         Debug.Log("웨이브 준비 단계");
 
         // GameManager 게임 시작 이벤트 구독 
@@ -64,9 +66,11 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     
     // 게임 시작 시 호출
-    private void StartFirstWavePrepare()
+    public void StartFirstWavePrepare()
     {
-        StartCoroutine(PrepareNextWave());
+        _monsterSpawner.SpawnWave(1, AddMonster,SetSpawnFinished);
+
+        //StartCoroutine(PrepareNextWave());
     }
 
     // 다음 웨이브 준비
@@ -102,14 +106,18 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     }
 
     // 몬스터 생성 시 호출
-    public void AddMonster()
+    public void AddMonster(BaseEnemy  enemy)
     {
+        enemy.onRemoved += RemoveMonster;
+        
         _aliveMonsterCount++;
     }
 
     // 몬스터 사망 시 호출
-    public void RemoveMonster()
+    public void RemoveMonster(BaseEnemy  enemy)
     {
+        enemy.onRemoved -= RemoveMonster;
+        
         _aliveMonsterCount--;
 
         CheckWaveEnd();

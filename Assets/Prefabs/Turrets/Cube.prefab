@@ -123,5 +123,5 @@ MonoBehaviour:
   lifeTime: 5
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   bulletDamage: 10

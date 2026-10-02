@@ -8,16 +8,16 @@ public class MonsterMove : MonoBehaviour
     private List<Transform> waypoints;
     private int arrivePoint;
     private BaseEnemy reenemy;
-    private float speed = 50f;
+    private float speed = 10f;
 
     private void Awake()
     {
         CacheComponent();
     }
-    private void Start()
-    {
-        Initialize(_start);
-    }
+    // private void Start()
+    // {
+    //     Initialize(_start);
+    // }
 
     private void Update()
     {
@@ -48,7 +48,7 @@ public class MonsterMove : MonoBehaviour
         if (transform.position == LastPoint.position)
         {
             Debug.Log("도착");
-            reenemy.ReturnToPool();
+            reenemy?.ReturnToPool();
         }
     }
     private void CacheComponent()

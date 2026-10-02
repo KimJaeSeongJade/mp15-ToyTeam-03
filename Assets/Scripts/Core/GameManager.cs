@@ -103,7 +103,7 @@ public class GameManager : SingletonBehaviour<GameManager>
                 break;
             case GameState.OnWave:
                 // 웨이브 시작 때 로직
-                
+                WaveManager.Instance.StartFirstWavePrepare();
                 // 웨이브 중임을 알리는 텍스트 : 남은 몹
                 
                 // 만약 클리어면 클리어 로직 처리하고 다음 웨이브 준비
@@ -149,6 +149,8 @@ public class GameManager : SingletonBehaviour<GameManager>
         // 판넬 끄고
         _startPanel.gameObject.SetActive(false);
         // 게임 시간 시작
+        WaveManager.Instance.StartFirstWavePrepare();
+        currentState = GameState.OnWave;
         Run();
         _inGameUI.SetActive(true);
     }
