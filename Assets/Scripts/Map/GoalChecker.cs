@@ -19,5 +19,6 @@ public class GoalChecker : MonoBehaviour
             _count++;
         }
         Debug.Log(_count);
+        _isCheck = false;
     }
 }

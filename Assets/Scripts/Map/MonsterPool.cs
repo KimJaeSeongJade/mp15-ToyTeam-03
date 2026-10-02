@@ -15,7 +15,9 @@ public class MonsterPool : MonoBehaviour
     //하나 생성할 때마다 --;
     
     
-
+     //List 또는 Queue로 통해서 받아오기
+     // _count만큼 확성화하기 -> 제활용은 필요 없음
+     // 
 
     private void Start() => FillPool();
 
