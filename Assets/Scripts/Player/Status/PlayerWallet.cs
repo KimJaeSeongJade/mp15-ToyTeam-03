@@ -19,6 +19,8 @@ public class PlayerWallet : MonoBehaviour
 
         _gold += amount;
         OnGoldChanged?.Invoke(_gold);
+
+        Debug.Log($"+{amount}골드 획득. 총 {_gold}골드");
     }
 
     // 잔액이 충분하면 골드를 차감하고 true를 반환한다. 부족하거나 음수이면 false다.
@@ -29,6 +31,7 @@ public class PlayerWallet : MonoBehaviour
 
         _gold -= amount;
         OnGoldChanged?.Invoke(_gold);
+        Debug.Log($"-{amount}골드 감소. 총 {_gold}골드");
         return true;
     }
 }
