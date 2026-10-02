@@ -119,7 +119,7 @@ public class PlayerBuildMode : MonoBehaviour
     {
         if (_buildPoint == null || !_inputReader.isPressedAttackDown) return;
 
-        _buildPoint.CheckCurrentTurret(_previewTurret.gameObject);
+        //_buildPoint.CheckCurrentTurret(_previewTurret);
         _previewTurret.TryBuild();
         _previewTurret = null;
 

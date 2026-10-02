@@ -19,9 +19,12 @@ public class BuildPoint : MonoBehaviour
         }
         else //있다면
         {
-            //TurretCombinationTable.Instance.TryGetResult(_currentTurret.Type, turret.Type, out GameObject result);
-            //Instantiate(result,transform.position,transform.rotation);
-            // _currentTurret 체크해서 있다면 조합된걸 반환
+            if (TurretCombinationTable.Instance.TryGetResult(_currentTurret.Type, turret.Type, out GameObject result))
+            {
+                Instantiate(result,transform.position,transform.rotation);
+                // _currentTurret 체크해서 있다면 조합된걸 반환  
+            }
+            
 
         }
         
