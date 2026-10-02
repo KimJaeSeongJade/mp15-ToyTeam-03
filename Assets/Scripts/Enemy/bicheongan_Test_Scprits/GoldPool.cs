@@ -10,7 +10,6 @@ public class GoldPool : MonoBehaviour
 
     private void Start()
     {
-        //Instance = this;
         FillPool(); //시작시 풀 채우기
     }
     private void Update() // 추가 생성이 되는지 확인

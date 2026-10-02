@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class MonsterHealth : MonoBehaviour, IDamagable
 {
     [SerializeField] private float _hp;
+    [SerializeField] private GoldDrop _goldPrabas;
+    private ObjectPool<GoldDrop> goldPool;
+
     private bool _isDead;
+
+    private void Awake()
+    {
+        goldPool = new ObjectPool<GoldDrop>(_goldPrabas, 20);
+    }
 
     private void Update()
     {
@@ -24,12 +33,12 @@ public class MonsterHealth : MonoBehaviour, IDamagable
             Debug.Log("죽음");
             _isDead = true;
             //DropGold();
-            Destroy(gameObject);// 오브젝트 풀 만들시 풀 반환으로 변경 
+            goldPool.PopAll();
+            Destroy(gameObject);// 몬스터 오브젝트 풀 만들시 풀 반환으로 변경 
         }
     }
     /*private void DropGold()
     {
-        GameObject gold = GoldPool.Instance.Take();
 
         if (gold == null)
             return;
