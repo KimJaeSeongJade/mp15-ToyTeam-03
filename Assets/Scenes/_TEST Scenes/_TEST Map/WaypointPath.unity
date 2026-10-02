@@ -2499,7 +2499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   _startPanel: {fileID: 867406134}
-  _pausePanel: {fileID: 1996934113}
+  _pausePanel: {fileID: 1858342578}
   _inGameUI: {fileID: 2054651654}
 --- !u!4 &1144319278
 Transform:
@@ -2546,6 +2546,8 @@ MonoBehaviour:
   _monsterSpawner: {fileID: 1062174970}
   _prepareTime: 10
   _gameManager: {fileID: 1144319277}
+  _aliveMonsterCount: 0
+  _isSpawnFinished: 0
 --- !u!1 &1186085402
 GameObject:
   m_ObjectHideFlags: 0
@@ -3749,7 +3751,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1858342579
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3876,12 +3878,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0507e1fb9fe63254989a188af2b501a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waypoint:
-  - {fileID: 867037061}
-  - {fileID: 325488759}
-  - {fileID: 872088277}
-  - {fileID: 520857663}
-  - {fileID: 2061190681}
 --- !u!4 &1906699161
 Transform:
   m_ObjectHideFlags: 0
@@ -3912,7 +3908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1996934114
 RectTransform:
   m_ObjectHideFlags: 0

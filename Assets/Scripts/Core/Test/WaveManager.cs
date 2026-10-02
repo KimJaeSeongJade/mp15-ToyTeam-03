@@ -106,7 +106,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     }
 
     // 몬스터 생성 시 호출
-    public void AddMonster(BaseEnemy  enemy)
+    public void AddMonster(BaseEnemy enemy)
     {
         enemy.onRemoved += RemoveMonster;
         
@@ -114,7 +114,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     }
 
     // 몬스터 사망 시 호출
-    public void RemoveMonster(BaseEnemy  enemy)
+    public void RemoveMonster(BaseEnemy enemy)
     {
         enemy.onRemoved -= RemoveMonster;
         
@@ -177,6 +177,3 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     }
     // fps 실습때 진행한 playerWeapon과 UI로 확인
 }
-
-
-
