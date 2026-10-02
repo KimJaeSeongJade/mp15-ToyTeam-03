@@ -11,9 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="522593d3-ccb6-424c-b3fc-31aff01e8e40" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.mp15-ToyTeam-03/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.mp15-ToyTeam-03/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/_TEST Scenes/_TEST Map/WaypointPath.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/_TEST Scenes/_TEST Map/WaypointPath.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MonsterSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/MonsterSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/BuildPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/BuildPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/BuildMode/PlayerBuildMode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/BuildMode/PlayerBuildMode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Turrets/BaseTurret.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Turrets/BaseTurret.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +24,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/CubeMove.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/MonsterObjectPool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/BuildPoint.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/37cc348edc804f4cb176b63962c716e7177200/78/85a51be4/Object.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -33,61 +33,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.621745091623785E-201" />
-      <entry key="MS500" value="6.950187458771467E-41" />
-      <entry key="S2" value="9.130596053822643E-11" />
-      <entry key="S5" value="9.642722218611314E-5" />
-      <entry key="S10" value="0.00982151862513977" />
-      <entry key="S30" value="0.25327570647738024" />
-      <entry key="S60" value="1.181652090221097" />
-      <entry key="M2" value="5.346833338443239" />
-      <entry key="M5" value="24.47960651189086" />
-      <entry key="M10" value="49.273910183356854" />
-      <entry key="M15" value="64.70639658421449" />
-      <entry key="M30" value="90.31367722662958" />
-      <entry key="H1" value="113.13785944565488" />
-      <entry key="H2" value="130.24974250807847" />
-      <entry key="H4" value="141.0989537998087" />
-      <entry key="D1" value="151.68645558992344" />
-      <entry key="W1" value="153.66518585519555" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.000000000206091" />
+      <entry key="S2" value="1.0037889450396664" />
+      <entry key="S5" value="1.1084956149499154" />
+      <entry key="S10" value="1.3594344310600193" />
+      <entry key="S30" value="2.005582973318969" />
+      <entry key="S60" value="2.3925660750344555" />
+      <entry key="M2" value="2.6710393706732822" />
+      <entry key="M5" value="4.160083113380545" />
+      <entry key="M10" value="11.945643845793276" />
+      <entry key="M15" value="22.273305259272753" />
+      <entry key="M30" value="54.600064120638464" />
+      <entry key="H1" value="114.72959790396963" />
+      <entry key="H2" value="200.25168018046776" />
+      <entry key="H4" value="282.95479666267056" />
+      <entry key="D1" value="391.8888015846399" />
+      <entry key="W1" value="415.82897889972395" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000000004423784" />
-      <entry key="S5" value="1.0001812665076306" />
-      <entry key="S10" value="1.0134648050589399" />
-      <entry key="S30" value="1.259813507011181" />
-      <entry key="S60" value="1.7636974870932565" />
-      <entry key="M2" value="2.9737415958529496" />
-      <entry key="M5" value="6.49045542610063" />
-      <entry key="M10" value="9.952098155696861" />
-      <entry key="M15" value="11.83033157371598" />
-      <entry key="M30" value="14.821223377517107" />
-      <entry key="H1" value="17.753261375301918" />
-      <entry key="H2" value="20.219343870833548" />
-      <entry key="H4" value="21.898191783163597" />
-      <entry key="D1" value="23.615152422297854" />
-      <entry key="W1" value="23.944098515520103" />
+      <entry key="MS100" value="4.554689964995039E-9" />
+      <entry key="MS500" value="0.02146306615500737" />
+      <entry key="S2" value="0.3844209715007407" />
+      <entry key="S5" value="0.7583881189981423" />
+      <entry key="S10" value="1.1041312877887812" />
+      <entry key="S30" value="1.681954150471337" />
+      <entry key="S60" value="2.078456800522578" />
+      <entry key="M2" value="2.4354202543784833" />
+      <entry key="M5" value="3.137630116309429" />
+      <entry key="M10" value="5.69702767593107" />
+      <entry key="M15" value="8.99475133677133" />
+      <entry key="M30" value="18.24447319296346" />
+      <entry key="H1" value="31.443549293804587" />
+      <entry key="H2" value="46.60174888008283" />
+      <entry key="H4" value="59.93022618309277" />
+      <entry key="D1" value="76.7353960812709" />
+      <entry key="W1" value="80.36852496691982" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="2.178743959020137E-7" />
-      <entry key="MS500" value="0.046520164223954365" />
-      <entry key="S2" value="0.46441935414211766" />
-      <entry key="S5" value="0.7360448135533579" />
-      <entry key="S10" value="0.8791537143495197" />
-      <entry key="S30" value="1.4475566106642943" />
-      <entry key="S60" value="2.8904157963425314" />
-      <entry key="M2" value="8.257901473952202" />
-      <entry key="M5" value="30.893700398970758" />
-      <entry key="M10" value="59.15859806146115" />
-      <entry key="M15" value="76.48036646171667" />
-      <entry key="M30" value="105.09722431182172" />
-      <entry key="H1" value="130.8677454316325" />
-      <entry key="H2" value="150.45558005741879" />
-      <entry key="H4" value="162.98979252360436" />
-      <entry key="D1" value="175.30028237417363" />
-      <entry key="W1" value="177.60909228376013" />
+      <entry key="MS100" value="9.711138717730472E-5" />
+      <entry key="MS500" value="0.15828078890173558" />
+      <entry key="S2" value="0.7972176970428395" />
+      <entry key="S5" value="1.4704297325341689" />
+      <entry key="S10" value="2.1892500726612294" />
+      <entry key="S30" value="3.554139098118394" />
+      <entry key="S60" value="4.393497494071145" />
+      <entry key="M2" value="5.063805301322146" />
+      <entry key="M5" value="7.273826706043423" />
+      <entry key="M10" value="17.608456806089215" />
+      <entry key="M15" value="31.222755682348073" />
+      <entry key="M30" value="72.78633126754475" />
+      <entry key="H1" value="146.11753962853186" />
+      <entry key="H2" value="246.81096238057233" />
+      <entry key="H4" value="342.8576218000323" />
+      <entry key="D1" value="468.6183800990463" />
+      <entry key="W1" value="496.1966348992088" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -114,7 +114,7 @@
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/ChouChou1008/MonsterSpawner&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/ChouChou1008/BuildPoint&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -124,7 +124,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Unity 에디터에 연결.Unity 에디터에 연결">
     <configuration name="유닛 테스트(배치 모드)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.62f3\Editor\Unity.exe" />

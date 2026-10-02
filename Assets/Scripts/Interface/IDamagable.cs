@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    public void TakeDamage(float damage) { }
+    // 데미지를 받는 메서드 (받을 데미지 수치를 매개변수로 받음)
+    void TakeDamage(float damage);
+    void SlowSpeed(float speed);
 }

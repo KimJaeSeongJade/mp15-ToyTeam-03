@@ -7,8 +7,13 @@ public class MonsterMove : MonoBehaviour
     [SerializeField] private WayPointPath _start; //스폰 포인트 참조
     private List<Transform> waypoints;
     private int arrivePoint;
+    private BaseEnemy reenemy;
     private float speed = 50f;
 
+    private void Awake()
+    {
+        CacheComponent();
+    }
     private void Start()
     {
         Initialize(_start);
@@ -43,7 +48,11 @@ public class MonsterMove : MonoBehaviour
         if (transform.position == LastPoint.position)
         {
             Debug.Log("도착");
-            Destroy(gameObject); // 임시
+            reenemy.ReturnToPool();
         }
+    }
+    private void CacheComponent()
+    {
+        reenemy = GetComponent<BaseEnemy>();
     }
 }
