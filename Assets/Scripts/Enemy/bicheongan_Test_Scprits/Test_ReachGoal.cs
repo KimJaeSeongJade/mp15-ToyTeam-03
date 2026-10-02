@@ -11,7 +11,7 @@ public class Test_ReachGoal : MonoBehaviour
 
         if (goal != null)
         {
-            //goal.ReachGoal();
+            goal.ReachGoal();
         }
     }
 }
