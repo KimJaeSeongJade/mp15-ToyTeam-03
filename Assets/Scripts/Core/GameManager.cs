@@ -52,7 +52,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     }
     // --------------------------------------------------------
     
-    public event Action OnWaveStarted;
+    public event Action OnWaveStarted; // 추후에 TODO REFACTOR
     
     private void PauseManager()
     {
