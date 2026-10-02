@@ -8,6 +8,7 @@ public class BaseTurret : MonoBehaviour
     protected float _currentHp;
     [SerializeField] protected int _goldCost;
     [SerializeField] private TurretType _turretType;
+    
     public float MaxHp => _maxHp;
     public float CurrentHp => _currentHp;
     public int Cost => _goldCost;

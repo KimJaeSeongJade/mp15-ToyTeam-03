@@ -12,6 +12,7 @@ public class PlayerBuildMode : MonoBehaviour
     [SerializeField] private LayerMask _targetMask;
     [SerializeField] private float _rayDistance;
 
+    private BuildPoint _buildPoint;
     private PlayerInputReader _inputReader;
     private PlayerAttackMode _attackMode;
     private TurretBuildTest _previewTurret;
@@ -47,9 +48,8 @@ public class PlayerBuildMode : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, _rayDistance, _targetMask))
         {
             // TODO: 디버그용 임시 코드. 추후 연결시 삭제
-            if (hit.transform.TryGetComponent(out _towerTest))
+            if (hit.transform.TryGetComponent(out _buildPoint))
             {
-                _towerTest.CallbackDebugLog();
                 _previewTurret.CanBuild(true);
 
 #if UNITY_EDITOR
@@ -117,9 +117,9 @@ public class PlayerBuildMode : MonoBehaviour
 
     private void TurretBuild()
     {
-        if (_towerTest == null || !_inputReader.isPressedAttackDown) return;
+        if (_buildPoint == null || !_inputReader.isPressedAttackDown) return;
 
-        _towerTest.Build(_previewTurret);
+        //_buildPoint.CheckCurrentTurret(_previewTurret);
         _previewTurret.TryBuild();
         _previewTurret = null;
 
