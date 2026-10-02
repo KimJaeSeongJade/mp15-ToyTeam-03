@@ -16,7 +16,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private GameObject _inGameUI;
     
-    
     private bool IsPause;
     private bool IsStart;
 
@@ -96,9 +95,20 @@ public class GameManager : SingletonBehaviour<GameManager>
                 break;
             case GameState.WavePreparation:
                 // 라운드 시작 전 로직
+                
+                
+                // 웨이브 준비 UI 잠시 띄웠다가 지우기 or
+                // 30초 위에 띄우고 웨이브 준비 단계
+                
                 break;
             case GameState.OnWave:
                 // 웨이브 시작 때 로직
+                
+                // 웨이브 중임을 알리는 텍스트 : 남은 몹
+                
+                // 만약 클리어면 클리어 로직 처리하고 다음 웨이브 준비
+                
+                // 만약 클리어 못했으면 게임 오버 상태로 변경
                 break;
             case GameState.Paused:
                 // 일시 정지 로직
