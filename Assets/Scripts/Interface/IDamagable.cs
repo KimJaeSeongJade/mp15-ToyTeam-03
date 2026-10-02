@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamagable
+public interface IDamageable
 {
-    public void TakeDamage(float damage) { }
+    // 데미지를 받는 메서드 (받을 데미지 수치를 매개변수로 받음)
+    void TakeDamage(float damage);
 }
