@@ -429,6 +429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 812784101}
+  - component: {fileID: 812784102}
   m_Layer: 0
   m_Name: Waypoint
   m_TagString: Untagged
@@ -456,6 +457,24 @@ Transform:
   - {fileID: 2061190681}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &812784102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812784100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0507e1fb9fe63254989a188af2b501a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waypoint:
+  - {fileID: 867037061}
+  - {fileID: 325488759}
+  - {fileID: 872088277}
+  - {fileID: 520857663}
+  - {fileID: 2061190681}
 --- !u!1 &867037060
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,9 +884,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292d1031144011e48aa1ffbab53dcbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waypointPath: {fileID: 1906699160}
+  _waypointPath: {fileID: 812784102}
   _count: 5
-  _monsterPrefab: {fileID: 5691040406973086368, guid: b5c276c95a1699b40891c66d302f62ed, type: 3}
+  _monsterPrefab: {fileID: 2920717749805239896, guid: d0fb8f7c614adeb4c93dfde66444e531, type: 3}
 --- !u!4 &1062174971
 Transform:
   m_ObjectHideFlags: 0
@@ -1097,7 +1116,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1906699160
 MonoBehaviour:
   m_ObjectHideFlags: 0
