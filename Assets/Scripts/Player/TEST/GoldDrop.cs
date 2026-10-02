@@ -16,8 +16,9 @@ public class GoldDrop : PoolObject
         _isDelivering = false;
         _player = null;
         gameObject.SetActive(true);
-
         _waveManager = WaveManager.Instance;
+        
+        
         if (_waveManager != null)
             _waveManager.OnWaveEnded += StartDelivery;
         else

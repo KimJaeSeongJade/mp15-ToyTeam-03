@@ -7,6 +7,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     // 웨이브 대기 시간
     [SerializeField] private float _prepareTime = 30f;
     private GameManager _gameManager;
+    GameState _currentState;
     
     // 정보 받아와야하면 추후에 수정
     
@@ -42,7 +43,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     
     private void OnEnable()
     {
-        if (!_gameManager.IsStarted) return;
+        if (_currentState == GameState.Ready) return;
         StartFirstWavePrepare();
         Debug.Log("웨이브 준비 단계");
 
@@ -159,6 +160,10 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     private void RefreshGold()
     {
+        if (_currentState == GameState.Clear)
+        {
+            
+        }
         //Player.OnGoldChange += RefreshGoldUI;
     }
 

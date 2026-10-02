@@ -18,14 +18,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     private bool IsPause;
     private bool IsStart;
-
     
-    // 웨이브 에서 시작했는지 확인 용도 
-    // 웨이브 종료시 받아와야해서 set으로 조건 추가할지 결정
-    public bool IsStarted
-    {
-        get { return IsStart; }
-    }
     // ---- 이벤트 함수 ---------------------------------------
     
     private void Awake() => SetSingleton();
@@ -41,7 +34,6 @@ public class GameManager : SingletonBehaviour<GameManager>
         _inGameUI.SetActive(false);
         // 게임 시간 정지
         Pause();
-        IsStart = true;
         IsPause = false;
     }
 
@@ -151,6 +143,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         // 게임 시간 시작
         Run();
         _inGameUI.SetActive(true);
+        currentState = GameState.WavePreparation;   // 시작시 웨이브 시작상태로 변경
     }
 }
 
@@ -160,6 +153,7 @@ public enum GameState
     Ready,
     WavePreparation,
     OnWave,
+    Clear,
     Paused,
     GameOver
 }
