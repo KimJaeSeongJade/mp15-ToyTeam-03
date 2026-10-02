@@ -32,17 +32,26 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         SetSingleton();
     }
 
+    private void Update()
+    {
+
+    }
+
     // 게임 매니저 게임 시작 -> 이벤트 구독 처리
+    
     
     private void OnEnable()
     {
         if (!_gameManager.IsStarted) return;
-        
+        StartFirstWavePrepare();
+        Debug.Log("웨이브 준비 단계");
+
         // GameManager 게임 시작 이벤트 구독 
-        
+
         // MonsterSpawner 생성 완료 이벤트 구독  // 장수님과 체크해서 이벤트 구독 처리해서 예시 화면 
-        
+
         // Monster 사망 관련 이벤트 구독         // OnReturn으로 +- 하면서 인원 수 체크하기
+        
     }
 
     private void OnDisable()
