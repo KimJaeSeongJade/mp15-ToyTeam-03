@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackTurret : BaseTurret
+public class DefenceTurret : BaseTurret
 {
-    [SerializeField] private float _attackRange;
+    [SerializeField] private float _defenceRange;
     [SerializeField] private LayerMask _targetMask;
     [SerializeField] private Transform _muzzlePoint;
     [SerializeField] private GameObject _bullets;
@@ -26,7 +25,6 @@ public class AttackTurret : BaseTurret
         }
         TurretRotate();
     }
-
     public override void Attack()
     {
         if (_bullets != null && _muzzlePoint != null)

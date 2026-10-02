@@ -44,4 +44,8 @@ public class MonsterHealth : MonoBehaviour, IDamagable
         Cacheenemy = GetComponent<BaseEnemy>();
     }
 
+    public void SlowSpeed(float speed)
+    {
+        
+    }
 }

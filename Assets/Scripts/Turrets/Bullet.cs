@@ -4,68 +4,48 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour 
 { 
-    [SerializeField] private float bulletSpeed = 15f;
-    [SerializeField] private float rotateSpeed = 15f; // 유도 각도 회전력
-    [SerializeField] private float lifeTime = 5f;      // 소멸 시간 (초단위 기본값 지정)
+    [SerializeField] protected LayerMask enemyLayer;
+    [SerializeField] protected float bulletDamage = 10f; // 총알의 기본 데미지
+    [SerializeField] private float speed = 15f;        // 총알 이동 속도
 
-    [Header("공격 및 감지 설정")]
-    [SerializeField] private LayerMask enemyLayer;     // 적 레이어마스크
-    [SerializeField] private float bulletDamage = 10f; // 적에게 줄 데미지
+    private Transform _target; // 추적할 몬스터 타겟
 
-    private Transform targetEnemy;                     // 트리거로 감지한 타겟 적
-
-    private void Start()
+    // 💡 터렛에서 총알을 생성(Instantiate)한 후, 이 함수를 호출해 타겟을 넘겨줍니다.
+    public void SetTarget(Transform target)
     {
-        // 허공으로 날아가 아무것도 안 만나면 자동 소멸
-        Destroy(gameObject, lifeTime);
+        _target = target;
     }
 
     private void Update()
     {
-        // 1. 아직 감지된 적이 없다면 생성 당시의 정면 방향으로 직진합니다.
-        if (targetEnemy == null)
+        // 타겟이 없다면 앞으로 직진하거나 소멸 처리
+        if (_target == null)
         {
-            transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
             return;
         }
 
-        // 2. 적이 감지되었다면 적의 실시간 위치를 향해 방향을 꺾으며 이동합니다.
-        Vector3 direction = (targetEnemy.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        
-        // 부드럽게 적을 향해 회전
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
-        
-        // 앞으로 전진
-        transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
+        // 💡 타겟(공중 몬스터)이 있는 방향으로 이동 및 회전
+        Vector3 direction = (_target.position - transform.position).normalized;
+        transform.position += direction * speed * Time.deltaTime;
+        transform.forward = direction; // 총알이 몬스터를 바라보도록 회전
     }
 
-    // 총알의 트리거 영역에 무언가 들어왔을 때 실행됩니다.
-    private void OnTriggerEnter(Collider other) 
+    protected virtual void OnTriggerEnter(Collider other) 
     { 
-        // 레이어마스크로 적(Enemy)인지 먼저 확인합니다.
+        // 1. 레이어마스크 조건에 부합하는지 확인
         if ((enemyLayer.value & (1 << other.gameObject.layer)) > 0) 
         { 
-            // [상황 A] 이미 추적 중인 적이거나, 처음 만난 적에게 완전히 '닿았을' 때
-            if (other.transform == targetEnemy || targetEnemy == null)
+            // 2. 상대방에게 IDamageable 인터페이스가 있는지 콤포넌트 추출 시도
+            // 💡 철자 주의: IDamagable -> IDamageable (e 추가)
+            if (other.TryGetComponent<IDamagable>(out IDamagable damageable))
             {
-                // 조금 더 가까이 확실하게 부딪혔는지 검사 (또는 바로 데미지 처리)
-                if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
-                {
-                    damageable.TakeDamage(bulletDamage);
-                }
-
-                // 적에게 닿았으므로 총알을 파괴합니다.
-                Destroy(gameObject);
-                return;
+                // 3. 인터페이스의 TakeDamage 메서드 호출
+                damageable.TakeDamage(bulletDamage);
             }
 
-            // [상황 B] 아직 타겟이 없는데 먼 거리의 트리거 감지 범위에 적이 먼저 포착되었을 때
-            if (targetEnemy == null)
-            {
-                targetEnemy = other.transform;
-            }
+            // 충돌했으므로 총알 제거
+            Destroy(gameObject); 
         } 
     } 
-    
 }
