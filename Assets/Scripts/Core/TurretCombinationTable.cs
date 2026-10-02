@@ -16,16 +16,16 @@ public class TurretCompination
 {
     public TurretType ExistType;
     public TurretType AddedType;
-    public GameObject ResultTurret;
+    public BaseTurret ResultTurret;
 }
 
 public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
 {
-    [SerializeField] private List <TurretBuildTest> _baseTurretlist;
+    [SerializeField] private List <BaseTurret> _baseTurretlist;
 
     [SerializeField] private List<TurretCompination> _combinationsViewer;
 
-    [SerializeField] private Dictionary<(TurretType, TurretType), GameObject> _lookup = new();
+    [SerializeField] private Dictionary<(TurretType, TurretType), BaseTurret> _lookup = new();
 
     protected override void Awake()
     {
@@ -48,13 +48,13 @@ public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
     }
 
 
-    public bool TryGetResult(TurretType existType, TurretType addType, out GameObject result)
+    public bool TryGetResult(TurretType existType, TurretType addType, out BaseTurret result)
     {
         return _lookup.TryGetValue((existType, addType), out result);
     }
 
     // TODO: 리펙토링 가능성 연구 필요
-    public TurretBuildTest GetSelectedTurret(int num)
+    public BaseTurret GetSelectedTurret(int num)
     {
         switch (num)
         {
