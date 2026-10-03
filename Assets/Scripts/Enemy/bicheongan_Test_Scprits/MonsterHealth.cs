@@ -9,12 +9,15 @@ public class MonsterHealth : MonoBehaviour, IDamageable
     [SerializeField] private GoldDrop _goldPrabas;
     private ObjectPool<GoldDrop> goldPool;
     private BaseEnemy Cacheenemy;
-
     private bool _isDead;
+    private bool _isSlow;
+
+    private MonsterMove _speed;// 임시 BaseEnemy 완성시 변경예정
 
     private void Awake()
     {
         CacheComponent();
+        _speed = GetComponent<MonsterMove>();// 임시 BaseEnemy 완성시 변경예정
         goldPool = new ObjectPool<GoldDrop>(_goldPrabas, 20);
     }
 
@@ -36,7 +39,14 @@ public class MonsterHealth : MonoBehaviour, IDamageable
             _isDead = true;
             goldPool.PopAll();
             Cacheenemy.ReturnToPool();
-            //Destroy(gameObject);// 몬스터 오브젝트 풀 만들시 풀 반환으로 변경 
+        }
+    }
+    public void SlowSpeed(float speed)
+    {
+        if (!_isSlow)
+        {
+            _speed.Slow(speed);
+            _isSlow = true;
         }
     }
     private void CacheComponent()
