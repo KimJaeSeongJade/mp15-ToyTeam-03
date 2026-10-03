@@ -59,20 +59,14 @@ public class GameManager : SingletonBehaviour<GameManager>
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             // 정지 상태 아니면 정지
-            if (IsPause == false)
+            if (IsPause)
             {
-                _pausePanel.gameObject.SetActive(true);
-                Time.timeScale = 0;
-                IsPause = true;
-                return;
+                ResumeGame();
             }
             // 정지 상태면 재개
-            if (IsPause == true)
+            else
             {
-                _pausePanel.gameObject.SetActive(false);
-                Time.timeScale = 1;
-                IsPause = false;
-                return;
+                PauseGame();
             }
         }
         // esc 누르면 update가 아닌 delegate 이벤트로 추가 TODO
@@ -82,6 +76,13 @@ public class GameManager : SingletonBehaviour<GameManager>
         _pausePanel.gameObject.SetActive(false);
         IsPause = false;
         Run();
+    }
+    
+    private void PauseGame()
+    {
+        _pausePanel.SetActive(true);
+        IsPause = true;
+        Pause();
     }
     
     public void ChangeState(GameState newState)
