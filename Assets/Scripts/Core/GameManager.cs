@@ -58,12 +58,12 @@ public class GameManager : SingletonBehaviour<GameManager>
         // esc 누르면 검증
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // 정지 상태 아니면 정지
+            // 정지 상태면 재개
             if (IsPause)
             {
                 ResumeGame();
             }
-            // 정지 상태면 재개
+            // 정지 상태 아니면 정지
             else
             {
                 PauseGame();
