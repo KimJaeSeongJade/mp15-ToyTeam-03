@@ -7,7 +7,7 @@ public class BuildPoint : MonoBehaviour
 
     private TurretCombinationTable table;
 
-    public Vector3 PlacementPosition => transform.TransformPoint(Vector3.up);
+    public Vector3 PlacementPosition => transform.TransformPoint(Vector3.zero);
     public Quaternion PlacementRotation => transform.rotation;
 
     private void Awake() => CacheComponent();
@@ -35,7 +35,7 @@ public class BuildPoint : MonoBehaviour
         BaseTurret previousTurret = _currentTurret;
 
         BaseTurret newTurret = Instantiate(resultTurret, transform);
-        newTurret.transform.localPosition = Vector3.up;
+        newTurret.transform.localPosition = Vector3.zero;
         newTurret.transform.rotation = transform.rotation;
         _currentTurret = newTurret;
 
