@@ -134,14 +134,16 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     public void AddMonster(BaseEnemy enemy)
     {
         // ReomoveMonster() 구독 추가 해제
-        //enemy.onRemoved += RemoveMonster;
+        enemy.onRemoved += RemoveMonster;
+        
         _aliveMonsterCount++;
     }
 
     // 몬스터 사망 시 호출
-    public void RemoveMonster()
+    public void RemoveMonster(BaseEnemy enemy)
     {
-        // enemy.onRemoved -= RemoveMonster;
+        enemy.onRemoved -= RemoveMonster;
+
         _aliveMonsterCount--;
 
         CheckWaveEnd();
@@ -172,14 +174,14 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
         // 드랍 골드 정산
         // 골드 정산 메서드 
-        
-        
+
+
         // 배달 함수 호출
-        
+
         // ↑ 이벤트 구독 하여 골드 ui쪽으로 업데이트만 하면 됨 
-        
+
         // 다음 웨이브 준비 시작
-        
+
         StartCoroutine(PrepareNextWave());
     }
 
