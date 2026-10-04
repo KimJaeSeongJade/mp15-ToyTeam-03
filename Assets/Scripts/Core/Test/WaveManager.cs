@@ -15,7 +15,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     // 정보 받아와야하면 추후에 수정
 
     private int _currentWave = 0;
-    private float _remainingTime;
+    [SerializeField] private float _remainingTime;
     [SerializeField] private int _aliveMonsterCount;
     [SerializeField] private bool _isSpawnFinished;
 
@@ -40,7 +40,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     private void Update()
     {
-        PrepareWaveUI();
+
     }
 
     // 게임 매니저 게임 시작 -> 이벤트 구독 처리
@@ -64,7 +64,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     private void OnDisable()
     {
-        
         // 이벤트 구독 해제
     }
     
@@ -88,29 +87,13 @@ public class WaveManager : SingletonBehaviour<WaveManager>
             OnPrepareTimeChanged?.Invoke(_remainingTime);
 
             _remainingTime -= Time.deltaTime;
-
+            _prepareTimeUI.text = $"{CurrentwaveNumber} 웨이브 시작까지 남은 시간 {_remainingTime.ToString("F0")}";
             yield return null;
         }
+        _prepareTimeUI.gameObject.SetActive(false);
         StartWave();
     }
-
-    private void PrepareWaveUI()
-    {
-        // 만약 게임 시작 됐으면 UI 처리한다.
-        // 조건식 추후에 고민
-        _prepareTimeUI.text = $"{CurrentwaveNumber} 웨이브 시작까지 남은 시간 {_remainingTime.ToString("F1")}";
-    }
     
-    // while (_remainingTime > 0)
-    // {
-    //     UI에 남은 시간 전달
-    //
-    //     _remainingTime -= Time.deltaTime
-    //
-    //     yield return null
-    // }
-    
-
 
     // 실제 웨이브 시작
     private void StartWave()
@@ -134,14 +117,14 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     public void AddMonster(BaseEnemy enemy)
     {
         // ReomoveMonster() 구독 추가 해제
-        //enemy.onRemoved += RemoveMonster;
+        enemy.onRemoved += RemoveMonster;
         _aliveMonsterCount++;
     }
 
     // 몬스터 사망 시 호출
-    public void RemoveMonster()
+    public void RemoveMonster(BaseEnemy enemy)
     {
-        // enemy.onRemoved -= RemoveMonster;
+        enemy.onRemoved -= RemoveMonster;
         _aliveMonsterCount--;
 
         CheckWaveEnd();

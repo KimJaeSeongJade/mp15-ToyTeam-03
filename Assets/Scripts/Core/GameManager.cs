@@ -11,10 +11,13 @@ public class GameManager : SingletonBehaviour<GameManager>
     // 리스트 크기만큼 골드가 뜨게
     
     // wave 끝났을 때 골드 
+    public const int GOLD_AMOUNT = 20;
     public GameState currentState;  // 현재 게임 상태
     [SerializeField] private GameObject _startPanel;    // 시작 화면 UI
     [SerializeField] private GameObject _pausePanel;    // 일시정지 UI
     [SerializeField] private GameObject _inGameUI;      // 인게임 UI
+
+    [field:SerializeField] public PlayerStatus PlayerStatus{get; private set;}
     
     
     private bool IsPause;
