@@ -10,12 +10,15 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     // 웨이브 대기 시간
     [SerializeField] private float _prepareTime = 30f;
     [SerializeField] private TextMeshProUGUI _prepareTimeUI;
+    [SerializeField] private TextMeshProUGUI _goldUI;
+    
     private GameManager _gameManager;
+    
 
     // 정보 받아와야하면 추후에 수정
 
     private int _currentWave = 0;
-    private float _remainingTime;
+    [SerializeField] private float _remainingTime;
     [SerializeField] private int _aliveMonsterCount;
     [SerializeField] private bool _isSpawnFinished;
 
@@ -30,6 +33,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     public event Action OnWaveEnded;
     public event Action<int> OnWaveChanged;
     public event Action<float> OnPrepareTimeChanged;
+    
 
     // --- 이벤트 함수 ---------------------------------------------
     
@@ -41,6 +45,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private void Update()
     {
         PrepareWaveUI();
+        RefreshGoldUI();
     }
 
     // 게임 매니저 게임 시작 -> 이벤트 구독 처리
@@ -64,7 +69,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     private void OnDisable()
     {
-        
         // 이벤트 구독 해제
     }
     
@@ -86,9 +90,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         while (_remainingTime > 0f)
         {
             OnPrepareTimeChanged?.Invoke(_remainingTime);
-
             _remainingTime -= Time.deltaTime;
-
             yield return null;
         }
 
@@ -99,18 +101,12 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         // 만약 게임 시작 됐으면 UI 처리한다.
         // 조건식 추후에 고민
-        _prepareTimeUI.text = $"{CurrentwaveNumber} 웨이브 시작까지 남은 시간 {_remainingTime.ToString("F1")}";
+        _prepareTimeUI.text = $"{CurrentwaveNumber} 웨이브 시작까지 남은 시간 {_remainingTime.ToString("F0")}";
+        if (_remainingTime <= 0f)
+        {
+            _prepareTimeUI.gameObject.SetActive(false);
+        }
     }
-    
-    // while (_remainingTime > 0)
-    // {
-    //     UI에 남은 시간 전달
-    //
-    //     _remainingTime -= Time.deltaTime
-    //
-    //     yield return null
-    // }
-    
 
 
     // 실제 웨이브 시작
@@ -136,7 +132,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         // ReomoveMonster() 구독 추가 해제
         enemy.onRemoved += RemoveMonster;
-        
         _aliveMonsterCount++;
     }
 
@@ -144,7 +139,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     public void RemoveMonster(BaseEnemy enemy)
     {
         enemy.onRemoved -= RemoveMonster;
-
         _aliveMonsterCount--;
 
         CheckWaveEnd();
@@ -191,17 +185,15 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         // _player = GetComponent<>(Player); 
     }
-
-    private void RefreshGold()
+    
+    private void RefreshGoldUI()
     {
-        //Player.OnGoldChange += RefreshGoldUI;
-    }
-
-    private void RefreshGoldUI(int gold)
-    {
-        Debug.Log($"Gold : {gold}");
+        _goldUI.text = $"보유 골드 : {_gameManager._gold }";
         //_playerGoldText.text = gold.ToString();
+
+        // _gameManager.PlayerStatus.
     }
+
     // fps 실습때 진행한 playerWeapon과 UI로 확인
 }
 
