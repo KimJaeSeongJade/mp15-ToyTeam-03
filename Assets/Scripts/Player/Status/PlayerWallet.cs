@@ -14,7 +14,7 @@ public class PlayerWallet : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance._playerWallet = this;
+        //GameManager.Instance._playerWallet = this;
     }
 
     // 골드 오브젝트가 플레이어에게 도착했을 때 호출한다. 잔액을 더하고 UI에 알린다.

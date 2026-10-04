@@ -51,7 +51,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
        
         // 게임매니저에서 시작 전달받아와야함.
         //if (GameManager.Instance.currentState != GameState.WavePreparation) return;
-        StartFirstWavePrepare();
+        //StartFirstWavePrepare();
         Debug.Log("웨이브 준비 단계");
 
         // GameManager 게임 시작 이벤트 구독 
@@ -91,6 +91,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
             yield return null;
         }
+
         StartWave();
     }
 
