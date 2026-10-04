@@ -16,16 +16,19 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField] private GameObject _pausePanel;    // 일시정지 UI
     [SerializeField] private GameObject _inGameUI;      // 인게임 UI
     
+    
     private bool IsPause;
-    private bool IsStart;
+    private bool canPause;
+    
+    //private bool IsTitle;
 
     
     // 웨이브 에서 시작했는지 확인 용도 
     // 웨이브 종료시 받아와야해서 set으로 조건 추가할지 결정
-    public bool IsStarted
-    {
-        get { return IsStart; }
-    }
+    // public bool IsStarted
+    // {
+    //     get { return hasStart; }
+    // }
     // ---- 이벤트 함수 ---------------------------------------
     
     private void Awake() => SetSingleton();
@@ -45,6 +48,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     private void PauseManager()
     {
+        if (!canPause) return;
         // esc 누르면 검증
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -106,6 +110,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         // 게임 시간 시작
         Run();
         _inGameUI.SetActive(true);
+        canPause = true;    // 시작하면 일시정지 가능하게
     }
     
     // 진행
@@ -134,8 +139,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         _inGameUI.SetActive(false);
         // 게임 시간 정지
         Pause();
-        IsStart = false;
-        IsPause = false;
+        canPause = false;
         
         // TODO RestartGame();
         // OnGameRestarted?.Invoke(); 로 해서 이벤트로 처리하는게 좋을듯
