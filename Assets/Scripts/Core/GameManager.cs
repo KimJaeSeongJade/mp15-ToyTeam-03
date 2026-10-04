@@ -32,17 +32,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     private void Start()
     {
-        currentState = GameState.Ready;
-        // 판넬 켜고
-        _startPanel.gameObject.SetActive(true);
-        // 일시정지 판넬은 꺼진 상태
-        _pausePanel.gameObject.SetActive(false);
-        // 인게임 판넬도 꺼진 상태
-        _inGameUI.SetActive(false);
-        // 게임 시간 정지
-        Pause();
-        IsStart = true;
-        IsPause = false;
+        ResetToTitle();
     }
 
     private void Update()
@@ -70,19 +60,6 @@ public class GameManager : SingletonBehaviour<GameManager>
             }
         }
         // esc 누르면 update가 아닌 delegate 이벤트로 추가 TODO
-    }
-    public void ResumeGame()
-    {
-        _pausePanel.gameObject.SetActive(false);
-        IsPause = false;
-        Run();
-    }
-    
-    private void PauseGame()
-    {
-        _pausePanel.SetActive(true);
-        IsPause = true;
-        Pause();
     }
     
     public void ChangeState(GameState newState)
@@ -120,16 +97,72 @@ public class GameManager : SingletonBehaviour<GameManager>
         }
     }
     
+    // 초기 화면
+    public void StartGame()
+    {
+        // 게임 시작 버튼 누르면
+        // 판넬 끄고
+        _startPanel.gameObject.SetActive(false);
+        // 게임 시간 시작
+        Run();
+        _inGameUI.SetActive(true);
+    }
+    
+    // 진행
     public void Run()
     {
         LockCursor();           // 마우스 커서 잠금
         Time.timeScale = 1;     // 게임 시간 on
     }
 
+    // 일시정지
     public void Pause()
     {
         UnlockCursor();
         Time.timeScale = 0;
+    }
+    
+    // 게임 리셋
+    private void ResetToTitle()
+    {
+        currentState = GameState.Ready;
+        // 판넬 켜고
+        _startPanel.gameObject.SetActive(true);
+        // 일시정지 판넬은 꺼진 상태
+        _pausePanel.gameObject.SetActive(false);
+        // 인게임 판넬도 꺼진 상태
+        _inGameUI.SetActive(false);
+        // 게임 시간 정지
+        Pause();
+        IsStart = false;
+        IsPause = false;
+        
+        // 대신 전체 게임 진행상황도 초기화해야함.
+        // 웨이브 = 0, 타이머 = 0, 생존 몬스터 수 0, SpawnFinished false
+        // player HP,Gold,위치 초기화
+        // 스포너 : Spawn 중지, 생성 몬스터 풀로 복귀
+        // Tower 설치된 터렛 제거
+        // UI는 웨이브/골드/HP/타워 쿨타임 초기화
+        
+        // OnGameRestarted?.Invoke(); 로 해서 이벤트로 처리하는게 좋을듯
+        // 웨이브 매니저 코루틴 시간 계산 쪽은 StopAllCoroutines()로 하면될듯
+        //
+    }
+    
+    // 일시정지 상태에서 게임 재개
+    public void ResumeGame()
+    {
+        _pausePanel.gameObject.SetActive(false);
+        IsPause = false;
+        Run();
+    }
+   
+    // 게임 일시정지
+    private void PauseGame()
+    {
+        _pausePanel.SetActive(true);
+        IsPause = true;
+        Pause();
     }
     
     private void LockCursor()
@@ -144,15 +177,6 @@ public class GameManager : SingletonBehaviour<GameManager>
         Cursor.visible = true;
     }
 
-    public void StartGame()
-    {
-        // 게임 시작 버튼 누르면
-        // 판넬 끄고
-        _startPanel.gameObject.SetActive(false);
-        // 게임 시간 시작
-        Run();
-        _inGameUI.SetActive(true);
-    }
 }
 
 // esc 누르면 판넬 나오고 종료/재개
