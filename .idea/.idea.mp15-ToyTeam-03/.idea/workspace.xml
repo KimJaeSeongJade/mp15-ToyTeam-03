@@ -10,22 +10,7 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="522593d3-ccb6-424c-b3fc-31aff01e8e40" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.mp15-ToyTeam-03/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.mp15-ToyTeam-03/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Turrets/BaseTurrets/AttackTurret.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Turrets/BaseTurrets/AttackTurret.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Turrets/BaseTurrets/DefenceTurret.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Turrets/BaseTurrets/DefenceTurret.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Turrets/BaseTurrets/GoldTurret.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Turrets/BaseTurrets/GoldTurret.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Turrets/BaseTurrets/SupportTurret.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Turrets/BaseTurrets/SupportTurret.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Turrets/Bullet/AttackBullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Turrets/Bullet/AttackBullet.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Turrets/Bullet/DefenceBullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Turrets/Bullet/DefenceBullet.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/_TEST Scenes/TurretTest/TurretTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/_TEST Scenes/TurretTest/TurretTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Turrets/AttackToSkyTurret.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Turrets/AttackToSkyTurret.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Turrets/AttackTurret.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Turrets/AttackTurret.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Turrets/BaseTurret.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Turrets/BaseTurret.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Turrets/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Turrets/Bullet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Turrets/DefenceBullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Turrets/DefenceBullet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Turrets/SupportTurret.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Turrets/SupportTurret.cs" afterDir="false" />
-    </list>
+    <list default="true" id="5fec5721-8205-4ad6-bca7-6e1be74d4ff2" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,9 +20,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Turrets/IAirMonster.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Turrets/IBuffable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Turrets/SkyEnemey.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Core/Test/WaveManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -45,71 +28,68 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.621745091623785E-201" />
-      <entry key="MS500" value="6.950187458771467E-41" />
-      <entry key="S2" value="9.130596053822643E-11" />
-      <entry key="S5" value="9.642722218611314E-5" />
-      <entry key="S10" value="0.00982151862513977" />
-      <entry key="S30" value="0.25327570647738024" />
-      <entry key="S60" value="1.181652090221097" />
-      <entry key="M2" value="5.346833338443239" />
-      <entry key="M5" value="24.47960651189086" />
-      <entry key="M10" value="49.273910183356854" />
-      <entry key="M15" value="64.70639658421449" />
-      <entry key="M30" value="90.31367722662958" />
-      <entry key="H1" value="113.13785944565488" />
-      <entry key="H2" value="130.24974250807847" />
-      <entry key="H4" value="141.0989537998087" />
-      <entry key="D1" value="151.68645558992344" />
-      <entry key="W1" value="153.66518585519555" />
+      <entry key="MS100" value="1.0595633906189867" />
+      <entry key="MS500" value="2.2507960880489843" />
+      <entry key="S2" value="3.92781801838955" />
+      <entry key="S5" value="5.694461217972917" />
+      <entry key="S10" value="7.64925622862553" />
+      <entry key="S30" value="10.14095579183865" />
+      <entry key="S60" value="11.184006122540335" />
+      <entry key="M2" value="12.949192296605101" />
+      <entry key="M5" value="16.99300858561677" />
+      <entry key="M10" value="20.524338323579713" />
+      <entry key="M15" value="23.61494265021421" />
+      <entry key="M30" value="42.57725272440479" />
+      <entry key="H1" value="113.68728186362502" />
+      <entry key="H2" value="234.52133728777406" />
+      <entry key="H4" value="352.26908802295617" />
+      <entry key="D1" value="503.677785448628" />
+      <entry key="W1" value="536.3328185634048" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000000004423784" />
-      <entry key="S5" value="1.0001812665076306" />
-      <entry key="S10" value="1.0134648050589399" />
-      <entry key="S30" value="1.259813507011181" />
-      <entry key="S60" value="1.7636974870932565" />
-      <entry key="M2" value="2.9737415958529496" />
-      <entry key="M5" value="6.49045542610063" />
-      <entry key="M10" value="9.952098155696861" />
-      <entry key="M15" value="11.83033157371598" />
-      <entry key="M30" value="14.821223377517107" />
-      <entry key="H1" value="17.753261375301918" />
-      <entry key="H2" value="20.219343870833548" />
-      <entry key="H4" value="21.898191783163597" />
-      <entry key="D1" value="23.615152422297854" />
-      <entry key="W1" value="23.944098515520103" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="1.8468642798658617E-208" />
+      <entry key="S2" value="1.2470442345081435E-52" />
+      <entry key="S5" value="2.2659557515517798E-21" />
+      <entry key="S10" value="6.515036055666877E-11" />
+      <entry key="S30" value="6.33812351542762E-4" />
+      <entry key="S60" value="0.03556874573481598" />
+      <entry key="M2" value="0.26665258767138367" />
+      <entry key="M5" value="0.9058000195183188" />
+      <entry key="M10" value="1.5818329503851871" />
+      <entry key="M15" value="2.2253185895521996" />
+      <entry key="M30" value="4.478352388716737" />
+      <entry key="H1" value="9.890117418945664" />
+      <entry key="H2" value="17.753297976467305" />
+      <entry key="H4" value="24.926631467877165" />
+      <entry key="D1" value="33.79819238932516" />
+      <entry key="W1" value="35.675321510287624" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="2.178743959020137E-7" />
-      <entry key="MS500" value="0.046520164223954365" />
-      <entry key="S2" value="0.46441935414211766" />
-      <entry key="S5" value="0.7360448135533579" />
-      <entry key="S10" value="0.8791537143495197" />
-      <entry key="S30" value="1.4475566106642943" />
-      <entry key="S60" value="2.8904157963425314" />
-      <entry key="M2" value="8.257901473952202" />
-      <entry key="M5" value="30.893700398970758" />
-      <entry key="M10" value="59.15859806146115" />
-      <entry key="M15" value="76.48036646171667" />
-      <entry key="M30" value="105.09722431182172" />
-      <entry key="H1" value="130.8677454316325" />
-      <entry key="H2" value="150.45558005741879" />
-      <entry key="H4" value="162.98979252360436" />
-      <entry key="D1" value="175.30028237417363" />
-      <entry key="W1" value="177.60909228376013" />
+      <entry key="MS100" value="0.9775877693575307" />
+      <entry key="MS500" value="2.208486080005429" />
+      <entry key="S2" value="3.9075514313292055" />
+      <entry key="S5" value="5.6679538647466945" />
+      <entry key="S10" value="7.621459192467455" />
+      <entry key="S30" value="10.125376568778046" />
+      <entry key="S60" value="11.20829429342885" />
+      <entry key="M2" value="13.203587311829596" />
+      <entry key="M5" value="17.886986802900307" />
+      <entry key="M10" value="22.097088118255133" />
+      <entry key="M15" value="25.832413982178423" />
+      <entry key="M30" value="47.04805612192936" />
+      <entry key="H1" value="123.56839789229065" />
+      <entry key="H2" value="252.26608756140763" />
+      <entry key="H4" value="377.1895589400383" />
+      <entry key="D1" value="537.4745581093898" />
+      <entry key="W1" value="572.0079253240781" />
     </decayedShown>
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
   <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 8
+  &quot;associatedIndex&quot;: 6,
+  &quot;fromUser&quot;: false
 }</component>
-  <component name="ProjectId" id="3K52B1zpQ9lKIF76RAdvOaIJvWz" />
+  <component name="ProjectId" id="3K4f9TgXRSs6IU0RtIAgE7IozRB" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -125,23 +105,21 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "feat/mark856ad/turret",
-    "junie.onboarding.icon.badge.shown": "true",
+    "git-widget-placeholder": "feat/yr1103/game-manager-in-game-ui",
+    "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "configurable.group.appearance",
-    "to.speed.mode.migration.done": "true"
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RunManager" selected="Unity 에디터에 연결.Unity 에디터에 연결">
     <configuration name="유닛 테스트(배치 모드)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.62f3\Editor\Unity.exe" />
-      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\user\AppData\Local\GitHubDesktop\app-3.6.6\mp15-ToyTeam-03 -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
-      <option name="WORKING_DIRECTORY" value="C:\Users\user\AppData\Local\GitHubDesktop\app-3.6.6\mp15-ToyTeam-03" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\user\Documents\GitHub\mp15-ToyTeam-03 -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\user\Documents\GitHub\mp15-ToyTeam-03" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
@@ -150,8 +128,8 @@
     </configuration>
     <configuration name="Unity 시작" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.62f3\Editor\Unity.exe" />
-      <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\user\AppData\Local\GitHubDesktop\app-3.6.6\mp15-ToyTeam-03 -debugCodeOptimization" />
-      <option name="WORKING_DIRECTORY" value="C:\Users\user\AppData\Local\GitHubDesktop\app-3.6.6\mp15-ToyTeam-03" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\user\Documents\GitHub\mp15-ToyTeam-03 -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\user\Documents\GitHub\mp15-ToyTeam-03" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
@@ -160,12 +138,10 @@
     </configuration>
     <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" useMixedMode="false">
       <option name="allowRunningInParallel" value="false" />
+      <option name="coreClr" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
-      <option name="runtimes">
-        <list />
-      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -177,11 +153,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
-      <changelist id="522593d3-ccb6-424c-b3fc-31aff01e8e40" name="변경" comment="" />
-      <created>1790832976600</created>
+      <changelist id="5fec5721-8205-4ad6-bca7-6e1be74d4ff2" name="변경" comment="" />
+      <created>1790821628377</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1790832976600</updated>
+      <updated>1790821628377</updated>
     </task>
     <servers />
   </component>
@@ -215,5 +191,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
