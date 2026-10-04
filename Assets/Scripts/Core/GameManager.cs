@@ -18,7 +18,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     
     private bool IsPause;
-    private bool canPause;
+    private bool canPause;  // 일시정지 위한 게임 시작 여부 검증
     
     //private bool IsTitle;
 

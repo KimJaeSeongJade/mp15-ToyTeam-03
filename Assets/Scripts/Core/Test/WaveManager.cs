@@ -69,7 +69,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     // 게임 시작 시 호출
     private void StartFirstWavePrepare()
     {
-        // TODO 여기 호출 부 수정
         StartCoroutine(PrepareNextWave());
     }
 
@@ -109,6 +108,11 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     // 실제 웨이브 시작
     private void StartWave()
     {
+        // MonsterSpawner에게 현재 웨이브 시작 요청
+        // TODO 여기 호출 부 수정
+        _monsterSpawner.SpawnWave(1, AddMonster, SetSpawnFinished);
+        
+        
         _currentWave++; // 웨이브 증가
         // 종료조건 파악을 위한 몬스터 수 확인
         _aliveMonsterCount = 0; 
@@ -117,8 +121,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
         OnWaveChanged?.Invoke(_currentWave);
         OnWaveStarted?.Invoke();
-
-        // MonsterSpawner에게 현재 웨이브 시작 요청
     }
 
     // 몬스터 생성 시 호출
