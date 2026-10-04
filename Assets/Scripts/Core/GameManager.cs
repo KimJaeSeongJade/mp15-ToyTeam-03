@@ -15,8 +15,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField] private GameObject _startPanel;    // 시작 화면 UI
     [SerializeField] private GameObject _pausePanel;    // 일시정지 UI
     [SerializeField] private GameObject _inGameUI;      // 인게임 UI
+
+    public PlayerWallet _playerWallet;
     
-    
+
     private bool IsPause;
     private bool canPause;  // 일시정지 위한 게임 시작 여부 검증
     

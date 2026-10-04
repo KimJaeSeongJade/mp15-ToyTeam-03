@@ -81,7 +81,5 @@ public class BasicAttack : PoolObject
     public void InitTransform()
     {
         _returnTr = transform.parent;
-
-        
     }
 }

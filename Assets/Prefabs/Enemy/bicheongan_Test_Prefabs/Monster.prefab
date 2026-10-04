@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 2110185110966363688}
   - component: {fileID: 2886963048642012211}
   - component: {fileID: 828571807100128330}
-  m_Layer: 0
+  - component: {fileID: 146840908834654453}
+  m_Layer: 9
   m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d99234d28ebdc4c8b22a32c0893822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hp: 0
   _goldPrabas: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}
 --- !u!114 &2886963048642012211
 MonoBehaviour:
@@ -162,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _start: {fileID: 0}
+  speed: 10
 --- !u!114 &828571807100128330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +177,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03abf3f0eaa8964fbf1a93f9fb4f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
-  Hp: 20
-  Defend: 0
-  GoldDrop: 0
+--- !u!195 &146840908834654453
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7454112230223378898}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1
+  m_Speed: 5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

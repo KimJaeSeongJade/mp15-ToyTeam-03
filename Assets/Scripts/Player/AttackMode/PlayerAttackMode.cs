@@ -150,16 +150,11 @@ public class PlayerAttackMode : MonoBehaviour
             _migicMuzzle,
             _basicAttack =>
             {
-                AttackPoolInit(_basicAttack);
+                _basicAttack.InitTransform();
             }
             );
 
         _elapseTime = _fireTime;
         _elapseSkillTime = _skillTime;
-    }
-
-    private void AttackPoolInit(BasicAttack basicAttack)
-    {
-        basicAttack.InitTransform();
     }
 }

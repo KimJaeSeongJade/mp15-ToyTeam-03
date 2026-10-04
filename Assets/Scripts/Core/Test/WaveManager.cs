@@ -50,8 +50,8 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
        
         // 게임매니저에서 시작 전달받아와야함.
-        if (GameManager.Instance.currentState != GameState.WavePreparation) return;
-        StartFirstWavePrepare();
+        //if (GameManager.Instance.currentState != GameState.WavePreparation) return;
+        //StartFirstWavePrepare();
         Debug.Log("웨이브 준비 단계");
 
         // GameManager 게임 시작 이벤트 구독 
@@ -91,6 +91,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
             yield return null;
         }
+
         StartWave();
     }
 
@@ -117,7 +118,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         // MonsterSpawner에게 현재 웨이브 시작 요청
         // TODO 여기 호출 부 수정
-        //_monsterSpawner.SpawnWave(1, AddMonster, SetSpawnFinished);
+        _monsterSpawner.SpawnWave(1, AddMonster, SetSpawnFinished);
         
         
         _currentWave++; // 웨이브 증가
@@ -131,17 +132,19 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     }
 
     // 몬스터 생성 시 호출
-    public void AddMonster()
+    public void AddMonster(BaseEnemy enemy)
     {
         // ReomoveMonster() 구독 추가 해제
-        //enemy.onRemoved += RemoveMonster;
+        enemy.onRemoved += RemoveMonster;
+        
         _aliveMonsterCount++;
     }
 
     // 몬스터 사망 시 호출
-    public void RemoveMonster()
+    public void RemoveMonster(BaseEnemy enemy)
     {
-        // enemy.onRemoved -= RemoveMonster;
+        enemy.onRemoved -= RemoveMonster;
+
         _aliveMonsterCount--;
 
         CheckWaveEnd();
@@ -172,14 +175,14 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
         // 드랍 골드 정산
         // 골드 정산 메서드 
-        
-        
+
+
         // 배달 함수 호출
-        
+
         // ↑ 이벤트 구독 하여 골드 ui쪽으로 업데이트만 하면 됨 
-        
+
         // 다음 웨이브 준비 시작
-        
+
         StartCoroutine(PrepareNextWave());
     }
 
