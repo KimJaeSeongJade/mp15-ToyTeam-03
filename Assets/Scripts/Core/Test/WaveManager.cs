@@ -42,7 +42,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     
     private void OnEnable()
     {
-        if (!_gameManager.IsStarted) return;
+        // 게임매니저에서 시작 전달받아와야함.
         StartFirstWavePrepare();
         Debug.Log("웨이브 준비 단계");
 
@@ -85,6 +85,17 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         }
         StartWave();
     }
+    
+    
+    // while (_remainingTime > 0)
+    // {
+    //     UI에 남은 시간 전달
+    //
+    //     _remainingTime -= Time.deltaTime
+    //
+    //     yield return null
+    // }
+
 
     // 실제 웨이브 시작
     private void StartWave()

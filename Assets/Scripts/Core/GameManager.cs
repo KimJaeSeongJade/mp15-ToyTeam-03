@@ -11,10 +11,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     // 리스트 크기만큼 골드가 뜨게
     
     // wave 끝났을 때 골드 
-    public GameState currentState;
-    [SerializeField] private GameObject _startPanel;
-    [SerializeField] private GameObject _pausePanel;
-    [SerializeField] private GameObject _inGameUI;
+    public GameState currentState;  // 현재 게임 상태
+    [SerializeField] private GameObject _startPanel;    // 시작 화면 UI
+    [SerializeField] private GameObject _pausePanel;    // 일시정지 UI
+    [SerializeField] private GameObject _inGameUI;      // 인게임 UI
     
     private bool IsPause;
     private bool IsStart;
@@ -32,7 +32,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     private void Start()
     {
-        ResetToTitle();
+        ResetToTitle(); // TODO 게임 데이터 초기화 연결해야함. (이벤트로)
     }
 
     private void Update()
@@ -137,6 +137,9 @@ public class GameManager : SingletonBehaviour<GameManager>
         IsStart = false;
         IsPause = false;
         
+        // TODO RestartGame();
+        // OnGameRestarted?.Invoke(); 로 해서 이벤트로 처리하는게 좋을듯
+        
         // 대신 전체 게임 진행상황도 초기화해야함.
         // 웨이브 = 0, 타이머 = 0, 생존 몬스터 수 0, SpawnFinished false
         // player HP,Gold,위치 초기화
@@ -144,7 +147,6 @@ public class GameManager : SingletonBehaviour<GameManager>
         // Tower 설치된 터렛 제거
         // UI는 웨이브/골드/HP/타워 쿨타임 초기화
         
-        // OnGameRestarted?.Invoke(); 로 해서 이벤트로 처리하는게 좋을듯
         // 웨이브 매니저 코루틴 시간 계산 쪽은 StopAllCoroutines()로 하면될듯
         //
     }
@@ -156,7 +158,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         IsPause = false;
         Run();
     }
-   
+    
     // 게임 일시정지
     private void PauseGame()
     {
@@ -165,21 +167,20 @@ public class GameManager : SingletonBehaviour<GameManager>
         Pause();
     }
     
+    // --- 마우스 커서 잠금/해제 -----------------------
     private void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
     private void UnlockCursor()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
-
+    // ----------------------------------------------
 }
 
-// esc 누르면 판넬 나오고 종료/재개
 public enum GameState
 {
     Ready,
