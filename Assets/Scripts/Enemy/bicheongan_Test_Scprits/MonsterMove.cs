@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MonsterMove : MonoBehaviour
 {
     [SerializeField] private WayPointPath _start; //스폰 포인트 참조
     private List<Transform> waypoints;
     private int arrivePoint;
+    private NavMeshAgent _agent;
     private BaseEnemy reenemy;
     [SerializeField]private float speed = 50f;//BaseEnemy 만들어지면 변경 예정
     private float originalSpeed;
@@ -33,27 +35,35 @@ public class MonsterMove : MonoBehaviour
         waypoints = waypoint._waypoints;
         Debug.Log("이동");
         arrivePoint = 0; // 이동해 인덱스 도착시 1+ 더하기
+        _agent.SetDestination(waypoint._waypoints[arrivePoint].position);
 
     }
 
     public void Move()
     {
+        if (waypoints == null) return;
+        if (waypoints.Count == 0) return;
+        if (_agent.pathPending) return;
 
-        Transform target = waypoints[arrivePoint];
-        Transform LastPoint = waypoints[waypoints.Count - 1];
-
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-
-        if (transform.position == target.position && (arrivePoint < waypoints.Count - 1))
+        if (_agent.remainingDistance <= _agent.stoppingDistance)
         {
             arrivePoint++;
+
+            if (arrivePoint >= waypoints.Count -1)
+            {
+                // 마지막 Waypoint 도착
+                Debug.Log("도착");
+                reenemy.ReturnToPool();
+                arrivePoint = 0;
+                return ;
+            }
+
+            _agent.SetDestination(
+                waypoints[arrivePoint].position
+            );
         }
-        if (transform.position == LastPoint.position)
-        {
-            Debug.Log("도착");
-            reenemy.ReturnToPool();
-        }
-    }
+    
+}
     public void Slow(float slowspeed)
     {
         speed *= (1f - slowspeed);
@@ -69,5 +79,6 @@ public class MonsterMove : MonoBehaviour
     private void CacheComponent()
     {
         reenemy = GetComponent<BaseEnemy>();
+        _agent = GetComponent<NavMeshAgent>();
     }
 }

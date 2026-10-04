@@ -22,7 +22,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     public int _gold => _wallet.Gold;
     
     
-    
+
     private bool IsPause;
     private bool canPause;  // 일시정지 위한 게임 시작 여부 검증
     

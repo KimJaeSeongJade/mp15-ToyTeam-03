@@ -9,8 +9,7 @@ public class AttackToSkyTurret : BaseTurret
     [SerializeField] private Transform _muzzlePoint; 
     [SerializeField] private GameObject _bullets; 
     [SerializeField] private float _bulletCoolTime; 
-
-    private int _currentHp; 
+    
     private int _maxHp; 
     private int _goldCost; 
 

@@ -12,6 +12,11 @@ public class PlayerWallet : MonoBehaviour
     // UI 활성화 시에는 Gold로 초기 값을 표시하고, 비활성화 시 구독을 해제한다.
     public event Action<int> OnGoldChanged;
 
+    private void Awake()
+    {
+        //GameManager.Instance._playerWallet = this;
+    }
+
     // 골드 오브젝트가 플레이어에게 도착했을 때 호출한다. 잔액을 더하고 UI에 알린다.
     public void AddGold(int amount)
     {
