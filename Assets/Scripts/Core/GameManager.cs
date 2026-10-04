@@ -35,7 +35,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     private void Start()
     {
-        ResetToTitle(); // TODO 게임 데이터 초기화 연결해야함. (이벤트로)
+        //ResetToTitle(); // TODO 게임 데이터 초기화 연결해야함. (이벤트로)
+        ChangeState(GameState.Ready);
     }
 
     private void Update()
@@ -74,22 +75,18 @@ public class GameManager : SingletonBehaviour<GameManager>
         {
             case GameState.Ready:
                 // 준비 상태 로직
+                ResetToTitle();
                 break;
             case GameState.WavePreparation:
+                WaveManager.Instance.StartFirstWavePrepare();
                 // 라운드 시작 전 로직
-                
-                
                 // 웨이브 준비 UI 잠시 띄웠다가 지우기 or
                 // 30초 위에 띄우고 웨이브 준비 단계
-                
                 break;
             case GameState.OnWave:
                 // 웨이브 시작 때 로직
-                
                 // 웨이브 중임을 알리는 텍스트 : 남은 몹
-                
                 // 만약 클리어면 클리어 로직 처리하고 다음 웨이브 준비
-                
                 // 만약 클리어 못했으면 게임 오버 상태로 변경
                 break;
             case GameState.Paused:
@@ -111,6 +108,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         Run();
         _inGameUI.SetActive(true);
         canPause = true;    // 시작하면 일시정지 가능하게
+        ChangeState(GameState.WavePreparation);
     }
     
     // 진행
@@ -130,7 +128,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     // 게임 리셋
     private void ResetToTitle()
     {
-        currentState = GameState.Ready;
         // 판넬 켜고
         _startPanel.gameObject.SetActive(true);
         // 일시정지 판넬은 꺼진 상태
