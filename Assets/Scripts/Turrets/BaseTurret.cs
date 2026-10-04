@@ -14,6 +14,12 @@ public class BaseTurret : MonoBehaviour
     public int Cost => _goldCost;
     public TurretType Type => _turretType;
 
+    // 게임 시작 시 현재 체력을 최대 체력으로 채워줍니다.
+    protected virtual void Awake()
+    {
+        _currentHp = _maxHp;
+    }
+
     public virtual void Attack()
     {
         
@@ -30,9 +36,8 @@ public class BaseTurret : MonoBehaviour
         }
     }
 
-    protected virtual void Die()
+    protected void Die()
     {
         Destroy(gameObject);
     }
-    
 }

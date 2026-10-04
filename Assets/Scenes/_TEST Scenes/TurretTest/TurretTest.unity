@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 268921315}
   - component: {fileID: 268921314}
   - component: {fileID: 268921319}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,10 +265,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 268921312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb3008c650cf64044bdd9e5d20f6ae9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 7810127fc4255ff49ba396a543c7beda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 50
+  damage: 10
+  attackRange: 2
+  attackCooldown: 1.5
+  turretLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &277547054
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +513,7 @@ MonoBehaviour:
   _attackRange: 0
   _targetMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   _muzzlePoint: {fileID: 0}
   _bullets: {fileID: 0}
   _bulletCoolTime: 0
@@ -703,6 +708,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackTurret
       objectReference: {fileID: 0}
+    - target: {fileID: 4042182580509433704, guid: 48914718a262942419d8429efa4ba6a6, type: 3}
+      propertyPath: _targetMask.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5128512087478530395, guid: 48914718a262942419d8429efa4ba6a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -760,6 +769,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DefenceTurret
       objectReference: {fileID: 0}
+    - target: {fileID: 309336622860494263, guid: 1e27a6c3fa2fbf649b35eb5ab09dd2c9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 376379192289624612, guid: 1e27a6c3fa2fbf649b35eb5ab09dd2c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -799,6 +812,10 @@ PrefabInstance:
     - target: {fileID: 376379192289624612, guid: 1e27a6c3fa2fbf649b35eb5ab09dd2c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324129409656737623, guid: 1e27a6c3fa2fbf649b35eb5ab09dd2c9, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

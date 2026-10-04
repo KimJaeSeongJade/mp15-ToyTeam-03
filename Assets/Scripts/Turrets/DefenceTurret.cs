@@ -9,6 +9,7 @@ public class DefenceTurret : BaseTurret
     [SerializeField] private Transform _muzzlePoint;
     [SerializeField] private GameObject _bullets;
     [SerializeField] private float _bulletCoolTime;
+    [SerializeField] private float _shield;
     
     [SerializeField] private Transform _target;
     private float _lastAttackTime;
@@ -73,5 +74,23 @@ public class DefenceTurret : BaseTurret
 
         // 몬스터 위치를 바라보도록 회전
         transform.LookAt(targetPosition);
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        // 1단계: 쉴드를 반영한 데미지 계산 (음수 방지)
+        float finalDamage = Mathf.Max(0, damage - _shield);
+
+        // 2단계: 계산된 최종 데미지를 차감하고 Clamp 처리
+        _currentHp -= finalDamage;
+        _currentHp = Mathf.Clamp(_currentHp, 0, _maxHp);
+        
+        Debug.Log($"{finalDamage}");
+
+        // 3단계: 사망 조건 검사
+        if (_currentHp <= 0)
+        {
+            Die();
+        }
     }
 }
