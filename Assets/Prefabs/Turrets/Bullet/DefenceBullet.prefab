@@ -120,6 +120,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 512
   bulletDamage: 10
   speed: 15
+  _lifeTime: 3
+  _returnPoint: {fileID: 0}
+  _muzzlePoint: {fileID: 0}
+  _bullets: {fileID: 0}
+  _bulletCoolTime: 0
+  _target: {fileID: 0}
