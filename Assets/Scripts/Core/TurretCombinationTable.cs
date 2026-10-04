@@ -8,7 +8,8 @@ public enum TurretType
     Attack,
     Defence,
     Support,
-    Gold
+    Gold,
+    Tier2
 }
 
 [Serializable]

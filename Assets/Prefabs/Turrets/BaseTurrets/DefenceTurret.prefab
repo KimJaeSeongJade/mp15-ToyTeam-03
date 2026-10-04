@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8421682086099692321}
   - component: {fileID: 7841179114445687230}
   - component: {fileID: 3635314910552156650}
+  - component: {fileID: -8289073889190054032}
   m_Layer: 0
   m_Name: DefenceTurret
   m_TagString: Untagged
@@ -122,6 +123,7 @@ MonoBehaviour:
   _maxHp: 100
   _goldCost: 30
   _turretType: 1
+  _preview: {fileID: -8289073889190054032}
   _defenceRange: 0
   _targetMask:
     serializedVersion: 2
@@ -130,6 +132,18 @@ MonoBehaviour:
   _bullets: {fileID: 7400289637809923982, guid: f3d938cd71b59d04d9f01c06f446eec5, type: 3}
   _bulletCoolTime: 2
   _target: {fileID: 0}
+--- !u!114 &-8289073889190054032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309336622860494263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be4d06afa8922d4db65e0af0574a1ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7324129409656737623
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseTurret : MonoBehaviour
+public class BaseTurret : MonoBehaviour, IBuildTargetReceiver
 {
     [SerializeField] protected float _maxHp;
     protected float _currentHp;
     [SerializeField] protected int _goldCost;
     [SerializeField] private TurretType _turretType;
+
+    [SerializeField] private TurretPreview _preview;
+
 
     public float MaxHp => _maxHp;
     public float CurrentHp => _currentHp;
