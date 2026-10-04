@@ -45,14 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseTurretlist:
-  - {fileID: 8416961283471144776, guid: 0bb3d452920248841827cd9a6a0846da, type: 3}
-  - {fileID: 3200751670305527379, guid: 17eff620ebc8e7b469bbdc5dbec478ff, type: 3}
-  - {fileID: 7324487866282028367, guid: 7800908d97e8f71458987ea68d6da96c, type: 3}
-  - {fileID: -83336193336749291, guid: fa244e50750663d4eba666df00c43da8, type: 3}
+  - {fileID: 4042182580509433704, guid: 48914718a262942419d8429efa4ba6a6, type: 3}
+  - {fileID: 3635314910552156650, guid: 1e27a6c3fa2fbf649b35eb5ab09dd2c9, type: 3}
   _combinationsViewer:
   - ExistType: 0
-    AddedType: 0
-    ResultTurret: {fileID: 5786668152552397256, guid: be46d9ae233358c428f5042b774789a0, type: 3}
-  - ExistType: 0
     AddedType: 1
-    ResultTurret: {fileID: 5982025004989082082, guid: 493255b27bdb0ab49908c4492d6ba9fe, type: 3}
+    ResultTurret: {fileID: 8518344323700068806, guid: e67bd320f3a7f3d4eada768bf6c2a090, type: 3}
+  - ExistType: 1
+    AddedType: 0
+    ResultTurret: {fileID: 627569506886221969, guid: c7a46d67dfdcdb148874b44e84a88c90, type: 3}

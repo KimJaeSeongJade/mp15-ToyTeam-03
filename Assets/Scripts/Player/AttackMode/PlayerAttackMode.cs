@@ -11,10 +11,12 @@ public class PlayerAttackMode : MonoBehaviour
     [SerializeField] private Transform _migicMuzzle;
     [SerializeField] private float _fireTime;
     [SerializeField] private float _skillTime;
+    [SerializeField] private float _skillRandge;
 
     private PlayerInputReader _inputReader;
     private PlayerBuildMode _buildMode;
 
+    private RaycastHit hit;
     private float _elapseTime;
     private float _elapseSkillTime;
 
@@ -29,7 +31,12 @@ public class PlayerAttackMode : MonoBehaviour
     private void Update()
     {
         FireCoolDown();
+        SkillCoolDown();
+
         Attack();
+
+        SkillInit();
+        SkillCasting();
 
         AttackModeEnd();
     }
@@ -43,6 +50,13 @@ public class PlayerAttackMode : MonoBehaviour
         _elapseTime += Time.deltaTime;
     }
 
+    private void SkillCoolDown()
+    {
+        if (canSkill) return;
+
+        _elapseSkillTime += Time.deltaTime;
+    }
+
     private void Attack()
     {
         if (!canFire || !_inputReader.isPressedAttack) return;
@@ -50,6 +64,31 @@ public class PlayerAttackMode : MonoBehaviour
         _basicAttack = _attackPools.Pop();
 
         _elapseTime = 0;
+    }
+
+    private void SkillCasting()
+    {
+        if (!canSkill || !_inputReader.isPressedSkill) return;
+
+        Vector3 centerPoint = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f);
+        Ray ray = Camera.main.ScreenPointToRay(centerPoint);
+
+        if (Physics.Raycast(ray, out hit, _skillRandge, LayerMask.GetMask("Ground")))
+        {
+            // TODO: 스킬 시전위치 표시 필요
+
+#if UNITY_EDITOR
+            Debug.DrawRay(ray.origin, ray.direction * _skillRandge, Color.red);
+#endif
+        }
+    }
+    private void SkillInit()
+    {
+        if (!canSkill || !_inputReader.isPressedSkillUp) return;
+
+        Instantiate(_skillAttack, hit.point, Quaternion.identity);
+
+        _elapseSkillTime = 0;
     }
 
     // TODO: 추후 변경 가능성 있음. 키 입력 구독 처리로 refac 예정
@@ -111,15 +150,11 @@ public class PlayerAttackMode : MonoBehaviour
             _migicMuzzle,
             _basicAttack =>
             {
-                AttackPoolInit(_basicAttack);
+                _basicAttack.InitTransform();
             }
             );
 
         _elapseTime = _fireTime;
-    }
-
-    private void AttackPoolInit(BasicAttack basicAttack)
-    {
-        basicAttack.InitTransform();
+        _elapseSkillTime = _skillTime;
     }
 }

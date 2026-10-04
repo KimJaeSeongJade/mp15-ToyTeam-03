@@ -19,8 +19,9 @@ public abstract class PoolObject : MonoBehaviour, IPoolable
     public void ReturnToPool()
     {
         Sleep();
-        returnToPool.Invoke(this);
+        returnToPool?.Invoke(this);// 확인 필요
     }
+
 }
 
 public interface IPoolable
