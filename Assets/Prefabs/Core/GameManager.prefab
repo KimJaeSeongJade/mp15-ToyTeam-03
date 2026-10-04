@@ -213,17 +213,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411355122599597862}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5498358014360018599}
+  m_Father: {fileID: 6283030443955889686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 4.4818726}
+  m_SizeDelta: {x: 106.97949, y: 37.000595}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5422447602728540724
 CanvasRenderer:
@@ -554,7 +554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 602.7544, y: -366.73193}
+  m_AnchoredPosition: {x: 602.7544, y: -286.5}
   m_SizeDelta: {x: 510.9913, y: 138.4192}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1067139849187245563
@@ -585,7 +585,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "WASD : \uC774\uB3D9\r\nLMB : \uACF5\uACA9 / \uC0C1\uD638\uC791\uC6A9"
+  m_text: "\uD130\uB81B \uC124\uCE58 : 1~2\uBC88\nWASD : \uC774\uB3D9\r\nLMB : \uACF5\uACA9
+    / \uC0C1\uD638\uC791\uC6A9"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b1320d30faa48ec43850a7f548bd9c48, type: 2}
   m_sharedMaterial: {fileID: -1631590351475038053, guid: b1320d30faa48ec43850a7f548bd9c48, type: 2}
@@ -1142,7 +1143,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2500410791196680266}
   - {fileID: 6283030443955889686}
   m_Father: {fileID: 8454433563608331086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1202,6 +1202,7 @@ MonoBehaviour:
   _startPanel: {fileID: 1893688328110758882}
   _pausePanel: {fileID: 5501374831915157982}
   _inGameUI: {fileID: 8937336240494605164}
+  <PlayerStatus>k__BackingField: {fileID: 0}
 --- !u!114 &3295938511261091825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1231,6 +1232,7 @@ MonoBehaviour:
   _monsterSpawner: {fileID: 0}
   _prepareTime: 30
   _prepareTimeUI: {fileID: 4996237864056121719}
+  _remainingTime: 0
   _aliveMonsterCount: 0
   _isSpawnFinished: 0
 --- !u!1 &4079566361677309664
@@ -1262,7 +1264,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2500410791196680266}
   m_Father: {fileID: 5498358014360018599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

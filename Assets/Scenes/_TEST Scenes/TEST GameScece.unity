@@ -130,10 +130,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 538692655540735674, guid: 06d0f9246a58a10438707b0f9088b85d, type: 3}
+      propertyPath: <PlayerStatus>k__BackingField
+      value: 
+      objectReference: {fileID: 1655226067}
+    - target: {fileID: 1541731921368434364, guid: 06d0f9246a58a10438707b0f9088b85d, type: 3}
+      propertyPath: m_Name
+      value: Turret2CooldownIMG
+      objectReference: {fileID: 0}
     - target: {fileID: 4070455002873652428, guid: 06d0f9246a58a10438707b0f9088b85d, type: 3}
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4537788570632182031, guid: 06d0f9246a58a10438707b0f9088b85d, type: 3}
+      propertyPath: m_Name
+      value: Turret1CooldownIMG
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485266086439729302, guid: 06d0f9246a58a10438707b0f9088b85d, type: 3}
+      propertyPath: _goldUI
+      value: 
+      objectReference: {fileID: 717687491}
     - target: {fileID: 5485266086439729302, guid: 06d0f9246a58a10438707b0f9088b85d, type: 3}
       propertyPath: _monsterSpawner
       value: 
@@ -695,6 +711,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &717687491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3569802373978590697, guid: 06d0f9246a58a10438707b0f9088b85d, type: 3}
+  m_PrefabInstance: {fileID: 123241512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &765541316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,6 +1628,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1634497824}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1655226067 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5499511263634816656, guid: 0883c668193b36940b1c02b705557596, type: 3}
+  m_PrefabInstance: {fileID: 2543709129744794537}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab7aa6e02ae84747a22587dd8f8b896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1906699159
 GameObject:
   m_ObjectHideFlags: 0

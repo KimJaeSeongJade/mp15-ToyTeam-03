@@ -10,7 +10,10 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     // 웨이브 대기 시간
     [SerializeField] private float _prepareTime = 30f;
     [SerializeField] private TextMeshProUGUI _prepareTimeUI;
+    [SerializeField] private TextMeshProUGUI _goldUI;
+    
     private GameManager _gameManager;
+    
 
     // 정보 받아와야하면 추후에 수정
 
@@ -30,6 +33,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     public event Action OnWaveEnded;
     public event Action<int> OnWaveChanged;
     public event Action<float> OnPrepareTimeChanged;
+    
 
     // --- 이벤트 함수 ---------------------------------------------
     
@@ -40,7 +44,8 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     private void Update()
     {
-
+        PrepareWaveUI();
+        RefreshGoldUI();
     }
 
     // 게임 매니저 게임 시작 -> 이벤트 구독 처리
@@ -85,15 +90,23 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         while (_remainingTime > 0f)
         {
             OnPrepareTimeChanged?.Invoke(_remainingTime);
-
             _remainingTime -= Time.deltaTime;
-            _prepareTimeUI.text = $"{CurrentwaveNumber} 웨이브 시작까지 남은 시간 {_remainingTime.ToString("F0")}";
             yield return null;
         }
-        _prepareTimeUI.gameObject.SetActive(false);
         StartWave();
     }
-    
+
+    private void PrepareWaveUI()
+    {
+        // 만약 게임 시작 됐으면 UI 처리한다.
+        // 조건식 추후에 고민
+        _prepareTimeUI.text = $"{CurrentwaveNumber} 웨이브 시작까지 남은 시간 {_remainingTime.ToString("F0")}";
+        if (_remainingTime <= 0f)
+        {
+            _prepareTimeUI.gameObject.SetActive(false);
+        }
+    }
+
 
     // 실제 웨이브 시작
     private void StartWave()
@@ -171,17 +184,15 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         // _player = GetComponent<>(Player); 
     }
-
-    private void RefreshGold()
+    
+    private void RefreshGoldUI()
     {
-        //Player.OnGoldChange += RefreshGoldUI;
-    }
-
-    private void RefreshGoldUI(int gold)
-    {
-        Debug.Log($"Gold : {gold}");
+        _goldUI.text = $"보유 골드 : {_gameManager._gold }";
         //_playerGoldText.text = gold.ToString();
+
+        // _gameManager.PlayerStatus.
     }
+
     // fps 실습때 진행한 playerWeapon과 UI로 확인
 }
 

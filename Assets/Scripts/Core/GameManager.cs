@@ -18,6 +18,9 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField] private GameObject _inGameUI;      // 인게임 UI
 
     [field:SerializeField] public PlayerStatus PlayerStatus{get; private set;}
+    private PlayerWallet _wallet;
+    public int _gold => _wallet.Gold;
+    
     
     
     private bool IsPause;
@@ -33,8 +36,12 @@ public class GameManager : SingletonBehaviour<GameManager>
     //     get { return hasStart; }
     // }
     // ---- 이벤트 함수 ---------------------------------------
-    
-    private void Awake() => SetSingleton();
+
+    private void Awake()
+    {
+        SetSingleton();
+        CacheComponents();
+    } 
     
     private void Start()
     {
@@ -81,7 +88,7 @@ public class GameManager : SingletonBehaviour<GameManager>
                 ResetToTitle();
                 break;
             case GameState.WavePreparation:
-                WaveManager.Instance.StartFirstWavePrepare();
+                //WaveManager.Instance.StartFirstWavePrepare();
                 // 라운드 시작 전 로직
                 // 웨이브 준비 UI 잠시 띄웠다가 지우기 or
                 // 30초 위에 띄우고 웨이브 준비 단계
@@ -183,6 +190,12 @@ public class GameManager : SingletonBehaviour<GameManager>
         Cursor.visible = true;
     }
     // ----------------------------------------------
+    
+    private void CacheComponents()
+    {
+        _wallet = PlayerStatus.GetComponent<PlayerWallet>();
+    }
+
 }
 
 public enum GameState
