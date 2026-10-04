@@ -16,10 +16,10 @@ public class MonsterMove : MonoBehaviour
         originalSpeed = speed;
         CacheComponent();
     }
-    private void Start()
-    {
-        Initialize(_start);
-    }
+    //private void Start()
+    //{
+    //    //Initialize(_start);
+    //}
 
     private void Update()
     {
@@ -31,6 +31,7 @@ public class MonsterMove : MonoBehaviour
     public void Initialize(WayPointPath waypoint)
     {
         waypoints = waypoint._waypoints;
+        Debug.Log("이동");
         arrivePoint = 0; // 이동해 인덱스 도착시 1+ 더하기
 
     }

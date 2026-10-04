@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
+/*[RequireComponent(typeof(NavMeshAgent))]
 public class MonsterNavMeshMoveTest : MonoBehaviour
 {
     // 실제로는 쓰지 스포너가 지정한다
@@ -68,3 +68,4 @@ public class MonsterNavMeshMoveTest : MonoBehaviour
         if (!_moving) Initialize(_testPath);
     }
 }
+*/
