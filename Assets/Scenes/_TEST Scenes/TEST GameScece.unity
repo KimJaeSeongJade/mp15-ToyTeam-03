@@ -243,8 +243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab81af3ce6970204593fe3f17fd9e01b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 10
-  _goldDropPrefab: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}
 --- !u!54 &137760621
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -754,6 +752,74 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 812784101}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &362072573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 362072576}
+  - component: {fileID: 362072575}
+  - component: {fileID: 362072574}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &362072574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362072573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &362072575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362072573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &362072576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362072573}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &415248990
 GameObject:
@@ -2204,9 +2270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292d1031144011e48aa1ffbab53dcbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waypointPath: {fileID: 1906699160}
+  _waypointPath: {fileID: 1906699162}
   _count: 5
-  _monsterPrefab: {fileID: 5691040406973086368, guid: b5c276c95a1699b40891c66d302f62ed, type: 3}
+  _monsterPrefab: {fileID: 7454112230223378898, guid: 3e38c30748ec2ee44a9636fdffece5c0, type: 3}
 --- !u!4 &1062174971
 Transform:
   m_ObjectHideFlags: 0
@@ -4081,7 +4147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1906699161}
-  - component: {fileID: 1906699160}
+  - component: {fileID: 1906699162}
   m_Layer: 0
   m_Name: WaypointPath
   m_TagString: Untagged
@@ -4089,24 +4155,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1906699160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1906699159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0507e1fb9fe63254989a188af2b501a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _waypoint:
-  - {fileID: 867037061}
-  - {fileID: 325488759}
-  - {fileID: 872088277}
-  - {fileID: 520857663}
-  - {fileID: 2061190681}
 --- !u!4 &1906699161
 Transform:
   m_ObjectHideFlags: 0
@@ -4122,6 +4170,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 952279505}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1906699162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906699159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d461d56de41ed468aa202daae79f26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  givewaypoints:
+  - {fileID: 1062174971}
+  - {fileID: 867037061}
+  - {fileID: 325488759}
+  - {fileID: 872088277}
+  - {fileID: 520857663}
+  - {fileID: 2061190681}
 --- !u!1 &1996934113
 GameObject:
   m_ObjectHideFlags: 0
@@ -4390,3 +4457,4 @@ SceneRoots:
   - {fileID: 1144319278}
   - {fileID: 952279505}
   - {fileID: 1450810945}
+  - {fileID: 362072576}

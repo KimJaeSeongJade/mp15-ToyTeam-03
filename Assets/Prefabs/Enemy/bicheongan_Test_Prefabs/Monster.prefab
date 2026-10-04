@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d99234d28ebdc4c8b22a32c0893822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 20
   _goldPrabas: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}
 --- !u!114 &2886963048642012211
 MonoBehaviour:
@@ -175,3 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03abf3f0eaa8964fbf1a93f9fb4f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 10
+  Hp: 20
+  Defend: 0
+  GoldDrop: 0
