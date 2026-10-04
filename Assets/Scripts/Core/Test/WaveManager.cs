@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class WaveManager : SingletonBehaviour<WaveManager>
 {
+    [SerializeField] private MonsterSpawner _monsterSpawner;
+
     // 웨이브 대기 시간
     [SerializeField] private float _prepareTime = 30f;
+    [SerializeField] private TMPro.TextMeshProUGUI _prepareText;
     private GameManager _gameManager;
-    
+
     // 정보 받아와야하면 추후에 수정
-    
-    private int _currentWave = 0;   
-    private float _remainingTime;   
-    private int _aliveMonsterCount;
-    private bool _isSpawnFinished;
+
+    private int _currentWave = 0;
+    private float _remainingTime;
+    [SerializeField] private int _aliveMonsterCount;
+    [SerializeField] private bool _isSpawnFinished;
 
     public int CurrentWave => _currentWave;
     public float RemainingTime => _remainingTime;
@@ -42,7 +45,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     
     private void OnEnable()
     {
-        if (!_gameManager.IsStarted) return;
+        // 게임매니저에서 시작 전달받아와야함.
         StartFirstWavePrepare();
         Debug.Log("웨이브 준비 단계");
 
@@ -86,9 +89,30 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         StartWave();
     }
 
+    private void PrepareWaveUI()
+    {
+        
+    }
+    
+    // while (_remainingTime > 0)
+    // {
+    //     UI에 남은 시간 전달
+    //
+    //     _remainingTime -= Time.deltaTime
+    //
+    //     yield return null
+    // }
+    
+
+
     // 실제 웨이브 시작
     private void StartWave()
     {
+        // MonsterSpawner에게 현재 웨이브 시작 요청
+        // TODO 여기 호출 부 수정
+        _monsterSpawner.SpawnWave(1, AddMonster, SetSpawnFinished);
+        
+        
         _currentWave++; // 웨이브 증가
         // 종료조건 파악을 위한 몬스터 수 확인
         _aliveMonsterCount = 0; 
@@ -97,19 +121,20 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
         OnWaveChanged?.Invoke(_currentWave);
         OnWaveStarted?.Invoke();
-
-        // MonsterSpawner에게 현재 웨이브 시작 요청
     }
 
     // 몬스터 생성 시 호출
     public void AddMonster()
     {
+        // ReomoveMonster() 구독 추가 해제
+        // enemy.onRemoved += RemoveMonster;
         _aliveMonsterCount++;
     }
 
     // 몬스터 사망 시 호출
     public void RemoveMonster()
     {
+        // enemy.onRemoved -= RemoveMonster;
         _aliveMonsterCount--;
 
         CheckWaveEnd();
