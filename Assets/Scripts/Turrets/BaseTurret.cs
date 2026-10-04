@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseTurret : MonoBehaviour
+public class BaseTurret : MonoBehaviour, IBuildTargetReceiver
 {
     [SerializeField] protected float _maxHp;
     protected float _currentHp;
     [SerializeField] protected int _goldCost;
     [SerializeField] private TurretType _turretType;
+
+    [SerializeField] private TurretPreview _preview;
+
 
     public float MaxHp => _maxHp;
     public float CurrentHp => _currentHp;
@@ -34,5 +37,14 @@ public class BaseTurret : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    
+
+    public void PreviewShow(BaseTurret resultPrefab, bool canBuild, Vector3 position, Quaternion rotation)
+    {
+        _preview.Show(resultPrefab, position, rotation, canBuild);
+    }
+
+    public void PreviewHide()
+    {
+        _preview.Hide();
+    }
 }

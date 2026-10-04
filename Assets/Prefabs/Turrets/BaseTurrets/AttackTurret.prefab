@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2742544638073256674}
   - component: {fileID: 7639780535241575203}
   - component: {fileID: 4042182580509433704}
+  - component: {fileID: -6173680046818110689}
   m_Layer: 0
   m_Name: AttackTurret
   m_TagString: Untagged
@@ -122,14 +123,27 @@ MonoBehaviour:
   _maxHp: 120
   _goldCost: 50
   _turretType: 0
+  _preview: {fileID: -6173680046818110689}
   _attackRange: 15
   _targetMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 512
   _muzzlePoint: {fileID: 401591288557125859}
   _bullets: {fileID: 6711337746384585866, guid: caac436db782ed540a49b881a1e39e92, type: 3}
   _bulletCoolTime: 0.5
   _target: {fileID: 0}
+--- !u!114 &-6173680046818110689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3529012851971500671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be4d06afa8922d4db65e0af0574a1ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4131614751707539491
 GameObject:
   m_ObjectHideFlags: 0
