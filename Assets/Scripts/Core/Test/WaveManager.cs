@@ -110,7 +110,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         // MonsterSpawner에게 현재 웨이브 시작 요청
         // TODO 여기 호출 부 수정
-        _monsterSpawner.SpawnWave(1, AddMonster, SetSpawnFinished);
+        //_monsterSpawner.SpawnWave(1, AddMonster, SetSpawnFinished);
         
         
         _currentWave++; // 웨이브 증가
