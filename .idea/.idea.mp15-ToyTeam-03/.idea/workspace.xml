@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="77a04a31-efbe-45d6-8706-1dbc83ded210" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.mp15-ToyTeam-03/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.mp15-ToyTeam-03/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/_TEST Scenes/_TEST Core/TestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/_TEST Scenes/_TEST Core/TestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/GameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Test/WaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Test/WaveManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +15,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "feat/yr1103/game-manager-button"
+    "git-widget-placeholder": "feat/yr1103/wave-wait-ui"
   }
 }]]></component>
   <component name="TaskManager">

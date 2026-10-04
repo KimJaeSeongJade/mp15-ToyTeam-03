@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class WaveManager : SingletonBehaviour<WaveManager>
 {
@@ -8,7 +9,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     // 웨이브 대기 시간
     [SerializeField] private float _prepareTime = 30f;
-    [SerializeField] private TMPro.TextMeshProUGUI _prepareText;
+    [SerializeField] private TextMeshProUGUI _prepareTimeUI;
     private GameManager _gameManager;
 
     // 정보 받아와야하면 추후에 수정
@@ -20,6 +21,8 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     public int CurrentWave => _currentWave;
     public float RemainingTime => _remainingTime;
+
+    private int CurrentwaveNumber = 1;
 
     // 웨이브 시작 / 종료 액션처리
     // delegate
@@ -37,7 +40,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     private void Update()
     {
-
+        PrepareWaveUI();
     }
 
     // 게임 매니저 게임 시작 -> 이벤트 구독 처리
@@ -45,7 +48,9 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     
     private void OnEnable()
     {
+       
         // 게임매니저에서 시작 전달받아와야함.
+        if (GameManager.Instance.currentState != GameState.WavePreparation) return;
         StartFirstWavePrepare();
         Debug.Log("웨이브 준비 단계");
 
@@ -67,7 +72,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     
     // 게임 시작 시 호출
-    private void StartFirstWavePrepare()
+    public void StartFirstWavePrepare()
     {
         StartCoroutine(PrepareNextWave());
     }
@@ -91,7 +96,9 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     private void PrepareWaveUI()
     {
-        
+        // 만약 게임 시작 됐으면 UI 처리한다.
+        // 조건식 추후에 고민
+        _prepareTimeUI.text = $"{CurrentwaveNumber} 웨이브 시작까지 남은 시간 {_remainingTime.ToString("F1")}";
     }
     
     // while (_remainingTime > 0)
@@ -127,7 +134,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     public void AddMonster()
     {
         // ReomoveMonster() 구독 추가 해제
-        // enemy.onRemoved += RemoveMonster;
+        //enemy.onRemoved += RemoveMonster;
         _aliveMonsterCount++;
     }
 
