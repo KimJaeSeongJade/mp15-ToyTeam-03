@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _start: {fileID: 0}
-  speed: 25
+  speed: 10
 --- !u!114 &828571807100128330
 MonoBehaviour:
   m_ObjectHideFlags: 0
