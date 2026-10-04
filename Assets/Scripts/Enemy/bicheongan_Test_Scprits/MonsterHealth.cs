@@ -18,7 +18,15 @@ public class MonsterHealth : MonoBehaviour, IDamageable
     {
         CacheComponent();
         _speed = GetComponent<MonsterMove>();// 임시 BaseEnemy 완성시 변경예정
-        goldPool = new ObjectPool<GoldDrop>(_goldPrabas, 20);
+        goldPool = new ObjectPool<GoldDrop>(
+            _goldPrabas,
+            10,
+            transform,
+            _goldPrabas =>
+            {
+                _goldPrabas.InitDate();
+            }
+            );
     }
 
     private void Update()

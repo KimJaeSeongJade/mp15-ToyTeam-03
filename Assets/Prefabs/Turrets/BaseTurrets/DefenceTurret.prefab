@@ -127,7 +127,7 @@ MonoBehaviour:
   _defenceRange: 0
   _targetMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   _muzzlePoint: {fileID: 0}
   _bullets: {fileID: 7400289637809923982, guid: f3d938cd71b59d04d9f01c06f446eec5, type: 3}
   _bulletCoolTime: 2

@@ -1,22 +1,28 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class WaveManager : SingletonBehaviour<WaveManager>
 {
+    [SerializeField] private MonsterSpawner _monsterSpawner;
+
     // 웨이브 대기 시간
     [SerializeField] private float _prepareTime = 30f;
+    [SerializeField] private TextMeshProUGUI _prepareTimeUI;
     private GameManager _gameManager;
-    
+
     // 정보 받아와야하면 추후에 수정
-    
-    private int _currentWave = 0;   
-    private float _remainingTime;   
-    private int _aliveMonsterCount;
-    private bool _isSpawnFinished;
+
+    private int _currentWave = 0;
+    private float _remainingTime;
+    [SerializeField] private int _aliveMonsterCount;
+    [SerializeField] private bool _isSpawnFinished;
 
     public int CurrentWave => _currentWave;
     public float RemainingTime => _remainingTime;
+
+    private int CurrentwaveNumber = 1;
 
     // 웨이브 시작 / 종료 액션처리
     // delegate
@@ -34,7 +40,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     private void Update()
     {
-
+        PrepareWaveUI();
     }
 
     // 게임 매니저 게임 시작 -> 이벤트 구독 처리
@@ -42,8 +48,10 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     
     private void OnEnable()
     {
-        if (!_gameManager.IsStarted) return;
-        StartFirstWavePrepare();
+       
+        // 게임매니저에서 시작 전달받아와야함.
+        //if (GameManager.Instance.currentState != GameState.WavePreparation) return;
+        //StartFirstWavePrepare();
         Debug.Log("웨이브 준비 단계");
 
         // GameManager 게임 시작 이벤트 구독 
@@ -64,7 +72,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     
     // 게임 시작 시 호출
-    private void StartFirstWavePrepare()
+    public void StartFirstWavePrepare()
     {
         StartCoroutine(PrepareNextWave());
     }
@@ -83,12 +91,36 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
             yield return null;
         }
+
         StartWave();
     }
+
+    private void PrepareWaveUI()
+    {
+        // 만약 게임 시작 됐으면 UI 처리한다.
+        // 조건식 추후에 고민
+        _prepareTimeUI.text = $"{CurrentwaveNumber} 웨이브 시작까지 남은 시간 {_remainingTime.ToString("F1")}";
+    }
+    
+    // while (_remainingTime > 0)
+    // {
+    //     UI에 남은 시간 전달
+    //
+    //     _remainingTime -= Time.deltaTime
+    //
+    //     yield return null
+    // }
+    
+
 
     // 실제 웨이브 시작
     private void StartWave()
     {
+        // MonsterSpawner에게 현재 웨이브 시작 요청
+        // TODO 여기 호출 부 수정
+        _monsterSpawner.SpawnWave(1, AddMonster, SetSpawnFinished);
+        
+        
         _currentWave++; // 웨이브 증가
         // 종료조건 파악을 위한 몬스터 수 확인
         _aliveMonsterCount = 0; 
@@ -97,19 +129,22 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
         OnWaveChanged?.Invoke(_currentWave);
         OnWaveStarted?.Invoke();
-
-        // MonsterSpawner에게 현재 웨이브 시작 요청
     }
 
     // 몬스터 생성 시 호출
-    public void AddMonster()
+    public void AddMonster(BaseEnemy enemy)
     {
+        // ReomoveMonster() 구독 추가 해제
+        enemy.onRemoved += RemoveMonster;
+        
         _aliveMonsterCount++;
     }
 
     // 몬스터 사망 시 호출
-    public void RemoveMonster()
+    public void RemoveMonster(BaseEnemy enemy)
     {
+        enemy.onRemoved -= RemoveMonster;
+
         _aliveMonsterCount--;
 
         CheckWaveEnd();
@@ -140,14 +175,14 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
         // 드랍 골드 정산
         // 골드 정산 메서드 
-        
-        
+
+
         // 배달 함수 호출
-        
+
         // ↑ 이벤트 구독 하여 골드 ui쪽으로 업데이트만 하면 됨 
-        
+
         // 다음 웨이브 준비 시작
-        
+
         StartCoroutine(PrepareNextWave());
     }
 

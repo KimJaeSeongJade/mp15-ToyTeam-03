@@ -17,6 +17,12 @@ public class BaseTurret : MonoBehaviour, IBuildTargetReceiver
     public int Cost => _goldCost;
     public TurretType Type => _turretType;
 
+    // 게임 시작 시 현재 체력을 최대 체력으로 채워줍니다.
+    protected virtual void Awake()
+    {
+        _currentHp = _maxHp;
+    }
+
     public virtual void Attack()
     {
         
@@ -33,18 +39,8 @@ public class BaseTurret : MonoBehaviour, IBuildTargetReceiver
         }
     }
 
-    protected virtual void Die()
+    protected void Die()
     {
         Destroy(gameObject);
-    }
-
-    public void PreviewShow(BaseTurret resultPrefab, bool canBuild, Vector3 position, Quaternion rotation)
-    {
-        _preview.Show(resultPrefab, position, rotation, canBuild);
-    }
-
-    public void PreviewHide()
-    {
-        _preview.Hide();
     }
 }

@@ -7,7 +7,9 @@ public class GoldDrop : PoolObject
     [SerializeField] private float _deliverySpeed = 8f;
     [SerializeField] private float _arrivalDistance = 0.3f;
 
-    private WaveManager _waveManager;
+    private Transform _tr;
+
+    [SerializeField] private WaveManager _waveManager;
     private PlayerWallet _playerWallet;
     [SerializeField] private Transform _tr;
     private bool _isDelivering;
@@ -21,6 +23,7 @@ public class GoldDrop : PoolObject
 
         _isDelivering = false;
         gameObject.SetActive(true);
+        transform.SetParent(null);
     }
 
     // 풀로 돌아갈 때 구독과 이동 상태를 정리한다.
@@ -30,6 +33,7 @@ public class GoldDrop : PoolObject
 
         _isDelivering = false;
         gameObject.SetActive(false);
+        transform.SetParent(_tr);
     }
 
     // 웨이브 종료 시 플레이어를 찾아 자동 배달을 시작한다.
@@ -74,5 +78,14 @@ public class GoldDrop : PoolObject
         //_amount = GameManager.Instance.GOLD_AMOUNT;
 
         //_playerWallet = GameManager.Instance.Player.GetComponent<PlayerWallet>();
+    }
+
+    public void InitDate()
+    {
+        _tr = transform.parent;
+
+        _waveManager = WaveManager.Instance;
+
+        _playerWallet = GameManager.Instance._playerWallet;
     }
 }
