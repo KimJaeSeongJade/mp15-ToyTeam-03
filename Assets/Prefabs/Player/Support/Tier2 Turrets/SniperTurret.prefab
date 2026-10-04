@@ -100,15 +100,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a9fd481bc6c0442ab96b300f6b13de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _preview: {fileID: 2083394507839992430}
   _maxHp: 100
   _goldCost: 100
   _turretType: 4
-  _preview: {fileID: 2083394507839992430}
+  _baseDamage: 10
   _target: {fileID: 0}
   _muzzle: {fileID: 5208188360719690816}
   _bullet: {fileID: 6935606243952076331, guid: e7b7c55ac4acb65429c48435ea731b05, type: 3}
   _initMaxCount: 5
-  _fireTime: 1
+  _fireTime: 30
 --- !u!1 &3106417339071747244
 GameObject:
   m_ObjectHideFlags: 0

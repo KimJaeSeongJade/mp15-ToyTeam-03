@@ -37,9 +37,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     // }
     // ---- 이벤트 함수 ---------------------------------------
 
-    private void Awake()
+    protected override void Awake()
     {
-        SetSingleton();
+        base.Awake();
+
         CacheComponents();
     } 
     

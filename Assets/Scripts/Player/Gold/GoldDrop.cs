@@ -11,7 +11,6 @@ public class GoldDrop : PoolObject
 
     [SerializeField] private WaveManager _waveManager;
     private PlayerWallet _playerWallet;
-    [SerializeField] private Transform _tr;
     private bool _isDelivering;
 
     private void Update() => DeliveryToPlayer();
@@ -86,6 +85,6 @@ public class GoldDrop : PoolObject
 
         _waveManager = WaveManager.Instance;
 
-        _playerWallet = GameManager.Instance._playerWallet;
+        _playerWallet = GameManager.Instance.PlayerStatus.GetComponent<PlayerWallet>();
     }
 }

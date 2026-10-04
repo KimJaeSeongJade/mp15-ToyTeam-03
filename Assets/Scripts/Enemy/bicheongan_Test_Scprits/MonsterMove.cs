@@ -10,7 +10,7 @@ public class MonsterMove : MonoBehaviour
     private int arrivePoint;
     private NavMeshAgent _agent;
     private BaseEnemy reenemy;
-    [SerializeField]private float speed = 50f;//BaseEnemy 만들어지면 변경 예정
+    [SerializeField] private float speed = 50f;//BaseEnemy 만들어지면 변경 예정
     private float originalSpeed;
 
     private void Awake()
@@ -49,21 +49,19 @@ public class MonsterMove : MonoBehaviour
         {
             arrivePoint++;
 
-            if (arrivePoint >= waypoints.Count -1)
+            if (arrivePoint >= waypoints.Count - 1)
             {
                 // 마지막 Waypoint 도착
                 Debug.Log("도착");
                 reenemy.ReturnToPool();
                 arrivePoint = 0;
-                return ;
+                return;
             }
 
-            _agent.SetDestination(
-                waypoints[arrivePoint].position
-            );
+            _agent.SetDestination(waypoints[arrivePoint].position);
         }
-    
-}
+
+    }
     public void Slow(float slowspeed)
     {
         speed *= (1f - slowspeed);
