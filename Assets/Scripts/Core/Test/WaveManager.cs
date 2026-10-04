@@ -50,7 +50,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
        
         // 게임매니저에서 시작 전달받아와야함.
-        if (GameManager.Instance.currentState != GameState.WavePreparation) return;
+        //if (GameManager.Instance.currentState != GameState.WavePreparation) return;
         StartFirstWavePrepare();
         Debug.Log("웨이브 준비 단계");
 
@@ -117,7 +117,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         // MonsterSpawner에게 현재 웨이브 시작 요청
         // TODO 여기 호출 부 수정
-        //_monsterSpawner.SpawnWave(1, AddMonster, SetSpawnFinished);
+        _monsterSpawner.SpawnWave(1, AddMonster, SetSpawnFinished);
         
         
         _currentWave++; // 웨이브 증가
@@ -131,7 +131,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     }
 
     // 몬스터 생성 시 호출
-    public void AddMonster()
+    public void AddMonster(BaseEnemy enemy)
     {
         // ReomoveMonster() 구독 추가 해제
         //enemy.onRemoved += RemoveMonster;
