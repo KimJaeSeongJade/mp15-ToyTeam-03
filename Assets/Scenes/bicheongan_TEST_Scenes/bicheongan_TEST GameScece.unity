@@ -1460,7 +1460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waypointPath: {fileID: 1906699162}
   _count: 5
-  _monsterPrefab: {fileID: 828571807100128330, guid: 3e38c30748ec2ee44a9636fdffece5c0, type: 3}
+  _monsterPrefab: {fileID: 508673397538570487, guid: 438176a4f45e55b43980ceacdae162ec, type: 3}
 --- !u!4 &1062174971
 Transform:
   m_ObjectHideFlags: 0
