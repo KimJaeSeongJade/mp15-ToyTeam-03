@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +8,9 @@ public class ChargeAttack : BasicAttack, IChargeable
     [SerializeField] private float _maxChargeTime = 2f;
     [SerializeField] private float _minimumDamage = 10f;
     [SerializeField] private float _maximumDamage = 30f;
+    [SerializeField] private GameObject _chargeEffect;
+    [SerializeField] private GameObject _releaseEffect;
+    [SerializeField, Min(0f)] private float _releaseDuration = 0.3f;
 
     private float _chargeStartTime;
     private bool _charging;
@@ -17,6 +22,7 @@ public class ChargeAttack : BasicAttack, IChargeable
 
     public override void WakeUp()
     {
+        StopAllCoroutines();
         // BasicAttack.WakeUp이 부모에서 분리하므로 발사 지점을 먼저 보관한다.
         _muzzle = transform.parent;
         base.WakeUp();
@@ -24,6 +30,8 @@ public class ChargeAttack : BasicAttack, IChargeable
         // 차지 중 이동은 GetNextPosition에서 막고 Update는 입력 해제를 감지한다.
         transform.SetParent(_muzzle, false);
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        _chargeEffect.SetActive(true);
+        _releaseEffect.SetActive(false);
 
         _chargeStartTime = Time.time;
         _charging = true;
@@ -59,9 +67,20 @@ public class ChargeAttack : BasicAttack, IChargeable
         {
             IDamageable target = collider.GetComponent<IDamageable>();
             if (target != null && damaged.Add(target))
-                target.TakeDamage(damageRatio);
+                target.TakeDamage(Convert.ToInt32(damageRatio));
         }
 
+        // 효과가 플레이어를 따라가지 않도록 루트를 월드에 남긴다.
+        transform.SetParent(null, true);
+        _charging = false;
+        _chargeEffect.SetActive(false);
+        _releaseEffect.SetActive(true);
+        StartCoroutine(ReturnAfterRelease());
+    }
+
+    private IEnumerator ReturnAfterRelease()
+    {
+        yield return new WaitForSeconds(_releaseDuration);
         ReturnToPool();
     }
 
@@ -74,6 +93,8 @@ public class ChargeAttack : BasicAttack, IChargeable
     public override void Sleep()
     {
         _charging = false;
+        _chargeEffect.SetActive(false);
+        _releaseEffect.SetActive(false);
         base.Sleep();
     }
 }
