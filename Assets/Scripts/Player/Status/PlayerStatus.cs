@@ -84,4 +84,9 @@ public class PlayerStatus : MonoBehaviour
             OnDashSpeedChanged?.Invoke(_dashSpeed);
         }
     }
+
+    public void GetExp(float amount)
+    {
+        _levelManager.GainExp(amount);
+    }
 }

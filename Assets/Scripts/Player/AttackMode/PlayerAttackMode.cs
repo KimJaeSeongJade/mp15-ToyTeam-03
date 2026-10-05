@@ -8,13 +8,14 @@ public class PlayerAttackMode : MonoBehaviour
     [SerializeField] private ObjectPool<BasicAttack> _attackPools;
     [SerializeField] private SkillAttack _skillAttack;
     [SerializeField] private int _initMaxCount;
-    [SerializeField] private Transform _migicMuzzle;
+    [SerializeField] private Transform _magicMuzzle;
     [SerializeField] private float _fireTime;
     [SerializeField] private float _skillTime;
     [SerializeField] private float _skillRandge;
 
     private PlayerInputReader _inputReader;
     private PlayerBuildMode _buildMode;
+    private IChargeable _chargingAttack;
 
     private RaycastHit hit;
     private float _elapseTime;
@@ -59,9 +60,16 @@ public class PlayerAttackMode : MonoBehaviour
 
     private void Attack()
     {
+        if (_chargingAttack != null)
+        {
+            if (_chargingAttack.IsCharging) return;
+            _chargingAttack = null;
+        }
+
         if (!canFire || !_inputReader.isPressedAttack) return;
 
-        _basicAttack = _attackPools.Pop();
+        BasicAttack attack = _attackPools.Pop();
+        _chargingAttack = attack as IChargeable;
 
         _elapseTime = 0;
     }
@@ -134,6 +142,34 @@ public class PlayerAttackMode : MonoBehaviour
         _buildMode.enabled = !isAttackMode;
     }
 
+    public void LevelUpMultiply(float atkMultiply, float skillMultiply)
+    {
+        _fireTime *= atkMultiply;
+        _skillTime *= skillMultiply;
+    }
+
+    // 이전 풀은 보관하고, 공격이 바뀔 때마다 새 프리팹으로 풀을 만든다.
+    public void SetBasicAttack(BasicAttack newBasicAttack)
+    {
+        _basicAttack = newBasicAttack;
+
+        _attackPools = new ObjectPool<BasicAttack>(
+            newBasicAttack,
+            _initMaxCount,
+            _magicMuzzle,
+            attack =>
+            {
+                // 풀이 부족해 나중에 생성된 탄환도 총구에서 출발하고 이곳으로 반환된다.
+                attack.transform.SetParent(_magicMuzzle, false);
+                attack.InitTransform();
+            });
+    }
+
+    public void SetSkillAttack(SkillAttack newSkillAttack)
+    {
+        _skillAttack = newSkillAttack;
+    }
+
     private void CacheComponenet()
     {
         _inputReader = GetComponent<PlayerInputReader>();
@@ -144,15 +180,7 @@ public class PlayerAttackMode : MonoBehaviour
     {
         enabled = isAttackMode;
 
-        _attackPools = new ObjectPool<BasicAttack>(
-            _basicAttack,
-            _initMaxCount,
-            _migicMuzzle,
-            _basicAttack =>
-            {
-                _basicAttack.InitTransform();
-            }
-            );
+        SetBasicAttack(_basicAttack);
 
         _elapseTime = _fireTime;
         _elapseSkillTime = _skillTime;
