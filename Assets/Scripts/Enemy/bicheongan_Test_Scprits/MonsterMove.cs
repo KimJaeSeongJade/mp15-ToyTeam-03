@@ -5,18 +5,21 @@ using UnityEngine.AI;
 
 public class MonsterMove : MonoBehaviour
 {
-    [SerializeField] private WayPointPath _start; //스폰 포인트 참조
+    //[SerializeField] private WayPointPath _start; //스폰 포인트 참조
     private List<Transform> waypoints;
     private int arrivePoint;
     private NavMeshAgent _agent;
     private BaseEnemy reenemy;
-    [SerializeField] private float speed = 50f;//BaseEnemy 만들어지면 변경 예정
+    //[SerializeField] private float speed = 50f;//BaseEnemy 만들어지면 변경 예정
+    
+
     private float originalSpeed;
 
     private void Awake()
     {
-        originalSpeed = speed;
         CacheComponent();
+        _agent.speed = reenemy.MonSpeed;
+        originalSpeed = _agent.speed;
     }
     //private void Start()
     //{
@@ -64,14 +67,14 @@ public class MonsterMove : MonoBehaviour
     }
     public void Slow(float slowspeed)
     {
-        speed *= (1f - slowspeed);
+        _agent.speed *= (1f - slowspeed);
         Debug.Log("느려짐");
         StartCoroutine(WaitSpeed());
     }
     private IEnumerator WaitSpeed()
     {
         yield return new WaitForSeconds(20f);
-        speed = originalSpeed;
+        _agent.speed = originalSpeed;
         Debug.Log("정상 스피드");
     }
     private void CacheComponent()

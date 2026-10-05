@@ -5,19 +5,18 @@ using UnityEngine;
 
 public class MonsterHealth : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float _hp;
+    //[SerializeField] private float _hp; // 변경예정
     [SerializeField] private GoldDrop _goldPrabas;
     private ObjectPool<GoldDrop> goldPool;
     private BaseEnemy Cacheenemy;
     private bool _isDead;
     private bool _isSlow;
 
-    private MonsterMove _speed;// 임시 BaseEnemy 완성시 변경예정
+    private MonsterMove _speed;
 
     private void Awake()
     {
         CacheComponent();
-        _speed = GetComponent<MonsterMove>();// 임시 BaseEnemy 완성시 변경예정
         goldPool = new ObjectPool<GoldDrop>(
             _goldPrabas,
             10,
@@ -40,8 +39,9 @@ public class MonsterHealth : MonoBehaviour, IDamageable
     {
         if (_isDead == true) return;
 
-        _hp -= damage;
-        if(_hp <= 0)
+        Cacheenemy.MonHp -= (damage - Cacheenemy.MonDefend);
+        Debug.Log($"몬스터에게 {damage - Cacheenemy.MonDefend} 데미지를 줌");
+        if (Cacheenemy.MonHp <= 0)
         {
             Debug.Log("죽음");
             _isDead = true;
@@ -60,5 +60,6 @@ public class MonsterHealth : MonoBehaviour, IDamageable
     private void CacheComponent()
     {
         Cacheenemy = GetComponent<BaseEnemy>();
+        _speed = GetComponent<MonsterMove>();
     }
 }
