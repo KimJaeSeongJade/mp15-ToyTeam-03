@@ -9,6 +9,8 @@ public class MonsterHealth : MonoBehaviour, IDamageable
     [SerializeField] private GoldDrop _goldPrabas;
     private ObjectPool<GoldDrop> goldPool;
     private BaseEnemy Cacheenemy;
+
+    private float goldCount;
     private bool _isDead;
     private bool _isSlow;
 
@@ -19,7 +21,7 @@ public class MonsterHealth : MonoBehaviour, IDamageable
         CacheComponent();
         goldPool = new ObjectPool<GoldDrop>(
             _goldPrabas,
-            10,
+            (int)goldCount,
             transform,
             _goldPrabas =>
             {
@@ -61,5 +63,6 @@ public class MonsterHealth : MonoBehaviour, IDamageable
     {
         Cacheenemy = GetComponent<BaseEnemy>();
         _speed = GetComponent<MonsterMove>();
+        goldCount = Cacheenemy.MonGold / GameManager.GOLD_AMOUNT;
     }
 }
