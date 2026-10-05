@@ -39,4 +39,11 @@ public class PlayerWallet : MonoBehaviour
         Debug.Log($"-{amount}골드 감소. 총 {_gold}골드");
         return true;
     }
+
+    public bool TryGetBoolSpendGold(int amount)
+    {
+        if (amount < 0 || _gold < amount) return false;
+
+        return true;
+    }
 }

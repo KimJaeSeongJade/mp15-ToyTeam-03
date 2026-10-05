@@ -25,7 +25,7 @@ public class MonsterHealth : MonoBehaviour, IDamageable
             transform,
             _goldPrabas =>
             {
-                _goldPrabas.InitDate();
+                _goldPrabas.InitData();
             }
             );
     }

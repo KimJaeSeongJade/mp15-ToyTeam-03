@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6744365403234072504
+--- !u!1 &407313154690658906
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3631639783528554487}
-  - component: {fileID: 5369044222178008345}
-  - component: {fileID: 956063815184015937}
-  - component: {fileID: 4035207203642884785}
+  - component: {fileID: 2857269259575018072}
+  - component: {fileID: 8183001788656065612}
+  - component: {fileID: 7420174222713766305}
+  - component: {fileID: 4880728934783871068}
   m_Layer: 0
-  m_Name: GoldDrop
+  m_Name: BA_ChargeAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3631639783528554487
+--- !u!4 &2857269259575018072
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6744365403234072504}
+  m_GameObject: {fileID: 407313154690658906}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.06, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5369044222178008345
+--- !u!33 &8183001788656065612
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6744365403234072504}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &956063815184015937
+  m_GameObject: {fileID: 407313154690658906}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &7420174222713766305
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6744365403234072504}
+  m_GameObject: {fileID: 407313154690658906}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -84,18 +84,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4035207203642884785
+--- !u!114 &4880728934783871068
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6744365403234072504}
+  m_GameObject: {fileID: 407313154690658906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a0c97bb1ddc46f9a7733a550d99a216, type: 3}
+  m_Script: {fileID: 11500000, guid: 1203164c9f361bf40be504dfb0e98efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _amount: 0
-  _deliverySpeed: 50
-  _arrivalDistance: 0.3
+  _damagableMask:
+    serializedVersion: 2
+    m_Bits: 512
+  _moveSpeed: 50
+  _damage: 10
+  _range: 50
+  _detectRadius: 1
+  _hitMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _maxChargeTime: 2
+  _maxDistance: 60
+  _minimumDamage: 10
+  _maximumDamage: 30

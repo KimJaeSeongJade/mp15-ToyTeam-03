@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class GoldDrop : PoolObject
 {
-    [SerializeField] private int _amount = 100;
+    [SerializeField] private int _amount;
     [SerializeField] private float _deliverySpeed = 8f;
     [SerializeField] private float _arrivalDistance = 0.3f;
 
     private Transform _tr;
 
-    [SerializeField] private WaveManager _waveManager;
+    private WaveManager _waveManager;
     private PlayerWallet _playerWallet;
     private bool _isDelivering;
 
@@ -74,16 +74,9 @@ public class GoldDrop : PoolObject
     {
         _tr = transform.parent;
 
-        //_amount = GameManager.Instance.GOLD_AMOUNT;
-
-        //_playerWallet = GameManager.Instance.Player.GetComponent<PlayerWallet>();
-    }
-
-    public void InitDate()
-    {
-        _tr = transform.parent;
-
         _waveManager = WaveManager.Instance;
+
+        _amount = GameManager.GOLD_AMOUNT;
 
         _playerWallet = GameManager.Instance.PlayerStatus.GetComponent<PlayerWallet>();
     }

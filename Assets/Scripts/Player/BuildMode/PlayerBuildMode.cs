@@ -10,6 +10,7 @@ public class PlayerBuildMode : MonoBehaviour
     private BuildPoint _buildPoint;
     private PlayerInputReader _inputReader;
     private PlayerAttackMode _attackMode;
+    private PlayerWallet _wallet;
 
     private void Awake() => CacheComponent();
     private void Start() => Init();
@@ -19,6 +20,7 @@ public class PlayerBuildMode : MonoBehaviour
         SetSelectedTurret();
         RayToBuildPoint();
         TurretBuild();
+        TurretSell();
         BuildModeEnd();
     }
 
@@ -50,7 +52,7 @@ public class PlayerBuildMode : MonoBehaviour
             if (point != null)
             {
                 _buildPoint = point;
-                canBuild = point.TryGetResultTurret(resultPrefab, out BaseTurret buildResult);
+                canBuild = point.TryGetResultTurret(resultPrefab, out BaseTurret buildResult) && _wallet.TryGetBoolSpendGold(_selectedTurret.Cost);
                 if (canBuild) resultPrefab = buildResult;
                 previewPosition = point.PlacementPosition;
                 previewRotation = point.PlacementRotation;
@@ -92,7 +94,21 @@ public class PlayerBuildMode : MonoBehaviour
         if (!_inputReader.isPressedAttackDown || _buildPoint == null || _selectedTurret == null) return;
 
         // 설치 시에도 BuildPoint가 같은 조합 규칙으로 결과를 결정하고 true시 원래 색으로 되돌린다.
-        if (_buildPoint.TryBuildTurret(_selectedTurret))
+        // int resultCost 로 조합 결과 터렛의 가격으로 계산한다.
+        if (_buildPoint.TryBuildTurret(_selectedTurret, out int resultCost))
+        {
+            _wallet.TrySpendGold(resultCost);
+            ClearSelectedBuildTarget();
+        }
+        return;
+    }
+
+    private void TurretSell()
+    {
+        if (!_inputReader.isPressedSkillDown || _buildPoint == null) return;
+
+        // 판매 성공시 프리뷰 색을 다시 정한다
+        if (_buildPoint.TrySellTurret(_wallet))
             ClearSelectedBuildTarget();
     }
 
@@ -113,6 +129,7 @@ public class PlayerBuildMode : MonoBehaviour
     {
         _inputReader = GetComponent<PlayerInputReader>();
         _attackMode = GetComponent<PlayerAttackMode>();
+        _wallet = GetComponent<PlayerWallet>();
         mainCamera = Camera.main;
     }
 
