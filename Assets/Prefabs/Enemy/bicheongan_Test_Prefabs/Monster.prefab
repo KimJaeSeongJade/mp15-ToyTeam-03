@@ -235,7 +235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d99234d28ebdc4c8b22a32c0893822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 0
   _goldPrabas: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}
 --- !u!114 &2886963048642012211
 MonoBehaviour:
@@ -249,8 +248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8693607146f2f7447b0d086a2ac5cfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _start: {fileID: 0}
-  speed: 10
 --- !u!114 &828571807100128330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +260,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03abf3f0eaa8964fbf1a93f9fb4f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _monHp: 20
+  _monDefend: 5
+  _monSpeed: 5
+  _monExp: 0
+  _monGlod: 0
 --- !u!195 &146840908834654453
 NavMeshAgent:
   m_ObjectHideFlags: 0

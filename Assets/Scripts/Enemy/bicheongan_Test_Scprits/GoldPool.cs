@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoldPool : MonoBehaviour
+/*public class GoldPool : MonoBehaviour
 {
     [SerializeField] private GameObject _goldPrefab;
     [SerializeField] private int _initialSize = 10;
@@ -53,3 +53,4 @@ public class GoldPool : MonoBehaviour
         gold.SetActive(false);
     }
 }
+*/
