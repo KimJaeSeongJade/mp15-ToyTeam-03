@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _mouseSensitivity;
     [SerializeField] private float _minPitch;
     [SerializeField] private float _maxPitch;
+    [SerializeField, Range(0f, 1f)] private float _pitchCameraDistanceScale = 0.55f;
     [SerializeField] private float _groundStickSpeed = 2f;
 
     private PlayerInputReader _inputReader;
@@ -16,19 +17,13 @@ public class PlayerMovement : MonoBehaviour
     private PlayerGroundChecker _groundChecker;
 
     private float _pitch;
-    private Vector3 _cameraOffset;
     private Transform _cameraTransform;
     private Rigidbody _rb;
 
     public Transform GetCamera { get => _cameraTransform;}
 
     private void Awake() => CacheComponent();
-
-    private void Update()
-    {
-        Rotate();
-    }
-
+    private void Update() => Rotate();
     private void LateUpdate()
     {
         Move();
@@ -37,8 +32,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void SetCameraTransform()
     {
+        float maxPitch = Mathf.Max(Mathf.Abs(_minPitch), Mathf.Abs(_maxPitch));
+        float pitchAmount = Mathf.InverseLerp(0f, maxPitch, Mathf.Abs(_pitch));
+        float cameraDepth = Mathf.Lerp(
+            _cameraPivot.localPosition.z,
+            _cameraPivot.localPosition.z * _pitchCameraDistanceScale,
+            pitchAmount);
+
+        Vector3 eyePosition = transform.TransformPoint(new Vector3(0f, _cameraPivot.localPosition.y, 0f));
+        Vector3 shoulderOffset = new Vector3(_cameraPivot.localPosition.x, 0f, cameraDepth);
         _cameraTransform.SetPositionAndRotation(
-            _cameraPivot.TransformPoint(_cameraOffset),
+            eyePosition + _cameraPivot.rotation * shoulderOffset,
             _cameraPivot.rotation);
     }
 
@@ -87,23 +91,12 @@ public class PlayerMovement : MonoBehaviour
         _cameraPivot.localRotation = Quaternion.Euler(_pitch, 0f, _cameraPivot.localEulerAngles.z);
 
         _attackMuzzle.localRotation = Quaternion.Euler(_pitch, 0f, 0f);
-        _cameraPivot.localRotation = Quaternion.Euler(_pitch, 0f, _cameraPivot.localEulerAngles.z);
     }
 
     private void CacheComponent()
     {
-        // 기존 프리팹/씬의 옆·뒤 거리만 카메라 오프셋으로 보관하고,
-        // 상하 회전 중심은 플레이어의 정면 축 위로 옮긴다.
-        Vector3 pivotPosition = _cameraPivot.localPosition;
-        _cameraOffset = new Vector3(pivotPosition.x, 0f, pivotPosition.z);
-        _cameraPivot.localPosition = new Vector3(0f, pivotPosition.y, 0f);
-
         _inputReader = GetComponent<PlayerInputReader>();
         _status = GetComponent<PlayerStatus>();
-        if (_status == null)
-        {
-            _status = gameObject.AddComponent<PlayerStatus>();
-        }
         _groundChecker = GetComponent<PlayerGroundChecker>();
         _playerJump = GetComponent<PlayerJump>();
         _rb = GetComponent<Rigidbody>();

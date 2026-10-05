@@ -9,12 +9,14 @@ public class PlayerAttackMode : MonoBehaviour
     [SerializeField] private SkillAttack _skillAttack;
     [SerializeField] private int _initMaxCount;
     [SerializeField] private Transform _magicMuzzle;
+    [SerializeField] private GameObject _skillIndicator;
     [SerializeField] private float _fireTime;
     [SerializeField] private float _skillTime;
     [SerializeField] private float _skillRandge;
 
     private PlayerInputReader _inputReader;
     private PlayerBuildMode _buildMode;
+    private PlayerAnimation _animation;
     private IChargeable _chargingAttack;
 
     private RaycastHit hit;
@@ -62,7 +64,13 @@ public class PlayerAttackMode : MonoBehaviour
     {
         if (_chargingAttack != null)
         {
-            if (_chargingAttack.IsCharging) return;
+            if (_chargingAttack.IsCharging)
+            {
+                _animation.SetCharging(true);
+                return;
+            }
+            _animation.SetCharging(false);
+            _animation.PlayAttack();
             _chargingAttack = null;
         }
 
@@ -70,31 +78,49 @@ public class PlayerAttackMode : MonoBehaviour
 
         BasicAttack attack = _attackPools.Pop();
         _chargingAttack = attack as IChargeable;
+        if (_chargingAttack != null)
+            _animation.SetCharging(true);
+        else
+            _animation.PlayAttack();
 
         _elapseTime = 0;
     }
 
     private void SkillCasting()
     {
-        if (!canSkill || !_inputReader.isPressedSkill) return;
+        if (!canSkill || !_inputReader.isPressedSkill)
+        {
+            _animation.SetCharging(false);
+            _skillIndicator.SetActive(false);
+            return;
+        }
+
+        _animation.SetCharging(true);
 
         Vector3 centerPoint = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f);
         Ray ray = Camera.main.ScreenPointToRay(centerPoint);
 
         if (Physics.Raycast(ray, out hit, _skillRandge, LayerMask.GetMask("Ground")))
         {
-            // TODO: 스킬 시전위치 표시 필요
+            _skillIndicator.transform.position = hit.point + Vector3.up * 0.03f;
+            _skillIndicator.SetActive(true);
 
 #if UNITY_EDITOR
             Debug.DrawRay(ray.origin, ray.direction * _skillRandge, Color.red);
 #endif
         }
+        else
+        {
+            _skillIndicator.SetActive(false);
+        }
     }
     private void SkillInit()
     {
-        if (!canSkill || !_inputReader.isPressedSkillUp) return;
+        if (!canSkill || !_inputReader.isPressedSkillUp || !_skillIndicator.activeInHierarchy) return;
 
         Instantiate(_skillAttack, hit.point, Quaternion.identity);
+        _animation.SetCharging(false);
+        _animation.PlaySkill();
 
         _elapseSkillTime = 0;
     }
@@ -174,6 +200,7 @@ public class PlayerAttackMode : MonoBehaviour
     {
         _inputReader = GetComponent<PlayerInputReader>();
         _buildMode = GetComponent<PlayerBuildMode>();
+        _animation = GetComponent<PlayerAnimation>();
     }
 
     private void Init()

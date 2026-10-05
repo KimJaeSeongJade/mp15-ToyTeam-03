@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 453618549}
   - component: {fileID: 453618548}
   - component: {fileID: 453618547}
+  - component: {fileID: 453618555}
   m_Layer: 9
   m_Name: Monster (3)
   m_TagString: Untagged
@@ -225,6 +226,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03abf3f0eaa8964fbf1a93f9fb4f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _monHp: 100
+  _monDefend: 0
+  _monSpeed: 0
+  _monGlod: 100
+  _monExp: 0
+  _monCastleDam: 0
 --- !u!114 &453618548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,8 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8693607146f2f7447b0d086a2ac5cfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _start: {fileID: 0}
-  speed: 50
 --- !u!114 &453618549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d99234d28ebdc4c8b22a32c0893822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
   _goldPrabas: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}
 --- !u!54 &453618550
 Rigidbody:
@@ -366,6 +370,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &453618555
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453618546}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &716039857
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,8 +477,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716039857}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 1.85, z: -1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -685,6 +711,7 @@ GameObject:
   - component: {fileID: 1115794300}
   - component: {fileID: 1115794299}
   - component: {fileID: 1115794298}
+  - component: {fileID: 1115794306}
   m_Layer: 9
   m_Name: Monster (4)
   m_TagString: Untagged
@@ -704,6 +731,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03abf3f0eaa8964fbf1a93f9fb4f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _monHp: 100
+  _monDefend: 0
+  _monSpeed: 0
+  _monGlod: 100
+  _monExp: 0
+  _monCastleDam: 0
 --- !u!114 &1115794299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,8 +749,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8693607146f2f7447b0d086a2ac5cfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _start: {fileID: 0}
-  speed: 50
 --- !u!114 &1115794300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,7 +761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d99234d28ebdc4c8b22a32c0893822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
   _goldPrabas: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}
 --- !u!54 &1115794301
 Rigidbody:
@@ -845,6 +875,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &1115794306
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115794297}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &1623331016 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3569802373978590697, guid: 06d0f9246a58a10438707b0f9088b85d, type: 3}
@@ -856,11 +908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1646474021 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2451385753596297110, guid: 0883c668193b36940b1c02b705557596, type: 3}
-  m_PrefabInstance: {fileID: 2543709129744794537}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1656777547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -962,6 +1009,7 @@ GameObject:
   - component: {fileID: 1787462362}
   - component: {fileID: 1787462361}
   - component: {fileID: 1787462360}
+  - component: {fileID: 1787462368}
   m_Layer: 9
   m_Name: Monster (1)
   m_TagString: Untagged
@@ -981,6 +1029,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03abf3f0eaa8964fbf1a93f9fb4f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _monHp: 100
+  _monDefend: 0
+  _monSpeed: 0
+  _monGlod: 100
+  _monExp: 0
+  _monCastleDam: 0
 --- !u!114 &1787462361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -993,8 +1047,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8693607146f2f7447b0d086a2ac5cfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _start: {fileID: 0}
-  speed: 50
 --- !u!114 &1787462362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,7 +1059,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d99234d28ebdc4c8b22a32c0893822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
   _goldPrabas: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}
 --- !u!54 &1787462363
 Rigidbody:
@@ -1122,6 +1173,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &1787462368
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787462359}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1838439830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,6 +1211,7 @@ GameObject:
   - component: {fileID: 1838439833}
   - component: {fileID: 1838439832}
   - component: {fileID: 1838439831}
+  - component: {fileID: 1838439839}
   m_Layer: 9
   m_Name: Monster (2)
   m_TagString: Untagged
@@ -1157,6 +1231,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03abf3f0eaa8964fbf1a93f9fb4f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _monHp: 100
+  _monDefend: 0
+  _monSpeed: 0
+  _monGlod: 100
+  _monExp: 0
+  _monCastleDam: 0
 --- !u!114 &1838439832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1169,8 +1249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8693607146f2f7447b0d086a2ac5cfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _start: {fileID: 0}
-  speed: 50
 --- !u!114 &1838439833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1183,7 +1261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d99234d28ebdc4c8b22a32c0893822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
   _goldPrabas: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}
 --- !u!54 &1838439834
 Rigidbody:
@@ -1298,6 +1375,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &1838439839
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838439830}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &828571808450308004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1310,6 +1409,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03abf3f0eaa8964fbf1a93f9fb4f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _monHp: 100
+  _monDefend: 0
+  _monSpeed: 0
+  _monGlod: 100
+  _monExp: 0
+  _monCastleDam: 0
 --- !u!23 &1354572689267136143
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1372,7 +1477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d99234d28ebdc4c8b22a32c0893822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
   _goldPrabas: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}
 --- !u!1001 &2543709129744794537
 PrefabInstance:
@@ -1382,10 +1486,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2933079705908043019, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _gold
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 4827471578815056431, guid: 0883c668193b36940b1c02b705557596, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1430,54 +1530,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7735846054338725324, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725779826809066087, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _attackSpeedMultiplier
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725779826809066087, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _basicAttacks.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725779826809066087, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _skillAttacks.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725779826809066087, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _skillCooldownMultiplier
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725779826809066087, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _basicAttacks.Array.data[0]
-      value: 
-      objectReference: {fileID: 4035207203642884785, guid: 8ef67b2133eccdd469c22f872dcb3df8, type: 3}
-    - target: {fileID: 8725779826809066087, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _basicAttacks.Array.data[1]
-      value: 
-      objectReference: {fileID: 4701898586334968289, guid: 49e167bea2d000a45af39a0ab47b976c, type: 3}
-    - target: {fileID: 8725779826809066087, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _basicAttacks.Array.data[2]
-      value: 
-      objectReference: {fileID: 4880728934783871068, guid: f9b74d637808ad0488c91d9d375de26a, type: 3}
-    - target: {fileID: 8725779826809066087, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _skillAttacks.Array.data[0]
-      value: 
-      objectReference: {fileID: 5997034715849493791, guid: 4326717c3c88f9547938be94a51644a0, type: 3}
-    - target: {fileID: 8725779826809066087, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _skillAttacks.Array.data[1]
-      value: 
-      objectReference: {fileID: 5123464600494981101, guid: 473faffd34d0ce04cbc2a95fc3341684, type: 3}
-    - target: {fileID: 9061598467559536980, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _basicAttack
-      value: 
-      objectReference: {fileID: 4035207203642884785, guid: 8ef67b2133eccdd469c22f872dcb3df8, type: 3}
-    - target: {fileID: 9061598467559536980, guid: 0883c668193b36940b1c02b705557596, type: 3}
-      propertyPath: _magicMuzzle
-      value: 
-      objectReference: {fileID: 1646474021}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1495,8 +1547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8693607146f2f7447b0d086a2ac5cfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _start: {fileID: 0}
-  speed: 50
 --- !u!54 &2955357740493783598
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1714,6 +1764,7 @@ GameObject:
   - component: {fileID: 2110185111780183494}
   - component: {fileID: 2886963047290785757}
   - component: {fileID: 828571808450308004}
+  - component: {fileID: 7454112229426057789}
   m_Layer: 9
   m_Name: Monster
   m_TagString: Untagged
@@ -1721,6 +1772,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!195 &7454112229426057789
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7454112229426057788}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
