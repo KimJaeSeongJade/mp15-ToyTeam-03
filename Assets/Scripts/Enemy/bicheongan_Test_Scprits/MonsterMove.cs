@@ -11,8 +11,8 @@ public class MonsterMove : MonoBehaviour
     private NavMeshAgent _agent;
     private BaseEnemy reenemy;
     //[SerializeField] private float speed = 50f;//BaseEnemy 만들어지면 변경 예정
-    
 
+    private bool _turretDis;
     private float originalSpeed;
 
     private void Awake()
@@ -51,7 +51,7 @@ public class MonsterMove : MonoBehaviour
         if (_agent.remainingDistance <= _agent.stoppingDistance)
         {
             arrivePoint++;
-
+            if (_turretDis) return;
             if (arrivePoint >= waypoints.Count - 1)
             {
                 // 마지막 Waypoint 도착
@@ -60,7 +60,6 @@ public class MonsterMove : MonoBehaviour
                 arrivePoint = 0;
                 return;
             }
-
             _agent.SetDestination(waypoints[arrivePoint].position);
         }
 
@@ -76,6 +75,11 @@ public class MonsterMove : MonoBehaviour
         yield return new WaitForSeconds(20f);
         _agent.speed = originalSpeed;
         Debug.Log("정상 스피드");
+    }
+    public void MoveToTurret(Transform turret)
+    {
+        _turretDis = true;
+        _agent.SetDestination(turret.position);
     }
     private void CacheComponent()
     {
