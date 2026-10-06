@@ -187,7 +187,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     }
     private void UnlockCursor()
     {
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
     // ----------------------------------------------

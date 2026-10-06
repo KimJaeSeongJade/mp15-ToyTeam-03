@@ -104,7 +104,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         _prepareTimeUI.text = $"Wave : {CurrentwaveNumber} Starts in {_remainingTime.ToString("F0")}...";
         if (_remainingTime <= 0f)
         {
-            _prepareTimeUI.gameObject.SetActive(false);
+            _prepareTimeUI.transform.parent.gameObject.SetActive(false);
         }
     }
 
