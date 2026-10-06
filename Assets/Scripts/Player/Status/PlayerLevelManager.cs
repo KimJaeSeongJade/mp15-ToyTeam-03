@@ -29,16 +29,6 @@ public class PlayerLevelManager : MonoBehaviour
 
     private void Awake() => CacheComponent();
 
-    private void Update()
-    {
-        if (IsMaxLevel) return;
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            GainExp(_requiredExpPerLevel[_status.Level - 1]);
-        }
-    }
-
     public void GainExp(float amount)
     {
         if (_status == null || amount <= 0f || IsMaxLevel || _requiredExpPerLevel == null || _requiredExpPerLevel.Length == 0) return;
