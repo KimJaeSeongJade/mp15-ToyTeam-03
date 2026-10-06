@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : PoolObject 
+public class Bullet : PoolObject
 { 
     [SerializeField] protected LayerMask enemyLayer;
     [SerializeField] protected float bulletDamage = 10f; // 총알의 기본 데미지
