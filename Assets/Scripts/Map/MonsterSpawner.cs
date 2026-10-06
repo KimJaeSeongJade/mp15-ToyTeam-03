@@ -8,13 +8,14 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField] private WayPointPath _waypointPath;
     [SerializeField] private int _count;
     [SerializeField] private BaseEnemy _monsterPrefab;
-
+    [SerializeField] private MonsterGroup _monsterGroup2;
     private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     private int _correntCount;
+    
 
     private void Start()
     {
-        SpawnWave(1,null,null);
+        SpawnWave(2,null,null);
     }
     
     public void SpawnWave(int waveNumber, Action<BaseEnemy> onMonsterSpawn, Action onSpawnEnd)
@@ -26,7 +27,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         _correntCount = 0;
 
-        while (_count > _correntCount)
+        while (_monsterGroup2.monsterDatas[0].count > _correntCount)
         {
             Debug.Log("생성");
             BaseEnemy _monster = Instantiate(_monsterPrefab, transform.position, transform.rotation);
