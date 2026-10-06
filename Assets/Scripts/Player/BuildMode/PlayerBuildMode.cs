@@ -9,6 +9,7 @@ public class PlayerBuildMode : MonoBehaviour
     private Camera mainCamera;
     private BuildPoint _buildPoint;
     private PlayerInputReader _inputReader;
+    private PlayerStatus _status;
     private PlayerAttackMode _attackMode;
     private PlayerWallet _wallet;
 
@@ -118,6 +119,8 @@ public class PlayerBuildMode : MonoBehaviour
 
         ClearSelectedBuildTarget();
 
+        _status.PlayerModeChange(true);
+
         _selectedTurret = null;
         _buildPoint = null;
         enabled = false;
@@ -129,6 +132,7 @@ public class PlayerBuildMode : MonoBehaviour
     {
         _inputReader = GetComponent<PlayerInputReader>();
         _attackMode = GetComponent<PlayerAttackMode>();
+        _status = GetComponent<PlayerStatus>();
         _wallet = GetComponent<PlayerWallet>();
         mainCamera = Camera.main;
     }
