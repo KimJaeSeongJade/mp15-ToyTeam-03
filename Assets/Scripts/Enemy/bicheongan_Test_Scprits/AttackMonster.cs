@@ -28,12 +28,14 @@ public class AttackMonster : BaseEnemy
     {
         if ((_TurretMask.value & (1 << other.gameObject.layer)) != 0)
         {
-            _targetTurret = other.transform;
-            _isTurretInSight = true;
-            Debug.Log("터렛 발견");
-           
-            _toTarget.MoveToTurret(_targetTurret);
-            _toTarget.MoveStop(_targetTurret);
+            if (_isTurretInSight == false)
+            {
+                _targetTurret = other.transform;
+                _isTurretInSight = true;
+                Debug.Log("터렛 발견");
+
+                _toTarget.MoveToTurret(_targetTurret);
+            }
         }
 
     }
@@ -55,17 +57,16 @@ public class AttackMonster : BaseEnemy
                 {
                     damageable.TakeDamage(_damage);
                     Debug.Log($"{_damage} 데미지 줌");
+
+                    StartCoroutine(AttackSpeed());
                 }
-
-                StartCoroutine(AttackSpeed());
-
             }
         }
         else
         {
             _isTurretInSight = false;
             _targetTurret = null;
-            _toTarget.ReturnMove();
+            _toTarget.ReturnMove();;
 
         }
     }
