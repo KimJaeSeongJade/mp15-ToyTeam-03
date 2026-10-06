@@ -81,8 +81,9 @@ public class MonsterMove : MonoBehaviour
     public void MoveStop(Transform turret)
     {
         _agent.SetDestination(turret.position);
-
-        StartCoroutine(StopDelayRutine());
+        transform.LookAt(turret.position);
+        _agent.isStopped = true;
+        _agent.velocity = Vector3.zero;
     }
     public void ReturnMove()
     {
@@ -90,12 +91,6 @@ public class MonsterMove : MonoBehaviour
         _agent.isStopped = false;
         _agent.SetDestination(waypoints[arrivePoint].position);
 
-    }
-    private IEnumerator StopDelayRutine()
-    {
-        yield return new WaitForSeconds(0.5f);
-        _agent.isStopped = true;
-        _agent.velocity = Vector3.zero;
     }
     private void CacheComponent()
     {
