@@ -12,6 +12,7 @@ public class AttackTurret : BaseTurret, IBuffable
     private ObjectPool<Bullet>  _bulletPool;
     [SerializeField] private float _bulletCoolTime;
     
+    
     [SerializeField] private Transform _target;
     private float _lastAttackTime;
 
