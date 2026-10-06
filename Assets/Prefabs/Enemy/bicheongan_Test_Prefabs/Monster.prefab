@@ -262,9 +262,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _monHp: 20
   _monDefend: 5
-  _monSpeed: 10
+  _monSpeed: 3
   _monGlod: 20
-  _monExp: 0
+  _monExp: 10
   _monCastleDam: 0
 --- !u!195 &146840908834654453
 NavMeshAgent:
