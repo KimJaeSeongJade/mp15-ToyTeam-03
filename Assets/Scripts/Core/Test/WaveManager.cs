@@ -104,7 +104,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         _prepareTimeUI.text = $"Wave : {CurrentwaveNumber} Starts in {_remainingTime.ToString("F0")}...";
         if (_remainingTime <= 0f)
         {
-            _prepareTimeUI.gameObject.SetActive(false);
+            _prepareTimeUI.transform.parent.gameObject.SetActive(false);
         }
     }
 
@@ -189,9 +189,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private void RefreshGoldUI()
     {
         _goldUI.text = $"보유 골드 : {_gameManager._gold }";
-        //_playerGoldText.text = gold.ToString();
-
-        // _gameManager.PlayerStatus.
     }
 
     // fps 실습때 진행한 playerWeapon과 UI로 확인
