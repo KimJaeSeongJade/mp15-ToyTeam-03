@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MonsterGroup : MonoBehaviour
 {
-    [Serializable]
+
     public struct MonsterData
     {
         public GameObject monster;
