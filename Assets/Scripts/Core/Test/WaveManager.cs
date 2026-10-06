@@ -189,9 +189,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private void RefreshGoldUI()
     {
         _goldUI.text = $"보유 골드 : {_gameManager._gold }";
-        //_playerGoldText.text = gold.ToString();
-
-        // _gameManager.PlayerStatus.
     }
 
     // fps 실습때 진행한 playerWeapon과 UI로 확인
