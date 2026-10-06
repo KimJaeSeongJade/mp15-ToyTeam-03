@@ -32,6 +32,10 @@ public class BaseEnemy : PoolObject
         onRemoved?.Invoke(this);
         gameObject.SetActive(false);
     }
+    public void GiveToExpPlayer()
+    {
+        GameManager.Instance.PlayerStatus.GetComponent<PlayerLevelManager>().GainExp(MonExp);
+    }
 
     private bool _finished;
     public event Action<BaseEnemy> Returned;

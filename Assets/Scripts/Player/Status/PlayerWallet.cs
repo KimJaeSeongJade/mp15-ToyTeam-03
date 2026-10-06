@@ -10,7 +10,7 @@ public class PlayerWallet : MonoBehaviour
 
     // 골드 잔액이 바뀔 때 새 잔액을 전달한다. UI는 이 이벤트를 구독해 표시를 갱신한다.
     // UI 활성화 시에는 Gold로 초기 값을 표시하고, 비활성화 시 구독을 해제한다.
-    public event Action<int> OnGoldChanged;
+    public event Action<int, int> OnGoldChanged;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class PlayerWallet : MonoBehaviour
         if (amount <= 0) return;
 
         _gold += amount;
-        OnGoldChanged?.Invoke(_gold);
+        OnGoldChanged?.Invoke(_gold, amount);
 
         Debug.Log($"+{amount}골드 획득. 총 {_gold}골드");
     }
@@ -35,7 +35,7 @@ public class PlayerWallet : MonoBehaviour
         if (amount == 0) return true;
 
         _gold -= amount;
-        OnGoldChanged?.Invoke(_gold);
+        OnGoldChanged?.Invoke(_gold, amount);
         Debug.Log($"-{amount}골드 감소. 총 {_gold}골드");
         return true;
     }

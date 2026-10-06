@@ -10,11 +10,13 @@ public class BaseTurret : MonoBehaviour, IBuildTargetReceiver
     [SerializeField] protected int _goldCost;
     [SerializeField] private TurretType _turretType;
     // 💡 [추가] 모든 터렛이 공통으로 사용할 기본 공격력 변수
-    [SerializeField] protected float _baseDamage = 10f; 
+    [SerializeField] protected float _baseDamage = 10f;
+    [SerializeField] private float _buildCooldown = 1f;
     public int GoldCost => _goldCost;
     public float MaxHp => _maxHp;
     public float CurrentHp => _currentHp;
     public int Cost => _goldCost;
+    public float BuildCooldown => _buildCooldown;
     public TurretType Type => _turretType;
 
     // 💡 [추가] 외부(SupportTurret, Bullet 등)에서 공격력을 읽거나 수정할 수 있는 통로(프로퍼티)

@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 3218823453181071039}
   - component: {fileID: 8446382994784395091}
   - component: {fileID: 5308136600538287521}
-  - component: {fileID: 508673397538570487}
   - component: {fileID: 1520819845321565712}
   - component: {fileID: 679693975636923955}
   - component: {fileID: 4698569821799239185}
   - component: {fileID: -3346122172301521705}
   - component: {fileID: -7868776957751945463}
+  - component: {fileID: -3249920731349799400}
   m_Layer: 9
   m_Name: AttackMon
   m_TagString: Untagged
@@ -113,29 +113,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &508673397538570487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 420398077192718060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3970ac6e2cad7f3498f69012ce88d46a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _monHp: 50
-  _monDefend: 0
-  _monSpeed: 10
-  _monGlod: 0
-  _monExp: 0
-  _monCastleDam: 0
-  _damage: 20
-  _attackSpeed: 10
-  _TurretMask:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!135 &1520819845321565712
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -230,14 +207,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3970ac6e2cad7f3498f69012ce88d46a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monHp: 0
-  _monDefend: 0
-  _monSpeed: 0
-  _monGlod: 0
-  _monExp: 0
+  _monHp: 50
+  _monDefend: 2
+  _monSpeed: 7
+  _monGlod: 40
+  _monExp: 15
   _monCastleDam: 0
-  _damage: 0
-  _attackSpeed: 0
+  _damage: 20
+  _attackSpeed: 5
   _TurretMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
+--- !u!114 &-3249920731349799400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420398077192718060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d99234d28ebdc4c8b22a32c0893822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goldPrabas: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}

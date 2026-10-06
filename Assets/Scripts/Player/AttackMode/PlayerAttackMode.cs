@@ -15,6 +15,7 @@ public class PlayerAttackMode : MonoBehaviour
     [SerializeField] private float _skillRandge;
 
     private PlayerInputReader _inputReader;
+    private PlayerStatus _status;
     private PlayerBuildMode _buildMode;
     private PlayerAnimation _animation;
     private IChargeable _chargingAttack;
@@ -26,7 +27,6 @@ public class PlayerAttackMode : MonoBehaviour
     private bool canFire => _elapseTime >= _fireTime;
     private bool canSkill => _elapseSkillTime >= _skillTime;
     private bool isAttackMode = true;
-
 
     private void Awake() => CacheComponenet();
     private void Start() => Init();
@@ -164,6 +164,8 @@ public class PlayerAttackMode : MonoBehaviour
 
         isAttackMode = false;
 
+        _status.PlayerModeChange(false);
+
         enabled = isAttackMode;
         _buildMode.enabled = !isAttackMode;
     }
@@ -199,6 +201,7 @@ public class PlayerAttackMode : MonoBehaviour
     private void CacheComponenet()
     {
         _inputReader = GetComponent<PlayerInputReader>();
+        _status = GetComponent<PlayerStatus>();
         _buildMode = GetComponent<PlayerBuildMode>();
         _animation = GetComponent<PlayerAnimation>();
     }
