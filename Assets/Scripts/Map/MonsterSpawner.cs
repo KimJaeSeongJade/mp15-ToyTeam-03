@@ -15,7 +15,7 @@ public class MonsterSpawner : MonoBehaviour
 
     private void Start()
     {
-        SpawnWave(2,null,null);
+        SpawnWave(1,null,null);
     }
     
     public void SpawnWave(int waveNumber, Action<BaseEnemy> onMonsterSpawn, Action onSpawnEnd)
@@ -27,7 +27,8 @@ public class MonsterSpawner : MonoBehaviour
     {
         _correntCount = 0;
 
-        while (_monsterGroup2.monsterDatas[0].count > _correntCount)
+        while (_count > _correntCount)
+            //while (_monsterGroup2.monsterDatas[0].count > _correntCount)
         {
             Debug.Log("생성");
             BaseEnemy _monster = Instantiate(_monsterPrefab, transform.position, transform.rotation);

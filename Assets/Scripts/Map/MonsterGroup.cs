@@ -19,7 +19,7 @@ public class MonsterGroup : MonoBehaviour
     private void Awake()
     {
         monsterDatas = new List<MonsterData>();
-        StartWave(2);  //gameManager가 호출 wave번호를 
+        StartWave(1);  //gameManager가 호출 wave번호를 
         //Group();
     }
     
