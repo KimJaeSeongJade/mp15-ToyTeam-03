@@ -48,7 +48,7 @@ public class MonsterMove : MonoBehaviour
         {
             arrivePoint++;
             if (_turretDis) return;
-            if (arrivePoint >= waypoints.Count - 1)
+            if (arrivePoint >= waypoints.Count)
             {
                 // 마지막 Waypoint 도착
                 Debug.Log("도착");
