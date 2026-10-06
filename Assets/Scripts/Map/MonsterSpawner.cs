@@ -11,6 +11,11 @@ public class MonsterSpawner : MonoBehaviour
 
     private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     private int _correntCount;
+
+    private void Start()
+    {
+        SpawnWave(1,null,null);
+    }
     
     public void SpawnWave(int waveNumber, Action<BaseEnemy> onMonsterSpawn, Action onSpawnEnd)
     {        
