@@ -101,7 +101,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         // 만약 게임 시작 됐으면 UI 처리한다.
         // 조건식 추후에 고민
-        _prepareTimeUI.text = $"{CurrentwaveNumber} 웨이브 시작까지 남은 시간 {_remainingTime.ToString("F0")}";
+        _prepareTimeUI.text = $"Wave : {CurrentwaveNumber} Starts in {_remainingTime.ToString("F0")}...";
         if (_remainingTime <= 0f)
         {
             _prepareTimeUI.gameObject.SetActive(false);
