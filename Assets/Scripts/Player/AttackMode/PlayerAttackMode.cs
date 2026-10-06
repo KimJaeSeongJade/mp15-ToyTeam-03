@@ -22,10 +22,10 @@ public class PlayerAttackMode : MonoBehaviour
 
     private RaycastHit hit;
     private float _elapseTime;
-    private float _elapseSkillTime;
+    private float _skillReadyAt;
 
     private bool canFire => _elapseTime >= _fireTime;
-    private bool canSkill => _elapseSkillTime >= _skillTime;
+    private bool canSkill => Time.time >= _skillReadyAt;
     private bool isAttackMode = true;
 
     private void Awake() => CacheComponenet();
@@ -34,7 +34,6 @@ public class PlayerAttackMode : MonoBehaviour
     private void Update()
     {
         FireCoolDown();
-        SkillCoolDown();
 
         Attack();
 
@@ -51,13 +50,6 @@ public class PlayerAttackMode : MonoBehaviour
         if (canFire) return;
 
         _elapseTime += Time.deltaTime;
-    }
-
-    private void SkillCoolDown()
-    {
-        if (canSkill) return;
-
-        _elapseSkillTime += Time.deltaTime;
     }
 
     private void Attack()
@@ -122,45 +114,13 @@ public class PlayerAttackMode : MonoBehaviour
         _animation.SetCharging(false);
         _animation.PlaySkill();
 
-        _elapseSkillTime = 0;
-    }
-
-    // TODO: 추후 변경 가능성 있음. 키 입력 구독 처리로 refac 예정
-    public void SetSelectedTurret()
-    {
-        if (!_inputReader.isPressedPrimary
-            && !_inputReader.isPressedSub
-            && !_inputReader.isPressedThird
-            && !_inputReader.isPressedForth) return;
-
-        if (_inputReader.isPressedPrimary)
-        {
-            _buildMode.SetSelectedTurret(0);
-        }
-        else if (_inputReader.isPressedSub)
-        {
-            _buildMode.SetSelectedTurret(1);
-
-        }
-        else if (_inputReader.isPressedThird)
-        {
-            _buildMode.SetSelectedTurret(2);
-
-        }
-        else if (_inputReader.isPressedForth)
-        {
-            _buildMode.SetSelectedTurret(3);
-        }
+        _skillReadyAt = Time.time + _skillTime;
+        _status.NotifySkillCooldownStarted(_skillTime);
     }
 
     private void AttackModeEnd()
     {
-        if (!_inputReader.isPressedPrimary
-            && !_inputReader.isPressedSub
-            && !_inputReader.isPressedThird
-            && !_inputReader.isPressedForth) return;
-
-        SetSelectedTurret();
+        if (!_buildMode.SetSelectedTurret()) return;
 
         isAttackMode = false;
 
@@ -213,6 +173,6 @@ public class PlayerAttackMode : MonoBehaviour
         SetBasicAttack(_basicAttack);
 
         _elapseTime = _fireTime;
-        _elapseSkillTime = _skillTime;
+        _skillReadyAt = Time.time;
     }
 }
