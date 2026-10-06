@@ -21,10 +21,6 @@ public class MonsterMove : MonoBehaviour
         _agent.speed = reenemy.MonSpeed;
         originalSpeed = _agent.speed;
     }
-    //private void Start()
-    //{
-    //    //Initialize(_start);
-    //}
 
     private void Update()
     {
@@ -70,6 +66,7 @@ public class MonsterMove : MonoBehaviour
         Debug.Log("느려짐");
         StartCoroutine(WaitSpeed());
     }
+    
     private IEnumerator WaitSpeed()
     {
         yield return new WaitForSeconds(20f);
@@ -80,6 +77,25 @@ public class MonsterMove : MonoBehaviour
     {
         _turretDis = true;
         _agent.SetDestination(turret.position);
+    }
+    public void MoveStop(Transform turret)
+    {
+        _agent.SetDestination(turret.position);
+
+        StartCoroutine(StopDelayRutine());
+    }
+    public void ReturnMove()
+    {
+        _turretDis = false;
+        _agent.isStopped = false;
+        _agent.SetDestination(waypoints[arrivePoint].position);
+
+    }
+    private IEnumerator StopDelayRutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _agent.isStopped = true;
+        _agent.velocity = Vector3.zero;
     }
     private void CacheComponent()
     {

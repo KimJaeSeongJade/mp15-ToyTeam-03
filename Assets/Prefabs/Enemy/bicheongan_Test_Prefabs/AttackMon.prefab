@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4698569821799239185}
   - component: {fileID: -3346122172301521705}
   - component: {fileID: -7868776957751945463}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AttackMon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,14 +126,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _monHp: 50
-  _monDefend: 10
+  _monDefend: 0
   _monSpeed: 10
   _monGlod: 0
   _monExp: 0
   _monCastleDam: 0
-  _damage: 5
-  _attackRange: 3
-  _AttackSpeed: 1
+  _damage: 20
+  _attackSpeed: 10
   _TurretMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -238,8 +237,7 @@ MonoBehaviour:
   _monExp: 0
   _monCastleDam: 0
   _damage: 0
-  _attackRange: 3
-  _AttackSpeed: 0
+  _attackSpeed: 0
   _TurretMask:
     serializedVersion: 2
     m_Bits: 0
