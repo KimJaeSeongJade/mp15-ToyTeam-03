@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AttackMonster : BaseEnemy
 {
     [SerializeField] private float _damage;
-    [SerializeField] private float _attackRange = 3f;
-    [SerializeField] private float _AttackSpeed;
+    [SerializeField] private float _attackSpeed;
     [SerializeField] private LayerMask _TurretMask;
 
     private MonsterMove _toTarget;
     private Transform _targetTurret;
     private bool _isTurretInSight;
+    private bool _isAttacking;
 
     private void Awake()
     {
@@ -28,9 +29,11 @@ public class AttackMonster : BaseEnemy
         if ((_TurretMask.value & (1 << other.gameObject.layer)) != 0)
         {
             _targetTurret = other.transform;
-            Debug.Log("터렛 발견");
             _isTurretInSight = true;
+            Debug.Log("터렛 발견");
+           
             _toTarget.MoveToTurret(_targetTurret);
+            _toTarget.MoveStop(_targetTurret);
         }
 
     }
@@ -39,20 +42,38 @@ public class AttackMonster : BaseEnemy
     {
         if (!_isTurretInSight) return;
 
-        Vector3 targetdir = (_targetTurret.position - transform.position).normalized;
 
-        Ray ray = new Ray(transform.position, targetdir);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, _attackRange, _TurretMask))
+        if (_targetTurret != null)
         {
-            Debug.Log("공격");
-            StartCoroutine(AttackSpeed());
+            _toTarget.MoveStop(_targetTurret);
+            if (_isAttacking == false)
+            {
+                _isAttacking = true;
+                Debug.Log("공격");
+                IDamageable damageable = _targetTurret.GetComponent<IDamageable>();
+                if (damageable != null)
+                {
+                    damageable.TakeDamage(_damage);
+                    Debug.Log($"{_damage} 데미지 줌");
+                }
+
+                StartCoroutine(AttackSpeed());
+
+            }
+        }
+        else
+        {
+            _isTurretInSight = false;
+            _targetTurret = null;
+            _toTarget.ReturnMove();
+
         }
     }
 
     private IEnumerator AttackSpeed()
     {
-        yield return new WaitForSeconds(_AttackSpeed);
+        yield return new WaitForSeconds(_attackSpeed);
+        _isAttacking = false;
     }
 
     private void CacheComponet()

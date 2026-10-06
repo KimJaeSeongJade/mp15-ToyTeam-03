@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test_Turret : MonoBehaviour
+public class Test_Turret : MonoBehaviour, IDamageable
 {
     [SerializeField] private float _hp = 100f;
     [SerializeField] private float _slowRate = 0.2f;
@@ -10,6 +10,10 @@ public class Test_Turret : MonoBehaviour
     [SerializeField] private float _range = 10f;
     private bool _isDead;
 
+    private void Awake()
+    {
+        IDamageable damage = GetComponent<IDamageable>();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -51,6 +55,7 @@ public class Test_Turret : MonoBehaviour
         {
             _isDead = true;
             Debug.Log("터렛 파괴");
+            Destroy(gameObject);
         }
     }
 
