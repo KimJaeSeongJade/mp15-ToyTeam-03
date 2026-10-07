@@ -11,7 +11,9 @@ public class BaseEnemy : PoolObject
     [SerializeField] protected float _monGlod;
     [SerializeField] protected float _monExp;
     [SerializeField] protected float _monCastleDam;
-    
+    [SerializeField] private GameObject _IsDeadImpack;
+
+
     private Transform _tr;
 
     public float MonHp { get { return _monHp; } set { _monHp = value; } }
@@ -20,6 +22,7 @@ public class BaseEnemy : PoolObject
     public float MonGold { get { return _monGlod; } set { _monGlod = value; } }
     public float MonExp { get { return _monExp; } set { _monExp = value; } }
     public float MonCastleDam { get { return _monCastleDam; } set { _monCastleDam = value; } }
+    public GameObject IsDeadImpack => _IsDeadImpack;
 
     public event Action<BaseEnemy> onRemoved;
 
