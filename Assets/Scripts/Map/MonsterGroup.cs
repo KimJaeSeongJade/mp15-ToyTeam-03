@@ -15,46 +15,63 @@ public class MonsterGroup : MonoBehaviour
     }
 
     public List<MonsterData> monsterDatas;
-
+    private bool _isMake;
+    
     private void Awake()
     {
         monsterDatas = new List<MonsterData>();
-        StartWave(1);  //gameManager가 호출 wave번호를 
-        //Group();
+        WaveMonster();
     }
-    
-    /*private void Group()
+
+    private void Start()
     {
-        for (int i = 0; i < monsterDatas.Count; i++)
+        if (!_isMake)
         {
-            Debug.Log(i);
-            Debug.Log($"monsterDatas.Count: {monsterDatas.Count} monsterDatas[i].count:" +
-                      $"{monsterDatas[i].count} monsterDatas[i].waypointNum: " +
-                      $"{monsterDatas[i].waypointNum})");
+            Debug.Log("생성이 안됨");
+            return;
+        }
+        /*while (true)
+        {
+            for (int i = 0; i < monsterDatas.Count; i++)
+            {
+                if (monsterDatas[i].waypointNum == 1)
+                {
+                    Debug.Log($"monsterDatas.Count: {monsterDatas.Count}, " +
+                              $"monsterDatas[{i}].count: {monsterDatas[i].count}" +
+                              $"monsterDatas[{i}].waypointNum: {monsterDatas[i].waypointNum}");  
+                }  
             }
-        } */
-    private void StartWave(int num)
-    {
-        if (num >= 2)
-        {
-            monsterDatas.Add(new MonsterData
-            {
-                monster = new GameObject(),
-                count = 10,
-                waypointNum = 2
-            });
-        }
-        else if (num >= 1)
-        {
-            monsterDatas.Add(new MonsterData
-            {
-                monster = new GameObject(),
-                count = 5,
-                waypointNum = 1
-            });
-        }
-        
+            break;
+        }*/
     }
     
-    
+
+    private void WaveMonster()
+    {
+        monsterDatas.Add(new MonsterData
+        {
+            monster = new GameObject(),
+            count = 10,
+            waypointNum = 1
+        });
+        monsterDatas.Add(new MonsterData
+        {
+            monster = new GameObject(),
+            count = 5,
+            waypointNum = 1
+        });
+        monsterDatas.Add(new MonsterData
+        {
+            monster = new GameObject(),
+            count = 5,
+            waypointNum = 2
+        });
+        monsterDatas.Add(new MonsterData
+        {
+            monster = new GameObject(),
+            count = 2,
+            waypointNum = 2
+        });
+        _isMake = true;
+    }
 }
