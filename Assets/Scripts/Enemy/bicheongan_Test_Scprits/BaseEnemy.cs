@@ -59,4 +59,8 @@ public class BaseEnemy : PoolObject
     {
         _tr = transform.parent;
     }
+    private void CaCheComponents()
+    {
+        _eXP = GameManager.Instance.GetComponent<PlayerLevelManager>();
+    }
 }
