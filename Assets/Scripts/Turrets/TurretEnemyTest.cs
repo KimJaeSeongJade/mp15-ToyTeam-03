@@ -1,16 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class MonsterHealth : MonoBehaviour, IDamageable
+public class TurretEnemyTest : MonoBehaviour,IDamageable
 {
     //[SerializeField] private float _hp; // 변경예정
-    [SerializeField] private GoldDrop _goldPrabas;
-    private ObjectPool<GoldDrop> goldPool;
     private BaseEnemy Cacheenemy;
 
-   
     private float goldCount;
     private bool _isDead;
     private bool _isSlow;
@@ -20,23 +16,6 @@ public class MonsterHealth : MonoBehaviour, IDamageable
     private void Awake()
     {
         CacheComponent();
-        goldPool = new ObjectPool<GoldDrop>(
-            _goldPrabas,
-            (int)goldCount,
-            transform,
-            _goldPrabas =>
-            {
-                _goldPrabas.InitData();
-            }
-            );
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            TakeDamage(10);
-        }
     }
     public void TakeDamage(float damage)
     {
@@ -48,9 +27,6 @@ public class MonsterHealth : MonoBehaviour, IDamageable
         {
             Debug.Log("죽음");
             _isDead = true;
-            //Cacheenemy.GiveToExpPlayer();
-            //Debug.Log($"Exp{Cacheenemy.MonExp}");
-            goldPool.PopAll();
             Cacheenemy.ReturnToPool();
         }
     }
@@ -66,8 +42,5 @@ public class MonsterHealth : MonoBehaviour, IDamageable
     {
         Cacheenemy = GetComponent<BaseEnemy>();
         _speed = GetComponent<MonsterMove>();
-        goldCount = Cacheenemy.MonGold / GameManager.GOLD_AMOUNT;
     }
-
-    
 }

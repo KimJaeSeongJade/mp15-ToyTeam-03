@@ -22,6 +22,11 @@ public class BaseEnemy : PoolObject
     public float MonCastleDam { get { return _monCastleDam; } set { _monCastleDam = value; } }
 
     public event Action<BaseEnemy> onRemoved;
+
+    private void Awake()
+    {
+        CaCheComponents();
+    }
     public override void WakeUp()
     {
         transform.SetParent(null);
@@ -34,9 +39,10 @@ public class BaseEnemy : PoolObject
         onRemoved?.Invoke(this);
         gameObject.SetActive(false);
     }
+    private PlayerLevelManager _eXP;
     public void GiveToExpPlayer()
     {
-        GameManager.Instance.PlayerStatus.GetComponent<PlayerLevelManager>().GainExp(MonExp);
+        _eXP.GainExp(MonExp);
     }
 
     private bool _finished;

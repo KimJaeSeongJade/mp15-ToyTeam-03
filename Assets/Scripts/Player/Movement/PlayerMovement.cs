@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _minPitch;
     [SerializeField] private float _maxPitch;
     [SerializeField, Range(0f, 1f)] private float _pitchCameraDistanceScale = 0.55f;
+    [SerializeField] private float _aimDistance = 100f;
     [SerializeField] private float _groundStickSpeed = 2f;
 
     private PlayerInputReader _inputReader;
@@ -17,8 +18,11 @@ public class PlayerMovement : MonoBehaviour
     private PlayerGroundChecker _groundChecker;
 
     private float _pitch;
+    private Camera _camera;
     private Transform _cameraTransform;
     private Rigidbody _rb;
+    private int _enemyLayer;
+    private readonly RaycastHit[] _aimHits = new RaycastHit[32];
 
     public Transform GetCamera { get => _cameraTransform;}
 
@@ -28,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         SetCameraTransform();
+        UpdateAttackAim();
     }
 
     private void SetCameraTransform()
@@ -44,6 +49,33 @@ public class PlayerMovement : MonoBehaviour
         _cameraTransform.SetPositionAndRotation(
             eyePosition + _cameraPivot.rotation * shoulderOffset,
             _cameraPivot.rotation);
+    }
+
+    // 화면 중앙이 가리키는 지점을 AttackTR 위치에서 바라본다.
+    public void UpdateAttackAim()
+    {
+        Ray aimRay = _camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        Vector3 aimPoint = aimRay.GetPoint(_aimDistance);
+        float nearestDistance = _aimDistance;
+        bool hasAttackTarget = false;
+
+        int hitCount = Physics.RaycastNonAlloc(
+            aimRay, _aimHits, _aimDistance,
+            Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            RaycastHit hit = _aimHits[i];
+            if (hit.collider.transform.IsChildOf(transform) || hit.distance >= nearestDistance)
+                continue;
+
+            nearestDistance = hit.distance;
+            aimPoint = hit.point;
+            hasAttackTarget = hit.collider.gameObject.layer == _enemyLayer;
+        }
+
+        _attackMuzzle.rotation = Quaternion.LookRotation(aimPoint - _attackMuzzle.position, transform.up);
+        _status.SetAttackTarget(hasAttackTarget);
     }
 
     public void Move()
@@ -89,8 +121,6 @@ public class PlayerMovement : MonoBehaviour
         _pitch = Mathf.Clamp(_pitch + input.x, _minPitch, _maxPitch);
 
         _cameraPivot.localRotation = Quaternion.Euler(_pitch, 0f, _cameraPivot.localEulerAngles.z);
-
-        _attackMuzzle.localRotation = Quaternion.Euler(_pitch, 0f, 0f);
     }
 
     private void CacheComponent()
@@ -100,7 +130,9 @@ public class PlayerMovement : MonoBehaviour
         _groundChecker = GetComponent<PlayerGroundChecker>();
         _playerJump = GetComponent<PlayerJump>();
         _rb = GetComponent<Rigidbody>();
+        _enemyLayer = LayerMask.NameToLayer("Enemy");
 
-        _cameraTransform = Camera.main.transform;
+        _camera = Camera.main;
+        _cameraTransform = _camera.transform;
     }
 }

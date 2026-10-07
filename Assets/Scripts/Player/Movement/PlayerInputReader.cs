@@ -9,10 +9,6 @@ public class PlayerInputReader : MonoBehaviour
     [SerializeField] private KeyCode _exitBuildKey = KeyCode.E;
     [SerializeField] private KeyCode _dashkey = KeyCode.LeftShift;
     [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
-    [SerializeField] private KeyCode _primaryKey = KeyCode.Alpha1;
-    [SerializeField] private KeyCode _subKey = KeyCode.Alpha2;
-    [SerializeField] private KeyCode _thirdKey = KeyCode.Alpha3;
-    [SerializeField] private KeyCode _forthKey = KeyCode.Alpha4;
 
 
     public bool isPressedAttackUp => Input.GetKeyUp(_attackKey);
@@ -24,10 +20,18 @@ public class PlayerInputReader : MonoBehaviour
     public bool isPressedExitBuild => Input.GetKeyDown(_exitBuildKey);
     public bool isPressedDashKey => Input.GetKey(_dashkey);
     public bool isPressedJumpKey => Input.GetKeyDown(_jumpKey);
-    public bool isPressedPrimary => Input.GetKeyDown(_primaryKey);
-    public bool isPressedSub => Input.GetKeyDown(_subKey);
-    public bool isPressedThird => Input.GetKeyDown(_thirdKey);
-    public bool isPressedForth => Input.GetKeyDown(_forthKey);
+
+    // 알파키 1~4를 0~3번 터렛 슬롯으로 변환한다. 입력이 없으면 -1.
+    public int GetSelectedTurretIndex()
+    {
+        for (int slot = 0; slot < 4; slot++)
+        {
+            KeyCode key = (KeyCode)((int)KeyCode.Alpha1 + slot);
+            if (Input.GetKeyDown(key)) return slot;
+        }
+
+        return -1;
+    }
 
     public Vector3 GetMoveInput()
     {       

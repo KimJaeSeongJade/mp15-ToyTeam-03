@@ -12,6 +12,7 @@ public class PlayerBuildMode : MonoBehaviour
     private PlayerStatus _status;
     private PlayerAttackMode _attackMode;
     private PlayerWallet _wallet;
+    private int _selectedSlot = -1;
 
     private void Awake() => CacheComponent();
     private void Start() => Init();
@@ -27,7 +28,7 @@ public class PlayerBuildMode : MonoBehaviour
 
     private void RayToBuildPoint()
     {
-        if (_selectedTurret == null)
+        if (_selectedTurret == null || _selectedSlot < 0)
         {
             _buildPoint = null;
             return;
@@ -53,8 +54,12 @@ public class PlayerBuildMode : MonoBehaviour
             if (point != null)
             {
                 _buildPoint = point;
-                canBuild = point.TryGetResultTurret(resultPrefab, out BaseTurret buildResult) && _wallet.TryGetBoolSpendGold(_selectedTurret.Cost);
-                if (canBuild) resultPrefab = buildResult;
+                if (point.TryGetResultTurret(resultPrefab, out BaseTurret buildResult))
+                {
+                    resultPrefab = buildResult;
+                    canBuild = _wallet.TryGetBoolSpendGold(buildResult.Cost)
+                        && TurretCombinationTable.Instance.IsBuildReady(_selectedSlot);
+                }
                 previewPosition = point.PlacementPosition;
                 previewRotation = point.PlacementRotation;
             }
@@ -67,38 +72,37 @@ public class PlayerBuildMode : MonoBehaviour
     }
 
     // 일반 공격 모드에서는 PlayerAttackMode가 선택 번호를 넘겨준다.
-    public void SetSelectedTurret()
+    public bool SetSelectedTurret()
     {
-        if (_inputReader.isPressedPrimary)
-            SetSelectedTurret(0);
-        else if (_inputReader.isPressedSub)
-            SetSelectedTurret(1);
-        else if (_inputReader.isPressedThird)
-            SetSelectedTurret(2);
-        else if (_inputReader.isPressedForth)
-            SetSelectedTurret(3);
-    }
+        int selectedNum = _inputReader.GetSelectedTurretIndex();
+        if (selectedNum < 0) return false;
 
-    public void SetSelectedTurret(int selectedNum)
-    {
         BaseTurret selected = TurretCombinationTable.Instance.GetSelectedTurret(selectedNum);
+        _selectedSlot = selectedNum;
 
-        if (selected == _selectedTurret) return;
+        if (selected == _selectedTurret) return true;
 
         ClearSelectedBuildTarget();
 
         _selectedTurret = selected;
+        return true;
     }
 
     private void TurretBuild()
     {
-        if (!_inputReader.isPressedAttackDown || _buildPoint == null || _selectedTurret == null) return;
+        if (!_inputReader.isPressedAttackDown || _buildPoint == null || _selectedTurret == null || _selectedSlot < 0) return;
+        if (!TurretCombinationTable.Instance.IsBuildReady(_selectedSlot)) return;
+
+        if (!_buildPoint.TryGetResultTurret(_selectedTurret, out BaseTurret resultTurret)
+            || !_wallet.TryGetBoolSpendGold(resultTurret.Cost)) return;
 
         // 설치 시에도 BuildPoint가 같은 조합 규칙으로 결과를 결정하고 true시 원래 색으로 되돌린다.
         // int resultCost 로 조합 결과 터렛의 가격으로 계산한다.
-        if (_buildPoint.TryBuildTurret(_selectedTurret, out int resultCost))
+        if (_buildPoint.TryBuildTurret(_selectedTurret, out int resultCost)
+            && _wallet.TrySpendGold(resultCost))
         {
-            _wallet.TrySpendGold(resultCost);
+            float cooldown = TurretCombinationTable.Instance.StartBuildCooldown(_selectedSlot);
+            _status.NotifyBuildCooldownStarted(_selectedSlot, cooldown);
             ClearSelectedBuildTarget();
         }
         return;
@@ -122,6 +126,7 @@ public class PlayerBuildMode : MonoBehaviour
         _status.PlayerModeChange(true);
 
         _selectedTurret = null;
+        _selectedSlot = -1;
         _buildPoint = null;
         enabled = false;
 
