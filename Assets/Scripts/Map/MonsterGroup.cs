@@ -51,13 +51,13 @@ public class MonsterGroup : MonoBehaviour
         monsterDatas.Add(new MonsterData
         {
             monster = new GameObject(),
-            count = 10,
+            count = 3,
             waypointNum = 1
         });
         monsterDatas.Add(new MonsterData
         {
             monster = new GameObject(),
-            count = 5,
+            count = 4,
             waypointNum = 1
         });
         monsterDatas.Add(new MonsterData
@@ -69,7 +69,7 @@ public class MonsterGroup : MonoBehaviour
         monsterDatas.Add(new MonsterData
         {
             monster = new GameObject(),
-            count = 2,
+            count = 6,
             waypointNum = 2
         });
         _isMake = true;

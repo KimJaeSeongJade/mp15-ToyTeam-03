@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-/*public class MonsterPool : MonoBehaviour
+public class MonsterPool : MonoBehaviour
 {
     [SerializeField] private int _waveMonstersCount;
     [SerializeField] private GameObject _monsterPrefab;
@@ -49,4 +49,4 @@ using UnityEngine;
     
 
 
-}*/
+}

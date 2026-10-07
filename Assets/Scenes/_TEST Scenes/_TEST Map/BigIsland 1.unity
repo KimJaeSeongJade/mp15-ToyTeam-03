@@ -33715,6 +33715,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13c990b8270c70b4c9f196019286028c, type: 3}
+--- !u!1 &822135408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3992058561654064293, guid: 13c990b8270c70b4c9f196019286028c, type: 3}
+  m_PrefabInstance: {fileID: 822135407}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &822139469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41300,6 +41305,9 @@ MonoBehaviour:
   _waypointPath:
   - {fileID: 1563536910}
   - {fileID: 1715944789}
+  PortalEffect:
+  - {fileID: 2002812439}
+  - {fileID: 822135408}
   _monsterPrefab: {fileID: 828571807100128330, guid: 3e38c30748ec2ee44a9636fdffece5c0, type: 3}
   monsterGroup1: {fileID: 1798418954}
 --- !u!4 &1017217900
@@ -73915,16 +73923,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterDatas:
   - monster: {fileID: 7454112230223378898, guid: 3e38c30748ec2ee44a9636fdffece5c0, type: 3}
-    count: 10
+    count: 3
     waypointNum: 1
   - monster: {fileID: 7454112230223378898, guid: 80e1a48201fb5c74082a864aaa72556f, type: 3}
-    count: 5
+    count: 4
     waypointNum: 1
   - monster: {fileID: 7454112230223378898, guid: 80e1a48201fb5c74082a864aaa72556f, type: 3}
     count: 5
     waypointNum: 2
   - monster: {fileID: 7454112230223378898, guid: 80e1a48201fb5c74082a864aaa72556f, type: 3}
-    count: 2
+    count: 6
     waypointNum: 2
 --- !u!4 &1798418955
 Transform:
@@ -82422,6 +82430,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45e0f06c750176947862c10346226439, type: 3}
+--- !u!1 &2002812439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5607819269926399345, guid: 45e0f06c750176947862c10346226439, type: 3}
+  m_PrefabInstance: {fileID: 2002812438}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2002909554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3618170896191659197, guid: d30a5034038eb324a9d7878b84f50184, type: 3}
@@ -87878,10 +87891,10 @@ SceneRoots:
   - {fileID: 858597764}
   - {fileID: 1563536911}
   - {fileID: 1715944788}
-  - {fileID: 375069465}
-  - {fileID: 1017217900}
-  - {fileID: 1237327186}
-  - {fileID: 2002812438}
   - {fileID: 1689733652}
+  - {fileID: 2002812438}
   - {fileID: 822135407}
   - {fileID: 1798418955}
+  - {fileID: 1237327186}
+  - {fileID: 1017217900}
+  - {fileID: 375069465}
