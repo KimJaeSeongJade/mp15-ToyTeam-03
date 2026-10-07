@@ -11,7 +11,8 @@ public class BaseEnemy : PoolObject
     [SerializeField] protected float _monGlod;
     [SerializeField] protected float _monExp;
     [SerializeField] protected float _monCastleDam;
-
+    
+    private Transform _tr;
 
     public float MonHp { get { return _monHp; } set { _monHp = value; } }
     public float MonDefend { get { return _monDefend; } set { _monDefend = value; } }
@@ -23,12 +24,13 @@ public class BaseEnemy : PoolObject
     public event Action<BaseEnemy> onRemoved;
     public override void WakeUp()
     {
-        
+        transform.SetParent(null);
         gameObject.SetActive(true);
     }
 
     public override void Sleep()
     {
+        transform.SetParent(_tr);
         onRemoved?.Invoke(this);
         gameObject.SetActive(false);
     }
@@ -46,5 +48,9 @@ public class BaseEnemy : PoolObject
         _finished = true;
         Debug.Log("결승");
         Returned?.Invoke(this);
+    }
+    public void InitData()
+    {
+        _tr = transform.parent;
     }
 }

@@ -11,9 +11,13 @@ public class MonsterSpawner : MonoBehaviour
     //[SerializeField] private int _count;
     [SerializeField] private BaseEnemy _monsterPrefab;
     [SerializeField] private MonsterGroup monsterGroup1;
+    [SerializeField] private MonsterPool  _monsterPool;
+    
+    
     private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     private int _correntCount;
     private BaseEnemy _monster;
+    
 
     private void Awake() => Portaleffect();
 
@@ -39,8 +43,12 @@ public class MonsterSpawner : MonoBehaviour
                     PortalEffect[waveNumber-1].SetActive(true);
                     for (int j = 0; j < monsterGroup1.monsterDatas[i].count; j++)
                     {
-                        _monster = Instantiate(_monsterPrefab, 
-                            _waypointPath[waveNumber-1].transform.position, transform.rotation);
+                        _monster = _monsterPool.Pop();
+                        _monster.transform.SetPositionAndRotation(_waypointPath[waveNumber-1].transform.position, 
+                            transform.rotation);
+                        
+                        /*_monster = Instantiate(_monsterPrefab, 
+                            _waypointPath[waveNumber-1].transform.position, transform.rotation);*/
                         Debug.Log($"{j+1} 마리");
                         _monster.GetComponent<MonsterMove>().Initialize(_waypointPath[waveNumber-1]);
                         onMonsterSpawn?.Invoke(_monster);

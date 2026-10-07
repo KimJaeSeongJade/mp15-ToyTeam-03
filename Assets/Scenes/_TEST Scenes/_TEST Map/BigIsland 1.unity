@@ -41283,6 +41283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1017217900}
   - component: {fileID: 1017217899}
+  - component: {fileID: 1017217901}
   m_Layer: 0
   m_Name: MonsterSpwan
   m_TagString: Untagged
@@ -41297,7 +41298,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017217898}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 292d1031144011e48aa1ffbab53dcbc7, type: 3}
   m_Name: 
@@ -41310,6 +41311,7 @@ MonoBehaviour:
   - {fileID: 822135408}
   _monsterPrefab: {fileID: 828571807100128330, guid: 3e38c30748ec2ee44a9636fdffece5c0, type: 3}
   monsterGroup1: {fileID: 1798418954}
+  _monsterPool: {fileID: 0}
 --- !u!4 &1017217900
 Transform:
   m_ObjectHideFlags: 0
@@ -41325,6 +41327,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1017217901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017217898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08696fe995f66e5428bdbde3c5508dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _monsterPrabas: {fileID: 828571807100128330, guid: 3e38c30748ec2ee44a9636fdffece5c0, type: 3}
+  _monsterGroup: {fileID: 1798418954}
 --- !u!1001 &1019601285
 PrefabInstance:
   m_ObjectHideFlags: 0

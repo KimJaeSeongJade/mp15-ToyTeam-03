@@ -5,22 +5,35 @@ using UnityEngine;
 
 public class MonsterGroup : MonoBehaviour 
 {
-
+    
     [System.Serializable]
     public struct MonsterData
     {
-        public GameObject monster;
+        public BaseEnemy monster;
         public int count;
         public int waypointNum;
     }
 
     public List<MonsterData> monsterDatas;
+    private ObjectPool<BaseEnemy> monsterPool;
     private bool _isMake;
     
     private void Awake()
     {
-        monsterDatas = new List<MonsterData>();
-        WaveMonster();
+        for (int i = 0; i < monsterDatas.Count; i++)
+        {
+            monsterPool = new ObjectPool<BaseEnemy>(
+                monsterDatas[i].monster,
+                monsterDatas[i].count,
+                transform,
+                _monsterPrabas =>
+                {
+                    _monsterPrabas.InitData();
+                }); 
+        }
+        
+        //monsterDatas = new List<MonsterData>();
+        //WaveMonster();
     }
 
     private void Start()
@@ -44,34 +57,12 @@ public class MonsterGroup : MonoBehaviour
             break;
         }*/
     }
-    
 
-    private void WaveMonster()
+    private void Update()
     {
-        monsterDatas.Add(new MonsterData
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            monster = new GameObject(),
-            count = 3,
-            waypointNum = 1
-        });
-        monsterDatas.Add(new MonsterData
-        {
-            monster = new GameObject(),
-            count = 4,
-            waypointNum = 1
-        });
-        monsterDatas.Add(new MonsterData
-        {
-            monster = new GameObject(),
-            count = 5,
-            waypointNum = 2
-        });
-        monsterDatas.Add(new MonsterData
-        {
-            monster = new GameObject(),
-            count = 6,
-            waypointNum = 2
-        });
-        _isMake = true;
+            monsterPool.Pop();
+        }
     }
 }
