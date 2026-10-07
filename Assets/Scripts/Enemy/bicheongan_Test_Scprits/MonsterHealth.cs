@@ -47,8 +47,8 @@ public class MonsterHealth : MonoBehaviour, IDamageable
         {
             Debug.Log("죽음");
             _isDead = true;
-            Cacheenemy.GiveToExpPlayer();
-            Debug.Log($"Exp{Cacheenemy.MonExp}");
+            //Cacheenemy.GiveToExpPlayer();
+            //Debug.Log($"Exp{Cacheenemy.MonExp}");
             goldPool.PopAll();
             Cacheenemy.ReturnToPool();
         }
