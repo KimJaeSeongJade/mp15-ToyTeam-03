@@ -104,13 +104,14 @@ MonoBehaviour:
   _goldCost: 100
   _turretType: 0
   _baseDamage: 10
+  _buildCooldown: 1
   _attackRange: 0
   _targetMask:
     serializedVersion: 2
     m_Bits: 512
   _muzzlePoint: {fileID: 2303267013804234632}
-  _bullets: {fileID: 0}
-  _bulletCoolTime: 0
+  _bullets: {fileID: 1549649516645007424, guid: a4a370d7c3b7f9c438e5e16b0834855e, type: 3}
+  _bulletCoolTime: 3
   _target: {fileID: 0}
 --- !u!114 &7627112027180410205
 MonoBehaviour:

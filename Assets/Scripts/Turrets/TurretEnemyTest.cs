@@ -17,6 +17,28 @@ public class TurretEnemyTest : MonoBehaviour,IDamageable
     {
         CacheComponent();
     }
+
+    private void OnMouseDown()
+    {
+        if (_isDead) return;
+
+        Debug.Log($"🎯 [적 공격 시작] {gameObject.name}이 주변 터렛을 공격합니다.");
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f);
+
+        foreach (Collider col in hitColliders)
+        {
+            if (col.TryGetComponent(out BaseTurret turret))
+            {
+                // 💡 에러 나는 코드 대신 테스트용 고정 대미지(예: 25f)를 다이렉트로 전달합니다.
+                float attackDamage = 25f;
+
+                turret.TakeDamage(attackDamage);
+                break;
+            }
+        }
+    }
+
     public void TakeDamage(float damage)
     {
         if (_isDead == true) return;
@@ -30,6 +52,7 @@ public class TurretEnemyTest : MonoBehaviour,IDamageable
             Cacheenemy.ReturnToPool();
         }
     }
+    
     public void SlowSpeed(float speed)
     {
         if (!_isSlow)

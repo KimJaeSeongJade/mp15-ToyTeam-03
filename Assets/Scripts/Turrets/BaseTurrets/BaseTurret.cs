@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseTurret : MonoBehaviour, IBuildTargetReceiver
+public class BaseTurret : MonoBehaviour, IBuildTargetReceiver, IDamageableturret
 {
     [SerializeField] private TurretPreview _preview;
     [SerializeField] protected float _maxHp;
