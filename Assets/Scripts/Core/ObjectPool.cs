@@ -18,6 +18,9 @@ public class ObjectPool<T> where T : Component, IPoolable
 
     /// <summary> 풀할 오브젝트 </summary>
     private T gameObject;
+    private readonly Dictionary<T, List<T>> poolsByPrefab;
+    private readonly Dictionary<T, T> prefabByObject;
+    private readonly Transform poolParent;
 
     /// <summary> 오브젝트 풀 </summary>
     /// <param name="_gameObject"> 풀링 할 오브젝트 </param>
@@ -48,6 +51,33 @@ public class ObjectPool<T> where T : Component, IPoolable
         pool.AddRange(arrObject);
     }
 
+    // 여러 프리팹을 한 풀에서 관리한다. 같은 프리팹은 한 번만 등록한다.
+    public ObjectPool(IEnumerable<(T prefab, int count)> entries, Transform parent = null, Action<T> onCreate = null)
+    {
+        objectList = new List<T>();
+        pool = new List<T>();
+        poolsByPrefab = new Dictionary<T, List<T>>();
+        prefabByObject = new Dictionary<T, T>();
+        poolParent = parent;
+        this.onCreate = onCreate;
+
+        foreach (var entry in entries)
+        {
+            if (!poolsByPrefab.TryGetValue(entry.prefab, out List<T> available))
+            {
+                available = new List<T>(entry.count);
+                poolsByPrefab.Add(entry.prefab, available);
+            }
+
+            for (int i = 0; i < entry.count; i++)
+            {
+                T created = CreateObject(entry.prefab, parent);
+                objectList.Add(created);
+                available.Add(created);
+            }
+        }
+    }
+
     // 꺼내기
     public T Pop()
     {
@@ -69,6 +99,32 @@ public class ObjectPool<T> where T : Component, IPoolable
         objectList.Add(result);
         result.WakeUp();
 
+        return result;
+    }
+
+    // 여러 프리팹을 등록한 풀에서는 꺼낼 종류를 지정한다.
+    public T Pop(T prefab)
+    {
+        if (!poolsByPrefab.TryGetValue(prefab, out List<T> available))
+        {
+            available = new List<T>();
+            poolsByPrefab.Add(prefab, available);
+        }
+        T result;
+
+        if (available.Count > 0)
+        {
+            int last = available.Count - 1;
+            result = available[last];
+            available.RemoveAt(last);
+        }
+        else
+        {
+            result = CreateObject(prefab, poolParent);
+            objectList.Add(result);
+        }
+
+        result.WakeUp();
         return result;
     }
 
@@ -111,7 +167,11 @@ public class ObjectPool<T> where T : Component, IPoolable
     // 넣기
     private void ReturnToPool(IPoolable _object)
     {
-        Push(_object as T);
+        T returned = _object as T;
+        if (poolsByPrefab == null)
+            Push(returned);
+        else
+            poolsByPrefab[prefabByObject[returned]].Add(returned);
     }
 
     // 생성하기
@@ -125,6 +185,16 @@ public class ObjectPool<T> where T : Component, IPoolable
         // 오브젝트 생성시 등록된 Action 실행
         onCreate?.Invoke(result);
 
+        return result;
+    }
+
+    private T CreateObject(T prefab, Transform parent)
+    {
+        T result = GameObject.Instantiate(prefab, parent);
+        result.gameObject.SetActive(false);
+        result.Init(ReturnToPool);
+        prefabByObject.Add(result, prefab);
+        onCreate?.Invoke(result);
         return result;
     }
 }
