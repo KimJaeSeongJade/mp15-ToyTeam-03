@@ -70,21 +70,8 @@ public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
         return cooldown;
     }
 
-    // TODO: 리펙토링 가능성 연구 필요
     public BaseTurret GetSelectedTurret(int num)
     {
-        switch (num)
-        {
-            case 0:
-                return _baseTurretlist[0];
-            case 1:
-                return _baseTurretlist[1];
-            case 2:
-                return _baseTurretlist[2];
-            case 3:
-                return _baseTurretlist[3];
-        }
-
-        return null;
+        return _baseTurretlist.Count >= num ? null : _baseTurretlist[num];
     }
 }

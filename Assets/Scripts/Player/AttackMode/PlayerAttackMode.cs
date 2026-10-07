@@ -44,7 +44,6 @@ public class PlayerAttackMode : MonoBehaviour
     }
 
 
-    // TODO: 스킬 구현
     private void FireCoolDown()
     {
         if (canFire) return;
@@ -127,6 +126,7 @@ public class PlayerAttackMode : MonoBehaviour
         _status.PlayerModeChange(false);
 
         enabled = isAttackMode;
+
         _buildMode.enabled = !isAttackMode;
     }
 
