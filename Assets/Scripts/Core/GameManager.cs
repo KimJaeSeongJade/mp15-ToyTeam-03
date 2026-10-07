@@ -29,11 +29,22 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     [SerializeField] private Image _buildCooldownImage;
     [SerializeField] private TextMeshProUGUI _buildCooldownText;
+
+    [Serializable]
+    private struct TurretInfo
+    {
+        public Image TurretImage;
+        public TextMeshProUGUI TurretText;
+        public float TurretCooldown;
+    }
+
+    [SerializeField] private TurretInfo[] _turretInfo;
+    
     // -------------------------------------------------------------
     // 구조체 또는 클래스를 적용하여 UI 이미지와 텍스트를 하나의 필드로 정리하기 TODO
     
     [field:SerializeField] public PlayerStatus PlayerStatus{get; private set;}
-    [SerializeField] private TurretCombinationTable _turretCombinationTable;
+    //[SerializeField] private TurretCombinationTable _turretCombinationTable;
     
     private PlayerWallet _wallet;
     private float _skillRemainingTime;
@@ -43,10 +54,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     public int _gold => _wallet.Gold;
 
-    private void GetTurretInfo(int slotNum)
-    { 
-        _turretCombinationTable.GetSelectedTurret(slotNum);
-    }
     
     // 입력받은 슬롯 넘버
     
@@ -79,6 +86,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     private void Start()
     {
+        Init();
         //ResetToTitle(); // TODO 게임 데이터 초기화 연결해야함. (이벤트로)
         ChangeState(GameState.Ready);
     }
@@ -295,10 +303,13 @@ public class GameManager : SingletonBehaviour<GameManager>
     private void CacheComponents()
     {
         _wallet = PlayerStatus.GetComponent<PlayerWallet>();
+
+        StartCoroutine(TurretInitRoutine());
     }
 
     private void Init()
     {
+
         // 판넬 켜고
         _startPanel.gameObject.SetActive(true);
         // 일시정지 판넬은 꺼진 상태
@@ -306,7 +317,19 @@ public class GameManager : SingletonBehaviour<GameManager>
         // 인게임 판넬도 꺼진 상태
         _inGameUI.SetActive(false);
     }
+
+    private IEnumerator TurretInitRoutine()
+    {
+        yield return new WaitUntil(() => TurretCombinationTable.Instance != null);
+
+        //_turretCombinationTable = TurretCombinationTable.Instance;
         
+        for (int i = 0; i < _turretInfo.Length; i++)
+        {
+            _turretInfo[i].TurretCooldown = TurretCombinationTable.Instance.GetSelectedTurret(i).BuildCooldown;
+        }
+    }
+    
     // --- 마우스 커서 잠금/해제 -----------------------
     private void LockCursor()
     {

@@ -14,6 +14,12 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     
     [SerializeField] private GameManager _gameManager;
     
+    //스테이지 클리어
+    [SerializeField] private TextMeshProUGUI _stageClearText;
+    [SerializeField] private float _invincibleSeconds = 2f;
+    private readonly WaitForSeconds _waitBlink = new WaitForSeconds(0.1f);
+    private bool _isInvincible;
+    private Coroutine _blinkCoroutine;
 
     // 정보 받아와야하면 추후에 수정
 
@@ -53,7 +59,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     
     private void OnEnable()
     {
-       
         // 게임매니저에서 시작 전달받아와야함.
         //if (GameManager.Instance.currentState != GameState.WavePreparation) return;
         StartFirstWavePrepare();
@@ -93,7 +98,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
             _remainingTime -= Time.deltaTime;
             yield return null;
         }
-
         StartWave();
     }
 
@@ -166,10 +170,12 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private void EndWave()
     {
         OnWaveEnded?.Invoke();
-
+        
+        // 웨이브 클리어 UI 출력
+        
         // 드랍 골드 정산
         // 골드 정산 메서드 
-
+        BeginBlink();
 
         // 배달 함수 호출
 
@@ -180,6 +186,39 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         StartCoroutine(PrepareNextWave());
     }
 
+
+    private void BeginInvincible()
+    {
+        _isInvincible = true;
+        BeginBlink();
+        StartCoroutine(InvincibleRoutine());
+    }
+    private IEnumerator InvincibleRoutine()
+    {
+        yield return new WaitForSeconds(_invincibleSeconds);
+        EndBlink();
+        _isInvincible = false;
+    }
+    private void BeginBlink()
+    {
+        _blinkCoroutine = StartCoroutine(BlinkRoutine());
+    }
+    private void EndBlink()
+    {
+        StopCoroutine(BlinkRoutine());
+        
+        StopCoroutine(_blinkCoroutine);
+        _stageClearText.enabled = true;
+    }
+
+    private IEnumerator BlinkRoutine()
+    {
+        while (true)
+        {
+            _stageClearText.enabled = !_stageClearText.enabled;
+            yield return _waitBlink;
+        }
+    }
 
     private void CacheComponents()
     {

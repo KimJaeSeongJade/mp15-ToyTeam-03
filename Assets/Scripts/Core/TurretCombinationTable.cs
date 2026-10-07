@@ -72,6 +72,7 @@ public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
 
     public BaseTurret GetSelectedTurret(int num)
     {
-        return _baseTurretlist.Count >= num ? null : _baseTurretlist[num];
+        Debug.Log( _baseTurretlist.Count);
+        return num >= _baseTurretlist.Count ? null : _baseTurretlist[num];
     }
 }
