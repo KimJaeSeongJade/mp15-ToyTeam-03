@@ -102,4 +102,8 @@ public class Bullet : PoolObject
     {
         damageable.TakeDamage(bulletDamage);
     }
+    protected virtual void DamageLogic(IDamageable damageable, float finalDamage)
+    {
+        damageable.TakeDamage(finalDamage);
+    }
 }
