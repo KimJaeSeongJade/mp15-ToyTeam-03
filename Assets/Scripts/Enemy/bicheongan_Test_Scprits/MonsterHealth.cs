@@ -10,6 +10,7 @@ public class MonsterHealth : MonoBehaviour, IDamageable
     private ObjectPool<GoldDrop> goldPool;
     private BaseEnemy Cacheenemy;
 
+   
     private float goldCount;
     private bool _isDead;
     private bool _isSlow;
@@ -67,4 +68,6 @@ public class MonsterHealth : MonoBehaviour, IDamageable
         _speed = GetComponent<MonsterMove>();
         goldCount = Cacheenemy.MonGold / GameManager.GOLD_AMOUNT;
     }
+
+    
 }

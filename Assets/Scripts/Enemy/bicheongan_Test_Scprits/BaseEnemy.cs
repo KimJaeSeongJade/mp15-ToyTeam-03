@@ -11,7 +11,8 @@ public class BaseEnemy : PoolObject
     [SerializeField] protected float _monGlod;
     [SerializeField] protected float _monExp;
     [SerializeField] protected float _monCastleDam;
-
+    
+    private Transform _tr;
 
     public float MonHp { get { return _monHp; } set { _monHp = value; } }
     public float MonDefend { get { return _monDefend; } set { _monDefend = value; } }
@@ -28,12 +29,13 @@ public class BaseEnemy : PoolObject
     }
     public override void WakeUp()
     {
-        
+        transform.SetParent(null);
         gameObject.SetActive(true);
     }
 
     public override void Sleep()
     {
+        transform.SetParent(_tr);
         onRemoved?.Invoke(this);
         gameObject.SetActive(false);
     }
@@ -53,8 +55,8 @@ public class BaseEnemy : PoolObject
         Debug.Log("결승");
         Returned?.Invoke(this);
     }
-    private void CaCheComponents()
+    public void InitData()
     {
-        _eXP = GameManager.Instance.GetComponent<PlayerLevelManager>();
+        _tr = transform.parent;
     }
 }
