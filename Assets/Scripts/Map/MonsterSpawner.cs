@@ -13,6 +13,7 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField] private MonsterGroup monsterGroup1;
     [SerializeField] private MonsterPool  _monsterPool;
     
+    public CameraDirector cameraDirector;
     
     private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     private int _correntCount;
@@ -46,6 +47,9 @@ public class MonsterSpawner : MonoBehaviour
                         _monster = _monsterPool.Pop();
                         _monster.transform.SetPositionAndRotation(_waypointPath[waveNumber-1].transform.position, 
                             transform.rotation);
+                        
+                        cameraDirector.FocusFor(_waypointPath[waveNumber-1].transform,2f); 
+                        //Trail Renderer 생성하는 동시에 2초간 봄하게 설정
                         
                         /*_monster = Instantiate(_monsterPrefab, 
                             _waypointPath[waveNumber-1].transform.position, transform.rotation);*/
