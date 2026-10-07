@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
@@ -16,9 +18,18 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField] private GameObject _startPanel;    // 시작 화면 UI
     [SerializeField] private GameObject _pausePanel;    // 일시정지 UI
     [SerializeField] private GameObject _inGameUI;      // 인게임 UI
+    [SerializeField] private GameObject _buildModeUI;   // 빌드모드 UI
+    [SerializeField] private GameObject _attackModeUI; // 공격모드 UI
+    
+    [SerializeField] private Image _skillCooldownImage;
+    [SerializeField] private TextMeshProUGUI _skillCooldownText;
 
+    
+    
     [field:SerializeField] public PlayerStatus PlayerStatus{get; private set;}
     private PlayerWallet _wallet;
+    private float _skillRemainingTime;
+    
     public int _gold => _wallet.Gold;
     
     
@@ -42,7 +53,11 @@ public class GameManager : SingletonBehaviour<GameManager>
         base.Awake();
 
         CacheComponents();
-    } 
+        
+        //if (currentState != null)
+        BindPlayerModeUI();
+    }
+
     
     private void Start()
     {
@@ -109,11 +124,52 @@ public class GameManager : SingletonBehaviour<GameManager>
         }
     }
 
-    private void PlayerMode()
+    private void BindPlayerModeUI()
+    {
+        PlayerStatus.OnPlayerModeChanged += SetPlayerModeUI;
+        PlayerStatus.OnSkillCooldownStarted += SetPlayerSkillCooldownUI;
+        PlayerStatus.OnBuildCooldownStarted += SetPlayerBuildCooldownUI;
+    }
+
+    private void SetPlayerModeUI(bool isAttackMode)
+    {
+        // 공격 모드
+        if (isAttackMode)
+        {
+            _attackModeUI.gameObject.SetActive(true);
+            _buildModeUI.gameObject.SetActive(false);
+        }
+        // 빌드 모드
+        else
+        {
+            _attackModeUI.gameObject.SetActive(false);
+            _buildModeUI.gameObject.SetActive(true);
+        }
+    }
+
+    private void SetPlayerBuildCooldownUI(int slotNum, float buildCooldown)
     {
         
     }
     
+    // 레벨업 할 때 평타 업글/ 스킬 업글 어떻게 받아올지 TODO
+    private void SetPlayerSkillCooldownUI(float skillCooldown)
+    {
+        _skillRemainingTime = skillCooldown;
+        _skillRemainingTime -= Time.time;
+        
+        // 스킬 시전했으면 쿨타임 보여주기
+        _skillCooldownText.gameObject.SetActive(true); // 기본값 false
+        
+        // 스킬 쿨타임 fillAmount
+        _skillCooldownImage.fillAmount = Mathf.Clamp01(skillCooldown / skillCooldown);
+        // 스킬 쿨타임 표기
+        _skillCooldownText.text = _skillRemainingTime.ToString("F0");
+        // 스킬 쿨타임 끝나면 시간 초 꺼주기
+        if (_skillRemainingTime <= 0) _skillCooldownText.gameObject.SetActive(false);
+    }
+
+
     
     
     // 초기 화면
@@ -125,9 +181,11 @@ public class GameManager : SingletonBehaviour<GameManager>
         // 게임 시간 시작
         Run();
         _inGameUI.SetActive(true);
+        _buildModeUI.gameObject.SetActive(false);
         canPause = true;    // 시작하면 일시정지 가능하게
         ChangeState(GameState.WavePreparation);
     }
+    
     
     // 진행
     public void Run()
