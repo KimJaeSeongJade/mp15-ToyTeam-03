@@ -16,10 +16,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     
     //스테이지 클리어
     [SerializeField] private TextMeshProUGUI _stageClearText;
-    [SerializeField] private float _invincibleSeconds = 2f;
-    private readonly WaitForSeconds _waitBlink = new WaitForSeconds(0.1f);
-    private bool _isInvincible;
-    private Coroutine _blinkCoroutine;
 
     // 정보 받아와야하면 추후에 수정
 
@@ -170,13 +166,13 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private void EndWave()
     {
         OnWaveEnded?.Invoke();
-        
+        PrintClearText();
         // 웨이브 클리어 UI 출력
         
         // 드랍 골드 정산
+        
         // 골드 정산 메서드 
-        BeginBlink();
-
+        
         // 배달 함수 호출
 
         // ↑ 이벤트 구독 하여 골드 ui쪽으로 업데이트만 하면 됨 
@@ -186,38 +182,10 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         StartCoroutine(PrepareNextWave());
     }
 
-
-    private void BeginInvincible()
+    private void PrintClearText()
     {
-        _isInvincible = true;
-        BeginBlink();
-        StartCoroutine(InvincibleRoutine());
-    }
-    private IEnumerator InvincibleRoutine()
-    {
-        yield return new WaitForSeconds(_invincibleSeconds);
-        EndBlink();
-        _isInvincible = false;
-    }
-    private void BeginBlink()
-    {
-        _blinkCoroutine = StartCoroutine(BlinkRoutine());
-    }
-    private void EndBlink()
-    {
-        StopCoroutine(BlinkRoutine());
-        
-        StopCoroutine(_blinkCoroutine);
-        _stageClearText.enabled = true;
-    }
-
-    private IEnumerator BlinkRoutine()
-    {
-        while (true)
-        {
-            _stageClearText.enabled = !_stageClearText.enabled;
-            yield return _waitBlink;
-        }
+        _stageClearText.gameObject.SetActive(true);
+        _stageClearText.text = "STAGE CLEAR!!";
     }
 
     private void CacheComponents()

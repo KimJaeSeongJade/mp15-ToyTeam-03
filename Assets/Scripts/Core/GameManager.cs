@@ -39,6 +39,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     }
 
     [SerializeField] private TurretInfo[] _turretInfo;
+
+    public bool IsStarted { get; private set; }
     
     // -------------------------------------------------------------
     // 구조체 또는 클래스를 적용하여 UI 이미지와 텍스트를 하나의 필드로 정리하기 TODO
@@ -217,18 +219,34 @@ public class GameManager : SingletonBehaviour<GameManager>
     /// <returns></returns>
     private IEnumerator UpdateUIRoutine(int slotNum, float buildCooldown)
     {
-        _buildRemainingTime = buildCooldown;
-        _buildCooldownText.gameObject.SetActive(true); // 기본값 false
+        
+        _buildRemainingTime = _turretInfo[slotNum].TurretCooldown;
+        _turretInfo[slotNum].TurretText.gameObject.SetActive(true); // 기본값 false
+        _turretInfo[slotNum].TurretImage.gameObject.SetActive(true);
         while (_buildRemainingTime > 0f)    // 스킬 쿨 돌때만
         {
             _buildRemainingTime -= Time.deltaTime;// 스킬 시전했으면 쿨타임 보여주기
             // 스킬 쿨타임 표기
-            _buildCooldownText.text = _buildRemainingTime.ToString("F0");
+            _turretInfo[slotNum].TurretText.text = _buildRemainingTime.ToString("F0");
             // 스킬 쿨타임 fillAmount
-            _buildCooldownImage.fillAmount = Mathf.Clamp01(_buildRemainingTime / buildCooldown);
+            _turretInfo[slotNum].TurretImage.fillAmount = Mathf.Clamp01(_buildRemainingTime / _turretInfo[slotNum].TurretCooldown);
             yield return null;
         }
-        _buildCooldownText.gameObject.SetActive(false);
+        _turretInfo[slotNum].TurretText.gameObject.SetActive(false); // 기본값 false
+        _turretInfo[slotNum].TurretImage.gameObject.SetActive(false);
+    }
+    
+    
+    private IEnumerator TurretInitRoutine()
+    {
+        yield return new WaitUntil(() => TurretCombinationTable.Instance != null);
+
+        //_turretCombinationTable = TurretCombinationTable.Instance;
+        
+        for (int i = 0; i < _turretInfo.Length; i++)
+        {
+            _turretInfo[i].TurretCooldown = TurretCombinationTable.Instance.GetSelectedTurret(i).BuildCooldown;
+        }
     }
     
     // 초기 화면
@@ -244,7 +262,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         _buildModeUI.gameObject.SetActive(false);
         _skillCooldownImage.gameObject.SetActive(false);
         _skillCooldownText.gameObject.SetActive(false); 
-        _buildCooldownText.gameObject.SetActive(false);
+        //_buildCooldownText.gameObject.SetActive(false);
         canPause = true;    // 시작하면 일시정지 가능하게
         ChangeState(GameState.WavePreparation);
     }
@@ -318,17 +336,6 @@ public class GameManager : SingletonBehaviour<GameManager>
         _inGameUI.SetActive(false);
     }
 
-    private IEnumerator TurretInitRoutine()
-    {
-        yield return new WaitUntil(() => TurretCombinationTable.Instance != null);
-
-        //_turretCombinationTable = TurretCombinationTable.Instance;
-        
-        for (int i = 0; i < _turretInfo.Length; i++)
-        {
-            _turretInfo[i].TurretCooldown = TurretCombinationTable.Instance.GetSelectedTurret(i).BuildCooldown;
-        }
-    }
     
     // --- 마우스 커서 잠금/해제 -----------------------
     private void LockCursor()
