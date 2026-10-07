@@ -108,6 +108,13 @@ public class GameManager : SingletonBehaviour<GameManager>
                 break;
         }
     }
+
+    private void PlayerMode()
+    {
+        
+    }
+    
+    
     
     // 초기 화면
     public void StartGame()

@@ -31,6 +31,7 @@ public class PlayerStatus : MonoBehaviour
     /// True : Attack 모드 / False : Build 모드
     /// </summary>
     public event Action<bool> OnPlayerModeChanged;
+    
     /// <summary>
     /// -1 : 기본 / 0 : 공격 / 1 : 건설(열거형으로 구현할지 협의필요)
     /// </summary>
