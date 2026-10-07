@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 5156816284534291348}
   - component: {fileID: 8500655535360023629}
   m_Layer: 0
-  m_Name: RapidFireCannon_2
+  m_Name: T1_DefenceTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
