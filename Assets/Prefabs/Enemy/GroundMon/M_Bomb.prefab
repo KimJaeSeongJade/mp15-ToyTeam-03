@@ -9933,7 +9933,7 @@ GameObject:
   - component: {fileID: 2941669814717001753}
   - component: {fileID: 5123450768010850401}
   - component: {fileID: 4541134765248746228}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: M_Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
