@@ -14,7 +14,7 @@ public class BaseEnemy : PoolObject
     [SerializeField] private GameObject _IsDeadImpack;
     [SerializeField] private GameObject _hitImpact;
 
-    private float _maxMonHp;
+    [SerializeField] protected float _maxMonHp;
     private Transform _tr;
     private PlayerLevelManager _eXP;
 
@@ -26,17 +26,18 @@ public class BaseEnemy : PoolObject
     public float MonCastleDam { get { return _monCastleDam; } set { _monCastleDam = value; } }
     public GameObject IsDeadImpack => _IsDeadImpack;
     public GameObject HitImpact => _hitImpact;
-    public float MonMaxHp { get => _maxMonHp; }
+    public float MonMaxHp { get => _maxMonHp; set { _maxMonHp = value; } }
 
     public event Action<BaseEnemy> onRemoved;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _maxMonHp = _monHp;
         CaCheComponents();
     }
     public override void WakeUp()
     {
+        _monHp = _maxMonHp;
         transform.SetParent(null);
         gameObject.SetActive(true);
     }
@@ -66,8 +67,8 @@ public class BaseEnemy : PoolObject
     {
         _tr = transform.parent;
     }
-    private void CaCheComponents()
+    protected virtual void CaCheComponents()
     {
-        _eXP = GameManager.Instance.GetComponent<PlayerLevelManager>();
+        _eXP = GameManager.Instance.PlayerStatus.GetComponent<PlayerLevelManager>();
     }
 }

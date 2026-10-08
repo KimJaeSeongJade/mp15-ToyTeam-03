@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class MonsterHealth : MonoBehaviour, IDamageable, ISloowable ,IHealthSource
+public class MonsterHealth : MonoBehaviour, IDamageableturret, ISloowable ,IHealthSource,IDamageable
 {
     [SerializeField] private GoldDrop _goldPrabas;
     private ObjectPool<GoldDrop> goldPool;
@@ -50,28 +50,20 @@ public class MonsterHealth : MonoBehaviour, IDamageable, ISloowable ,IHealthSour
             Debug.Log($"몬스터에게 {mindamage} 데미지를 줌");
         }
         Instantiate(Cacheenemy.HitImpact, transform.position, Quaternion.identity);
-        OnHealthChanged?.Invoke();
         if (Cacheenemy.MonHp <= 0)
         {
             Debug.Log("죽음");
             _isDead = true;
             Instantiate(Cacheenemy.IsDeadImpack, transform.position, Quaternion.identity);
-            Debug.Log("1");
-            //Cacheenemy.GiveToExpPlayer();
-            //Debug.Log($"Exp{Cacheenemy.MonExp}");
 
-            try
-            {
-                goldPool.PopAll();
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError($"goldPool.PopAll에서 에러 발생!: {e.Message}");
-            }
-            Debug.Log("2");
+            Cacheenemy.GiveToExpPlayer();
+            Debug.Log($"Exp{Cacheenemy.MonExp}");
+
+            goldPool.PopAll();
             Cacheenemy.ReturnToPool();
-            Debug.Log(3);
+
         }
+        OnHealthChanged?.Invoke();
     }
     
     public void SlowSpeed(float speed)

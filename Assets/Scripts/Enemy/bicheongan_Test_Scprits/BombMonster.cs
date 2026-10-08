@@ -13,9 +13,10 @@ public class BombMonster : BaseEnemy
     private bool _isTurretInSight;
     private bool _isAttacking;
 
-    private void Awake()
+    protected override void Awake()
     {
-        CacheComponet();
+        base.Awake();
+        CaCheComponents();
     }
 
 
@@ -47,7 +48,7 @@ public class BombMonster : BaseEnemy
             {
                 _isAttacking = true;
                 Debug.Log("공격");
-                IDamageable damageable = _targetTurret.GetComponent<IDamageable>();
+                IDamageableturret damageable = _targetTurret.GetComponent<IDamageableturret>();
                 if (damageable != null)
                 {
                     damageable.TakeDamage(_damage);
@@ -57,8 +58,9 @@ public class BombMonster : BaseEnemy
         }
     }
 
-    private void CacheComponet()
+    protected override void CaCheComponents()
     {
+        base.CaCheComponents();
         _toTarget = GetComponent<MonsterMove>();
     }
 }

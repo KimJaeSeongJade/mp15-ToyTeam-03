@@ -35,7 +35,7 @@ public class BombAnim : MonoBehaviour
     {
         if (IsSight == true && !_isBomb)
         {
-
+            _isBomb = true;
             _animator.SetBool("IsBomb", true);
 
             StartCoroutine(Delay());
@@ -45,7 +45,7 @@ public class BombAnim : MonoBehaviour
 
     private IEnumerator Delay()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         _return.ReturnToPool();
     }
 
