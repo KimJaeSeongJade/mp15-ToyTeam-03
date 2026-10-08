@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseTurret : MonoBehaviour, IBuildTargetReceiver, IDamageableturret
+public class BaseTurret : MonoBehaviour, IBuildTargetReceiver, IDamageableturret, ITurretInfoSender
 {
+    [SerializeField] private string _name;
+    [SerializeField,TextArea] private string _info;
+    public string Name { get => _name;}
+    public string Info { get => _info;}
     [SerializeField] private TurretPreview _preview;
     [SerializeField] protected float _maxHp;
     protected float _currentHp;
@@ -60,5 +64,10 @@ public class BaseTurret : MonoBehaviour, IBuildTargetReceiver, IDamageableturret
     public void PreviewHide()
     {
         _preview.Hide();
+    }
+
+    public void GetTurretInfo()
+    {
+        
     }
 }

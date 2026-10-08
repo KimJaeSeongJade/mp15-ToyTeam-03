@@ -73,6 +73,7 @@ public class MonsterHealth : MonoBehaviour, IDamageable, ISloowable ,IHealthSour
             Debug.Log(3);
         }
     }
+    
     public void SlowSpeed(float speed)
     {
         if (!_isSlow)
