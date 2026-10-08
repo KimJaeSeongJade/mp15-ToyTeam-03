@@ -14,7 +14,7 @@ public class PlayerStatus : MonoBehaviour
     private PlayerBuildMode _buildMode;
     private bool _isAttackMode = true;
     private bool _hasAttackTarget;
-    private int _currnetCursor = -1;
+    private CrosshairType _currnetCursor = CrosshairType.Default;
 
     // 다음 레벨까지 필요한 경험치. 계산은 PlayerLevelManager가 담당하며 최대 레벨에서는 0이다.
     public float RequiredExp => _levelManager.RequiredExp;
@@ -35,7 +35,7 @@ public class PlayerStatus : MonoBehaviour
     /// <summary>
     /// -1 : 기본 / 0 : 공격 / 1 : 건설(열거형으로 구현할지 협의필요)
     /// </summary>
-    public event Action<int> OnCursorChanged;
+    public event Action<CrosshairType> OnCursorChanged;
 
     /// <summary>
     /// 슬롯 번호, 쿨타임 순서
@@ -136,8 +136,8 @@ public class PlayerStatus : MonoBehaviour
 
     private void UpdateCursor()
     {
-        int cursor = !_isAttackMode ? 1 :
-            _hasAttackTarget ? 0 : -1;
+        CrosshairType cursor = !_isAttackMode ? CrosshairType.Build :
+            _hasAttackTarget ? CrosshairType.Attack : CrosshairType.Default;
 
         if (_currnetCursor == cursor) return;
 
