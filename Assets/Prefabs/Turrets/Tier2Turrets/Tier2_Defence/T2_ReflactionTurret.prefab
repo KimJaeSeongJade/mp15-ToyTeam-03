@@ -333,9 +333,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1228668213287985383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ddd9298df2ea2c45b8c9909d0a33341, type: 3}
+  m_Script: {fileID: 11500000, guid: 84694f66548f65040a85ec567ce0e2e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _preview: {fileID: 3786408196965372772}
+  _maxHp: 100
+  _goldCost: 200
+  _turretType: 4
+  _baseDamage: 10
+  _buildCooldown: 1
+  _sheildDamage: 15
+  _reflectionRange: 3
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &3454981125211244147
 GameObject:
   m_ObjectHideFlags: 0

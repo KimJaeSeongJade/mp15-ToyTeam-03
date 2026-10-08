@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 5158954053532723853}
   - component: {fileID: 7954733569185653698}
   - component: {fileID: 574553850495127198}
+  - component: {fileID: -5277056977547018229}
   m_Layer: 0
   m_Name: T2_FrozenTurret
   m_TagString: Untagged
@@ -340,3 +341,29 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 6.66
   m_Center: {x: -0.000000029802322, y: 0.25713593, z: 0}
+--- !u!114 &-5277056977547018229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571948556805675919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0536c06407fabda40bde08a28f1cd06c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preview: {fileID: 7954733569185653698}
+  _maxHp: 100
+  _goldCost: 100
+  _turretType: 4
+  _baseDamage: 10
+  _buildCooldown: 1
+  _attackRange: 0
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _muzzlePoint: {fileID: 622838753644026178}
+  _bullets: {fileID: 6662358214220460424, guid: 6fe546a2969176c4d9d5f2d149e004e9, type: 3}
+  _bulletCoolTime: 1
+  _target: {fileID: 0}

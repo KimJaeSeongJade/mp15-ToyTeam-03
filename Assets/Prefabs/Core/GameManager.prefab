@@ -2816,6 +2816,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fe2443101ded6f544b32f8dc8690c367, type: 3}
   - {fileID: 21300000, guid: 2d18e23e3ce249b4489b8bcdd02d3f48, type: 3}
   - {fileID: 21300000, guid: f2e59480af813ad42af2eba175095158, type: 3}
+  _crosshair: {fileID: 5549911892319579626}
   _turretInfo:
   - TurretImage: {fileID: 178088069092651875}
     TurretText: {fileID: 8468527609834193391}
