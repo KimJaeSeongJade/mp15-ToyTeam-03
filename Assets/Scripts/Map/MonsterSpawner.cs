@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField] private WayPointPath[] _waypointPath;
-
     [SerializeField] private GameObject[] PortalEffect;
-    //[SerializeField] private int _count;
-    private ObjectPool<BaseEnemy> _monsterGroupPool;
     [SerializeField] private List<MonsterGroup> _monsterGroupList;
-    
-    
+    [SerializeField] private CamSwitcher _camSwitcher;
+    private List<int> cmWaveCheck = new List<int>();
+
+    private ObjectPool<BaseEnemy> _monsterGroupPool;
     private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     private BaseEnemy _monster;
 
@@ -31,11 +31,7 @@ public class MonsterSpawner : MonoBehaviour
             transform,
             monster => monster.InitData());
     }
-
-    private bool _isCamera()
-    {
-        return  true;
-    }
+    
     public void SpawnWave(int waveNumber, Action<BaseEnemy> onMonsterSpawn, Action onSpawnEnd)
     {
         StartCoroutine(WaveStartRoutine(waveNumber,onMonsterSpawn, onSpawnEnd));
@@ -69,10 +65,8 @@ public class MonsterSpawner : MonoBehaviour
             
             break;
         }*/
-
         MonsterGroup _localMonsterGroup = _monsterGroupList[waveNumber-1];
         _localMonsterGroup.ResetSpwan();
-
         while (_localMonsterGroup.TryGetNext(out MonsterGroup.MonsterData resultData))
         {
             int pathNum = resultData.waypointNum;
@@ -81,6 +75,20 @@ public class MonsterSpawner : MonoBehaviour
             _monster = _monsterGroupPool.Pop(resultData.monster);
             _monster.transform.SetPositionAndRotation(targetPath.transform.position, transform.rotation);
             _monster.GetComponent<MonsterMove>().Initialize(targetPath);
+            
+            /*if (cmWaveCheck.Count == 0)
+            {
+                cmWaveCheck.Add(waveNumber-1);
+                Debug.Log("새로운 wave 찾음");
+                _camSwitcher.Activate();
+                
+            }
+            else if (!cmWaveCheck.Contains(waveNumber - 1))
+            {
+                cmWaveCheck.Add(waveNumber-1);
+                //
+            }*/
+            
             onMonsterSpawn?.Invoke(_monster);
             yield return _wait;
 
@@ -91,6 +99,8 @@ public class MonsterSpawner : MonoBehaviour
         onSpawnEnd?.Invoke();
         
     }
+    
+    
     private void PortaleffectFalse()
     {
         PortalEffect[0].SetActive(false);

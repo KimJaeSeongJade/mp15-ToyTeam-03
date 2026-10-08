@@ -24,6 +24,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     [SerializeField] private int _aliveMonsterCount;
     [SerializeField] private bool _isSpawnFinished;
 
+    public static event Action OnCamActivate;   
     public int CurrentWave => _currentWave;
     public float RemainingTime => _remainingTime;
 
@@ -87,10 +88,15 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private IEnumerator PrepareNextWave()
     {
         _remainingTime = _prepareTime;
-
+        bool _isSwitcher =  false;
         while (_remainingTime > 0f)
         {
             OnPrepareTimeChanged?.Invoke(_remainingTime);
+            if (_remainingTime < 8f && _isSwitcher == false)
+            {
+                _isSwitcher = true;
+                OnCamActivate?.Invoke();
+            }
             _remainingTime -= Time.deltaTime;
             yield return null;
         }
