@@ -50,6 +50,7 @@ public class MonsterHealth : MonoBehaviour, IDamageable
             _isDead = true;
             //Cacheenemy.GiveToExpPlayer();
             //Debug.Log($"Exp{Cacheenemy.MonExp}");
+            Instantiate(Cacheenemy.IsDeadImpack, transform.position, Quaternion.identity);
             goldPool.PopAll();
             Cacheenemy.ReturnToPool();
         }

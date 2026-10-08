@@ -274,6 +274,7 @@ MonoBehaviour:
   _monGlod: 40
   _monExp: 10
   _monCastleDam: 5
+  _isDeadImpact: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
 --- !u!114 &7255533912421643374
 MonoBehaviour:
   m_ObjectHideFlags: 0
