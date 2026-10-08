@@ -10,7 +10,6 @@ public class MonsterMove : MonoBehaviour
     private int arrivePoint;
     private NavMeshAgent _agent;
     private BaseEnemy reenemy;
-    //[SerializeField] private float speed = 50f;//BaseEnemy 만들어지면 변경 예정
 
     private bool _turretDis;
     private float originalSpeed;
@@ -78,6 +77,8 @@ public class MonsterMove : MonoBehaviour
         _turretDis = true;
         _agent.SetDestination(turret.position);
     }
+
+    //터렛에 도착시 이동을 멈춤
     public void MoveStop(Transform turret)
     {
         _agent.SetDestination(turret.position);
@@ -85,6 +86,8 @@ public class MonsterMove : MonoBehaviour
         _agent.isStopped = true;
         _agent.velocity = Vector3.zero;
     }
+
+    //공격 범위에 더텟이 없을시 다시 웨이 포인트로 이동
     public void ReturnMove()
     {
         _turretDis = false;

@@ -1,0 +1,64 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class BombMonster : BaseEnemy
+{
+    [SerializeField] private float _damage;
+    [SerializeField] private LayerMask _TurretMask;
+
+    private MonsterMove _toTarget;
+    private Transform _targetTurret;
+    private bool _isTurretInSight;
+    private bool _isAttacking;
+
+    private void Awake()
+    {
+        CacheComponet();
+    }
+
+
+    private void OnTriggerEnter(Collider other) // 범위는 임시 후 변경 예정
+    {
+        if ((_TurretMask.value & (1 << other.gameObject.layer)) != 0)
+        {
+            if (_isTurretInSight == false)
+            {
+                _targetTurret = other.transform;
+                _isTurretInSight = true;
+                Debug.Log("터렛 발견");
+
+                _toTarget.MoveToTurret(_targetTurret);
+            }
+        }
+
+    }
+
+    private void Attack()
+    {
+        if (!_isTurretInSight) return;
+
+
+        if (_targetTurret != null)
+        {
+            _toTarget.MoveStop(_targetTurret);
+            if (_isAttacking == false)
+            {
+                _isAttacking = true;
+                Debug.Log("공격");
+                IDamageable damageable = _targetTurret.GetComponent<IDamageable>();
+                if (damageable != null)
+                {
+                    damageable.TakeDamage(_damage);
+                    Debug.Log($"{_damage} 데미지 줌");
+                }
+            }
+        }
+    }
+
+    private void CacheComponet()
+    {
+        _toTarget = GetComponent<MonsterMove>();
+    }
+}

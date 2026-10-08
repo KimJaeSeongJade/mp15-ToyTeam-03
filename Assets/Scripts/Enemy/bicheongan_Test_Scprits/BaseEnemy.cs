@@ -12,9 +12,11 @@ public class BaseEnemy : PoolObject
     [SerializeField] protected float _monExp;
     [SerializeField] protected float _monCastleDam;
     [SerializeField] private GameObject _IsDeadImpack;
+    [SerializeField] private GameObject _hitImpact;
 
-
+    private float _maxMonHp;
     private Transform _tr;
+    private PlayerLevelManager _eXP;
 
     public float MonHp { get { return _monHp; } set { _monHp = value; } }
     public float MonDefend { get { return _monDefend; } set { _monDefend = value; } }
@@ -23,11 +25,14 @@ public class BaseEnemy : PoolObject
     public float MonExp { get { return _monExp; } set { _monExp = value; } }
     public float MonCastleDam { get { return _monCastleDam; } set { _monCastleDam = value; } }
     public GameObject IsDeadImpack => _IsDeadImpack;
+    public GameObject HitImpact => _hitImpact;
+    public float MonMaxHp { get => _maxMonHp; }
 
     public event Action<BaseEnemy> onRemoved;
 
     private void Awake()
     {
+        _maxMonHp = _monHp;
         CaCheComponents();
     }
     public override void WakeUp()
@@ -42,7 +47,6 @@ public class BaseEnemy : PoolObject
         onRemoved?.Invoke(this);
         gameObject.SetActive(false);
     }
-    private PlayerLevelManager _eXP;
     public void GiveToExpPlayer()
     {
         _eXP.GainExp(MonExp);
