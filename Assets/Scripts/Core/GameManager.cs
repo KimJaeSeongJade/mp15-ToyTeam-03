@@ -67,6 +67,9 @@ public class GameManager : SingletonBehaviour<GameManager>
     //private bool IsTitle;
 
     
+    
+    
+    
     // 웨이브 에서 시작했는지 확인 용도 
     // 웨이브 종료시 받아와야해서 set으로 조건 추가할지 결정
     // public bool IsStarted
@@ -360,4 +363,10 @@ public enum GameState
     GameOver
 }
 
+public enum CrosshairType
+{
+    Default,
+    Attack,
+    Build
+}
 
