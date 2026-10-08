@@ -15,14 +15,11 @@ public class MonsterSpawner : MonoBehaviour
     private ObjectPool<BaseEnemy> _monsterGroupPool;
     private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     private BaseEnemy _monster;
-
-
-    private void Awake()
-    {
-        PortaleffectTure();
-    }
+    private int _currentWave ;
+    
 
     private void Start() => Init();
+    
 
     private void Init()
     {
@@ -71,7 +68,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             int pathNum = resultData.waypointNum;
             WayPointPath targetPath = _waypointPath[pathNum-1];
-
+            
             _monster = _monsterGroupPool.Pop(resultData.monster);
             _monster.transform.SetPositionAndRotation(targetPath.transform.position, transform.rotation);
             _monster.GetComponent<MonsterMove>().Initialize(targetPath);

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Cinemachine;
 
-public class CanSwitcher : MonoBehaviour
+public class Switcher : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera[] cams;
     [SerializeField] private float _camDelay = 2f;
