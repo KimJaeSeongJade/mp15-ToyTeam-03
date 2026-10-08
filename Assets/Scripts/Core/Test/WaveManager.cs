@@ -14,6 +14,8 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     
     [SerializeField] private GameManager _gameManager;
     
+    //스테이지 클리어
+    [SerializeField] private TextMeshProUGUI _stageClearText;
 
     // 정보 받아와야하면 추후에 수정
 
@@ -53,7 +55,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     
     private void OnEnable()
     {
-       
         // 게임매니저에서 시작 전달받아와야함.
         //if (GameManager.Instance.currentState != GameState.WavePreparation) return;
         StartFirstWavePrepare();
@@ -93,7 +94,6 @@ public class WaveManager : SingletonBehaviour<WaveManager>
             _remainingTime -= Time.deltaTime;
             yield return null;
         }
-
         StartWave();
     }
 
@@ -166,11 +166,13 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private void EndWave()
     {
         OnWaveEnded?.Invoke();
-
+        PrintClearText();
+        // 웨이브 클리어 UI 출력
+        
         // 드랍 골드 정산
+        
         // 골드 정산 메서드 
-
-
+        
         // 배달 함수 호출
 
         // ↑ 이벤트 구독 하여 골드 ui쪽으로 업데이트만 하면 됨 
@@ -180,6 +182,11 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         StartCoroutine(PrepareNextWave());
     }
 
+    private void PrintClearText()
+    {
+        _stageClearText.gameObject.SetActive(true);
+        _stageClearText.text = "STAGE CLEAR!!";
+    }
 
     private void CacheComponents()
     {

@@ -11,8 +11,7 @@ public class Bullet : PoolObject
     [SerializeField] private float _lifeTime = 3f;
     [SerializeField] private Transform _returnPoint;
     private Transform _target; // 추적할 몬스터 타겟
-
-    // 💡 이 함수가 있어야 AttackTurret.cs의 43번째 줄 에러가 사라집니다!
+    
     public void SetDamage(float newDamage)
     {
         // 터렛에서 넘겨준 버프 데미지가 정상적인 양수일 때만 덮어씁니다.
@@ -101,9 +100,5 @@ public class Bullet : PoolObject
     protected virtual void DamageLogic(IDamageable damageable)
     {
         damageable.TakeDamage(bulletDamage);
-    }
-    protected virtual void DamageLogic(IDamageable damageable, float finalDamage)
-    {
-        damageable.TakeDamage(finalDamage);
     }
 }

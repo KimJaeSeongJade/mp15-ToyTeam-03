@@ -13,7 +13,7 @@ public enum TurretType
 }
 
 [Serializable]
-public class TurretCompination
+public class TurretCombination
 {
     public TurretType ExistType;
     public TurretType AddedType;
@@ -24,7 +24,7 @@ public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
 {
     [SerializeField] private List <BaseTurret> _baseTurretlist;
 
-    [SerializeField] private List<TurretCompination> _combinationsViewer;
+    [SerializeField] private List<TurretCombination> _combinationsViewer;
 
     [SerializeField] private Dictionary<(TurretType, TurretType), BaseTurret> _lookup = new();
     private float[] _buildReadyAt;
@@ -34,11 +34,11 @@ public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
         base.Awake();
         _buildReadyAt = new float[_baseTurretlist.Count];
 
-        foreach(TurretCompination compination in _combinationsViewer)
+        foreach(TurretCombination combination in _combinationsViewer)
         {
-            if (compination == null || compination.ResultTurret == null) continue;
+            if (combination == null || combination.ResultTurret == null) continue;
 
-            var key = (compination.ExistType, compination.AddedType);
+            var key = (combination.ExistType, combination.AddedType);
 
             if(_lookup.ContainsKey(key))
             {
@@ -46,7 +46,7 @@ public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
                 continue;
             }
 
-            _lookup.Add(key, compination.ResultTurret);
+            _lookup.Add(key, combination.ResultTurret);
         }
     }
 
@@ -72,6 +72,7 @@ public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
 
     public BaseTurret GetSelectedTurret(int num)
     {
-        return _baseTurretlist.Count >= num ? null : _baseTurretlist[num];
+        Debug.Log( _baseTurretlist.Count);
+        return num >= _baseTurretlist.Count ? null : _baseTurretlist[num];
     }
 }
