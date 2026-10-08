@@ -15,9 +15,46 @@ public class MonsterGroup : MonoBehaviour
     }
 
     public List<MonsterData> monsterDatas;
-    private ObjectPool<BaseEnemy> monsterPool;
+
+    private int _listNum;
+    private int _listCount;
+
+    public IEnumerable<(BaseEnemy Prefab, int Count)> GetInitMonsterDataPools() 
+    {
+        foreach (MonsterData monsterData in monsterDatas)
+        {
+            yield return (monsterData.monster, monsterData.count);
+        }
+    }
+
+    public void ResetSpwan()
+    {
+        _listNum = 0;
+        _listCount = 0;
+    }
+
+    public bool TryGetNext(out MonsterData resultData)
+    {
+        while (_listNum < monsterDatas.Count)
+        {
+            resultData = monsterDatas[_listNum];
+            if (_listCount < resultData.count)
+            {
+                _listCount++;
+                return true;
+            }
+            _listNum++;
+            _listCount = 0;
+        }
+        
+        resultData = default;
+        return false;
+    }
+
+
+    /*private ObjectPool<BaseEnemy> monsterPool;
     private bool _isMake;
-    
+
     private void Awake()
     {
         for (int i = 0; i < monsterDatas.Count; i++)
@@ -29,9 +66,9 @@ public class MonsterGroup : MonoBehaviour
                 _monsterPrabas =>
                 {
                     _monsterPrabas.InitData();
-                }); 
+                });
         }
-        
+
         //monsterDatas = new List<MonsterData>();
         //WaveMonster();
     }
@@ -51,11 +88,11 @@ public class MonsterGroup : MonoBehaviour
                 {
                     Debug.Log($"monsterDatas.Count: {monsterDatas.Count}, " +
                               $"monsterDatas[{i}].count: {monsterDatas[i].count}" +
-                              $"monsterDatas[{i}].waypointNum: {monsterDatas[i].waypointNum}");  
-                }  
+                              $"monsterDatas[{i}].waypointNum: {monsterDatas[i].waypointNum}");
+                }
             }
             break;
-        }*/
+        }#1#
     }
 
     private void Update()
@@ -64,5 +101,5 @@ public class MonsterGroup : MonoBehaviour
         {
             monsterPool.Pop();
         }
-    }
+    }*/
 }
