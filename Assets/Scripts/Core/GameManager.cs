@@ -30,6 +30,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField] private Image _buildCooldownImage;
     [SerializeField] private TextMeshProUGUI _buildCooldownText;
 
+    [SerializeField] private Image _cursorImage;
+    [SerializeField] private Sprite[]  _cursorSprites;
+    [SerializeField] private GameObject _crosshair;
+    
     [Serializable]
     private struct TurretInfo
     {
@@ -55,20 +59,13 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     
     public int _gold => _wallet.Gold;
-
     
     // 입력받은 슬롯 넘버
     
-    
-
     private bool IsPause;
     private bool canPause;  // 일시정지 위한 게임 시작 여부 검증
     
     //private bool IsTitle;
-
-    
-    
-    
     
     // 웨이브 에서 시작했는지 확인 용도 
     // 웨이브 종료시 받아와야해서 set으로 조건 추가할지 결정
@@ -87,7 +84,6 @@ public class GameManager : SingletonBehaviour<GameManager>
         //if (currentState != null)
         BindPlayerModeUI();
     }
-
     
     private void Start()
     {
@@ -161,7 +157,25 @@ public class GameManager : SingletonBehaviour<GameManager>
         PlayerStatus.OnPlayerModeChanged += SetPlayerModeUI;
         PlayerStatus.OnSkillCooldownStarted += SetPlayerSkillCooldownUI;
         PlayerStatus.OnBuildCooldownStarted += SetPlayerBuildCooldownUI;
+        PlayerStatus.OnCursorChanged += SetCrosshair;
     }
+
+    private void SetCrosshair(CrosshairType crosshairType)
+    {   // -1 : 기본 / 0 : 공격 / 1 : 건설
+        switch (crosshairType)
+        {
+            case CrosshairType.Attack:
+                _cursorImage.sprite =  _cursorSprites[(int)CrosshairType.Attack];
+                break;
+            case CrosshairType.Build:
+                _cursorImage.sprite = _cursorSprites[(int)CrosshairType.Build];
+                break;
+            case CrosshairType.Default:
+                _cursorImage.sprite = _cursorSprites[(int)CrosshairType.Default];
+                break;
+        }
+    }
+    
 
     private void SetPlayerModeUI(bool isAttackMode)
     {
@@ -273,15 +287,16 @@ public class GameManager : SingletonBehaviour<GameManager>
     // 진행
     public void Run()
     {
-        LockCursor();           // 마우스 커서 잠금
         Time.timeScale = 1;     // 게임 시간 on
+        LockCursor();           // 마우스 커서 잠금
     }
 
     // 일시정지
     public void Pause()
     {
-        UnlockCursor();
         Time.timeScale = 0;
+        UnlockCursor();
+        _crosshair.SetActive(false);
     }
     
     // 게임 리셋
@@ -309,28 +324,31 @@ public class GameManager : SingletonBehaviour<GameManager>
     // 일시정지 상태에서 게임 재개
     public void ResumeGame()
     {
-        _pausePanel.gameObject.SetActive(false);
-        IsPause = false;
         Run();
+        LockCursor();
+        _pausePanel.gameObject.SetActive(false);
+        _crosshair.SetActive(true);
+        IsPause = false;
     }
     
     // 게임 일시정지
     private void PauseGame()
     {
+        Pause();
+        UnlockCursor();
+        _crosshair.gameObject.SetActive(false);
         _pausePanel.SetActive(true);
         IsPause = true;
-        Pause();
     }
+
     private void CacheComponents()
     {
         _wallet = PlayerStatus.GetComponent<PlayerWallet>();
-
         StartCoroutine(TurretInitRoutine());
     }
 
     private void Init()
     {
-
         // 판넬 켜고
         _startPanel.gameObject.SetActive(true);
         // 일시정지 판넬은 꺼진 상태
@@ -345,7 +363,14 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+       // StartCoroutine(UpdateCursorRoutine());
     }
+
+    // private IEnumerator UpdateCursorRoutine()
+    // {
+    //     yield return new WaitUntil(() => !IsPause);
+    //
+    // }
     private void UnlockCursor()
     {
         Cursor.lockState = CursorLockMode.Confined;
