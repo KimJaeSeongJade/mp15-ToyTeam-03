@@ -14,9 +14,10 @@ public class AttackMonster : BaseEnemy
     private bool _isTurretInSight;
     private bool _isAttacking;
 
-    private void Awake()
+    protected override void Awake()
     {
-        CacheComponet();
+        base.Awake();
+        CaCheComponents();
     }
 
     private void Update()
@@ -24,7 +25,7 @@ public class AttackMonster : BaseEnemy
         Attack();
     }
 
-    private void OnTriggerEnter(Collider other) // 범위는 임시 후 변경 예정
+    private void OnTriggerEnter(Collider other)
     {
         if ((_TurretMask.value & (1 << other.gameObject.layer)) != 0)
         {
@@ -52,7 +53,7 @@ public class AttackMonster : BaseEnemy
             {
                 _isAttacking = true;
                 Debug.Log("공격");
-                IDamageable damageable = _targetTurret.GetComponent<IDamageable>();
+                IDamageableturret damageable = _targetTurret.GetComponent<IDamageableturret>();
                 if (damageable != null)
                 {
                     damageable.TakeDamage(_damage);
@@ -77,8 +78,9 @@ public class AttackMonster : BaseEnemy
         _isAttacking = false;
     }
 
-    private void CacheComponet()
+    protected override void CaCheComponents()
     {
+        base.CaCheComponents();
         _toTarget = GetComponent<MonsterMove>();
     }
 }
