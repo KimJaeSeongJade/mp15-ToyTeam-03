@@ -16,11 +16,7 @@ public class MonsterSpawner : MonoBehaviour
     private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     private BaseEnemy _monster;
 
-
-    private void Awake()
-    {
-        PortaleffectTure();
-    }
+    
 
     private void Start() => Init();
 

@@ -31,6 +31,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     // 웨이브 시작 / 종료 액션처리
     // delegate
+    public static event Action OnCamActivate;
     public event Action OnWaveStarted;
     public event Action OnWaveEnded;
     public event Action<int> OnWaveChanged;
@@ -87,12 +88,17 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private IEnumerator PrepareNextWave()
     {
         _remainingTime = _prepareTime;
-
+        bool _isSwitcher =  false;
         while (_remainingTime > 0f)
         {
             OnPrepareTimeChanged?.Invoke(_remainingTime);
-            _remainingTime -= Time.deltaTime;
-            yield return null;
+                        if (_remainingTime < 8f && _isSwitcher == false)
+                        {
+                            _isSwitcher = true;
+                            OnCamActivate?.Invoke();
+                        }
+                        _remainingTime -= Time.deltaTime;
+                        yield return null;
         }
         StartWave();
     }
@@ -114,7 +120,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         // MonsterSpawner에게 현재 웨이브 시작 요청
         // TODO 여기 호출 부 수정
-        _monsterSpawner.SpawnWave(1, AddMonster, SetSpawnFinished);
+        _monsterSpawner.SpawnWave(_currentWave+1, AddMonster, SetSpawnFinished);
         
         
         _currentWave++; // 웨이브 증가
