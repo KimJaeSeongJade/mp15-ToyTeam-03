@@ -53,6 +53,7 @@ public class MonsterHealth : MonoBehaviour, IDamageable
             Cacheenemy.ReturnToPool();
         }
     }
+    
     public void SlowSpeed(float speed)
     {
         if (!_isSlow)
