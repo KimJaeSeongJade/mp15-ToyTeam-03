@@ -9,15 +9,23 @@ public class TutorialBuildPointGuide : MonoBehaviour
     private Camera _camera;
     private GameObject _marker;
     private LineRenderer _arrow;
+    private LineRenderer _ring;
     private Material _material;
     private TMP_Text _label;
     private TMP_Text _direction;
     private Canvas _canvas;
     private bool _visible;
+    private string _destinationName;
 
     public void Initialize(BuildPoint point, Transform player, TutorialUI ui)
     {
-        _point = point.transform;
+        Initialize(point.transform, player, ui, "건설 지점", true);
+    }
+
+    public void Initialize(Transform point, Transform player, TutorialUI ui, string destinationName, bool showRing)
+    {
+        _point = point;
+        _destinationName = destinationName;
         _player = player;
         _camera = Camera.main;
         _canvas = ui.GetComponentInParent<Canvas>();
@@ -26,6 +34,8 @@ public class TutorialBuildPointGuide : MonoBehaviour
         _material = new Material(Shader.Find("Sprites/Default"));
         Color color = new Color(1f, 0.8f, 0.15f);
         LineRenderer ring = CreateLine("PlacementRing", color);
+        _ring = ring;
+        ring.gameObject.SetActive(showRing);
         ring.loop = true;
         ring.positionCount = 64;
         for (int i = 0; i < 64; i++)
@@ -80,6 +90,18 @@ public class TutorialBuildPointGuide : MonoBehaviour
         if (_direction != null) _direction.gameObject.SetActive(false);
     }
 
+    public void Track(Transform point, string destinationName = null)
+    {
+        _point = point;
+        if (destinationName != null) _destinationName = destinationName;
+        if (_ring == null || point == null) return;
+        for (int i = 0; i < _ring.positionCount; i++)
+        {
+            float angle = i * Mathf.PI * 2f / _ring.positionCount;
+            _ring.SetPosition(i, point.position + new Vector3(Mathf.Cos(angle) * 1.4f, 0.15f, Mathf.Sin(angle) * 1.4f));
+        }
+    }
+
     private void LateUpdate()
     {
         if (!_visible || _camera == null || _point == null) return;
@@ -112,7 +134,7 @@ public class TutorialBuildPointGuide : MonoBehaviour
         Camera uiCamera = _canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : _canvas.worldCamera;
         RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)_canvas.transform, position, uiCamera, out Vector2 local);
         _label.rectTransform.localPosition = local + (offscreen ? Vector2.down * 48f : Vector2.zero);
-        _label.text = $"건설 지점 · {Vector3.Distance(_player.position, _point.position):0} m";
+        _label.text = $"{_destinationName} · {Vector3.Distance(_player.position, _point.position):0} m";
         _direction.gameObject.SetActive(offscreen);
         _direction.rectTransform.localPosition = local;
         _direction.rectTransform.localRotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg);

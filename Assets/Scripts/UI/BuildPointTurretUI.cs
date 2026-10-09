@@ -1,5 +1,7 @@
 using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // 플레이어의 레이 판정에서 전달한 결과를 표시하는 재사용 UI.
 public class BuildPointTurretUI : MonoBehaviour
@@ -12,24 +14,38 @@ public class BuildPointTurretUI : MonoBehaviour
     [Header("빌드포인트 위 위치와 크기 (월드 단위)")]
     [SerializeField] private Vector3 _worldOffset = new Vector3(0f, 3f, 0f);
     [SerializeField, Min(0.001f)] private float _worldScale = 0.005f;
+    [SerializeField] private Shader _backgroundOverlayShader;
+    [SerializeField] private Shader _textOverlayShader;
 
     private RectTransform _rect;
     private Canvas _canvas;
     private Camera _worldCamera;
     private Vector3 _worldPosition;
     private bool _isTracking;
+    private Graphic[] _graphics;
+    private readonly Dictionary<Graphic, Material> _overlayMaterials = new Dictionary<Graphic, Material>();
 
     private void Awake()
     {
         _rect = GetComponent<RectTransform>();
         _canvas = GetComponent<Canvas>();
-        if (_canvas != null) _canvas.renderMode = RenderMode.WorldSpace;
+        if (_canvas != null)
+        {
+            _canvas.renderMode = RenderMode.WorldSpace;
+            _canvas.overrideSorting = true;
+            _canvas.sortingOrder = 32760;
+        }
+        _graphics = GetComponentsInChildren<Graphic>(true);
     }
 
     // Cinemachine 등 카메라 이동이 적용된 뒤 화면 위치를 갱신한다.
     private void LateUpdate()
     {
-        if (_isTracking) UpdatePosition();
+        if (_isTracking)
+        {
+            UpdatePosition();
+            EnsureOverlayMaterials();
+        }
     }
 
     public void Show(BaseTurret resultTurret, bool canBuild, bool canSell, int sellGold,
@@ -48,6 +64,36 @@ public class BuildPointTurretUI : MonoBehaviour
             ? "조합 불가" : canBuild ? "건설 가능" : "건설 불가 (골드 부족 또는 쿨타임)");
         if (!gameObject.activeSelf) gameObject.SetActive(true);
         UpdatePosition();
+        EnsureOverlayMaterials();
+    }
+
+    private void EnsureOverlayMaterials()
+    {
+        if (_graphics == null) return;
+        foreach (Graphic graphic in _graphics)
+        {
+            TMP_Text text = graphic as TMP_Text;
+            Material source = text != null ? text.fontSharedMaterial : graphic.material;
+            Shader shader = text != null ? _textOverlayShader : _backgroundOverlayShader;
+            if (source == null || shader == null) continue;
+            if (_overlayMaterials.TryGetValue(graphic, out Material owned))
+            {
+                if (source == owned) continue;
+                Destroy(owned);
+            }
+            // 폰트 교체 후에도 아틀라스를 유지하고 공유 에셋의 재질은 변경하지 않는다.
+            Material material = new Material(source) { shader = shader, renderQueue = 4000 };
+            _overlayMaterials[graphic] = material;
+            if (text != null) text.fontSharedMaterial = material;
+            else graphic.material = material;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        foreach (Material material in _overlayMaterials.Values)
+            if (material != null) Destroy(material);
+        _overlayMaterials.Clear();
     }
 
     public void Hide()

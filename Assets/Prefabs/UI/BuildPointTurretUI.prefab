@@ -101,6 +101,8 @@ MonoBehaviour:
   _buildStateText: {fileID: 6003}
   _worldOffset: {x: 0, y: 1.25, z: 0}
   _worldScale: 0.005
+  _backgroundOverlayShader: {fileID: 4800000, guid: 9b9e52ce6505480ea013063156b85bfb, type: 3}
+  _textOverlayShader: {fileID: 4800000, guid: dd89cf5b9246416f84610a006f916af7, type: 3}
 --- !u!223 &1005
 Canvas:
   m_ObjectHideFlags: 0
