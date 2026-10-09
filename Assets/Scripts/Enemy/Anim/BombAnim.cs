@@ -42,7 +42,7 @@ public class BombAnim : MonoBehaviour
         }
     }
 
-    private void Return()
+    private void Return() // 공격 모션 후 애니메이션 클립에서 이벤트로 작동
     {
         _return.ReturnToPool();
     }
@@ -63,8 +63,6 @@ public class BombAnim : MonoBehaviour
         IsSight = false;
         _isBomb = false;
 
-        //StopAllCoroutines();
-
         _animator.SetBool("IsBomb", false);
         _animator.SetBool("IsMove", false);
     }
@@ -79,8 +77,6 @@ public class BombAnim : MonoBehaviour
         }
         if (_animator != null)
         {
-            _animator.Rebind();
-            _animator.Update(0f);
 
             _animator.SetBool("IsBomb", false);
             _animator.SetBool("IsMove", false);

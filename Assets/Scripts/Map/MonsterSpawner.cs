@@ -76,7 +76,20 @@ public class MonsterSpawner : MonoBehaviour
 
             _monster = _monsterGroupPool.Pop(resultData.monster);
             _monster.transform.SetPositionAndRotation(targetPath.transform.position, transform.rotation);
-            _monster.GetComponent<MonsterMove>().Initialize(targetPath);
+
+            BossMove _boss = _monster.GetComponent<BossMove>();
+            if (_boss != null)
+            {
+                _boss.Initialize(targetPath);
+            }
+            else
+            {
+                MonsterMove _normalMon = _monster.GetComponent<MonsterMove>();
+                if (_normalMon != null)
+                {
+                    _normalMon.Initialize(targetPath);
+                }
+            }
             onMonsterSpawn?.Invoke(_monster);
             yield return _wait;
 
