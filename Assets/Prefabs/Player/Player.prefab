@@ -12659,10 +12659,6 @@ MonoBehaviour:
   _exitBuildKey: 101
   _dashkey: 304
   _jumpKey: 32
-  _primaryKey: 49
-  _subKey: 50
-  _thirdKey: 51
-  _forthKey: 52
 --- !u!114 &6619005142672213757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12716,6 +12712,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _rayDistance: 5
+  _turretInfoPrefab: {fileID: 1004, guid: f23ae74e10204b8f9c06a81cd583124a, type: 3}
 --- !u!114 &7349751491184764522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12734,6 +12731,7 @@ MonoBehaviour:
   _minPitch: -60
   _maxPitch: 60
   _pitchCameraDistanceScale: 0.15
+  _aimDistance: 50
   _groundStickSpeed: 2
 --- !u!114 &7195687505308062913
 MonoBehaviour:
