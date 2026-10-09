@@ -21,6 +21,7 @@ public class GoldDrop : PoolObject
     private PlayerWallet _playerWallet;
     private bool _isDelivering;
     private bool _isDropping;
+    public bool IsAvailableForResonance => isActiveAndEnabled && !_isDelivering && !_isDropping;
 
     private void Update()
     {

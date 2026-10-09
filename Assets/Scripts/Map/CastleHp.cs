@@ -14,6 +14,12 @@ public class CastleHp : MonoBehaviour,ICastleInterface
     }
     
     public event Action <float,float> OnCastleHealthChanged;
+    public void Heal(float amount)
+    {
+        if (_hp <= 0 || amount <= 0) return;
+        _hp = Mathf.Min(_maxHp, _hp + amount);
+        OnCastleHealthChanged?.Invoke(_hp, _maxHp);
+    }
     
 
     public void CastleTakeDamage(float damage)

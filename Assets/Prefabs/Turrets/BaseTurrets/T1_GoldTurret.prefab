@@ -165,13 +165,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 909d7ce4a885a9d4f9bbfa949a9212ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
+  _info: 
   _preview: {fileID: 7693613485966695973}
   _maxHp: 500
   _goldCost: 200
   _turretType: 3
   _baseDamage: 10
-  _goldPrefab: {fileID: 0}
-  _spawnPoint: {fileID: 0}
+  _buildCooldown: 1
+  _goldPrefab: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}
+  _spawnPoint: {fileID: 4608280963793158992}
   _productionCoolTime: 3
 --- !u!114 &7693613485966695973
 MonoBehaviour:
