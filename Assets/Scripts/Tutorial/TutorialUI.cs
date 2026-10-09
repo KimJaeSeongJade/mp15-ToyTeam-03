@@ -11,6 +11,8 @@ public class TutorialUI : MonoBehaviour
     public TMP_Text Message;
     public TMP_Text Progress;
     public TMP_Text Gold;
+    [Tooltip("크로스헤어 오브젝트. 비어 있으면 기존 HUD의 Crosshair를 자동 연결합니다.")]
+    public GameObject Crosshair;
     public RectTransform[] FocusTargets;
     public RectTransform Highlight;
     public Image HighlightImage;
@@ -22,6 +24,11 @@ public class TutorialUI : MonoBehaviour
     [Header("안내문 기본 위치")]
     [Tooltip("하이라이트 대상이 없을 때의 위치. 캔버스 중앙 기준 UI 좌표입니다. X는 오른쪽, Y는 위쪽입니다.")]
     public Vector2 DefaultInstructionPosition = new Vector2(0f, 216f);
+    [Header("새 안내 표시 효과")]
+    public bool AnimateInstructions = true;
+    [Min(0.01f)] public float InstructionAnimationDuration = 0.32f;
+    [Range(0.8f, 1f)] public float InstructionStartScale = 0.94f;
+    [Range(1f, 1.2f)] public float InstructionPeakScale = 1.06f;
 
     private RectTransform _canvasRect;
     private RectTransform _target;
@@ -35,6 +42,10 @@ public class TutorialUI : MonoBehaviour
     private RectTransform _messageBox;
     private TMP_FontAsset _tutorialFont;
     private Vector2 _lastCanvasSize;
+    private Vector3 _instructionBaseScale;
+    private float _instructionAnimationRemaining;
+    private object _lastPresentation;
+    private string _lastInstructionMessage;
 
     // 원본 프리팹은 수정하지 않고 이 씬에 있는 기존 HUD에만 연결한다.
     public void BindExistingHUD(GameManager game)
@@ -51,6 +62,7 @@ public class TutorialUI : MonoBehaviour
             canvas.enabled = true;
         }
         Transform root = game.transform;
+        if (Crosshair == null) Crosshair = Find(root, "Crosshair")?.gameObject;
         foreach (TMP_Text text in root.GetComponentsInChildren<TMP_Text>(true)) ApplyTutorialFont(text);
         foreach (TMP_Text text in game.PlayerStatus.GetComponentsInChildren<TMP_Text>(true)) ApplyTutorialFont(text);
         SetActive(root, "PausePanel", false);
@@ -93,8 +105,9 @@ public class TutorialUI : MonoBehaviour
         _canvasRect = (RectTransform)GetComponentInParent<Canvas>().transform;
         Message.transform.parent.gameObject.SetActive(false);
         _messageBox = Message.rectTransform.parent as RectTransform;
+        _instructionBaseScale = _messageBox.localScale;
         CreateTutorialFont();
-        Message.alignment = TextAlignmentOptions.MidlineLeft;
+        Message.alignment = TextAlignmentOptions.Midline;
         Message.enableWordWrapping = false;
         Message.enableAutoSizing = true;
         Message.fontSizeMin = 18f;
@@ -167,10 +180,23 @@ public class TutorialUI : MonoBehaviour
         if (!visible) _spotlightRoot.gameObject.SetActive(false);
     }
 
-    public void Show(string message, TutorialFocus focus, string progress, RectTransform focusOverride = null)
+    public void Show(string message, TutorialFocus focus, string progress, RectTransform focusOverride = null,
+        object presentationKey = null)
     {
-        Message.text = message.Replace("\r", " ").Replace("\n", " ");
+        string instruction = (message ?? "").Replace("\r", " ").Replace("\n", " ");
+        // 같은 안내의 횟수·수치 갱신에는 재생하지 않고 안내가 바뀔 때만 재생한다.
+        bool newInstruction = presentationKey != null
+            ? !ReferenceEquals(_lastPresentation, presentationKey)
+            : _lastInstructionMessage != instruction;
+        _lastPresentation = presentationKey;
+        _lastInstructionMessage = instruction;
+        Message.text = instruction;
         ResizeMessageBox();
+        if (newInstruction && AnimateInstructions)
+        {
+            _instructionAnimationRemaining = Mathf.Max(0.01f, InstructionAnimationDuration);
+            _messageBox.localScale = _instructionBaseScale * InstructionStartScale;
+        }
         SetSpotlight(false);
         Progress.text = progress;
         if (_waveText != null) _waveText.text = progress;
@@ -190,8 +216,13 @@ public class TutorialUI : MonoBehaviour
     }
 
     public void SetGold(int amount) { if (Gold != null) Gold.text = amount.ToString(); }
+    public void SetCrosshairVisible(bool visible)
+    {
+        if (Crosshair != null) Crosshair.SetActive(visible);
+    }
     private void LateUpdate()
     {
+        UpdateInstructionAnimation();
         if (_lastCanvasSize != _canvasRect.rect.size)
         {
             _lastCanvasSize = _canvasRect.rect.size;
@@ -231,10 +262,32 @@ public class TutorialUI : MonoBehaviour
         HighlightImage.color = color;
     }
 
+    private void UpdateInstructionAnimation()
+    {
+        if (!AnimateInstructions || !_messageBox.gameObject.activeInHierarchy || _instructionAnimationRemaining <= 0f)
+        {
+            _instructionAnimationRemaining = 0f;
+            _messageBox.localScale = _instructionBaseScale;
+            return;
+        }
+        float duration = Mathf.Max(0.01f, InstructionAnimationDuration);
+        _instructionAnimationRemaining = Mathf.Max(0f, _instructionAnimationRemaining - Time.unscaledDeltaTime);
+        float t = 1f - Mathf.Clamp01(_instructionAnimationRemaining / duration);
+        // 긴 한 줄 안내가 화면 너비를 넘지 않는 범위에서 확대한다.
+        float available = (_canvasRect.rect.width - 48f)
+            / Mathf.Max(1f, _messageBox.sizeDelta.x * Mathf.Abs(_instructionBaseScale.x));
+        float peak = Mathf.Min(InstructionPeakScale, Mathf.Max(1f, available));
+        float scale = t < 0.45f
+            ? Mathf.SmoothStep(InstructionStartScale, peak, t / 0.45f)
+            : Mathf.SmoothStep(peak, 1f, (t - 0.45f) / 0.55f);
+        _messageBox.localScale = _instructionBaseScale * scale;
+    }
+
     private void PositionMessageBox(Vector2 targetMin, Vector2 targetMax)
     {
         Rect canvas = _canvasRect.rect;
-        Vector2 half = _messageBox.sizeDelta * 0.5f;
+        Vector2 half = Vector2.Scale(_messageBox.sizeDelta,
+            new Vector2(Mathf.Abs(_messageBox.localScale.x), Mathf.Abs(_messageBox.localScale.y))) * 0.5f;
         const float gap = 24f;
         const float margin = 24f;
         float centerX = (targetMin.x + targetMax.x) * 0.5f;
@@ -281,6 +334,10 @@ public class TutorialUI : MonoBehaviour
 
     public void HideExplanation()
     {
+        _instructionAnimationRemaining = 0f;
+        _messageBox.localScale = _instructionBaseScale;
+        _lastPresentation = null;
+        _lastInstructionMessage = null;
         _target = null;
         SetSpotlight(false);
         Highlight.gameObject.SetActive(false);

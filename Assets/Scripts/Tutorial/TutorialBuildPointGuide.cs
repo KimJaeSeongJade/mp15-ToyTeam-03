@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using System;
 
@@ -9,7 +8,7 @@ public class TutorialGuideStyle
     public GameObject WorldArrowPrefab;
     [Tooltip("빌드포인트 바닥의 링 / 이펙트 프리팹. 몬스터 안내에는 사용하지 않습니다.")]
     public GameObject WorldRingPrefab;
-    [Tooltip("TutorialGuideScreenUI가 루트에 붙은 UI 프리팹. 기존 안내 Canvas 아래 생성합니다.")]
+    [Tooltip("TutorialGuideScreenUI가 루트에 붙은 UI 프리팹. Add Component → UI → Screen Target Guide View에서 추가합니다.")]
     public TutorialGuideScreenUI ScreenGuidePrefab;
     public Vector3 WorldArrowOffset = new Vector3(0f, 3.8f, 0f);
     public Vector3 WorldRingOffset = new Vector3(0f, 0.15f, 0f);
@@ -35,16 +34,13 @@ public class TutorialBuildPointGuide : MonoBehaviour
     private LineRenderer _arrow;
     private LineRenderer _ring;
     private Material _material;
-    private TMP_Text _label;
-    private TMP_Text _direction;
-    private Canvas _canvas;
     private bool _visible;
     private string _destinationName;
     private TutorialGuideStyle _style;
     private Transform _arrowInstance;
     private Transform _ringInstance;
     private Quaternion _arrowRotation;
-    private TutorialGuideScreenUI _screenGuide;
+    private ScreenTargetGuide _screenTracker;
 
     public void Initialize(BuildPoint point, Transform player, TutorialUI ui)
     {
@@ -58,7 +54,6 @@ public class TutorialBuildPointGuide : MonoBehaviour
         _destinationName = destinationName;
         _player = player;
         _camera = Camera.main;
-        _canvas = ui.GetComponentInParent<Canvas>();
         _style = style ?? new TutorialGuideStyle();
         _marker = new GameObject("TutorialBuildPointMarker");
         _marker.transform.SetParent(transform, false);
@@ -84,19 +79,19 @@ public class TutorialBuildPointGuide : MonoBehaviour
             _arrow = CreateLine("PlacementArrow", color);
             _arrow.positionCount = 5;
         }
-        if (_style.ScreenGuidePrefab != null)
-        {
-            _screenGuide = Instantiate(_style.ScreenGuidePrefab, _canvas.transform, false);
-            _screenGuide.Initialize();
-        }
-        else
-        {
-            _label = CreateText("BuildPointDestination", ui.Message.font, 24f, color);
-            _label.rectTransform.sizeDelta = new Vector2(300f, 40f);
-            _direction = CreateText("BuildPointDirection", ui.Message.font, 58f, color);
-            _direction.text = ">";
-            _direction.rectTransform.sizeDelta = new Vector2(70f, 70f);
-        }
+        GameObject screenRoot = new GameObject("TutorialScreenGuide");
+        screenRoot.transform.SetParent(transform, false);
+        _screenTracker = screenRoot.AddComponent<ScreenTargetGuide>();
+        _screenTracker.TargetCanvas = ui.GetComponentInParent<Canvas>();
+        _screenTracker.WorldCamera = _camera;
+        _screenTracker.Observer = _player;
+        _screenTracker.ViewPrefab = _style.ScreenGuidePrefab;
+        _screenTracker.Font = ui.Message.font;
+        _screenTracker.DefaultColor = color;
+        _screenTracker.TargetOffset = _style.ScreenAnchorOffset;
+        _screenTracker.LabelFormat = _style.LabelFormat;
+        _screenTracker.DistanceFormat = _style.DistanceFormat;
+        _screenTracker.SetTarget(point, destinationName);
         UpdateRing();
         Show(false);
     }
@@ -125,33 +120,18 @@ public class TutorialBuildPointGuide : MonoBehaviour
         return line;
     }
 
-    private TMP_Text CreateText(string name, TMP_FontAsset font, float size, Color color)
-    {
-        GameObject child = new GameObject(name, typeof(RectTransform));
-        child.transform.SetParent(_canvas.transform, false);
-        TMP_Text text = child.AddComponent<TextMeshProUGUI>();
-        text.font = font;
-        text.fontSize = size;
-        text.color = color;
-        text.alignment = TextAlignmentOptions.Center;
-        text.raycastTarget = false;
-        text.rectTransform.anchorMin = text.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-        return text;
-    }
-
     public void Show(bool visible)
     {
         _visible = visible;
         if (_marker != null) _marker.SetActive(visible);
-        if (_label != null) _label.gameObject.SetActive(visible);
-        if (_direction != null) _direction.gameObject.SetActive(false);
-        if (_screenGuide != null) _screenGuide.gameObject.SetActive(visible);
+        if (_screenTracker != null) _screenTracker.Show(visible);
     }
 
     public void Track(Transform point, string destinationName = null)
     {
         _point = point;
         if (destinationName != null) _destinationName = destinationName;
+        if (_screenTracker != null) _screenTracker.SetTarget(point, _destinationName);
         UpdateRing();
     }
 
@@ -189,48 +169,11 @@ public class TutorialBuildPointGuide : MonoBehaviour
         }
         UpdateRing();
 
-        Vector3 screen = _camera.WorldToScreenPoint(_point.position + _style.ScreenAnchorOffset);
-        Vector2 center = new Vector2(Screen.width, Screen.height) * 0.5f;
-        Vector2 delta = (Vector2)screen - center;
-        if (screen.z < 0f) delta = -delta;
-        float marginX = Mathf.Min(160f, Screen.width * 0.2f);
-        float marginY = Mathf.Min(120f, Screen.height * 0.2f);
-        bool offscreen = screen.z <= 0f || screen.x < marginX || screen.x > Screen.width - marginX
-            || screen.y < marginY || screen.y > Screen.height - marginY;
-        Vector2 position = screen;
-        if (offscreen)
-        {
-            if (delta.sqrMagnitude < 0.001f) delta = Vector2.down;
-            Vector2 extent = center - new Vector2(marginX, marginY);
-            float factor = Mathf.Min(extent.x / Mathf.Max(Mathf.Abs(delta.x), 0.001f),
-                extent.y / Mathf.Max(Mathf.Abs(delta.y), 0.001f));
-            position = center + delta * factor;
-        }
-        Camera uiCamera = _canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : _canvas.worldCamera;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)_canvas.transform, position, uiCamera, out Vector2 local);
-        string distance = Vector3.Distance(_player.position, _point.position).ToString("0");
-        string label = (_style.LabelFormat ?? "").Replace("{이름}", _destinationName).Replace("{거리}", distance);
-        float angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
-        if (_screenGuide != null)
-        {
-            string distanceText = (_style.DistanceFormat ?? "").Replace("{거리}", distance);
-            _screenGuide.UpdateDisplay(local, offscreen, angle, label, distanceText);
-        }
-        else
-        {
-            _label.rectTransform.localPosition = local + (offscreen ? Vector2.down * 48f : Vector2.zero);
-            _label.text = label;
-            _direction.gameObject.SetActive(offscreen);
-            _direction.rectTransform.localPosition = local;
-            _direction.rectTransform.localRotation = Quaternion.Euler(0f, 0f, angle);
-        }
     }
 
     private void OnDestroy()
     {
-        if (_label != null) Destroy(_label.gameObject);
-        if (_direction != null) Destroy(_direction.gameObject);
-        if (_screenGuide != null) Destroy(_screenGuide.gameObject);
+        if (_screenTracker != null) Destroy(_screenTracker.gameObject);
         if (_marker != null) Destroy(_marker);
         if (_material != null) Destroy(_material);
     }

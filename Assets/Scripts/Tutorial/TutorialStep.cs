@@ -8,9 +8,13 @@ public abstract class TutorialStep
 {
     public bool Enabled = true;
     public string Name;
+    [Tooltip("이 단계에서 화면 중앙의 크로스헤어를 표시합니다.")]
+    public bool ShowCrosshair = true;
     public TutorialPresentation Text = new TutorialPresentation();
     public abstract IEnumerator Execute(TutorialContext context);
 }
+
+public enum TutorialCrosshairVisibility { InheritStep, Show, Hide }
 
 [Serializable]
 public class TutorialPresentation
@@ -20,11 +24,15 @@ public class TutorialPresentation
     public TutorialFocus Focus;
     [Tooltip("지정하면 기본 HUD 강조 대상 대신 사용합니다.")]
     public RectTransform FocusOverride;
+    [Tooltip("이 안내 문구를 표시할 때의 크로스헤어 상태: 단계 설정 유지 / 표시 / 숨김")]
+    public TutorialCrosshairVisibility Crosshair;
 
     public void Show(TutorialContext context, int current = 0, int target = 0, string key = "", float seconds = 0f)
     {
+        context.UI.SetCrosshairVisible(Crosshair == TutorialCrosshairVisibility.InheritStep
+            ? context.StepCrosshairVisible : Crosshair == TutorialCrosshairVisibility.Show);
         context.UI.Show(context.Format(Message, current, target, key, seconds), Focus,
-            context.Format(Title, current, target, key, seconds), FocusOverride);
+            context.Format(Title, current, target, key, seconds), FocusOverride, this);
     }
 }
 

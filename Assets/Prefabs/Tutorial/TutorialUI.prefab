@@ -551,6 +551,7 @@ MonoBehaviour:
   Message: {fileID: 2793424364769974904}
   Progress: {fileID: 886459621242925436}
   Gold: {fileID: 7219848538071566800}
+  Crosshair: {fileID: 0}
   FocusTargets:
   - {fileID: 0}
   - {fileID: 6760909086202882729}
@@ -567,6 +568,10 @@ MonoBehaviour:
   SpotlightDarkness: 0.4
   TutorialFontSource: {fileID: 12800000, guid: a5aadf8e1a6f3a047b35ffd9566ff00d, type: 3}
   DefaultInstructionPosition: {x: 0, y: -240}
+  AnimateInstructions: 1
+  InstructionAnimationDuration: 0.5
+  InstructionStartScale: 0.9
+  InstructionPeakScale: 1.15
 --- !u!1 &2014860668224443350
 GameObject:
   m_ObjectHideFlags: 0

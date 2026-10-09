@@ -28,6 +28,7 @@ public class TutorialContext
     public TutorialSpawnCutscene Camera { get; private set; }
     public TutorialBuildAreaFilter BuildAreas { get; private set; }
     public bool Failed { get; private set; }
+    public bool StepCrosshairVisible { get; private set; } = true;
     public bool Paused => _owner.IsPaused;
     public event Action ShotFired;
     public event Action SkillUsed;
@@ -72,6 +73,12 @@ public class TutorialContext
             Player.GetComponent<PlayerAttackMode>().SetBasicAttack(template);
         }
         return true;
+    }
+
+    public void SetStepCrosshair(bool visible)
+    {
+        StepCrosshairVisible = visible;
+        UI.SetCrosshairVisible(visible);
     }
 
     public string KeyName(KeyCode key)

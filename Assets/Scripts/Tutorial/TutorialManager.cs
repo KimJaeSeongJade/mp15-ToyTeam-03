@@ -48,6 +48,7 @@ public class TutorialManager : MonoBehaviour
             if (step == null) { Context.Fail($"{i + 1}번째 단계 데이터가 없습니다."); yield break; }
             if (!step.Enabled) continue;
             yield return new WaitUntil(() => !IsPaused);
+            Context.SetStepCrosshair(step.ShowCrosshair);
             Context.UI.Message.transform.parent.gameObject.SetActive(true);
             yield return step.Execute(Context);
             if (Context.Failed) yield break;
