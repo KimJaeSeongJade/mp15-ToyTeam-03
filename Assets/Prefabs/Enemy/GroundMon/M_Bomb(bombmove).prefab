@@ -4938,7 +4938,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -0.23565264}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8723043030852288196}
   m_Father: {fileID: 2355337033088378808}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -89.999916}
 --- !u!1 &438490986038483830
@@ -9956,7 +9957,6 @@ Transform:
   - {fileID: 1810143186992565959}
   - {fileID: 6164242244119434262}
   - {fileID: 2355337033088378808}
-  - {fileID: 8723043030852288196}
   - {fileID: 7511419211187863755}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10132,6 +10132,7 @@ MonoBehaviour:
   _monCastleDam: 10
   _IsDeadImpack: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
   _hitImpact: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
+  _maxMonHp: 0
   _damage: 20
   _TurretMask:
     serializedVersion: 2
@@ -25171,12 +25172,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4120076619269803923}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.0000000022499398, y: 0.13932145, z: -0.05147261}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0030139799, y: 0.051472582, z: 0.13828887}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7215504604495044936}
+  m_Father: {fileID: 3330812291369414073}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &3171846371618238460
 SkinnedMeshRenderer:

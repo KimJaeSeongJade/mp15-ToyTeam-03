@@ -788,7 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3970ac6e2cad7f3498f69012ce88d46a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monHp: 50
+  _monHp: 20
   _monDefend: 5
   _monSpeed: 3
   _monGlod: 100
@@ -796,6 +796,7 @@ MonoBehaviour:
   _monCastleDam: 10
   _IsDeadImpack: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
   _hitImpact: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
+  _maxMonHp: 0
   _damage: 10
   _attackSpeed: 3
   _TurretMask:
@@ -929,6 +930,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32074f5e216fdb34caeb9c1e483521eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _TurretMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &7369623274211277394
 GameObject:
   m_ObjectHideFlags: 0

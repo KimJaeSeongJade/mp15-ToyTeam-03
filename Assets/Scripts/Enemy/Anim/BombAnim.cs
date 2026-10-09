@@ -38,14 +38,12 @@ public class BombAnim : MonoBehaviour
             _isBomb = true;
             _animator.SetBool("IsBomb", true);
 
-            StartCoroutine(Delay());
 
         }
     }
 
-    private IEnumerator Delay()
+    private void Return()
     {
-        yield return new WaitForSeconds(2f);
         _return.ReturnToPool();
     }
 
@@ -58,6 +56,34 @@ public class BombAnim : MonoBehaviour
                 IsSight = true;
                 Debug.Log("터렛 발견");
             }
+        }
+    }
+    public void ResetBomb()
+    {
+        IsSight = false;
+        _isBomb = false;
+
+        //StopAllCoroutines();
+
+        _animator.SetBool("IsBomb", false);
+        _animator.SetBool("IsMove", false);
+    }
+    private void OnEnable()
+    {
+        IsSight = false;
+        _isBomb = false;
+
+        if (_animator == null)
+        {
+            _animator = GetComponent<Animator>();
+        }
+        if (_animator != null)
+        {
+            _animator.Rebind();
+            _animator.Update(0f);
+
+            _animator.SetBool("IsBomb", false);
+            _animator.SetBool("IsMove", false);
         }
     }
 
