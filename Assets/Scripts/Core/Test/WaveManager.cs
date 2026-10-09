@@ -26,9 +26,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     public int CurrentWave => _currentWave;
     public float RemainingTime => _remainingTime;
-
-    private int CurrentwaveNumber = 1;
-
+    
     // 웨이브 시작 / 종료 액션처리
     // delegate
     public event Action OnWaveStarted;
@@ -57,7 +55,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         // 게임매니저에서 시작 전달받아와야함.
         //if (GameManager.Instance.currentState != GameState.WavePreparation) return;
-        StartFirstWavePrepare();
+        //StartFirstWavePrepare();
         Debug.Log("웨이브 준비 단계");
 
         // GameManager 게임 시작 이벤트 구독 
@@ -87,7 +85,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private IEnumerator PrepareNextWave()
     {
         _remainingTime = _prepareTime;
-
+        _prepareTimeUI.transform.parent.gameObject.SetActive(true);
         while (_remainingTime > 0f)
         {
             OnPrepareTimeChanged?.Invoke(_remainingTime);
@@ -101,8 +99,12 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         // 만약 게임 시작 됐으면 UI 처리한다.
         // 조건식 추후에 고민
-        _prepareTimeUI.text = $"Wave : {CurrentwaveNumber} Starts in {_remainingTime.ToString("F0")}...";
-        if (_remainingTime <= 0f)
+        if (_remainingTime > 0f)
+        {
+            _prepareTimeUI.text =
+                $"Wave : {_currentWave+1} Starts in {_remainingTime:F0}...";
+        }
+        else
         {
             _prepareTimeUI.transform.parent.gameObject.SetActive(false);
         }
@@ -112,10 +114,9 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     // 실제 웨이브 시작
     private void StartWave()
     {
+        /*
         // MonsterSpawner에게 현재 웨이브 시작 요청
-        // TODO 여기 호출 부 수정
         _monsterSpawner.SpawnWave(1, AddMonster, SetSpawnFinished);
-        
         
         _currentWave++; // 웨이브 증가
         // 종료조건 파악을 위한 몬스터 수 확인
@@ -125,6 +126,21 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
         OnWaveChanged?.Invoke(_currentWave);
         OnWaveStarted?.Invoke();
+        */
+        
+        _aliveMonsterCount = 0;
+        _isSpawnFinished = false;
+
+        _currentWave++;
+
+        OnWaveChanged?.Invoke(_currentWave);
+        OnWaveStarted?.Invoke();
+
+        _monsterSpawner.SpawnWave(
+            _currentWave,
+            AddMonster,
+            SetSpawnFinished
+        );
     }
 
     // 몬스터 생성 시 호출

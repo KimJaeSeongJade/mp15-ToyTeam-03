@@ -88,7 +88,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private void Start()
     {
         Init();
-        //ResetToTitle(); // TODO 게임 데이터 초기화 연결해야함. (이벤트로)
+        ResetToTitle(); // TODO 게임 데이터 초기화 연결해야함. (이벤트로)
         ChangeState(GameState.Ready);
     }
 
@@ -132,7 +132,7 @@ public class GameManager : SingletonBehaviour<GameManager>
                 ResetToTitle();
                 break;
             case GameState.WavePreparation:
-                //WaveManager.Instance.StartFirstWavePrepare();
+                WaveManager.Instance.StartFirstWavePrepare();
                 // 라운드 시작 전 로직
                 // 웨이브 준비 UI 잠시 띄웠다가 지우기 or
                 // 30초 위에 띄우고 웨이브 준비 단계
@@ -148,6 +148,10 @@ public class GameManager : SingletonBehaviour<GameManager>
                 break;
             case GameState.GameOver:
                 // 게임 오버 로직
+                break;
+            case GameState.GameClear:
+                
+                // 게임 클리어 로직
                 break;
         }
     }
@@ -375,6 +379,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        Debug.Log($"Cursor State : {Cursor.lockState}");
     }
     // ----------------------------------------------
 }
@@ -385,7 +390,8 @@ public enum GameState
     WavePreparation,
     OnWave,
     Paused,
-    GameOver
+    GameOver,
+    GameClear
 }
 
 public enum CrosshairType
