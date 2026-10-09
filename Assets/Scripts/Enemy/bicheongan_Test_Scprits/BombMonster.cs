@@ -57,6 +57,14 @@ public class BombMonster : BaseEnemy
             }
         }
     }
+    protected override void ResetWakeUp()
+    {
+        base.ResetWakeUp();
+
+        _targetTurret = null;
+        _isTurretInSight = false;
+        _isAttacking = false;
+    }
 
     protected override void CaCheComponents()
     {

@@ -28,6 +28,8 @@ public class BaseEnemy : PoolObject
     public GameObject HitImpact => _hitImpact;
     public float MonMaxHp { get => _maxMonHp; set { _maxMonHp = value; } }
 
+    private MonsterHealth ResetHealth;
+
     public event Action<BaseEnemy> onRemoved;
 
     protected virtual void Awake()
@@ -37,9 +39,15 @@ public class BaseEnemy : PoolObject
     }
     public override void WakeUp()
     {
-        _monHp = _maxMonHp;
+        ResetHealth.ResetHealth();
+        ResetWakeUp();
         transform.SetParent(null);
         gameObject.SetActive(true);
+    }
+    protected virtual void ResetWakeUp() 
+    {
+        _monHp = _maxMonHp;
+        _finished = false;
     }
 
     public override void Sleep()
@@ -70,5 +78,6 @@ public class BaseEnemy : PoolObject
     protected virtual void CaCheComponents()
     {
         _eXP = GameManager.Instance.PlayerStatus.GetComponent<PlayerLevelManager>();
+        ResetHealth = GetComponent<MonsterHealth>();
     }
 }

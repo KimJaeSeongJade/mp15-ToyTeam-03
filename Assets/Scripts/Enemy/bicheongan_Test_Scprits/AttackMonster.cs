@@ -77,7 +77,14 @@ public class AttackMonster : BaseEnemy
         yield return new WaitForSeconds(_attackSpeed);
         _isAttacking = false;
     }
+    protected override void ResetWakeUp()
+    {
+        base.ResetWakeUp();
 
+        _targetTurret = null;
+        _isTurretInSight = false;
+        _isAttacking = false;
+    }
     protected override void CaCheComponents()
     {
         base.CaCheComponents();

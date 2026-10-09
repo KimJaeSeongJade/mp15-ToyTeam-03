@@ -979,14 +979,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03abf3f0eaa8964fbf1a93f9fb4f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monHp: 30
-  _monDefend: 30
+  _monHp: 20
+  _monDefend: 5
   _monSpeed: 3
   _monGlod: 100
   _monExp: 15
   _monCastleDam: 5
   _IsDeadImpack: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
   _hitImpact: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
+  _maxMonHp: 0
 --- !u!114 &7149040131415970672
 MonoBehaviour:
   m_ObjectHideFlags: 0

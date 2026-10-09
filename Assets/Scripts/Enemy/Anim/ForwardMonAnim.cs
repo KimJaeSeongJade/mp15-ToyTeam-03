@@ -24,8 +24,6 @@ public class ForwardMonAnim : MonoBehaviour
         _animator.SetBool("IsMove", isMoving);
     } 
 
-
-
     private void CaCheCompoents()
     {
         _agent = GetComponent<NavMeshAgent>();

@@ -74,6 +74,11 @@ public class MonsterHealth : MonoBehaviour, IDamageableturret, ISloowable ,IHeal
             _isSlow = true;
         }
     }
+    public void ResetHealth()
+    {
+        _isDead = false;
+        _isSlow = false;
+    }
     private void CacheComponent()
     {
         Cacheenemy = GetComponent<BaseEnemy>();
