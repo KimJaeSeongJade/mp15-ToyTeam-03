@@ -13,6 +13,7 @@ public class BaseEnemy : PoolObject
     [SerializeField] protected float _monCastleDam;
     [SerializeField] private GameObject _IsDeadImpack;
     [SerializeField] private GameObject _hitImpact;
+    [SerializeField] private GameObject _spawnImpact;
 
     [SerializeField] protected float _maxMonHp;
     private Transform _tr;
@@ -26,6 +27,7 @@ public class BaseEnemy : PoolObject
     public float MonCastleDam { get { return _monCastleDam; } set { _monCastleDam = value; } }
     public GameObject IsDeadImpack => _IsDeadImpack;
     public GameObject HitImpact => _hitImpact;
+    public GameObject SpawnImpact => _spawnImpact;
     public float MonMaxHp { get => _maxMonHp; set { _maxMonHp = value; } }
 
     private MonsterHealth ResetHealth;
@@ -43,6 +45,7 @@ public class BaseEnemy : PoolObject
         ResetWakeUp();
         transform.SetParent(null);
         gameObject.SetActive(true);
+        MonSpwanImpact();
     }
     protected virtual void ResetWakeUp() 
     {
@@ -70,6 +73,11 @@ public class BaseEnemy : PoolObject
         _finished = true;
         Debug.Log("결승");
         Returned?.Invoke(this);
+    }
+    private void MonSpwanImpact()
+    {
+        GameObject impact = Instantiate(SpawnImpact, transform.position,Quaternion.identity);
+        Destroy(impact, 1f);
     }
     public void InitData()
     {
