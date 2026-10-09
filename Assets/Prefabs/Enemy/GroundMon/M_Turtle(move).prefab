@@ -987,6 +987,7 @@ MonoBehaviour:
   _monCastleDam: 5
   _IsDeadImpack: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
   _hitImpact: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
+  _spawnImpact: {fileID: 4809171458859421548, guid: 4e91ed1a8efe7044785b9bd97a47d87f, type: 3}
   _maxMonHp: 0
 --- !u!114 &7149040131415970672
 MonoBehaviour:
