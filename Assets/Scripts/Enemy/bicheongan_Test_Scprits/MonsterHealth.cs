@@ -13,6 +13,15 @@ public class MonsterHealth : MonoBehaviour, IDamageableturret, ISloowable ,IHeal
     private float goldCount;
     private bool _isDead;
     private bool _isSlow;
+    private float _vulnerabilityMultiplier = 1f;
+    private float _vulnerabilityUntil;
+
+    public void ApplyVulnerability(float multiplier, float duration)
+    {
+        if (Time.time >= _vulnerabilityUntil) _vulnerabilityMultiplier = 1f;
+        _vulnerabilityMultiplier = Mathf.Max(_vulnerabilityMultiplier, multiplier);
+        _vulnerabilityUntil = Mathf.Max(_vulnerabilityUntil, Time.time + duration);
+    }
 
     public float CurrentHp { get => Cacheenemy.MonHp; }
     public float MaxHp { get => Cacheenemy.MonMaxHp; }
@@ -38,17 +47,10 @@ public class MonsterHealth : MonoBehaviour, IDamageableturret, ISloowable ,IHeal
     public void TakeDamage(float damage)
     {
         if (_isDead == true) return;
-        float mindamage = Mathf.Max(1, damage - Cacheenemy.MonDefend);
-        if (damage - Cacheenemy.MonDefend > 0)
-        {
-            Cacheenemy.MonHp -= (damage - Cacheenemy.MonDefend);
-            Debug.Log($"몬스터에게 {damage - Cacheenemy.MonDefend} 데미지를 줌");
-        }
-        else
-        {
-            Cacheenemy.MonHp -= mindamage;
-            Debug.Log($"몬스터에게 {mindamage} 데미지를 줌");
-        }
+        float receivedDamage = Mathf.Max(1, damage - Cacheenemy.MonDefend);
+        if (Time.time < _vulnerabilityUntil) receivedDamage *= _vulnerabilityMultiplier;
+        Cacheenemy.MonHp -= receivedDamage;
+        Debug.Log($"몬스터에게 {receivedDamage} 데미지를 줌");
         Instantiate(Cacheenemy.HitImpact, transform.position, Quaternion.identity);
         if (Cacheenemy.MonHp <= 0)
         {
@@ -78,6 +80,8 @@ public class MonsterHealth : MonoBehaviour, IDamageableturret, ISloowable ,IHeal
     {
         _isDead = false;
         _isSlow = false;
+        _vulnerabilityMultiplier = 1f;
+        _vulnerabilityUntil = 0f;
     }
     private void CacheComponent()
     {

@@ -5214,6 +5214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3631639783528554487}
   - component: {fileID: 4035207203642884785}
+  - component: {fileID: 1003001}
   m_Layer: 0
   m_Name: GoldDrop
   m_TagString: Untagged
@@ -5256,3 +5257,17 @@ MonoBehaviour:
   _scatterRadius: 1.5
   _scatterDuration: 0.5
   _arcHeight: 1.5
+
+--- !u!135 &1003001
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6744365403234072504}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}

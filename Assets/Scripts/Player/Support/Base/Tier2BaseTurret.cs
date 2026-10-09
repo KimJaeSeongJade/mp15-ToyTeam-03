@@ -6,9 +6,9 @@ using UnityEngine.UIElements;
 public class Tier2BaseTurret : BaseTurret
 {
     [SerializeField] protected Transform _target;
-    [SerializeField] private Transform _muzzle;
+    [SerializeField] protected Transform _muzzle;
     [SerializeField] protected Tier2BaseBullet _bullet;
-    [SerializeField] private int _initMaxCount;
+    [SerializeField] protected int _initMaxCount;
     [SerializeField] private float _fireTime;
 
     protected ObjectPool<Tier2BaseBullet> _bulletPool;
