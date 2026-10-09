@@ -11,13 +11,13 @@ public class GoldResonanceTurret : GoldEffectTurret
     {
         base.Start();
 
-        _bulletPool = new ObjectPool<Tier2BaseBullet>(_bullet, 3, transform, bullet =>
+        _bulletPool = new ObjectPool<Tier2BaseBullet>(_bullet, _initMaxCount, transform, bullet =>
         {
             bullet.transform.SetParent(transform, false);
             bullet.InitData();
         });
 
-        _pulses = new ObjectPool<GoldResonancePulseBullet>(_pulsePrefab, 1, transform, bullet =>
+        _pulses = new ObjectPool<GoldResonancePulseBullet>(_pulsePrefab, _initMaxCount, transform, bullet =>
         {
             bullet.transform.SetParent(transform, false);
             bullet.InitData();

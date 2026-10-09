@@ -16,6 +16,8 @@ public class PlayerLevelManager : MonoBehaviour
     [SerializeField] private BasicAttack[] _basicAttacks;
     [SerializeField] private SkillAttack[] _skillAttacks;
 
+    [SerializeField] private GameObject _lvUpEffect;
+
     // 경험치 요구량 배열을 기준으로 도달 가능한 마지막 레벨을 반환한다.
     public int MaxLevel => (_requiredExpPerLevel?.Length ?? 0) + 1;
     // 현재 레벨이 마지막 레벨인지 확인한다.
@@ -28,6 +30,12 @@ public class PlayerLevelManager : MonoBehaviour
         || _requiredExpPerLevel.Length == 0 ? 0 : _requiredExpPerLevel[_status.Level - 1];
 
     private void Awake() => CacheComponent();
+
+    private void Update()
+    {
+        if (!Input.GetKeyDown(KeyCode.L)) return;
+        GainExp(200);
+    }
 
     public void GainExp(float amount)
     {
@@ -54,6 +62,8 @@ public class PlayerLevelManager : MonoBehaviour
     // 추후 확장성을 고려하면 다른 방식으로 구현이 필요
     private void ApplyLevelRewards(int newLevel)
     {
+        Instantiate(_lvUpEffect, transform);
+
         switch (newLevel)
         {
             case 2:
