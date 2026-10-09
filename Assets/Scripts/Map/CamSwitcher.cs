@@ -8,6 +8,7 @@ public class CamSwitcher : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera[] cams;
     [SerializeField] private GameObject[] PortalEffect;
     [SerializeField] private float _camDelay = 2f;
+    [SerializeField] private TrialRender _trialRender;
     private int _currentWave=1;
     
     private void Awake()
@@ -45,10 +46,12 @@ public class CamSwitcher : MonoBehaviour
         {
             PortalEffect[0].SetActive(true);
             PortalEffect[1].SetActive(true);
+            _trialRender.Move(1);
         }
         else
         {
             PortalEffect[0].SetActive(true);
+            _trialRender.Move(0);
         }
         cams[_currentWave-1].gameObject.SetActive(true);
         cams[_currentWave-1].Priority = 0;
