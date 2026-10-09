@@ -10,7 +10,7 @@ public class CamSwitcher : MonoBehaviour
     [SerializeField] private float _camDelay = 2f;
     [SerializeField] private TrialRender _trialRender;
     private int _currentWave=1;
-    
+    private bool _hasEffect = false;
     private void Awake()
     {
         OnCamera(0);
@@ -46,7 +46,11 @@ public class CamSwitcher : MonoBehaviour
         {
             PortalEffect[0].SetActive(true);
             PortalEffect[1].SetActive(true);
-            _trialRender.Move(1);
+            if (!_hasEffect)
+            {
+                _trialRender.Move(1);
+                _hasEffect = true;
+            }
         }
         else
         {
