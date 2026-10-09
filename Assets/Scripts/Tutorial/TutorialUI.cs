@@ -19,6 +19,9 @@ public class TutorialUI : MonoBehaviour
     public Button ContinueButton;
     [Range(0f, 1f)] public float SpotlightDarkness = 0.8f;
     public Font TutorialFontSource;
+    [Header("안내문 기본 위치")]
+    [Tooltip("하이라이트 대상이 없을 때의 위치. 캔버스 중앙 기준 UI 좌표입니다. X는 오른쪽, Y는 위쪽입니다.")]
+    public Vector2 DefaultInstructionPosition = new Vector2(0f, 216f);
 
     private RectTransform _canvasRect;
     private RectTransform _target;
@@ -88,6 +91,7 @@ public class TutorialUI : MonoBehaviour
     private void Awake()
     {
         _canvasRect = (RectTransform)GetComponentInParent<Canvas>().transform;
+        Message.transform.parent.gameObject.SetActive(false);
         _messageBox = Message.rectTransform.parent as RectTransform;
         CreateTutorialFont();
         Message.alignment = TextAlignmentOptions.MidlineLeft;
@@ -163,7 +167,7 @@ public class TutorialUI : MonoBehaviour
         if (!visible) _spotlightRoot.gameObject.SetActive(false);
     }
 
-    public void Show(string message, TutorialFocus focus, string progress)
+    public void Show(string message, TutorialFocus focus, string progress, RectTransform focusOverride = null)
     {
         Message.text = message.Replace("\r", " ").Replace("\n", " ");
         ResizeMessageBox();
@@ -171,7 +175,7 @@ public class TutorialUI : MonoBehaviour
         Progress.text = progress;
         if (_waveText != null) _waveText.text = progress;
         int index = (int)focus;
-        _target = FocusTargets != null && index < FocusTargets.Length ? FocusTargets[index] : null;
+        _target = focusOverride != null ? focusOverride : FocusTargets != null && index < FocusTargets.Length ? FocusTargets[index] : null;
         Highlight.gameObject.SetActive(_target != null);
     }
 
@@ -186,19 +190,6 @@ public class TutorialUI : MonoBehaviour
     }
 
     public void SetGold(int amount) { if (Gold != null) Gold.text = amount.ToString(); }
-    public void SetCastleHealth(float current, float max)
-    {
-        Message.text = $"캐슬 HP: {current:0} / {max:0} - 도착하기 전에 막으세요!";
-        ResizeMessageBox();
-    }
-
-    public static string KeyName(KeyCode key)
-    {
-        if (key == KeyCode.Mouse0) return "마우스 왼쪽";
-        if (key == KeyCode.Mouse1) return "마우스 오른쪽";
-        return key.ToString();
-    }
-
     private void LateUpdate()
     {
         if (_lastCanvasSize != _canvasRect.rect.size)
@@ -212,7 +203,7 @@ public class TutorialUI : MonoBehaviour
         _spotlightRoot.gameObject.SetActive(dim);
         if (!visible)
         {
-            _messageBox.localPosition = _canvasRect.rect.center + new Vector2(0f, _canvasRect.rect.height * 0.2f);
+            _messageBox.localPosition = _canvasRect.rect.center + DefaultInstructionPosition;
             if (dim) UpdateSpotlight(_canvasRect.rect.center, _canvasRect.rect.center);
             return;
         }
