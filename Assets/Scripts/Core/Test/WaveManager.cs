@@ -271,9 +271,13 @@ public class WaveManager : SingletonBehaviour<WaveManager>
             OnAllWavesCleared?.Invoke();
             return;
         }
+        StopAllCoroutines();
         // 다음 웨이브 준비 시작
         OnNextWaveRequested?.Invoke();
     }
+    
+    //OnNextWaveRequested?.Invoke(); 
+    
 
 
 
