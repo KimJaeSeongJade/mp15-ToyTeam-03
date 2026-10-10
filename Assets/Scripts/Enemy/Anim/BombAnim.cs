@@ -54,7 +54,9 @@ public class BombAnim : MonoBehaviour
             if (IsSight == false)
             {
                 IsSight = true;
+                #if UNITY_EDITOR
                 Debug.Log("터렛 발견");
+#endif
             }
         }
     }

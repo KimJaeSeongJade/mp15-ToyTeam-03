@@ -50,16 +50,22 @@ public class MonsterHealth : MonoBehaviour, IDamageableturret, ISloowable ,IHeal
         float receivedDamage = Mathf.Max(1, damage - Cacheenemy.MonDefend);
         if (Time.time < _vulnerabilityUntil) receivedDamage *= _vulnerabilityMultiplier;
         Cacheenemy.MonHp -= receivedDamage;
+        #if UNITY_EDITOR
         Debug.Log($"몬스터에게 {receivedDamage} 데미지를 줌");
+#endif
         Instantiate(Cacheenemy.HitImpact, transform.position, Quaternion.identity);
         if (Cacheenemy.MonHp <= 0)
         {
+            #if UNITY_EDITOR
             Debug.Log("죽음");
+#endif
             _isDead = true;
             Instantiate(Cacheenemy.IsDeadImpack, transform.position, Quaternion.identity);
 
             Cacheenemy.GiveToExpPlayer();
+            #if UNITY_EDITOR
             Debug.Log($"Exp{Cacheenemy.MonExp}");
+#endif
 
             goldPool.PopAll();
             Cacheenemy.ReturnToPool();

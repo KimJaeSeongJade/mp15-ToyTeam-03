@@ -26,7 +26,9 @@ public class TrialRender : MonoBehaviour
             }
             else
             {
+                #if UNITY_EDITOR
                 Debug.LogError("MonsterMove 컴포넌트가 없습니다.");
+#endif
             }
         }
     }

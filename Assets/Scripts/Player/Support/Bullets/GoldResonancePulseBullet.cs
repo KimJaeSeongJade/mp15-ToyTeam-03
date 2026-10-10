@@ -13,6 +13,7 @@ public class GoldResonancePulseBullet : GoldExpandingPulseBullet
         _detected.Clear();
         _onGoldReached = onGoldReached;
         BeginPulse(position, radius);
+        SetVisualVisible(true);
     }
     protected override void Detect(Collider other)
     {
@@ -25,6 +26,7 @@ public class GoldResonancePulseBullet : GoldExpandingPulseBullet
     {
         _onGoldReached = null;
         _detected.Clear();
+        SetVisualVisible(false);
         base.OnFireEnd();
     }
 }

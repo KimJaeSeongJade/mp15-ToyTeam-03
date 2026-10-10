@@ -85,7 +85,9 @@ public class DefenceTurret : BaseTurret
         _currentHp -= finalDamage;
         _currentHp = Mathf.Clamp(_currentHp, 0, _maxHp);
         
+        #if UNITY_EDITOR
         Debug.Log($"{finalDamage}");
+#endif
 
         // 3단계: 사망 조건 검사
         if (_currentHp <= 0)

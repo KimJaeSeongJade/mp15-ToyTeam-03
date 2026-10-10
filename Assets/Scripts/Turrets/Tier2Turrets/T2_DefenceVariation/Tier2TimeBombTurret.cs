@@ -37,7 +37,9 @@ public class Tier2TimeBombTurret : BaseTurret
 
     private void TurretBomb()
     {
+        #if UNITY_EDITOR
         Debug.Log($"💥 [{gameObject.name}] 시한폭탄 터렛 작동! 광역 폭발 발생.");
+#endif
 
         // _bombRange만큼의 원형 범위 내에 있는 적 레이어 콜라이더들을 긁어옵니다.
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, _bombRange, _enemyLayer);
@@ -48,7 +50,9 @@ public class Tier2TimeBombTurret : BaseTurret
             if (hitEnemies[i].TryGetComponent(out IDamageable enemyDamageable))
             {
                 enemyDamageable.TakeDamage(_bombDamage);
+                #if UNITY_EDITOR
                 Debug.Log($"[폭발 피격] {hitEnemies[i].name}에게 {_bombDamage}만큼의 폭발 피해를 입혔습니다.");
+#endif
             }
         }
     }
@@ -57,7 +61,9 @@ public class Tier2TimeBombTurret : BaseTurret
     {
         if (_goldPrefab == null) return;
 
+        #if UNITY_EDITOR
         Debug.Log($"🪙 [{gameObject.name}] 파괴 보상으로 골드를 {_spawnGoldCount}개 소환합니다.");
+#endif
 
         for (int i = 0; i < _spawnGoldCount; i++)
         {

@@ -30,7 +30,9 @@ public class PrefabShaderWarmup : MonoBehaviour
     {
         if (SpawnPoint == null)
         {
+            #if UNITY_EDITOR
             Debug.LogError("PrefabShaderWarmup: 카메라 앞의 SpawnPoint를 연결하세요.", this);
+#endif
             yield break;
         }
         PrepareOverlay();

@@ -18,7 +18,7 @@ public class SceneFade : SingletonBehaviour<SceneFade>
 
     [Header("인스펙터에서 씬 이동 연결")]
     [Tooltip("Build Settings에 등록된 다음 씬 이름 또는 경로")]
-    [SerializeField] private string _destinationScene;
+    public string _destinationScene;
     [Tooltip("완전히 검어진 뒤 제거할 기존 씬 오브젝트. 튜토리얼 GameManager를 연결합니다.")]
     [SerializeField] private GameObject _destroyBeforeLoad;
     public GameObject DestroeyBeforeLoad { set => _destroyBeforeLoad = value; }
@@ -40,7 +40,9 @@ public class SceneFade : SingletonBehaviour<SceneFade>
         if (action == null) return false;
         if (IsFading)
         {
+            #if UNITY_EDITOR
             Debug.LogWarning("SceneFade: 페이드 중에는 새 Action을 등록할 수 없습니다.", this);
+#endif
             return false;
         }
         _atBlack += action;
@@ -81,7 +83,9 @@ public class SceneFade : SingletonBehaviour<SceneFade>
         if (IsFading || !isActiveAndEnabled) return false;
         if (string.IsNullOrWhiteSpace(sceneName) || !Application.CanStreamedLevelBeLoaded(sceneName))
         {
+            #if UNITY_EDITOR
             Debug.LogError($"SceneFade: Build Settings에 등록된 씬을 지정하세요: {sceneName}", this);
+#endif
             return false;
         }
         Register(() => WaitFor(StartCoroutine(LoadSceneRoutine(sceneName, destroyBeforeLoad))));
@@ -113,7 +117,11 @@ public class SceneFade : SingletonBehaviour<SceneFade>
             foreach (Delegate callback in callbacks)
             {
                 try { ((Action)callback).Invoke(); }
-                catch (Exception exception) { Debug.LogException(exception, this); }
+                catch (Exception exception) { {
+#if UNITY_EDITOR
+                    Debug.LogException(exception, this);
+#endif
+                } }
             }
             for (int i = 0; i < _waits.Count; i++) yield return _waits[i];
             yield return null; // 새 씬의 초기화가 진행된 뒤 화면을 밝힌다.

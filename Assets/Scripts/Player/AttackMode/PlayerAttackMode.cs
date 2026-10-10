@@ -18,6 +18,7 @@ public class PlayerAttackMode : MonoBehaviour
     private PlayerStatus _status;
     private PlayerBuildMode _buildMode;
     private PlayerAnimation _animation;
+    private PlayerSound _sound;
     private IChargeable _chargingAttack;
 
     private RaycastHit hit;
@@ -70,9 +71,15 @@ public class PlayerAttackMode : MonoBehaviour
         BasicAttack attack = _attackPools.Pop();
         _chargingAttack = attack as IChargeable;
         if (_chargingAttack != null)
+        {
             _animation.SetCharging(true);
+            SoundManager.Instance.Play(_sound.ChargeStart);
+        }
         else
+        {
             _animation.PlayAttack();
+            SoundManager.Instance.Play(attack is SpreadAttack ? _sound.SpreadAttack : _sound.BasicAttack);
+        }
 
         _elapseTime = 0;
     }
@@ -112,6 +119,7 @@ public class PlayerAttackMode : MonoBehaviour
         Instantiate(_skillAttack, hit.point, Quaternion.identity);
         _animation.SetCharging(false);
         _animation.PlaySkill();
+        SoundManager.Instance.Play(_skillAttack is CycloneAttack ? _sound.CycloneSkill : _sound.Skill);
 
         _skillReadyAt = Time.time + _skillTime;
         _status.NotifySkillCooldownStarted(_skillTime);
@@ -164,6 +172,7 @@ public class PlayerAttackMode : MonoBehaviour
         _status = GetComponent<PlayerStatus>();
         _buildMode = GetComponent<PlayerBuildMode>();
         _animation = GetComponent<PlayerAnimation>();
+        _sound = GetComponent<PlayerSound>();
     }
 
     private void Init()

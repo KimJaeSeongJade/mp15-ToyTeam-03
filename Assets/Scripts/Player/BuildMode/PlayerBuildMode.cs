@@ -15,6 +15,7 @@ public class PlayerBuildMode : MonoBehaviour
     private PlayerStatus _status;
     private PlayerAttackMode _attackMode;
     private PlayerWallet _wallet;
+    private PlayerSound _sound;
     private int _selectedSlot = -1;
 
     private void Awake()
@@ -120,6 +121,7 @@ public class PlayerBuildMode : MonoBehaviour
         _selectedSlot = selectedNum;
 
         if (selected == _selectedTurret) return true;
+        SoundManager.Instance.Play(_sound.SelectTurret);
 
         ClearSelectedBuildTarget();
 
@@ -142,6 +144,7 @@ public class PlayerBuildMode : MonoBehaviour
         {
             float cooldown = TurretCombinationTable.Instance.StartBuildCooldown(_selectedSlot);
             _status.NotifyBuildCooldownStarted(_selectedSlot, cooldown);
+            SoundManager.Instance.Play(_sound.Build);
             ClearSelectedBuildTarget();
             RayToBuildPoint();
         }
@@ -155,6 +158,7 @@ public class PlayerBuildMode : MonoBehaviour
         // 판매 성공시 프리뷰 색을 다시 정한다
         if (_buildPoint.TrySellTurret(_wallet))
         {
+            SoundManager.Instance.Play(_sound.Sell);
             ClearSelectedBuildTarget();
             RayToBuildPoint();
         }
@@ -163,6 +167,7 @@ public class PlayerBuildMode : MonoBehaviour
     private void BuildModeEnd()
     {
         if (!_inputReader.isPressedExitBuild) return;
+        SoundManager.Instance.Play(_sound.ExitBuild);
 
         ClearSelectedBuildTarget();
 
@@ -182,6 +187,7 @@ public class PlayerBuildMode : MonoBehaviour
         _attackMode = GetComponent<PlayerAttackMode>();
         _status = GetComponent<PlayerStatus>();
         _wallet = GetComponent<PlayerWallet>();
+        _sound = GetComponent<PlayerSound>();
         mainCamera = Camera.main;
     }
 

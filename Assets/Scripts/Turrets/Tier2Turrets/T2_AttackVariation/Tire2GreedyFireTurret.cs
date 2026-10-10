@@ -64,7 +64,9 @@ public class Tire2GreedyFireTurret : AttackTurret
                 _bullets = _bulletPool.Pop();
                 (_bullets as GreedyBullet).SetOwner(this);
             }
+            #if UNITY_EDITOR
             Debug.Log($"[부익부 빈익빈] 총알 생성 완료! 현재 누적 버프: +{_currentDamageBonus} (상한: {_maxDamageBonus})");
+#endif
         }
     }
 

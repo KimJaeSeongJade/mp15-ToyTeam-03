@@ -81,7 +81,9 @@ public class GoldDrop : PoolObject
 
         if (_playerWallet == null)
         {
+            #if UNITY_EDITOR
             Debug.LogWarning("Player를 찾지 못해 골드를 배달할 수 없습니다.", this);
+#endif
             return;
         }
 
@@ -95,7 +97,9 @@ public class GoldDrop : PoolObject
         if (_playerWallet == null)
         {
             _isDelivering = false;
+            #if UNITY_EDITOR
             Debug.LogWarning("배달 중 플레이어 참조가 사라졌습니다.", this);
+#endif
             return;
         }
 

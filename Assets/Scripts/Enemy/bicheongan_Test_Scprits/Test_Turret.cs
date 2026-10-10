@@ -32,7 +32,9 @@ public class Test_Turret : MonoBehaviour, IDamageable
 
         if (targets.Length == 0)
         {
+            #if UNITY_EDITOR
             Debug.Log("못찾음");
+#endif
         }
 
         IDamageable target = targets[0].GetComponent<IDamageable>();
@@ -42,7 +44,9 @@ public class Test_Turret : MonoBehaviour, IDamageable
 
         target.SlowSpeed(0.2f);
 
+        #if UNITY_EDITOR
         Debug.Log("느려는 공격");
+#endif
     }
 
     public void TakeDamage(float damage)
@@ -54,7 +58,9 @@ public class Test_Turret : MonoBehaviour, IDamageable
         if (_hp <= 0)
         {
             _isDead = true;
+            #if UNITY_EDITOR
             Debug.Log("터렛 파괴");
+#endif
             Destroy(gameObject);
         }
     }

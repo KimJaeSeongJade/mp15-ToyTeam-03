@@ -42,7 +42,9 @@ public class Tier2SheildTurret : BaseTurret
             if (_currentShield >= damage)
             {
                 _currentShield -= damage;
+                #if UNITY_EDITOR
                 Debug.Log($"🛡️ [보호막 흡수] 보호막이 대미지를 차단함! 남은 보호막: {_currentShield}");
+#endif
                 return; // 체력 차감 없이 종료
             }
             // 2. 데미지가 보호막보다 클 때 -> 보호막을 깨트리고 남은 대미지만 계산
@@ -50,13 +52,17 @@ public class Tier2SheildTurret : BaseTurret
             {
                 damage -= _currentShield;
                 _currentShield = 0;
+                #if UNITY_EDITOR
                 Debug.Log("💥 [보호막 파괴] 보호막이 깨졌습니다! 남은 대미지가 체력에 들어갑니다.");
+#endif
             }
         }
 
         // 3. 보호막이 없는 상태이거나 뚫고 남은 잔여 대미지는 부모 체력 로직(base.TakeDamage)에 전달
         base.TakeDamage(damage);
+        #if UNITY_EDITOR
         Debug.Log($"❤️ [터렛 체력 피격] 남은 체력: {_currentHp} / {_maxHp}");
+#endif
     }
 
     public override void Attack()

@@ -39,7 +39,9 @@ public class Tier2GiantTurret : BaseTurret
                     // 💡 [디버그 로그 1] 감지 및 리스트 추가 확인
                     if (damageable is Component enemyComp)
                     {
+                        #if UNITY_EDITOR
                         Debug.Log($"<color=cyan>[도발 감지]</color> 범위 내 새로운 적 발견: <b>{enemyComp.name}</b> (현재 묶인 적: {_provokedTargets.Count}마리)");
+#endif
                     }
 
                     // 4. 주변 적 도발 시 몬스터 정지
@@ -69,13 +71,17 @@ public class Tier2GiantTurret : BaseTurret
             // 💡 [디버그 로그 2] 정지 해제 성공 확인
             if (enemy is Component enemyComp)
             {
+                #if UNITY_EDITOR
                 Debug.Log($"<color=lime>[도발 해제]</color> {_stopDuration}초 경과로 <b>{enemyComp.name}</b> 정지 해제 및 이동 재개");
+#endif
             }
         }
         else
         {
             // 💡 [디버그 로그 3] 대기 도중 적이 사망한 경우 예외 추적
+            #if UNITY_EDITOR
             Debug.Log("<color=orange>[도발 알림]</color> 멈춰있던 적이 정지 시간이 끝나기 전에 사망하여 풀에서 반환됨");
+#endif
         }
 
         // 관리가 끝났으므로 도발 추적 리스트에서 제거해 줍니다.

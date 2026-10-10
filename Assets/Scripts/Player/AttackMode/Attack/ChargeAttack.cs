@@ -15,6 +15,7 @@ public class ChargeAttack : BasicAttack, IChargeable
     private float _chargeStartTime;
     private bool _charging;
     private Transform _muzzle;
+    private PlayerSound _sound;
 
     HashSet<IDamageable> damaged = new HashSet<IDamageable>();
 
@@ -25,6 +26,7 @@ public class ChargeAttack : BasicAttack, IChargeable
         StopAllCoroutines();
         // BasicAttack.WakeUp이 부모에서 분리하므로 발사 지점을 먼저 보관한다.
         _muzzle = transform.parent;
+        _sound = _muzzle.GetComponentInParent<PlayerSound>();
         base.WakeUp();
 
         // 차지 중 이동은 GetNextPosition에서 막고 Update는 입력 해제를 감지한다.
@@ -75,6 +77,7 @@ public class ChargeAttack : BasicAttack, IChargeable
         _charging = false;
         _chargeEffect.SetActive(false);
         _releaseEffect.SetActive(true);
+        SoundManager.Instance.Play(_sound.ChargeRelease);
         StartCoroutine(ReturnAfterRelease());
     }
 

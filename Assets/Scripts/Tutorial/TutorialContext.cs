@@ -245,7 +245,9 @@ public class TutorialContext
     public void Fail(string reason)
     {
         Failed = true;
+        #if UNITY_EDITOR
         Debug.LogError($"TutorialManager: {reason}", _owner);
+#endif
         if (UI != null) { FailureText.Show(this); UI.SetSpotlight(false); }
         if (Input != null) Input.CancelPrompt();
     }

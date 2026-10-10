@@ -33,7 +33,9 @@ public class AttackMonster : BaseEnemy
             {
                 _targetTurret = other.transform;
                 _isTurretInSight = true;
+                #if UNITY_EDITOR
                 Debug.Log("터렛 발견");
+#endif
 
                 _toTarget.MoveToTurret(_targetTurret);
             }
@@ -52,12 +54,16 @@ public class AttackMonster : BaseEnemy
             if (_isAttacking == false)
             {
                 _isAttacking = true;
+                #if UNITY_EDITOR
                 Debug.Log("공격");
+#endif
                 IDamageableturret damageable = _targetTurret.GetComponent<IDamageableturret>();
                 if (damageable != null)
                 {
                     damageable.TakeDamage(_damage);
+                    #if UNITY_EDITOR
                     Debug.Log($"{_damage} 데미지 줌");
+#endif
 
                     StartCoroutine(AttackSpeed());
                 }
