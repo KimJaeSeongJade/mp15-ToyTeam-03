@@ -271,14 +271,13 @@ public class WaveManager : SingletonBehaviour<WaveManager>
             OnAllWavesCleared?.Invoke();
             return;
         }
-        OnNextWaveRequested?.Invoke();
-        // 골드 정산
-        // ↑ 이벤트 구독 하여 골드 ui쪽으로 업데이트만 하면 됨 
-
+        StopAllCoroutines();
         // 다음 웨이브 준비 시작
-
-        // StartCoroutine(PrepareNextWave());
+        OnNextWaveRequested?.Invoke();
     }
+    
+    //OnNextWaveRequested?.Invoke(); 
+    
 
 
 
@@ -295,7 +294,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     
     private void RefreshGoldUI()
     {
-        _goldUI.text = $"보유 골드 : {_gameManager._gold }";
+        _goldUI.text = $"{_gameManager._gold }G";
     }
 
     // fps 실습때 진행한 playerWeapon과 UI로 확인

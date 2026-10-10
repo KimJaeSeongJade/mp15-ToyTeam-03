@@ -36,9 +36,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField] private GameObject _attackModeUI; // 공격모드 UI
     [SerializeField] private Image _skillCooldownImage; // 스킬 쿨타임 이미지
     [SerializeField] private TextMeshProUGUI _skillCooldownText; // 스킬 쿨타임 텍스트
-    
-    [SerializeField] private Image _buildCooldownImage;
-    [SerializeField] private TextMeshProUGUI _buildCooldownText;
 
     [SerializeField] private Image _cursorImage;
     [SerializeField] private Sprite[]  _cursorSprites;
@@ -550,6 +547,9 @@ public class GameManager : SingletonBehaviour<GameManager>
         _inGameUI.SetActive(false);
         // 결과 판넬 꺼진 상태
         _gameResultPanel.SetActive(false);
+        // 스킬 쿨타임 반영 ui 꺼짐 상태
+        _skillCooldownImage.gameObject.SetActive(false);
+        _skillCooldownText.gameObject.SetActive(false);
     }
 
     
