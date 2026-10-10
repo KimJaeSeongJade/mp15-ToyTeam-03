@@ -7,21 +7,21 @@ public class AttackTurret : BaseTurret, IBuffable
 {
     [SerializeField] private float _attackRange;
     [SerializeField] private LayerMask _targetMask;
-    [SerializeField] private Transform _muzzlePoint;
-    [SerializeField] private Bullet _bullets;
-    private ObjectPool<Bullet>  _bulletPool;
+    [SerializeField] protected Transform _muzzlePoint;
+    [SerializeField] protected Bullet _bullets;
+    protected ObjectPool<Bullet>  _bulletPool;
     [SerializeField] private float _bulletCoolTime;
     
     
     [SerializeField] private Transform _target;
     private float _lastAttackTime;
 
-    private void Start()
+    protected virtual void Start()
     {
         _bulletPool = new ObjectPool<Bullet>(_bullets, 10, _muzzlePoint, bullet => { bullet.InitDate(); });
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (_target == null) return;
 

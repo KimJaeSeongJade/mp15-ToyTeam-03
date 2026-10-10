@@ -131,3 +131,4 @@ public class MonsterMove : MonoBehaviour, IMonsterMoveable
         _agent = GetComponent<NavMeshAgent>();
     }
 }
+
