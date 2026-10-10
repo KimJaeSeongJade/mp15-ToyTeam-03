@@ -74,9 +74,6 @@ public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
 
     public BaseTurret GetSelectedTurret(int num)
     {
-        #if UNITY_EDITOR
-        Debug.Log( _baseTurretlist.Count);
-#endif
         return num >= _baseTurretlist.Count ? null : _baseTurretlist[num];
     }
 }

@@ -39,6 +39,8 @@ public class CastleHp : MonoBehaviour,ICastleInterface
         }
         _hp -= damage;
 
+        Debug.Log($"{damage} / {_hp}");
+
         OnCastleHealthChanged?.Invoke(_hp, _maxHp);
     }
     /*UI에서 
