@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 1661131092487338194}
   - component: {fileID: 8497655396227700380}
   - component: {fileID: 173408800482432190}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AttackTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ MonoBehaviour:
     m_Bits: 512
   _muzzlePoint: {fileID: 7967880760251419405}
   _bullets: {fileID: 4857848663938798310, guid: 6b54568e97b8548459be6b81b636e63c, type: 3}
-  _bulletCoolTime: 3
+  _bulletCoolTime: 1
   _target: {fileID: 0}
 --- !u!114 &173408800482432190
 MonoBehaviour:
