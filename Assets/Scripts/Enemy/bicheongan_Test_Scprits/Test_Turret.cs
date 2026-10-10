@@ -69,4 +69,9 @@ public class Test_Turret : MonoBehaviour, IDamageable
     {
         
     }
+
+    public bool CheckExecution(float thresholdRatio)
+    {
+        return false;
+    }
 }

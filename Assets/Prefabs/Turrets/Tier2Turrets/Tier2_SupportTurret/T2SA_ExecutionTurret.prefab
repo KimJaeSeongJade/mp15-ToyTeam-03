@@ -512,6 +512,6 @@ MonoBehaviour:
   _executionThreshold: 0.15
   _enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   _scanInterval: 0.2
   _executionFxPrefab: {fileID: 0}
