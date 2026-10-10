@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,7 @@ public class MonsterMove : MonoBehaviour
         _agent.speed = reenemy.MonSpeed;
         originalSpeed = _agent.speed;
     }
-
+    
     private void Update()
     {
         Move();
@@ -34,10 +35,20 @@ public class MonsterMove : MonoBehaviour
         #if UNITY_EDITOR
         Debug.Log("이동");
 #endif
+
+        ResetPath(waypoint.transform.position);
         arrivePoint = 0; // 이동해 인덱스 도착시 1+ 더하기
         _agent.SetDestination(waypoint._waypoints[arrivePoint].position);
 
+        _agent.velocity = Vector3.zero;
     }
+
+    public void ResetPath(Vector3 warpPos)
+    {
+        _agent.ResetPath();
+        _agent.Warp(warpPos);
+    }
+
 
     public void Move()
     {

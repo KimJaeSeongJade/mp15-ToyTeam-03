@@ -43,6 +43,15 @@ public class CastleHp : MonoBehaviour,ICastleInterface
 
         OnCastleHealthChanged?.Invoke(_hp, _maxHp);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<BaseEnemy>(out BaseEnemy enemy))
+        {
+            CastleTakeDamage(enemy.MonCastleDam);
+        }
+    }
+
     /*UI에서 
     private void Start()
     {
