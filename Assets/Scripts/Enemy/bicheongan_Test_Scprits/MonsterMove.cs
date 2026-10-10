@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,6 @@ public class MonsterMove : MonoBehaviour
     private int arrivePoint;
     private NavMeshAgent _agent;
     private BaseEnemy reenemy;
-    private MonsterHealth istrue;
 
     private bool _turretDis;
     private float originalSpeed;
@@ -21,18 +21,7 @@ public class MonsterMove : MonoBehaviour
         _agent.speed = reenemy.MonSpeed;
         originalSpeed = _agent.speed;
     }
-    public void Reset()
-    {
-        waypoints = null;
-        arrivePoint = 0;
-        _agent.speed = reenemy.MonSpeed;
-        originalSpeed = _agent.speed;
-        _turretDis = false;
-
-        _agent.velocity = Vector3.zero;
-        _agent.isStopped = true;
-    }
-
+    
     private void Update()
     {
         Move();
@@ -42,18 +31,24 @@ public class MonsterMove : MonoBehaviour
     // 경로 정보 받아오기
     public void Initialize(WayPointPath waypoint)
     {
-        if (waypoint == null) return;
-        if (waypoint._waypoints == null) return;
-        if (_turretDis) return;
-
         waypoints = waypoint._waypoints;
         #if UNITY_EDITOR
         Debug.Log("이동");
 #endif
+
+        ResetPath(waypoint.transform.position);
         arrivePoint = 0; // 이동해 인덱스 도착시 1+ 더하기
         _agent.SetDestination(waypoint._waypoints[arrivePoint].position);
 
+        _agent.velocity = Vector3.zero;
     }
+
+    public void ResetPath(Vector3 warpPos)
+    {
+        _agent.ResetPath();
+        _agent.Warp(warpPos);
+    }
+
 
     public void Move()
     {
@@ -61,18 +56,17 @@ public class MonsterMove : MonoBehaviour
         if (waypoints.Count == 0) return;
         if (_agent.pathPending) return;
 
-        if (_turretDis) return;
-
         if (_agent.remainingDistance <= _agent.stoppingDistance)
         {
-                arrivePoint++;
+            arrivePoint++;
+            if (_turretDis) return;
             if (arrivePoint >= waypoints.Count)
             {
                 // 마지막 Waypoint 도착
                 #if UNITY_EDITOR
                 Debug.Log("도착");
 #endif
-                //reenemy.ReturnToPool();
+                reenemy.ReturnToPool();
                 arrivePoint = 0;
                 return;
             }
@@ -93,7 +87,6 @@ public class MonsterMove : MonoBehaviour
     {
         yield return new WaitForSeconds(20f);
         _agent.speed = originalSpeed;
-        istrue.IsSlowReset(); // false로 바꾸어준다.
         #if UNITY_EDITOR
         Debug.Log("정상 스피드");
 #endif
@@ -125,7 +118,6 @@ public class MonsterMove : MonoBehaviour
     {
         reenemy = GetComponent<BaseEnemy>();
         _agent = GetComponent<NavMeshAgent>();
-        istrue = GetComponent<MonsterHealth>();   
     }
 }
 
