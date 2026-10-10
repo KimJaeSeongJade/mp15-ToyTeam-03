@@ -24,7 +24,24 @@ public class BossMove : MonoBehaviour
         _agent.speed = reenemy.MonSpeed;
         originalSpeed = _agent.speed;
     }
+    public void Reset()
+    {
+        waypoints = null;
+        arrivePoint = 0;
+        _agent.speed = reenemy.MonSpeed;
+        originalSpeed = _agent.speed;
+        _turretDis = false;
 
+        _agent.velocity = Vector3.zero;
+        _agent.isStopped = true;
+
+        //arrivePoint = 0;
+        //_agent.speed = reenemy.MonSpeed;
+        //originalSpeed = _agent.speed;
+        //_turretDis = false;
+        //_agent.isStopped = false;
+
+    }
     private void Update()
     {
         Move();
@@ -34,6 +51,11 @@ public class BossMove : MonoBehaviour
     // 경로 정보 받아오기
     public void Initialize(WayPointPath waypoint)
     {
+        if (waypoint == null) return;
+        if (waypoint._waypoints == null) return;
+        if (waypoints.Count == 0) return;
+        if (_turretDis) return;
+
         waypoints = waypoint._waypoints;
         Debug.Log("이동");
         arrivePoint = 0; // 이동해 인덱스 도착시 1+ 더하기
@@ -46,16 +68,16 @@ public class BossMove : MonoBehaviour
         if (waypoints == null) return;
         if (waypoints.Count == 0) return;
         if (_agent.pathPending) return;
+        if (_turretDis) return;
 
         if (_agent.remainingDistance <= _agent.stoppingDistance)
         {
             arrivePoint++;
-            if (_turretDis) return;
             if (arrivePoint >= waypoints.Count)
             {
                 // 마지막 Waypoint 도착
                 Debug.Log("도착");
-                reenemy.ReturnToPool();
+                //reenemy.ReturnToPool();
                 arrivePoint = 0;
                 return;
             }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.AI;
 
 public class MonsterSpawner : MonoBehaviour
 {
@@ -21,15 +22,15 @@ public class MonsterSpawner : MonoBehaviour
     {
         Init();
     } 
-    private void OnEnable()
-    {
-        _waveManager.OnWaveEnded += HandleSpawnEnd;
-    }
-
-    private void OnDisable()
-    {
-        _waveManager.OnWaveEnded -= HandleSpawnEnd;
-    }
+    // private void OnEnable()
+    // {
+    //     _waveManager.OnWaveEnded += HandleSpawnEnd;
+    // }
+    //
+    // private void OnDisable()
+    // {
+    //     _waveManager.OnWaveEnded -= HandleSpawnEnd;
+    // }
     
 
     private void Init()
@@ -59,17 +60,19 @@ public class MonsterSpawner : MonoBehaviour
             if (_isSpawnEnd != false)
             { 
                 _monster = _monsterGroupPool.Pop(resultData.monster); 
-                _monster.transform.SetPositionAndRotation(targetPath.transform.position, transform.rotation);
                 
+                MonsterMove _normalMon = _monster.GetComponent<MonsterMove>();
+                
+                _normalMon.ResetPath(transform.position);
+
                 BossMove _boss = _monster.GetComponent<BossMove>();
-            
+                
                 if (_boss != null)
                 {
                     _boss.Initialize(targetPath);
                 }
                 else
                 {
-                    MonsterMove _normalMon = _monster.GetComponent<MonsterMove>();
                     if (_normalMon != null)
                     {
                         _normalMon.Initialize(targetPath);

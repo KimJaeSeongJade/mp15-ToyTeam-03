@@ -905,7 +905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _monHp: 30
   _monDefend: 0
-  _monSpeed: 5
+  _monSpeed: 2
   _monGlod: 100
   _monExp: 20
   _monCastleDam: 10

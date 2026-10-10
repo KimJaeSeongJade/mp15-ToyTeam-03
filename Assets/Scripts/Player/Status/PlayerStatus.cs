@@ -9,7 +9,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _dashSpeed = 10f;
 
-    private PlayerLevelManager _levelManager;
+    [SerializeField] private PlayerLevelManager _levelManager;
     private PlayerAttackMode _attackMode;
     private PlayerBuildMode _buildMode;
     private bool _isAttackMode = true;

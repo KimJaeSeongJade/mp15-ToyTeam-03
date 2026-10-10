@@ -16,8 +16,10 @@ public class BaseEnemy : PoolObject
     [SerializeField] private GameObject _spawnImpact;
 
     [SerializeField] protected float _maxMonHp;
+
     private Transform _tr;
     private PlayerLevelManager _eXP;
+    private CastleHp _TakeDam;
 
     public float MonHp { get { return _monHp; } set { _monHp = value; } }
     public float MonDefend { get { return _monDefend; } set { _monDefend = value; } }
@@ -31,6 +33,8 @@ public class BaseEnemy : PoolObject
     public float MonMaxHp { get => _maxMonHp; set { _maxMonHp = value; } }
 
     private MonsterHealth ResetHealth;
+    private MonsterMove _move;
+    private BossMove _bossMove;
 
     public event Action<BaseEnemy> onRemoved;
 
@@ -55,9 +59,23 @@ public class BaseEnemy : PoolObject
 
     public override void Sleep()
     {
+        Debug.Log(1);
         transform.SetParent(_tr);
+        Debug.Log(2);
         onRemoved?.Invoke(this);
+        Debug.Log(3);
         gameObject.SetActive(false);
+        Debug.Log(4);
+        if (_move != null)
+        {
+            _move.Reset();
+        }
+        Debug.Log(5);
+        if (_bossMove != null)
+        {
+            _bossMove.Reset();
+        }
+        Debug.Log(6);
     }
     public void GiveToExpPlayer()
     {
@@ -71,10 +89,12 @@ public class BaseEnemy : PoolObject
         if (_finished == true) return;
 
         _finished = true;
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         Debug.Log("결승");
+        _TakeDam.CastleTakeDamage(10);
 #endif
         Returned?.Invoke(this);
+        ReturnToPool();
     }
     private void MonSpwanImpact()
     {
@@ -89,5 +109,8 @@ public class BaseEnemy : PoolObject
     {
         _eXP = GameManager.Instance.PlayerStatus.GetComponent<PlayerLevelManager>();
         ResetHealth = GetComponent<MonsterHealth>();
+        _move = GetComponent<MonsterMove>();
+        _bossMove= GetComponent<BossMove>();
+        _TakeDam = GetComponent<CastleHp>();
     }
 }

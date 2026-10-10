@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,6 +58,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     // -----------------------------------------------------------------
     
     [SerializeField] private CastleHp _castleHp;
+    [SerializeField] private Image _castleHpFillImage;
     [SerializeField] private TextMeshProUGUI _castleHpText;
     
     // [SerializeField] private CastleHp _castleHp;
@@ -71,6 +73,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     [field:SerializeField] public PlayerStatus PlayerStatus{get; private set;}
     //[SerializeField] private TurretCombinationTable _turretCombinationTable;
+    
+    [field:SerializeField]public WaveManager _waveManager { get; private set; }
     
     private PlayerWallet _wallet;
     private float _skillRemainingTime;
@@ -100,14 +104,12 @@ public class GameManager : SingletonBehaviour<GameManager>
         base.Awake();
 
         CacheComponents();
-
-        InitStart();
-
+        
         //if (currentState != null)
 
     }
 
-    private void InitStart()
+    private void Start()
     {
         BindPlayerModeUI();
         ChangeState(GameState.Ready);
@@ -117,12 +119,13 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         // 플레이어 초기 경험치 UI
         RefreshExpUI(PlayerStatus.Exp, PlayerStatus.RequiredExp);
+
+        Init();
     }
 
     private void Update()
     {
         PauseManager();
-
     }
     // --------------------------------------------------------
     
@@ -216,20 +219,20 @@ public class GameManager : SingletonBehaviour<GameManager>
         PlayerStatus.OnBuildCooldownStarted += SetPlayerBuildCooldownUI;
         PlayerStatus.OnCursorChanged += SetCrosshair;
         // ----------------------------------------
-        
+
         // 플레이어 경험치 / 레벨 UI -------------------
         PlayerStatus.OnExpChanged += RefreshExpUI;
         PlayerStatus.OnLevelChanged += RefreshLevelUI;
         // ----------------------------------------
 
         // 게임 오버 판정 체크 --------------
-        _castleHp.OnCastleHealthChanged += RefreshCastleHealthUI;
-        _castleHp.OnCastleHealthChanged += CheckGameOver;
+        //_castleHp.OnCastleHealthChanged += RefreshCastleHealthUI;
+        //_castleHp.OnCastleHealthChanged += CheckGameOver;
         //------------------------------
 
-        WaveManager.Instance.OnAllWavesCleared += CheckGameClear;
-        WaveManager.Instance.OnNextWaveRequested += HandleNextWaveRequested;
-    }
+        _waveManager.OnAllWavesCleared += CheckGameClear;
+        _waveManager.OnNextWaveRequested += HandleNextWaveRequested;
+   }
 
     private void HandleNextWaveRequested()
     {
@@ -439,6 +442,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private void RefreshCastleHealthUI(float currentHp, float maxHp)
     {
         _castleHpText.text = $"{currentHp:F0}/{maxHp:F0}";
+        _castleHpFillImage.fillAmount = Mathf.Clamp01(currentHp / maxHp);
     }
 
 
