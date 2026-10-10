@@ -271,13 +271,8 @@ public class WaveManager : SingletonBehaviour<WaveManager>
             OnAllWavesCleared?.Invoke();
             return;
         }
-        OnNextWaveRequested?.Invoke();
-        // 골드 정산
-        // ↑ 이벤트 구독 하여 골드 ui쪽으로 업데이트만 하면 됨 
-
         // 다음 웨이브 준비 시작
-
-        // StartCoroutine(PrepareNextWave());
+        OnNextWaveRequested?.Invoke();
     }
 
 

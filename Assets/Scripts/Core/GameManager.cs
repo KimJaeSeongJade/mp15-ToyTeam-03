@@ -547,6 +547,9 @@ public class GameManager : SingletonBehaviour<GameManager>
         _inGameUI.SetActive(false);
         // 결과 판넬 꺼진 상태
         _gameResultPanel.SetActive(false);
+        // 스킬 쿨타임 반영 ui 꺼짐 상태
+        _skillCooldownImage.gameObject.SetActive(false);
+        _skillCooldownText.gameObject.SetActive(false);
     }
 
     
