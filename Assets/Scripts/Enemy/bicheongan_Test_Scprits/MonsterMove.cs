@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MonsterMove : MonoBehaviour
+public class MonsterMove : MonoBehaviour, IMonsterMoveable
 {
     //[SerializeField] private WayPointPath _start; //스폰 포인트 참조
     private List<Transform> waypoints;
