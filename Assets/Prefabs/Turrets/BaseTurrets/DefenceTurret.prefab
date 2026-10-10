@@ -265,6 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e05c9d67130920448013e330a617877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
+  _info: 
   _preview: {fileID: 3948341175797632354}
   _maxHp: 350
   _goldCost: 100
@@ -277,7 +279,7 @@ MonoBehaviour:
     m_Bits: 512
   _muzzlePoint: {fileID: 1908856182375406686}
   _bullets: {fileID: 0}
-  _bulletCoolTime: 0
+  _bulletCoolTime: 1
   _shield: 0
   _target: {fileID: 0}
 --- !u!1 &1812503333591112134
