@@ -19,6 +19,9 @@ public class GameManager : SingletonBehaviour<GameManager>
     // --- 판넬 ------------
     [SerializeField] private GameObject _startPanel;    // 시작 화면 UI
     [SerializeField] private GameObject _pausePanel;    // 일시정지 UI
+    
+    [SerializeField] private GameObject _gameResultPanel; // 게임 오버 / 클리어 UI 
+    [SerializeField] private TextMeshProUGUI _gameResultText;
     //---------------------
     
     // --- 인게임 UI -----------------------------------------------
@@ -46,13 +49,14 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField] private TurretInfo[] _turretInfo;
 
     // -----------------------------------------------------------------
-
     
-    [SerializeField] private WaveManager _waveManager;
     [SerializeField] private CastleHp _castleHp;
     [SerializeField] private TextMeshProUGUI _castleHpText;
     
     // [SerializeField] private CastleHp _castleHp;
+    
+    // 게임 초기화를 위한 웨이브 매니저에게 상태 변경 전달해줘서 웨이브쪽에서 웨이브 관련 코루틴 종료처리
+    public event Action<GameState> OnGameStateChanged;
     
     public bool IsStarted { get; private set; }
     
@@ -92,15 +96,14 @@ public class GameManager : SingletonBehaviour<GameManager>
         CacheComponents();
         
         //if (currentState != null)
-        BindPlayerModeUI();
+
     }
     
     private void Start()
     {
-        Init();
-        ResetToTitle(); // TODO 게임 데이터 초기화 연결해야함. (이벤트로)
+        BindPlayerModeUI();
         ChangeState(GameState.Ready);
-        RefreshCastleHealthUI(_castleHp.CurrentHP, _castleHp.MaxHp);
+        RefreshCastleHealthUI(_castleHp.CurrentHP,_castleHp.MaxHp);
     }
 
     private void Update()
@@ -143,39 +146,53 @@ public class GameManager : SingletonBehaviour<GameManager>
                 ResetToTitle();
                 break;
             case GameState.WavePreparation:
+                _gameResultPanel.SetActive(false);
                 WaveManager.Instance.StartFirstWavePrepare();
                 // 라운드 시작 전 로직
                 // 웨이브 준비 UI 잠시 띄웠다가 지우기 or
                 // 30초 위에 띄우고 웨이브 준비 단계
-                break;
-            case GameState.OnWave:
-                // 웨이브 시작 때 로직
-                // 웨이브 중임을 알리는 텍스트 : 남은 몹
-                // 만약 클리어면 클리어 로직 처리하고 다음 웨이브 준비
-                // 만약 클리어 못했으면 게임 오버 상태로 변경
                 break;
             case GameState.Paused:
                 // 일시 정지 로직
                 break;
             case GameState.GameOver:
                 // 게임 오버 로직
+                Pause();
+                ShowGameResult("Game Over!!");
                 break;
             case GameState.GameClear:
-                
+                Pause();
                 // 게임 클리어 로직
+                ShowGameResult("Clear!!");
                 break;
         }
+        // 웨이브 매니저가 상태 변경 정보 체크
+        OnGameStateChanged?.Invoke(currentState);
     }
 
     private void BindPlayerModeUI()
     {
+        // 플레이어 스킬, 상태, 조준점 ------------------
         PlayerStatus.OnPlayerModeChanged += SetPlayerModeUI;
         PlayerStatus.OnSkillCooldownStarted += SetPlayerSkillCooldownUI;
         PlayerStatus.OnBuildCooldownStarted += SetPlayerBuildCooldownUI;
         PlayerStatus.OnCursorChanged += SetCrosshair;
+        // ----------------------------------------
+        
+        // 게임 오버 판정 체크 --------------
         _castleHp.OnCastleHealthChanged += RefreshCastleHealthUI;
         _castleHp.OnCastleHealthChanged += CheckGameOver;
+        //------------------------------
+
+        WaveManager.Instance.OnAllWavesCleared += CheckGameClear;
+        WaveManager.Instance.OnNextWaveRequested += HandleNextWaveRequested;
     }
+
+    private void HandleNextWaveRequested()
+    {
+        ChangeState(GameState.WavePreparation);
+    }
+    
 
     private void SetCrosshair(CrosshairType crosshairType)
     {   // -1 : 기본 / 0 : 공격 / 1 : 건설
@@ -316,10 +333,27 @@ public class GameManager : SingletonBehaviour<GameManager>
         _crosshair.SetActive(false);
     }
     
-    //  UI 매니저 쪽에서 
+    //  UI 매니저 쪽으로 추후 수정
     private void RefreshCastleHealthUI(float currentHp, float maxHp)
     {
         _castleHpText.text = $"{currentHp:F0}/{maxHp:F0}";
+    }
+
+
+    private void ShowGameResult(string resultMessage)
+    {
+        _gameResultText.text = resultMessage;
+        _gameResultPanel.SetActive(true);
+    }
+    
+    private void CheckGameClear()
+    {
+        // 이미 게임 오버나 클리어 상태면 return
+        if (currentState == GameState.GameOver ||
+            currentState == GameState.GameClear)
+            return;
+
+        ChangeState(GameState.GameClear);
     }
 
     
@@ -327,7 +361,10 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private void CheckGameOver(float currentHp, float maxHp)
     {
-        if (currentHp <= 0f)
+        // 캐슬 체력 0 이하 & 현재 게임 상태가 게임오버가 아니면 게임 오버 처리
+        if (currentHp <= 0f &&
+            currentState != GameState.GameOver &&
+            currentState != GameState.GameClear)
         {
             ChangeState(GameState.GameOver);
         }
@@ -335,6 +372,15 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     // 현재 hp 변경되면 값을 못 받아와서 초기값 받아와야함.
     // 그냥 받아오는 구조 대신 이거도 상수로 내가 가지고 있는게 낫지 않을까
+    // 근데 이전 회의 때 게임 매니저가 캐슬 hp 보유하지 않기로 결정.
+
+    
+    // 결과 창 버튼이 할 일
+    public void ReturnToTitle()
+    {
+        ChangeState(GameState.Ready);
+    }
+    
     
     // 게임 리셋
     private void ResetToTitle()
@@ -343,17 +389,20 @@ public class GameManager : SingletonBehaviour<GameManager>
         // 게임 시간 정지
         Pause();
         canPause = false;
+        IsPause = false;
         
+        _gameResultPanel.SetActive(false);
+
         // TODO RestartGame();
         // OnGameRestarted?.Invoke(); 로 해서 이벤트로 처리하는게 좋을듯
-        
+
         // 대신 전체 게임 진행상황도 초기화해야함.
         // 웨이브 = 0, 타이머 = 0, 생존 몬스터 수 0, SpawnFinished false
         // player HP,Gold,위치 초기화
         // 스포너 : Spawn 중지, 생성 몬스터 풀로 복귀
         // Tower 설치된 터렛 제거
         // UI는 웨이브/골드/HP/타워 쿨타임 초기화
-        
+
         // 웨이브 매니저 코루틴 시간 계산 쪽은 StopAllCoroutines()로 하면될듯
         //
     }
@@ -392,6 +441,8 @@ public class GameManager : SingletonBehaviour<GameManager>
         _pausePanel.gameObject.SetActive(false);
         // 인게임 판넬도 꺼진 상태
         _inGameUI.SetActive(false);
+        // 결과 판넬 꺼진 상태
+        _gameResultPanel.SetActive(false);
     }
 
     

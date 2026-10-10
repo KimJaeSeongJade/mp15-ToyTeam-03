@@ -21,6 +21,8 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     // 정보 받아와야하면 추후에 수정
 
     private int _currentWave = 0;
+    private bool _isWaveEnded = false;
+    
     [SerializeField] private float _remainingTime;
     [SerializeField] private int _aliveMonsterCount;
     [SerializeField] private bool _isSpawnFinished;
@@ -32,8 +34,13 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     // delegate
     public event Action OnWaveStarted;
     public event Action OnWaveEnded;
+    
+    public event Action OnNextWaveRequested;
+    
     public event Action<int> OnWaveChanged;
     public event Action<float> OnPrepareTimeChanged;
+    
+    public event Action OnAllWavesCleared;
     
 
     // --- 이벤트 함수 ---------------------------------------------
@@ -57,7 +64,10 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         // 게임매니저에서 시작 전달받아와야함.
         //if (GameManager.Instance.currentState != GameState.WavePreparation) return;
         //StartFirstWavePrepare();
-        Debug.Log("웨이브 준비 단계");
+        if (_gameManager != null)
+        {
+            _gameManager.OnGameStateChanged += UpdateGameStateChanged;
+        }
 
         // GameManager 게임 시작 이벤트 구독 
 
@@ -70,10 +80,57 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private void OnDisable()
     {
         // 이벤트 구독 해제
+        if (_gameManager != null)
+        {
+            _gameManager.OnGameStateChanged -= UpdateGameStateChanged;
+        }
     }
+    
+
     
     // --------------------------------------------------------------
 
+    private void UpdateGameStateChanged(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.Ready:
+                StopWaveProgress();
+                ResetWaveData();
+                break;
+
+            case GameState.GameOver:
+            case GameState.GameClear:
+                StopWaveProgress();
+                break;
+        }
+    }
+    
+    // 웨이브 데이터 초기화 --------------
+    private void ResetWaveData()
+    {
+        _currentWave = 0;
+        _remainingTime = 0f;
+        _aliveMonsterCount = 0;
+        _isSpawnFinished = false;
+        _isWaveEnded = false;
+    }
+    
+    private void StopWaveProgress()
+    {
+        StopAllCoroutines();
+        //_monsterSpawner.StopSpawning();
+        // 포탈 이펙트 끄고, 스포너쪽 Stop All 코루틴 : 퍼블릭으로 만들어주세요. (필요한 거만 StopCorutine 처리하는게 더 좋아보이긴 함)
+        
+        // 스포너쪽에서 처리할 거
+        /*public void StopSpawning()
+        {
+            StopAllCoroutines();
+            // 포털 이펙트 비활성화
+        }*/
+    }
+    
+    
     
     // 게임 시작 시 호출
     public void StartFirstWavePrepare()
@@ -128,7 +185,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
         OnWaveChanged?.Invoke(_currentWave);
         OnWaveStarted?.Invoke();
         */
-        
+        _isWaveEnded = false;
         _aliveMonsterCount = 0;
         _isSpawnFinished = false;
 
@@ -173,8 +230,19 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     // 몬스터 스폰 끝나고 생존한 몬스터가 없는 경우 종료
     private void CheckWaveEnd()
     {
+        // 이미 종료 처리된 웨이브 return
+        if (_isWaveEnded) return;
+        
+        // 게임 자체가 종료된 상태라면 무시
+        if (_gameManager.currentState == GameState.GameOver ||
+            _gameManager.currentState == GameState.GameClear)
+        {
+            return;
+        }
+        
         if (_isSpawnFinished && _aliveMonsterCount <= 0)
         {
+            _isWaveEnded = true;
             EndWave();
         }
     }
@@ -183,20 +251,22 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private void EndWave()
     {
         OnWaveEnded?.Invoke();
-        PrintClearText();
         // 웨이브 클리어 UI 출력
+        PrintClearText();
         
-        // 드랍 골드 정산
-        
-        // 골드 정산 메서드 
-        
-        // 배달 함수 호출
-
+        // 다음 웨이브 없으면 클리어
+        if (_currentWave >= _monsterSpawner.TotalWaveCount)
+        {
+            OnAllWavesCleared?.Invoke();
+            return;
+        }
+        OnNextWaveRequested?.Invoke();
+        // 골드 정산
         // ↑ 이벤트 구독 하여 골드 ui쪽으로 업데이트만 하면 됨 
 
         // 다음 웨이브 준비 시작
 
-        StartCoroutine(PrepareNextWave());
+        // StartCoroutine(PrepareNextWave());
     }
 
 
@@ -204,7 +274,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     private void PrintClearText()
     {
         _stageClearText.gameObject.SetActive(true);
-        _stageClearText.text = "STAGE CLEAR!!";
+        _stageClearText.text = "Wave CLEAR!!";
     }
 
     private void CacheComponents()
