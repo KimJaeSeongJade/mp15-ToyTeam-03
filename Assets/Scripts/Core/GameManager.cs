@@ -103,16 +103,18 @@ public class GameManager : SingletonBehaviour<GameManager>
         base.Awake();
 
         CacheComponents();
-        
+
+        InitStart();
+
         //if (currentState != null)
 
     }
-    
-    private void Start()
+
+    private void InitStart()
     {
         BindPlayerModeUI();
         ChangeState(GameState.Ready);
-        RefreshCastleHealthUI(_castleHp.CurrentHP,_castleHp.MaxHp);
+        RefreshCastleHealthUI(_castleHp.CurrentHP, _castleHp.MaxHp);
         // 플레이어 초기 레벨 UI
         RefreshLevelUI(PlayerStatus.Level);
 
@@ -222,7 +224,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         PlayerStatus.OnExpChanged += RefreshExpUI;
         PlayerStatus.OnLevelChanged += RefreshLevelUI;
         // ----------------------------------------
-        
+
         // 게임 오버 판정 체크 --------------
         _castleHp.OnCastleHealthChanged += RefreshCastleHealthUI;
         _castleHp.OnCastleHealthChanged += CheckGameOver;
@@ -326,13 +328,14 @@ public class GameManager : SingletonBehaviour<GameManager>
     private IEnumerator UpdateUIRoutine(int slotNum, float buildCooldown)
     {
         // 슬롯별 독립적인 쿨타임 관리
-        float remainingTime = buildCooldown;
+        float remainingTime = _turretInfo[slotNum].TurretCooldown;
+        float _buildCooldown = _turretInfo[slotNum].TurretCooldown;
 
         // 해당 슬롯의 터렛 UI 정보
         TurretInfo turret = _turretInfo[slotNum];
 
         // 쿨타임이 없으면 UI 비활성화
-        if (buildCooldown <= 0f)
+        if (_buildCooldown <= 0f)
         {
             turret.TurretText.gameObject.SetActive(false);
             turret.TurretImage.gameObject.SetActive(false);
@@ -354,7 +357,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
             // 터렛 쿨타임 fillAmount
             turret.TurretImage.fillAmount =
-                Mathf.Clamp01(remainingTime / buildCooldown);
+                Mathf.Clamp01(remainingTime / _buildCooldown);
 
             yield return null;
         }

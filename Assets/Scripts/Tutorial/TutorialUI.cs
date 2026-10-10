@@ -73,7 +73,7 @@ public class TutorialUI : MonoBehaviour
         _buildTarget = Find(root, "Turret1UI") as RectTransform;
         _exitBuildTarget = Find(root, "ExitBuildModeUI") as RectTransform;
         FocusTargets = new RectTransform[12];
-        FocusTargets[(int)TutorialFocus.Experience] = Find(root, "ExpText") as RectTransform;
+        FocusTargets[(int)TutorialFocus.Experience] = Find(root, "ExpBarBackGround") as RectTransform;
         FocusTargets[(int)TutorialFocus.Attack] = Find(root, "BasicAttackUI") as RectTransform;
         FocusTargets[(int)TutorialFocus.Skill] = Find(root, "SpecialAttackUI") as RectTransform;
         FocusTargets[(int)TutorialFocus.Build] = _buildTarget;

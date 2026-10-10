@@ -12798,7 +12798,7 @@ MonoBehaviour:
   _skillAttacks:
   - {fileID: 5997034715849493791, guid: 4326717c3c88f9547938be94a51644a0, type: 3}
   - {fileID: 5123464600494981101, guid: 473faffd34d0ce04cbc2a95fc3341684, type: 3}
-  _lvUpEffect: {fileID: 0}
+  _lvUpEffect: {fileID: 4987666491960284591, guid: 442aca3bb0ebbde4e80bd892842d099e, type: 3}
 --- !u!114 &2933079705908043019
 MonoBehaviour:
   m_ObjectHideFlags: 0

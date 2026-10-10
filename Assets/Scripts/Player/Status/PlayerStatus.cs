@@ -150,5 +150,8 @@ public class PlayerStatus : MonoBehaviour
         _levelManager = GetComponent<PlayerLevelManager>();
         _attackMode = GetComponent<PlayerAttackMode>();
         _buildMode = GetComponent<PlayerBuildMode>();
+
+        OnLevelChanged?.Invoke(Level);
+        OnExpChanged?.Invoke(Exp, RequiredExp);
     }
 }
