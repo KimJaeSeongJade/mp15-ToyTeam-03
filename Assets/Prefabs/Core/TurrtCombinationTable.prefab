@@ -47,6 +47,8 @@ MonoBehaviour:
   _baseTurretlist:
   - {fileID: 4042182580509433704, guid: 48914718a262942419d8429efa4ba6a6, type: 3}
   - {fileID: 3635314910552156650, guid: 1e27a6c3fa2fbf649b35eb5ab09dd2c9, type: 3}
+  - {fileID: 3635314910552156650, guid: 1e27a6c3fa2fbf649b35eb5ab09dd2c9, type: 3}
+  - {fileID: 3635314910552156650, guid: 1e27a6c3fa2fbf649b35eb5ab09dd2c9, type: 3}
   _combinationsViewer:
   - ExistType: 0
     AddedType: 1

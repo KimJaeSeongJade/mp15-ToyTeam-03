@@ -125,8 +125,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3292110470117957552}
   - component: {fileID: 5699668193296761332}
-  - component: {fileID: 6746061044754055899}
-  m_Layer: 0
+  - component: {fileID: 2085691399005447632}
+  m_Layer: 10
   m_Name: SupportTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be4d06afa8922d4db65e0af0574a1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6746061044754055899
+--- !u!114 &2085691399005447632
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,26 +176,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2835738551911499857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e05c9d67130920448013e330a617877, type: 3}
+  m_Script: {fileID: 11500000, guid: bbaf4e7d6991730418353f0fb86e05c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  _info: 
+  _name: "\uC9C0\uC6D0\uD0C0\uC6CC"
+  _info: "\uC8FC\uBCC0\uD0C0\uC6CC\uACF5\uACA9\uB825\uC99D\uAC00\uBC84\uD504"
   _preview: {fileID: 5699668193296761332}
-  _maxHp: 350
-  _goldCost: 100
-  _turretType: 1
+  _maxHp: 0
+  _goldCost: 0
+  _turretType: 2
   _baseDamage: 10
   _buildCooldown: 1
-  _defenceRange: 0
-  _targetMask:
+  _buffDamage: 0
+  _buffRange: 0
+  _turretMask:
     serializedVersion: 2
-    m_Bits: 512
-  _muzzlePoint: {fileID: 0}
-  _bullets: {fileID: 0}
-  _bulletCoolTime: 1
-  _shield: 0
-  _target: {fileID: 0}
+    m_Bits: 1024
+  _buffDuration: 3
+  _buffCooldown: 5
 --- !u!1 &2947240997604807835
 GameObject:
   m_ObjectHideFlags: 0

@@ -5641,8 +5641,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2665047764002152825}
-  - component: {fileID: 755409960488231548}
   - component: {fileID: 1710827236713179177}
+  - component: {fileID: -3037077997730432447}
   m_Layer: 0
   m_Name: GoldTurret
   m_TagString: Untagged
@@ -5672,34 +5672,6 @@ Transform:
   - {fileID: 1157418325782045654}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &755409960488231548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5746865719641170120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9f461b14a9977348b02e47edcac44a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _name: 
-  _info: 
-  _preview: {fileID: 1710827236713179177}
-  _maxHp: 300
-  _goldCost: 50
-  _turretType: 0
-  _baseDamage: 10
-  _buildCooldown: 1
-  _attackRange: 5
-  _targetMask:
-    serializedVersion: 2
-    m_Bits: 512
-  _muzzlePoint: {fileID: 2495245894270651596}
-  _bullets: {fileID: 4857848663938798310, guid: 6b54568e97b8548459be6b81b636e63c, type: 3}
-  _bulletCoolTime: 3
-  _target: {fileID: 0}
 --- !u!114 &1710827236713179177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5712,6 +5684,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be4d06afa8922d4db65e0af0574a1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3037077997730432447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5746865719641170120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 909d7ce4a885a9d4f9bbfa949a9212ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: "\uACE8\uB4DC\uD0C0\uC6CC"
+  _info: "\uD0C0\uC6CC \uC124\uCE58 \uC2DC \uC77C\uC815 \uC2DC\uAC04\uB9C8\uB2E4
+    \uACE8\uB4DC \uC0DD\uC131"
+  _preview: {fileID: 1710827236713179177}
+  _maxHp: 0
+  _goldCost: 0
+  _turretType: 3
+  _baseDamage: 10
+  _buildCooldown: 1
+  _goldPrefab: {fileID: 4035207203642884785, guid: 9585eb54ee1d4c14868154e97fa26fd3, type: 3}
+  _spawnPoint: {fileID: 2495245894270651596}
+  _productionCoolTime: 3
 --- !u!1 &6953371870712588817
 GameObject:
   m_ObjectHideFlags: 0

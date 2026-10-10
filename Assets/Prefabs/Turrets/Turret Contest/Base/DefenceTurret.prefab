@@ -265,8 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e05c9d67130920448013e330a617877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  _info: 
+  _name: "\uBC29\uC5B4\uD0C0\uC6CC"
+  _info: "\uC801 \uD53C\uACA9 \uC2DC \uC2AC\uB85C\uC6B0 \uD6A8\uACFC"
   _preview: {fileID: 3948341175797632354}
   _maxHp: 350
   _goldCost: 100
@@ -278,7 +278,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _muzzlePoint: {fileID: 1908856182375406686}
-  _bullets: {fileID: 0}
+  _bullets: {fileID: 4788009782221846059, guid: 1b408a7d3cd3dc745a3a05ae6b5a2000, type: 3}
   _bulletCoolTime: 1
   _shield: 0
   _target: {fileID: 0}
