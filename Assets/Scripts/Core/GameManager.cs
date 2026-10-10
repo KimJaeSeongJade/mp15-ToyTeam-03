@@ -43,11 +43,14 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         public Image TurretImage;
         public TextMeshProUGUI TurretText;
+        public TextMeshProUGUI TurretGoldText; //설치 골드
         public float TurretCooldown;
     }
 
     [SerializeField] private TurretInfo[] _turretInfo;
 
+    private Coroutine[] _turretCooldownCoroutines;
+    
     // -----------------------------------------------------------------
     
     [SerializeField] private CastleHp _castleHp;
@@ -229,8 +232,19 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private void SetPlayerBuildCooldownUI(int slotNum, float buildCooldown)
     {
-        StartCoroutine(UpdateUIRoutine(slotNum, buildCooldown));
+        // 잘못된 슬롯 번호 방지
+        if (slotNum < 0 || slotNum >= _turretInfo.Length)
+            return;
 
+        // 해당 슬롯의 기존 쿨타임 코루틴 중단
+        if (_turretCooldownCoroutines[slotNum] != null)
+        {
+            StopCoroutine(_turretCooldownCoroutines[slotNum]);
+        }
+
+        // 해당 슬롯의 새로운 쿨타임 코루틴 시작
+        _turretCooldownCoroutines[slotNum] =
+            StartCoroutine(UpdateUIRoutine(slotNum, buildCooldown));
     }
     
     
@@ -270,33 +284,80 @@ public class GameManager : SingletonBehaviour<GameManager>
     /// <returns></returns>
     private IEnumerator UpdateUIRoutine(int slotNum, float buildCooldown)
     {
-        
-        _buildRemainingTime = _turretInfo[slotNum].TurretCooldown;
-        _turretInfo[slotNum].TurretText.gameObject.SetActive(true); // 기본값 false
-        _turretInfo[slotNum].TurretImage.gameObject.SetActive(true);
-        while (_buildRemainingTime > 0f)    // 스킬 쿨 돌때만
+        // 슬롯별 독립적인 쿨타임 관리
+        float remainingTime = buildCooldown;
+
+        // 해당 슬롯의 터렛 UI 정보
+        TurretInfo turret = _turretInfo[slotNum];
+
+        // 쿨타임이 없으면 UI 비활성화
+        if (buildCooldown <= 0f)
         {
-            _buildRemainingTime -= Time.deltaTime;// 스킬 시전했으면 쿨타임 보여주기
-            // 스킬 쿨타임 표기
-            _turretInfo[slotNum].TurretText.text = _buildRemainingTime.ToString("F0");
-            // 스킬 쿨타임 fillAmount
-            _turretInfo[slotNum].TurretImage.fillAmount = Mathf.Clamp01(_buildRemainingTime / _turretInfo[slotNum].TurretCooldown);
+            turret.TurretText.gameObject.SetActive(false);
+            turret.TurretImage.gameObject.SetActive(false);
+            yield break;
+        }
+
+        // 터렛 설치 쿨타임 UI 활성화 (기본값 false)
+        turret.TurretImage.gameObject.SetActive(true);
+        turret.TurretText.gameObject.SetActive(true);
+
+        while (remainingTime > 0f) // 터렛 쿨타임 진행 중
+        {
+            remainingTime -= Time.deltaTime; // 남은 쿨타임 감소
+            remainingTime = Mathf.Max(0f, remainingTime);
+
+            // 터렛 쿨타임 표기
+            turret.TurretText.text =
+                Mathf.CeilToInt(remainingTime).ToString();
+
+            // 터렛 쿨타임 fillAmount
+            turret.TurretImage.fillAmount =
+                Mathf.Clamp01(remainingTime / buildCooldown);
+
             yield return null;
         }
-        _turretInfo[slotNum].TurretText.gameObject.SetActive(false); // 기본값 false
-        _turretInfo[slotNum].TurretImage.gameObject.SetActive(false);
+
+        // 쿨타임 종료 후 UI 비활성화
+        turret.TurretImage.fillAmount = 0f;
+        turret.TurretText.gameObject.SetActive(false);
+        turret.TurretImage.gameObject.SetActive(false);
     }
     
     
     private IEnumerator TurretInitRoutine()
     {
-        yield return new WaitUntil(() => TurretCombinationTable.Instance != null);
+        // TurretCombinationTable 초기화 대기
+        yield return new WaitUntil(() =>
+            TurretCombinationTable.Instance != null);
 
         //_turretCombinationTable = TurretCombinationTable.Instance;
-        
+
         for (int i = 0; i < _turretInfo.Length; i++)
         {
-            _turretInfo[i].TurretCooldown = TurretCombinationTable.Instance.GetSelectedTurret(i).BuildCooldown;
+            // 선택된 기본 터렛 데이터 가져오기
+            BaseTurret turretData =
+                TurretCombinationTable.Instance.GetSelectedTurret(i);
+
+            // 터렛 데이터가 없으면 다음 슬롯으로
+            if (turretData == null)
+            {
+                Debug.LogWarning($"터렛 슬롯 {i} 데이터가 없습니다.");
+                continue;
+            }
+
+            // 터렛 기본 설치 쿨타임 초기화
+            _turretInfo[i].TurretCooldown =
+                turretData.BuildCooldown;
+
+            // 터렛 설치 골드 UI 상시 표시
+            // BuildGoldCost는 BaseTurret의 실제 비용 프로퍼티로 교체 필요
+            //_turretInfo[i].TurretGoldText.text = $"{turretData.BuildGoldCost}G";
+
+            // 터렛 쿨타임 UI 초기 상태 (기본값 false)
+            _turretInfo[i].TurretImage.fillAmount = 0f;
+            _turretInfo[i].TurretText.gameObject.SetActive(false);
+            _turretInfo[i].TurretImage.gameObject.SetActive(false);
         }
     }
     
@@ -430,6 +491,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     private void CacheComponents()
     {
         _wallet = PlayerStatus.GetComponent<PlayerWallet>();
+        // 슬롯별 쿨타임 코루틴 관리
+        _turretCooldownCoroutines = new Coroutine[_turretInfo.Length];
         StartCoroutine(TurretInitRoutine());
     }
 
