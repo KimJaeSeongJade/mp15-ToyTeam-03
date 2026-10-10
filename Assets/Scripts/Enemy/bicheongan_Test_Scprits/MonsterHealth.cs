@@ -62,10 +62,10 @@ public class MonsterHealth : MonoBehaviour, IDamageableturret, ISloowable ,IHeal
             _isDead = true;
             Instantiate(Cacheenemy.IsDeadImpack, transform.position, Quaternion.identity);
 
-            Cacheenemy.GiveToExpPlayer();
-            #if UNITY_EDITOR
-            Debug.Log($"Exp{Cacheenemy.MonExp}");
-#endif
+            //Cacheenemy.GiveToExpPlayer();
+            //#if UNITY_EDITOR
+            //Debug.Log($"Exp{Cacheenemy.MonExp}");
+//#endif
 
             goldPool.PopAll();
             Cacheenemy.ReturnToPool();
@@ -81,6 +81,10 @@ public class MonsterHealth : MonoBehaviour, IDamageableturret, ISloowable ,IHeal
             _speed.Slow(speed);
             _isSlow = true;
         }
+    }
+    public void IsSlowReset()
+    {
+        _isSlow = false;
     }
     public void ResetHealth()
     {

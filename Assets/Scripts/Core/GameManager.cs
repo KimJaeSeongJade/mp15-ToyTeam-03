@@ -223,8 +223,8 @@ public class GameManager : SingletonBehaviour<GameManager>
         // ----------------------------------------
 
         // 게임 오버 판정 체크 --------------
-        _castleHp.OnCastleHealthChanged += RefreshCastleHealthUI;
-        _castleHp.OnCastleHealthChanged += CheckGameOver;
+        //_castleHp.OnCastleHealthChanged += RefreshCastleHealthUI;
+        //_castleHp.OnCastleHealthChanged += CheckGameOver;
         //------------------------------
 
         WaveManager.Instance.OnAllWavesCleared += CheckGameClear;
