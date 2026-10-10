@@ -56,6 +56,9 @@ MonoBehaviour:
   _detectRadius: 2
   _duration: 0.5
   _waveVisual: {fileID: 5324784269340105267}
+  _maxVisibleWaves: 8
+  _visualGroupDistance: 1
+  _visualDuration: 0.25
 --- !u!135 &1001001
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ public abstract class GoldExpandingPulseBullet : Tier2BaseBullet
     private float _elapsed;
     private float _radius;
     private bool _running;
+    private ParticleSystem[] _visualParticles;
+    private Renderer[] _visualRenderers;
 
     protected virtual void Awake()
     {
@@ -17,6 +19,17 @@ public abstract class GoldExpandingPulseBullet : Tier2BaseBullet
         Rigidbody body = GetComponent<Rigidbody>();
         body.isKinematic = true;
         body.useGravity = false;
+        if (_waveVisual != null)
+        {
+            _visualParticles = _waveVisual.GetComponentsInChildren<ParticleSystem>(true);
+            _visualRenderers = _waveVisual.GetComponentsInChildren<Renderer>(true);
+            // 풀링되는 시각 오브젝트가 파티클 종료 시 스스로 파괴되지 않게 한다.
+            foreach (ParticleSystem particle in _visualParticles)
+            {
+                var main = particle.main;
+                main.stopAction = ParticleSystemStopAction.None;
+            }
+        }
     }
     protected void BeginPulse(Vector3 position, float radius)
     {
@@ -42,6 +55,19 @@ public abstract class GoldExpandingPulseBullet : Tier2BaseBullet
     private void OnTriggerEnter(Collider other) { if (_running) Detect(other); }
     private void OnTriggerStay(Collider other) { if (_running) Detect(other); }
     protected abstract void Detect(Collider other);
+    protected void SetVisualVisible(bool visible)
+    {
+        if (_waveVisual == null) return;
+        // 시각 루트만 끈다. 발사체 루트의 물리 판정은 계속 동작한다.
+        if (_waveVisual != transform) _waveVisual.gameObject.SetActive(visible);
+        else foreach (Renderer renderer in _visualRenderers) renderer.enabled = visible;
+
+        foreach (ParticleSystem particle in _visualParticles)
+        {
+            particle.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+            if (visible && particle.gameObject.activeInHierarchy) particle.Play(false);
+        }
+    }
     protected override void OnFireEnd()
     {
         _running = false;
