@@ -8,6 +8,7 @@ public class PlayerLevelManager : MonoBehaviour
 
     private PlayerStatus _status;
     private PlayerAttackMode _attackMode;
+    private PlayerSound _sound;
 
     [Header("레벨별 업그레이드 사항을 넣어두는 필드\n" +
         "현재는 레벨이 많지 않아 이대로 구현하나 추후 개선 필요")]
@@ -62,6 +63,7 @@ public class PlayerLevelManager : MonoBehaviour
     // 추후 확장성을 고려하면 다른 방식으로 구현이 필요
     private void ApplyLevelRewards(int newLevel)
     {
+        SoundManager.Instance.Play(_sound.LevelUp);
         Instantiate(_lvUpEffect, transform);
 
         switch (newLevel)
@@ -106,5 +108,6 @@ public class PlayerLevelManager : MonoBehaviour
     {
         _status = GetComponent<PlayerStatus>();
         _attackMode = GetComponent<PlayerAttackMode>();
+        _sound = GetComponent<PlayerSound>();
     }
 }

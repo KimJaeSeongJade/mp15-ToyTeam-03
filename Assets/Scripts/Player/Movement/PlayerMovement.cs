@@ -9,10 +9,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _maxPitch;
     [SerializeField, Range(0f, 1f)] private float _pitchCameraDistanceScale = 0.55f;
     [SerializeField] private float _aimDistance = 100f;
+    [SerializeField] private float _minAimDistance = 1f;
     [SerializeField] private float _groundStickSpeed = 2f;
+    [SerializeField] private float _walkStepInterval = 0.45f;
+    [SerializeField] private float _runStepInterval = 0.3f;
 
     private PlayerInputReader _inputReader;
     private PlayerStatus _status;
+    private PlayerSound _sound;
+    private float _nextStepTime;
 
     private PlayerJump _playerJump;
     private PlayerGroundChecker _groundChecker;
@@ -69,6 +74,12 @@ public class PlayerMovement : MonoBehaviour
             if (hit.collider.transform.IsChildOf(transform) || hit.distance >= nearestDistance)
                 continue;
 
+            Vector3 muzzleToHit = hit.point - _attackMuzzle.position;
+            // 총구 근처나 뒤쪽의 충돌 지점을 조준하면 발사 방향이 크게 꺾이므로 제외한다.
+            if (muzzleToHit.sqrMagnitude < _minAimDistance * _minAimDistance ||
+                Vector3.Dot(muzzleToHit, aimRay.direction) <= 0f)
+                continue;
+
             nearestDistance = hit.distance;
             aimPoint = hit.point;
             hasAttackTarget = hit.collider.gameObject.layer == _enemyLayer;
@@ -110,6 +121,21 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _rb.velocity = newVelocity;
+        PlayFootstep(isGroundMoving && !isJumping);
+    }
+
+    private void PlayFootstep(bool isMoving)
+    {
+        if (!isMoving)
+        {
+            _nextStepTime = Time.time;
+            return;
+        }
+        if (Time.timeScale == 0f || Time.time < _nextStepTime) return;
+
+        bool isRunning = _inputReader.isPressedDashKey;
+        SoundManager.Instance.Play(isRunning ? _sound.Run : _sound.Walk);
+        _nextStepTime = Time.time + (isRunning ? _runStepInterval : _walkStepInterval);
     }
 
     public void Rotate()
@@ -127,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _inputReader = GetComponent<PlayerInputReader>();
         _status = GetComponent<PlayerStatus>();
+        _sound = GetComponent<PlayerSound>();
         _groundChecker = GetComponent<PlayerGroundChecker>();
         _playerJump = GetComponent<PlayerJump>();
         _rb = GetComponent<Rigidbody>();

@@ -26,7 +26,9 @@ public class CastleHp : MonoBehaviour,ICastleInterface
     {
         if (_hp <= 0)
         {
+            #if UNITY_EDITOR
             Debug.Log("Game Over");
+#endif
             return;
         }
         _hp -= damage;

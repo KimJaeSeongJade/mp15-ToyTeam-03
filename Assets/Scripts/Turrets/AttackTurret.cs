@@ -63,7 +63,9 @@ public class AttackTurret : BaseTurret, IBuffable
         // 부모(BaseTurret)에 기재된 기본 공격력 수치를 변경합니다.
         _baseDamage += buffAmount; 
         
+        #if UNITY_EDITOR
         Debug.Log($"[버프 알림] {gameObject.name}의 현재 공격력: {this.Damage}");
+#endif
     }
 
     // 공격 대상 감지

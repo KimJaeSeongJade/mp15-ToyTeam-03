@@ -12566,6 +12566,7 @@ GameObject:
   - component: {fileID: 8725779826809066087}
   - component: {fileID: 2933079705908043019}
   - component: {fileID: 5066512629011828405}
+  - component: {fileID: 6250715545810286870}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -12732,7 +12733,10 @@ MonoBehaviour:
   _maxPitch: 60
   _pitchCameraDistanceScale: 0.15
   _aimDistance: 50
+  _minAimDistance: 1
   _groundStickSpeed: 2
+  _walkStepInterval: 0.45
+  _runStepInterval: 0.3
 --- !u!114 &7195687505308062913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12794,6 +12798,7 @@ MonoBehaviour:
   _skillAttacks:
   - {fileID: 5997034715849493791, guid: 4326717c3c88f9547938be94a51644a0, type: 3}
   - {fileID: 5123464600494981101, guid: 473faffd34d0ce04cbc2a95fc3341684, type: 3}
+  _lvUpEffect: {fileID: 0}
 --- !u!114 &2933079705908043019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12807,6 +12812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gold: 1000
+  _goldSoundGroupInterval: 0.5
 --- !u!114 &5066512629011828405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12825,6 +12831,35 @@ MonoBehaviour:
   PRAM_IS_CHARGE: IsCharge
   PRAM_ATTACK: Attack
   PRAM_SKILL: Skill
+--- !u!114 &6250715545810286870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7735846054338725324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a877823b9847b41815a37879148ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _walk: {fileID: 8300000, guid: df7087e4d8a8bb546bc08ce68632903f, type: 3}
+  _run: {fileID: 8300000, guid: 023ea3ddeaa8dd146b7633a0800e5a0e, type: 3}
+  _jump: {fileID: 8300000, guid: 4e349dc959014a845b9aa317d1c2b7f0, type: 3}
+  _land: {fileID: 8300000, guid: e1e2d06fe0d78194b9c7c8cc88414d0d, type: 3}
+  _basicAttack: {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
+  _spreadAttack: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
+  _chargeStart: {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
+  _chargeRelease: {fileID: 8300000, guid: f1cb5d83282f2904a85f73111d068616, type: 3}
+  _skill: {fileID: 8300000, guid: 6cf9c85b5a3b88c468b21b9d21250adf, type: 3}
+  _cycloneSkill: {fileID: 8300000, guid: 113a0f1929ad74dcba20169a2eaa5e57, type: 3}
+  _build: {fileID: 8300000, guid: 25c32590ca6d5fb4091782c76566abd8, type: 3}
+  _sell: {fileID: 8300000, guid: 388c360750dfcd34eac2b0be237adf65, type: 3}
+  _selectTurret: {fileID: 8300000, guid: b299613ebddf5d24fa7e69083be88030, type: 3}
+  _exitBuild: {fileID: 8300000, guid: 91c24ecde82c3eb42be5c1a5f468cb9e, type: 3}
+  _levelUp: {fileID: 8300000, guid: cfce0cea076109f478783201b2a9f57f, type: 3}
+  _goldGain: {fileID: 8300000, guid: 845300b0e46c7854a886dcbc3ebacc6c, type: 3}
+  _goldSpend: {fileID: 8300000, guid: c944ac0baf2eb094ba713594ffe647d7, type: 3}
 --- !u!1 &7993432028831231793
 GameObject:
   m_ObjectHideFlags: 0

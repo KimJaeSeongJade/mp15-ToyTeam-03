@@ -28,7 +28,9 @@ public class Tier2ReflectionTurret : BaseTurret
             {
                 // 몬스터의 TakeDamage를 호출하여 반격 대미지를 꽂아넣습니다.
                 monsterDamageable.TakeDamage(_sheildDamage);
+                #if UNITY_EDITOR
                 Debug.Log($"[반격 성공] {col.name}에게 {_sheildDamage}만큼의 반사 대미지를 주었습니다.");
+#endif
 
                 // 단일 대상 반격이므로 한 마리만 때리고 루프를 나갑니다.
                 break;

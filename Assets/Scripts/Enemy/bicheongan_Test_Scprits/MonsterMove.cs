@@ -31,7 +31,9 @@ public class MonsterMove : MonoBehaviour
     public void Initialize(WayPointPath waypoint)
     {
         waypoints = waypoint._waypoints;
+        #if UNITY_EDITOR
         Debug.Log("이동");
+#endif
         arrivePoint = 0; // 이동해 인덱스 도착시 1+ 더하기
         _agent.SetDestination(waypoint._waypoints[arrivePoint].position);
 
@@ -50,7 +52,9 @@ public class MonsterMove : MonoBehaviour
             if (arrivePoint >= waypoints.Count)
             {
                 // 마지막 Waypoint 도착
+                #if UNITY_EDITOR
                 Debug.Log("도착");
+#endif
                 reenemy.ReturnToPool();
                 arrivePoint = 0;
                 return;
@@ -62,7 +66,9 @@ public class MonsterMove : MonoBehaviour
     public void Slow(float slowspeed)
     {
         _agent.speed *= (1f - slowspeed);
+        #if UNITY_EDITOR
         Debug.Log("느려짐");
+#endif
         StartCoroutine(WaitSpeed());
     }
     
@@ -70,7 +76,9 @@ public class MonsterMove : MonoBehaviour
     {
         yield return new WaitForSeconds(20f);
         _agent.speed = originalSpeed;
+        #if UNITY_EDITOR
         Debug.Log("정상 스피드");
+#endif
     }
     public void MoveToTurret(Transform turret)
     {

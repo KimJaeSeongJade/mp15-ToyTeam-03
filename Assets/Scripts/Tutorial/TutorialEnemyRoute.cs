@@ -39,7 +39,9 @@ public class TutorialEnemyRoute : MonoBehaviour
     private bool Fail()
     {
         Failed = true;
+        #if UNITY_EDITOR
         Debug.LogError("TutorialEnemyRoute: 등장 지점, 건설 구역, 캐슬 사이의 NavMesh 경로를 확인하세요.", this);
+#endif
         return false;
     }
 

@@ -15,13 +15,17 @@ public class UITest : SingletonBehaviour<UITest>
         // 나중에는 설치된 기준으로 쿨타임 돌아가게 구현 해야함.
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            #if UNITY_EDITOR
             Debug.Log("1번 터렛 쿨타임 감소 중");
+#endif
             turret1fillImage.fillAmount = _remainingTime / TURRET1_COOLDOWN;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            #if UNITY_EDITOR
             Debug.Log("2번 터렛 쿨타임 감소 중");
+#endif
             turret2fillImage.fillAmount = _remainingTime / TURRET1_COOLDOWN;
         }
     }

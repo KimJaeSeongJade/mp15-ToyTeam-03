@@ -44,7 +44,9 @@ public class Tier2GuardTurret : BaseTurret
         _currentHp -= finalDamage;
         _currentHp = Mathf.Clamp(_currentHp, 0, _maxHp);
 
+        #if UNITY_EDITOR
         Debug.Log($"🛡️ [{gameObject.name}] 피격! 원래 대미지: {damage} -> 방어 차감 대미지: {finalDamage} (현재 총 방어력: {totalDefense}) / 남은 HP: {_currentHp}");
+#endif
 
         if (_currentHp <= 0)
         {

@@ -42,7 +42,9 @@ public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
 
             if(_lookup.ContainsKey(key))
             {
+                #if UNITY_EDITOR
                 Debug.LogError($"중복된 타워 조합: {key.ExistType} {key.AddedType}", this);
+#endif
                 continue;
             }
 
@@ -72,7 +74,9 @@ public class TurretCombinationTable : SingletonBehaviour<TurretCombinationTable>
 
     public BaseTurret GetSelectedTurret(int num)
     {
+        #if UNITY_EDITOR
         Debug.Log( _baseTurretlist.Count);
+#endif
         return num >= _baseTurretlist.Count ? null : _baseTurretlist[num];
     }
 }

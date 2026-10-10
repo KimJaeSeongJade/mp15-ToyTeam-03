@@ -61,7 +61,9 @@ public class IsAttackAnim : MonoBehaviour
             {
                 IsSight = true;
                 _target = other.transform;
+                #if UNITY_EDITOR
                 Debug.Log("터렛 발견");
+#endif
             }
         }
     }

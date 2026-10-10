@@ -10,7 +10,9 @@ public class Test : MonoBehaviour
     public void TakeDamage(float damage)
     {
         hp -= damage;
+        #if UNITY_EDITOR
         Debug.Log($"{gameObject.name}이 {damage}의 데미지를 입었습니다. 남은 체력: {hp}");
+#endif
 
         if (hp <= 0)
         {

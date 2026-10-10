@@ -95,7 +95,9 @@ public class MonsterSpawner : MonoBehaviour
 
         }
         
+        #if UNITY_EDITOR
         Debug.Log("생성 끝");
+#endif
         PortaleffectFalse();
         onSpawnEnd?.Invoke();
         

@@ -71,7 +71,9 @@ public class BaseEnemy : PoolObject
         if (_finished == true) return;
 
         _finished = true;
+        #if UNITY_EDITOR
         Debug.Log("결승");
+#endif
         Returned?.Invoke(this);
     }
     private void MonSpwanImpact()

@@ -115,8 +115,19 @@ public class TutorialManager : MonoBehaviour
         PlayerPrefs.SetInt(CompletionKey, 1);
         PlayerPrefs.Save();
         Context.UI.HideExplanation();
-        if (!string.IsNullOrWhiteSpace(CompletionLog)) Debug.Log(CompletionLog, this);
+        if (!string.IsNullOrWhiteSpace(CompletionLog)) {
+#if UNITY_EDITOR
+            Debug.Log(CompletionLog, this);
+#endif
+        }
         OnCompleted.Invoke();
+    }
+
+    public void GoToNextScene(string sceneName)
+    {
+        SceneFade.Instance._destinationScene = sceneName;
+        SceneFade.Instance.DestroeyBeforeLoad = GameManager.Instance.gameObject;
+        SceneFade.Instance.TransitionToScene();
     }
 
     public void NotifyPracticeShot() { if (_initialized && !_completed) Context.NotifyShot(); }

@@ -31,7 +31,9 @@ public class TurretEnemyTest : MonoBehaviour, IDamageable
     {
         if (_isDead) return;
 
+        #if UNITY_EDITOR
         Debug.Log($"🎯 [적 공격 시작] {gameObject.name}이 주변 터렛을 공격합니다.");
+#endif
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f);
 
@@ -51,10 +53,14 @@ public class TurretEnemyTest : MonoBehaviour, IDamageable
         if (_isDead == true) return;
 
         Cacheenemy.MonHp -= (damage - Cacheenemy.MonDefend);
+        #if UNITY_EDITOR
         Debug.Log($"몬스터에게 {damage - Cacheenemy.MonDefend} 데미지를 줌");
+#endif
         if (Cacheenemy.MonHp <= 0)
         {
+            #if UNITY_EDITOR
             Debug.Log("죽음");
+#endif
             _isDead = true;
             Cacheenemy.ReturnToPool();
         }
@@ -88,7 +94,9 @@ public class TurretEnemyTest : MonoBehaviour, IDamageable
         // 기획된 처형 기준 수치 이하인지 검사 (ex: 15% 이하)
         if (hpRatio <= thresholdRatio && Cacheenemy.MonHp > 0)
         {
+            #if UNITY_EDITOR
             Debug.Log($"<color=red>[🚨 적 자체 처형]</color> {gameObject.name}이 체력 기준치({hpRatio * 100f:F1}%) 미달로 스스로 소멸합니다.");
+#endif
             
             _isDead = true;
             Cacheenemy.MonHp = 0;
