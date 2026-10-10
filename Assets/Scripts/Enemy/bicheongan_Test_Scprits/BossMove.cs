@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
 
-public class BossMove : MonoBehaviour
+public class BossMove : MonoBehaviour, IMonsterMoveable
 {
     [Header("이동속도 퍼센트 예 1.3f면 30% 이동속도 업")]
     [SerializeField] private float _speedPer = 1.3f;
@@ -53,7 +53,7 @@ public class BossMove : MonoBehaviour
     {
         if (waypoint == null) return;
         if (waypoint._waypoints == null) return;
-        if (waypoints.Count == 0) return;
+        if (waypoint._waypoints.Count == 0) return;
         if (_turretDis) return;
 
         waypoints = waypoint._waypoints;
@@ -63,12 +63,18 @@ public class BossMove : MonoBehaviour
 
     }
 
+    public void ResetPath(Vector3 warpPos)
+    {
+        _agent.ResetPath();
+        _agent.Warp(warpPos);
+    }
+    
     public void Move()
     {
         if (waypoints == null) return;
         if (waypoints.Count == 0) return;
         if (_agent.pathPending) return;
-        if (_turretDis) return;
+        //if (_turretDis) return;
 
         if (_agent.remainingDistance <= _agent.stoppingDistance)
         {

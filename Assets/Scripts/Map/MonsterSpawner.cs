@@ -22,16 +22,6 @@ public class MonsterSpawner : MonoBehaviour
     {
         Init();
     } 
-    // private void OnEnable()
-    // {
-    //     _waveManager.OnWaveEnded += HandleSpawnEnd;
-    // }
-    //
-    // private void OnDisable()
-    // {
-    //     _waveManager.OnWaveEnded -= HandleSpawnEnd;
-    // }
-    
 
     private void Init()
     {
@@ -57,30 +47,17 @@ public class MonsterSpawner : MonoBehaviour
             int pathNum = resultData.waypointNum;
             WayPointPath targetPath = _waypointPath[pathNum-1];
 
-            if (_isSpawnEnd != false)
-            { 
-                _monster = _monsterGroupPool.Pop(resultData.monster); 
-                
-                MonsterMove _normalMon = _monster.GetComponent<MonsterMove>();
-                
-                _normalMon.ResetPath(transform.position);
+        
+            _monster = _monsterGroupPool.Pop(resultData.monster);
 
-                BossMove _boss = _monster.GetComponent<BossMove>();
+            IMonsterMoveable _moveableMonster = _monster.GetComponent<IMonsterMoveable>();
                 
-                if (_boss != null)
-                {
-                    _boss.Initialize(targetPath);
-                }
-                else
-                {
-                    if (_normalMon != null)
-                    {
-                        _normalMon.Initialize(targetPath);
-                    }
-                }
-                onMonsterSpawn?.Invoke(_monster);
-                yield return _wait;   
-            }
+            _moveableMonster.ResetPath(transform.position);
+            _moveableMonster.Initialize(targetPath);
+
+            onMonsterSpawn?.Invoke(_monster);
+            yield return _wait;   
+            
         }
         
         #if UNITY_EDITOR
