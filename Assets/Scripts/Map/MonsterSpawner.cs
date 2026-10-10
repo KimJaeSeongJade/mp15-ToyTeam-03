@@ -6,19 +6,31 @@ using System;
 public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField] private WayPointPath[] _waypointPath;
-
+    [SerializeField] private WaveManager _waveManager;
     [SerializeField] private GameObject[] PortalEffect;
-    //[SerializeField] private int _count;
     private ObjectPool<BaseEnemy> _monsterGroupPool;
     [SerializeField] private List<MonsterGroup> _monsterGroupList;
     
     
     private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     private BaseEnemy _monster;
-
+    private bool _isSpawnEnd;
     
+    
+    private void Start()
+    {
+        Init();
+    } 
+    private void OnEnable()
+    {
+        _waveManager.OnWaveEnded += HandleSpawnEnd;
+    }
 
-    private void Start() => Init();
+    private void OnDisable()
+    {
+        _waveManager.OnWaveEnded -= HandleSpawnEnd;
+    }
+    
 
     private void Init()
     {
@@ -27,11 +39,7 @@ public class MonsterSpawner : MonoBehaviour
             transform,
             monster => monster.InitData());
     }
-
-    private bool _isCamera()
-    {
-        return  true;
-    }
+    
     public void SpawnWave(int waveNumber, Action<BaseEnemy> onMonsterSpawn, Action onSpawnEnd)
     {
         StartCoroutine(WaveStartRoutine(waveNumber,onMonsterSpawn, onSpawnEnd));
@@ -39,33 +47,7 @@ public class MonsterSpawner : MonoBehaviour
     
     private IEnumerator WaveStartRoutine(int waveNumber,Action<BaseEnemy> onMonsterSpawn, Action onSpawnEnd)
     {
-        /*while (true)
-        {
-            Debug.Log("몬스터 생성");
-            for (int i = 0; i < monsterGroup1.monsterDatas.Count; i++)
-            {
-                if (monsterGroup1.monsterDatas[i].waypointNum == waveNumber)
-                {
-                    PortalEffect[waveNumber-1].SetActive(true);
-                    for (int j = 0; j < monsterGroup1.monsterDatas[i].count; j++)
-                    {
-                        _monster = _monsterPool.Pop();
-                        _monster.transform.SetPositionAndRotation(_waypointPath[waveNumber-1].transform.position, 
-                            transform.rotation);
-                        
-                        /*_monster = Instantiate(_monsterPrefab, 
-                            _waypointPath[waveNumber-1].transform.position, transform.rotation);#1#
-                        Debug.Log($"{j+1} 마리");
-                        _monster.GetComponent<MonsterMove>().Initialize(_waypointPath[waveNumber-1]);
-                        onMonsterSpawn?.Invoke(_monster);
-                        yield return _wait;
-                    }
-                } 
-            }
-            
-            break;
-        }*/
-
+        _isSpawnEnd = true;
         MonsterGroup _localMonsterGroup = _monsterGroupList[waveNumber-1];
         _localMonsterGroup.ResetSpwan();
 
@@ -74,25 +56,28 @@ public class MonsterSpawner : MonoBehaviour
             int pathNum = resultData.waypointNum;
             WayPointPath targetPath = _waypointPath[pathNum-1];
 
-            _monster = _monsterGroupPool.Pop(resultData.monster);
-            _monster.transform.SetPositionAndRotation(targetPath.transform.position, transform.rotation);
-
-            BossMove _boss = _monster.GetComponent<BossMove>();
-            if (_boss != null)
-            {
-                _boss.Initialize(targetPath);
-            }
-            else
-            {
-                MonsterMove _normalMon = _monster.GetComponent<MonsterMove>();
-                if (_normalMon != null)
+            if (_isSpawnEnd != false)
+            { 
+                _monster = _monsterGroupPool.Pop(resultData.monster); 
+                _monster.transform.SetPositionAndRotation(targetPath.transform.position, transform.rotation);
+                
+                BossMove _boss = _monster.GetComponent<BossMove>();
+            
+                if (_boss != null)
                 {
-                    _normalMon.Initialize(targetPath);
+                    _boss.Initialize(targetPath);
                 }
+                else
+                {
+                    MonsterMove _normalMon = _monster.GetComponent<MonsterMove>();
+                    if (_normalMon != null)
+                    {
+                        _normalMon.Initialize(targetPath);
+                    }
+                }
+                onMonsterSpawn?.Invoke(_monster);
+                yield return _wait;   
             }
-            onMonsterSpawn?.Invoke(_monster);
-            yield return _wait;
-
         }
         
         #if UNITY_EDITOR
@@ -102,6 +87,16 @@ public class MonsterSpawner : MonoBehaviour
         onSpawnEnd?.Invoke();
         
     }
+    
+    public int TotalWaveCount => _waypointPath.Length;
+    
+    
+    private void HandleSpawnEnd()
+    {
+        _isSpawnEnd = false;
+        Debug.Log("HandleSpawnEnd");
+    }
+    
     private void PortaleffectFalse()
     {
         PortalEffect[0].SetActive(false);

@@ -62,12 +62,7 @@ public class CamSwitcher : MonoBehaviour
 
         yield return new WaitForSeconds(_camDelay);
         OnCamera(_currentWave-1);
-        /*yield return new WaitForSeconds(_camDelay);
-
-        for (int i = 0; i < cams.Length; i++)
-        {
-            cams[i].gameObject.SetActive(false);
-        }*/
+  
     }
     
     private void OnCamera(int index)
