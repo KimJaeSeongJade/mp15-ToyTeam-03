@@ -9,17 +9,15 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _dashSpeed = 10f;
 
-    private PlayerLevelManager _levelManager;
+    [SerializeField] private PlayerLevelManager _levelManager;
+    private PlayerAttackMode _attackMode;
+    private PlayerBuildMode _buildMode;
+    private bool _isAttackMode = true;
+    private bool _hasAttackTarget;
+    private CrosshairType _currnetCursor = CrosshairType.Default;
 
     // 다음 레벨까지 필요한 경험치. 계산은 PlayerLevelManager가 담당하며 최대 레벨에서는 0이다.
-    public float RequiredExp
-    {
-        get
-        {
-            if (_levelManager == null) _levelManager = GetComponent<PlayerLevelManager>();
-            return _levelManager != null ? _levelManager.RequiredExp : 0;
-        }
-    }
+    public float RequiredExp => _levelManager.RequiredExp;
 
     // 플레이어 상태 변경을 알리는 이벤트. UI는 필요한 이벤트를 구독해 표시를 갱신한다.
     public event Action<int> OnLevelChanged;
@@ -28,6 +26,37 @@ public class PlayerStatus : MonoBehaviour
     public event Action<float> OnAttackPowerChanged;
     public event Action<float> OnMoveSpeedChanged;
     public event Action<float> OnDashSpeedChanged;
+
+    /// <summary>
+    /// True : Attack 모드 / False : Build 모드
+    /// </summary>
+    public event Action<bool> OnPlayerModeChanged;
+    
+    /// <summary>
+    /// -1 : 기본 / 0 : 공격 / 1 : 건설(열거형으로 구현할지 협의필요)
+    /// </summary>
+    public event Action<CrosshairType> OnCursorChanged;
+
+    /// <summary>
+    /// 슬롯 번호, 쿨타임 순서
+    /// </summary>
+    public event Action<int, float> OnBuildCooldownStarted;
+    /// <summary>
+    /// 스킬의 쿨타임
+    /// </summary>
+    public event Action<float> OnSkillCooldownStarted;
+
+    private void Awake() => CacheComponenet();
+
+    public void NotifyBuildCooldownStarted(int slot, float duration)
+    {
+        OnBuildCooldownStarted?.Invoke(slot, duration);
+    }
+
+    public void NotifySkillCooldownStarted(float duration)
+    {
+        OnSkillCooldownStarted?.Invoke(duration);
+    }
 
     public int Level
     {
@@ -83,5 +112,46 @@ public class PlayerStatus : MonoBehaviour
             _dashSpeed = value;
             OnDashSpeedChanged?.Invoke(_dashSpeed);
         }
+    }
+
+    public void GetExp(float amount)
+    {
+        _levelManager.GainExp(amount);
+    }
+
+    public void PlayerModeChange(bool value)
+    {
+        _isAttackMode = value;
+        OnPlayerModeChanged?.Invoke(value);
+        UpdateCursor();
+    }
+
+    public void SetAttackTarget(bool hasTarget)
+    {
+        if (_hasAttackTarget == hasTarget) return;
+
+        _hasAttackTarget = hasTarget;
+        UpdateCursor();
+    }
+
+    private void UpdateCursor()
+    {
+        CrosshairType cursor = !_isAttackMode ? CrosshairType.Build :
+            _hasAttackTarget ? CrosshairType.Attack : CrosshairType.Default;
+
+        if (_currnetCursor == cursor) return;
+
+        _currnetCursor = cursor;
+        OnCursorChanged?.Invoke(cursor);
+    }
+
+    private void CacheComponenet()
+    {
+        _levelManager = GetComponent<PlayerLevelManager>();
+        _attackMode = GetComponent<PlayerAttackMode>();
+        _buildMode = GetComponent<PlayerBuildMode>();
+
+        OnLevelChanged?.Invoke(Level);
+        OnExpChanged?.Invoke(Exp, RequiredExp);
     }
 }

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BasicAttack : PoolObject
 {
-    [SerializeField] private LayerMask _damagableMask;
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _damage;
-    [SerializeField] private float _range;
-    [SerializeField] private float _detectRadius;
+    [SerializeField] protected LayerMask _damagableMask;
+    [SerializeField] protected float _moveSpeed;
+    [SerializeField] protected float _damage;
+    [SerializeField] protected float _range;
+    [SerializeField] protected float _detectRadius;
     
     private Transform _returnTr;
     private Vector3 _startPos;
@@ -17,15 +17,22 @@ public class BasicAttack : PoolObject
     public override void WakeUp() => OnFireStart();
     public override void Sleep() => OnFireEnd();
 
+    protected float MoveSpeed => _moveSpeed;
+
+    protected void ResetTravelStart() => _startPos = transform.position;
+
+    protected virtual Vector3 GetNextPosition(float deltaTime) =>
+        transform.position + transform.forward * (_moveSpeed * deltaTime);
+
     private void MoveFoward()
     {
         Vector3 currentPosition = transform.position;
-        Vector3 move = transform.forward * (_moveSpeed * Time.fixedDeltaTime);
-        Vector3 nextPosition = currentPosition + move;
+        Vector3 nextPosition = GetNextPosition(Time.fixedDeltaTime);
+        Vector3 move = nextPosition - currentPosition;
         float moveDistance = move.magnitude;
         RaycastHit hit = default;
         bool hasHit = moveDistance > 0f &&
-            Physics.SphereCast(currentPosition, _detectRadius, transform.forward, out hit, moveDistance, _damagableMask, QueryTriggerInteraction.Ignore);
+            Physics.SphereCast(currentPosition, _detectRadius, move / moveDistance, out hit, moveDistance, _damagableMask, QueryTriggerInteraction.Ignore);
         
         if (hasHit)
         {

@@ -1,0 +1,194 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1583876539310651036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2826350914543445701}
+  - component: {fileID: 8189752361921450186}
+  - component: {fileID: 7627112027180410205}
+  - component: {fileID: 8183618714949711275}
+  m_Layer: 10
+  m_Name: T1_AttackTurret
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2826350914543445701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583876539310651036}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6182810062011472192}
+  - {fileID: 2303267013804234632}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8189752361921450186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583876539310651036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f461b14a9977348b02e47edcac44a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: "\uACF5\uACA9 \uD130\uB81B"
+  _info: "\uAE30\uBCF8\uC801\uC778 \uACF5\uACA9 \uD130\uB81B"
+  _preview: {fileID: 7627112027180410205}
+  _maxHp: 100
+  _goldCost: 150
+  _turretType: 0
+  _baseDamage: 5
+  _buildCooldown: 5
+  _attackRange: 0
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 512
+  _muzzlePoint: {fileID: 2303267013804234632}
+  _bullets: {fileID: 4857848663938798310, guid: 6b54568e97b8548459be6b81b636e63c, type: 3}
+  _bulletCoolTime: 2
+  _target: {fileID: 0}
+--- !u!114 &7627112027180410205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583876539310651036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be4d06afa8922d4db65e0af0574a1ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &8183618714949711275
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583876539310651036}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2727501192594461104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2303267013804234632}
+  m_Layer: 0
+  m_Name: MuzzlePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2303267013804234632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2727501192594461104}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.016000032, y: 1.891, z: 0.778}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2826350914543445701}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4809920350592164242
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2826350914543445701}
+    m_Modifications:
+    - target: {fileID: 1661131092487338194, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661131092487338194, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661131092487338194, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661131092487338194, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661131092487338194, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661131092487338194, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661131092487338194, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661131092487338194, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661131092487338194, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661131092487338194, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224494018387954264, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_Name
+      value: AttackTurret
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8497655396227700380, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+    - {fileID: 173408800482432190, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+--- !u!4 &6182810062011472192 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1661131092487338194, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+  m_PrefabInstance: {fileID: 4809920350592164242}
+  m_PrefabAsset: {fileID: 0}

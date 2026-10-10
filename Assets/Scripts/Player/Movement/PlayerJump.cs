@@ -5,6 +5,8 @@ public class PlayerJump : MonoBehaviour
 {
     private PlayerInputReader _inputReader;
     private PlayerGroundChecker _groundChecker;
+    private PlayerSound _sound;
+    private bool _wasGrounded = true;
 
     [SerializeField] private float _jumpForece;
     [SerializeField] private float _coyoteTime = 0.1f;
@@ -47,6 +49,8 @@ public class PlayerJump : MonoBehaviour
         _rb.velocity = velocity;
 
         _rb.AddForce(Vector3.up * _jumpForece, ForceMode.Impulse);
+        _wasGrounded = false;
+        SoundManager.Instance.Play(_sound.Jump);
     }
 
     private void CoyoteTime()
@@ -84,7 +88,14 @@ public class PlayerJump : MonoBehaviour
 
     private void ResetJumpWhenLanded()
     {
-        if (!_groundChecker.IsGrounded || _groundedAfterJumpIgnoreTimer > 0f) return;
+        if (_groundedAfterJumpIgnoreTimer > 0f) return;
+        if (!_groundChecker.IsGrounded)
+        {
+            _wasGrounded = false;
+            return;
+        }
+        if (!_wasGrounded) SoundManager.Instance.Play(_sound.Land);
+        _wasGrounded = true;
 
         IsJumping = false;
         _jumpConsumed = false;
@@ -102,6 +113,7 @@ public class PlayerJump : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _inputReader = GetComponent<PlayerInputReader>();
         _groundChecker = GetComponent<PlayerGroundChecker>();
+        _sound = GetComponent<PlayerSound>();
 
         if (_groundChecker == null)
         {

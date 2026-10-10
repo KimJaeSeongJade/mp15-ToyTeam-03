@@ -3,26 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : PoolObject 
+    public class Bullet : PoolObject
 { 
     [SerializeField] protected LayerMask enemyLayer;
     [SerializeField] protected float bulletDamage = 10f; // 총알의 기본 데미지
     [SerializeField] private float speed = 15f; // 총알 이동 속도
     [SerializeField] private float _lifeTime = 3f;
     [SerializeField] private Transform _returnPoint;
-    private Transform _target; // 추적할 몬스터 타겟
+    protected Transform _target; // 추적할 몬스터 타겟
 
-    // 💡 이 함수가 있어야 AttackTurret.cs의 43번째 줄 에러가 사라집니다!
     public void SetDamage(float newDamage)
     {
-        // 터렛에서 넘겨준 버프 데미지가 정상적인 양수일 때만 덮어씁니다.
         if (newDamage > 0)
         {
             bulletDamage = newDamage;
         }
     }
 
-    // 💡 터렛에서 총알을 생성(Instantiate)한 후 호출하여 타겟을 넘겨받는 함수
     public void SetTarget(Transform target)
     {
         _target = target;
@@ -46,6 +43,9 @@ public class Bullet : PoolObject
 
     public override void Sleep()
     {
+        // 💡 [요청 사항 반영 1] 풀 반환 시 이전 타깃을 해제하여 데이터 꼬임을 방지합니다.
+        _target = null;
+
         transform.SetParent(_returnPoint);
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(Vector3.zero));
         gameObject.SetActive(false);
@@ -53,28 +53,19 @@ public class Bullet : PoolObject
 
     protected virtual void OnTriggerEnter(Collider other) 
     { 
-        // 1. 레이어마스크 조건에 부합하는지 확인
         if ((enemyLayer.value & (1 << other.gameObject.layer)) > 0) 
         { 
-            // 2. 상대방에게 IDamageable 인터페이스가 있는지 컴포넌트 추출 시도
             if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
             {
-                // 3. 인터페이스의 TakeDamage 메서드 호출 (버프 반영된 데미지 입력)
-                // damageable.TakeDamage(bulletDamage);
                 DamageLogic(damageable);
             }
-
-            // 충돌했으므로 총알 제거
-            //Destroy(gameObject);
             ReturnToPool();
         } 
     }
-
     
     private IEnumerator LifeTimeRoutine()
     {
         yield return new WaitForSeconds(_lifeTime);
-        // 풀링 종료
         ReturnToPool();
     }
 
@@ -85,14 +76,22 @@ public class Bullet : PoolObject
 
     protected virtual void Move()
     {
-        // 타겟이 없다면 앞으로 직진하거나 소멸 처리
+        // 💡 [요청 사항 반영 2] 타깃이 존재하더라도 이미 사망했거나 비활성화(오브젝트 풀 반환) 상태라면 
+        // 유령을 계속 추적하지 않도록 실시간 가드 처리를 거쳐 타깃을 null로 밀어버립니다.
+        if (_target != null && !_target.gameObject.activeInHierarchy)
+        {
+            _target = null;
+        }
+
+        // 타깃이 없다면(혹은 방금 사라졌다면) 날아가던 정면 방향 그대로 직진 처리합니다.
         if (_target == null)
         {
+            // 💡 꼬임 방지 팁: 이미 transform.forward가 설정되어 있으므로 Vector3.forward(로컬 정면)로 자연스럽게 전진합니다.
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
             return;
         }
 
-        // 💡 타겟이 있는 방향으로 이동 및 회전
+        // 타겟이 있는 방향으로 이동 및 회전
         Vector3 direction = (_target.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
         transform.forward = direction; // 총알이 몬스터를 바라보도록 회전
@@ -101,5 +100,9 @@ public class Bullet : PoolObject
     protected virtual void DamageLogic(IDamageable damageable)
     {
         damageable.TakeDamage(bulletDamage);
+    }
+    protected virtual void DamageLogic(IDamageable damageable, float finalDamage)
+    {
+        damageable.TakeDamage(finalDamage);
     }
 }
