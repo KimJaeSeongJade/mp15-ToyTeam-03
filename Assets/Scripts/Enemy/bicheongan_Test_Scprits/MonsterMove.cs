@@ -21,11 +21,7 @@ public class MonsterMove : MonoBehaviour
         _agent.speed = reenemy.MonSpeed;
         originalSpeed = _agent.speed;
     }
-    
-    private void Update()
-    {
-        Move();
-    }
+
     public void Reset()
     {
         waypoints = null;
@@ -38,6 +34,10 @@ public class MonsterMove : MonoBehaviour
         _agent.isStopped = true;
     }
 
+    private void Update()
+    {
+        Move();
+    }
 
     // 경로 정보 받아오기
     public void Initialize(WayPointPath waypoint)

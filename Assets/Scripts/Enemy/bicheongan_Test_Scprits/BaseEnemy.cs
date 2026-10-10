@@ -19,7 +19,6 @@ public class BaseEnemy : PoolObject
 
     private Transform _tr;
     private PlayerLevelManager _eXP;
-    private CastleHp _TakeDam;
 
     public float MonHp { get { return _monHp; } set { _monHp = value; } }
     public float MonDefend { get { return _monDefend; } set { _monDefend = value; } }
@@ -89,10 +88,7 @@ public class BaseEnemy : PoolObject
         if (_finished == true) return;
 
         _finished = true;
-#if UNITY_EDITOR
-        Debug.Log("결승");
-        _TakeDam.CastleTakeDamage(10);
-#endif
+
         Returned?.Invoke(this);
         ReturnToPool();
     }
@@ -111,6 +107,5 @@ public class BaseEnemy : PoolObject
         ResetHealth = GetComponent<MonsterHealth>();
         _move = GetComponent<MonsterMove>();
         _bossMove= GetComponent<BossMove>();
-        _TakeDam = GetComponent<CastleHp>();
     }
 }

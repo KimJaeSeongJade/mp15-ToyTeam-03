@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -19,12 +20,31 @@ public class PrefabShaderWarmup : MonoBehaviour
     [Min(0f)] public float PreviewSeconds = 0.25f;
     [Tooltip("복제본의 MonoBehaviour를 제거해 공격·이동·게임매니저 접근을 방지합니다. 스크립트로 생성되는 별도 이펙트는 그 프리팹도 목록에 등록하세요.")]
     public bool VisualsOnly = true;
-    public UnityEvent OnCompleted = new UnityEvent();
+    public event Action OnCompleted;
+
+    public string NextScenename;
 
     public int CreatedCount { get; private set; }
     public int TotalCount { get; private set; }
     public bool IsLoading { get; private set; }
     private GameObject _staging;
+
+    private void Awake()
+    {
+        switch (TutorialManager.HasCompleted)
+        {
+            case true:
+                NextScenename = "MainScene";
+                break;
+
+            case false:
+                NextScenename = "TutorialScene";
+                break;
+        }
+
+        SceneFade.Instance._destinationScene = NextScenename;
+        OnCompleted += SceneFade.Instance.TransitionToScene;
+    }
 
     private IEnumerator Start()
     {
@@ -128,5 +148,10 @@ public class PrefabShaderWarmup : MonoBehaviour
         if (ProgressText != null) ProgressText.text = $"{CreatedCount} / {TotalCount}";
     }
 
-    private void OnDestroy() { if (_staging != null) Destroy(_staging); }
+    private void OnDestroy() 
+    {
+        OnCompleted -= SceneFade.Instance.TransitionToScene;
+
+        if (_staging != null) Destroy(_staging); 
+    }
 }
