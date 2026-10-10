@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 7522243248825534011}
   - component: {fileID: 8372182785277494322}
   m_Layer: 0
-  m_Name: T2_GreedyFireTurret
+  m_Name: T2AG_GreedyFireTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -45,12 +45,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseTurretlist:
-  - {fileID: 4042182580509433704, guid: 48914718a262942419d8429efa4ba6a6, type: 3}
-  - {fileID: 3635314910552156650, guid: 1e27a6c3fa2fbf649b35eb5ab09dd2c9, type: 3}
+  - {fileID: 8189752361921450186, guid: da4a62dd926064649aaca61200b5ee24, type: 3}
+  - {fileID: 5156816284534291348, guid: f5baa6089d0fcc54c94b0caa458109fb, type: 3}
+  - {fileID: 8180835375217798017, guid: 4a7eb0e883500fa41b4964f7cd6e691c, type: 3}
+  - {fileID: 1503815633231147940, guid: 9b0ee7522f0cfe641b62c7b8b0b0b250, type: 3}
   _combinationsViewer:
   - ExistType: 0
+    AddedType: 0
+    ResultTurret: {fileID: 4846312338679964812, guid: d9996679ed285de4ea8309b09cee22ee, type: 3}
+  - ExistType: 0
     AddedType: 1
-    ResultTurret: {fileID: 8518344323700068806, guid: e67bd320f3a7f3d4eada768bf6c2a090, type: 3}
+    ResultTurret: {fileID: 6936314071567498351, guid: 4a7079ffc29fb664ba2ca6faccabec6c, type: 3}
+  - ExistType: 0
+    AddedType: 2
+    ResultTurret: {fileID: -7030947445096924977, guid: a858be4a489f4c14fa466e139466e614, type: 3}
+  - ExistType: 0
+    AddedType: 3
+    ResultTurret: {fileID: 8372182785277494322, guid: fcd9034b43d0e10488686545400e0cca, type: 3}
   - ExistType: 1
     AddedType: 0
-    ResultTurret: {fileID: 627569506886221969, guid: c7a46d67dfdcdb148874b44e84a88c90, type: 3}
+    ResultTurret: {fileID: 1781218806896001097, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
+  - ExistType: 1
+    AddedType: 1
+    ResultTurret: {fileID: 6739040549583069518, guid: 850e14efdce06314a9ad0bd7e3f52dc8, type: 3}
+  - ExistType: 1
+    AddedType: 2
+    ResultTurret: {fileID: 4710846765872305952, guid: 891bdc399037a8f4795ed8df07ddb642, type: 3}
+  - ExistType: 1
+    AddedType: 3
+    ResultTurret: {fileID: 8617275642402418418, guid: 17caa1bbb7a283c4da19d51bb2df78ba, type: 3}
+  - ExistType: 2
+    AddedType: 0
+    ResultTurret: {fileID: -3342265335225964876, guid: f54ba6e242073ea47a76fb4f6dd35cbd, type: 3}
+  - ExistType: 2
+    AddedType: 1
+    ResultTurret: {fileID: -1934481904617014365, guid: b3d2a2b3b54ff4f4aac96bdc9f45de0c, type: 3}
+  - ExistType: 2
+    AddedType: 2
+    ResultTurret: {fileID: 1649732015126816570, guid: ecee54a6836e1c94388e6dc97701b9d8, type: 3}
+  - ExistType: 2
+    AddedType: 3
+    ResultTurret: {fileID: 8956890685768784375, guid: 0bc8b55a3a04e2f4a839eba4e932cfe5, type: 3}
