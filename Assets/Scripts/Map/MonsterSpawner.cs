@@ -11,7 +11,7 @@ public class MonsterSpawner : MonoBehaviour
     //[SerializeField] private int _count;
     private ObjectPool<BaseEnemy> _monsterGroupPool;
     [SerializeField] private List<MonsterGroup> _monsterGroupList;
-    
+    public int TotalWaveCount => _monsterGroupList.Count; // 게임 오버 판정을 확인하기 위해 읽기 전용 프로퍼티 추가
     
     private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     private BaseEnemy _monster;
