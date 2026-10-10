@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: "\uD2F0\uC5B42 \uAD00\uD1B5 \uD130\uB81B"
   _info: "\uBAAC\uC2A4\uD130 \uAD00\uD1B5 \uACF5\uACA9 \uD130\uB81B"
-  _preview: {fileID: 0}
+  _preview: {fileID: 2825688747922289392}
   _maxHp: 0
   _goldCost: 0
   _turretType: 4
@@ -283,7 +283,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _muzzlePoint: {fileID: 6371523438996001392}
-  _bullets: {fileID: 1549649516645007424, guid: a4a370d7c3b7f9c438e5e16b0834855e, type: 3}
+  _bullets: {fileID: 4877335657989112379, guid: 320af0acb63833c4aac06f36c94c2916, type: 3}
   _bulletCoolTime: 2
   _target: {fileID: 0}
 --- !u!1 &8101205689528271869

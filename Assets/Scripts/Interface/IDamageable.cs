@@ -9,5 +9,5 @@ public interface IDamageable
     void SlowSpeed(float speed);
 
     // TODO MonsterHealth 내 추가할 내용
-    // bool CheckExecution(float thresholdRatio);
+    bool CheckExecution(float thresholdRatio);
 }

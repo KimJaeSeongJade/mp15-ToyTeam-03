@@ -37,7 +37,7 @@ public class Tier2ExecutionTurret : BaseTurret
                 // 💡 적 유닛 안에 선언된 인터페이스 처형 함수를 직접 호출합니다!
                 // 적이 스스로 조건을 검사하고 처형에 성공(true)했다면 터렛은 이펙트만 예쁘게 띄워줍니다.
                 // TODO IDamageable 내 추가
-                // if (damageable.CheckExecution(_executionThreshold))
+                if (damageable.CheckExecution(_executionThreshold))
                 {
                     PlayExecutionEffect(hitEnemies[i].transform.position);
                 }

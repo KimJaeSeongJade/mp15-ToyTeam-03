@@ -82,6 +82,20 @@ public class MonsterHealth : MonoBehaviour, IDamageableturret, ISloowable ,IHeal
             _isSlow = true;
         }
     }
+
+    public bool CheckExecution(float thresholdRatio)
+    {
+        if (CurrentHp / MaxHp <= thresholdRatio)
+        {
+            Debug.Log("처형 가능");
+            
+            TakeDamage(MaxHp);
+            return true;
+        }
+
+        return false;
+    }
+
     public void ResetHealth()
     {
         _isDead = false;
