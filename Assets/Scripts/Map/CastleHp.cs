@@ -8,6 +8,12 @@ public class CastleHp : MonoBehaviour,ICastleInterface
 {
     [SerializeField] private float _hp;
     [SerializeField] private float _maxHp;
+    
+    // 게임 매니저에서 초기 체력 받아오기 위한 프로퍼티 --------------------
+    public float CurrentHP => _hp;
+    public float MaxHp => _maxHp;
+    //------------------------------------------------------------
+    
     private void Awake()
     {
         _hp = _maxHp;

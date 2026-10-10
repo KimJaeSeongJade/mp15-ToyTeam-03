@@ -14,6 +14,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     
     // wave 끝났을 때 골드 
     public const int GOLD_AMOUNT = 20;
+    // public const float CASTLE_HP = 500;
     public GameState currentState;  // 현재 게임 상태
     // --- 판넬 ------------
     [SerializeField] private GameObject _startPanel;    // 시작 화면 UI
@@ -44,6 +45,15 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     [SerializeField] private TurretInfo[] _turretInfo;
 
+    // -----------------------------------------------------------------
+
+    
+    [SerializeField] private WaveManager _waveManager;
+    [SerializeField] private CastleHp _castleHp;
+    [SerializeField] private TextMeshProUGUI _castleHpText;
+    
+    // [SerializeField] private CastleHp _castleHp;
+    
     public bool IsStarted { get; private set; }
     
     // -------------------------------------------------------------
@@ -90,6 +100,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         Init();
         ResetToTitle(); // TODO 게임 데이터 초기화 연결해야함. (이벤트로)
         ChangeState(GameState.Ready);
+        RefreshCastleHealthUI(_castleHp.CurrentHP, _castleHp.MaxHp);
     }
 
     private void Update()
@@ -162,6 +173,8 @@ public class GameManager : SingletonBehaviour<GameManager>
         PlayerStatus.OnSkillCooldownStarted += SetPlayerSkillCooldownUI;
         PlayerStatus.OnBuildCooldownStarted += SetPlayerBuildCooldownUI;
         PlayerStatus.OnCursorChanged += SetCrosshair;
+        _castleHp.OnCastleHealthChanged += RefreshCastleHealthUI;
+        _castleHp.OnCastleHealthChanged += CheckGameOver;
     }
 
     private void SetCrosshair(CrosshairType crosshairType)
@@ -303,6 +316,26 @@ public class GameManager : SingletonBehaviour<GameManager>
         _crosshair.SetActive(false);
     }
     
+    //  UI 매니저 쪽에서 
+    private void RefreshCastleHealthUI(float currentHp, float maxHp)
+    {
+        _castleHpText.text = $"{currentHp:F0}/{maxHp:F0}";
+    }
+
+    
+    // 게임 오버 체크
+
+    private void CheckGameOver(float currentHp, float maxHp)
+    {
+        if (currentHp <= 0f)
+        {
+            ChangeState(GameState.GameOver);
+        }
+    }
+    
+    // 현재 hp 변경되면 값을 못 받아와서 초기값 받아와야함.
+    // 그냥 받아오는 구조 대신 이거도 상수로 내가 가지고 있는게 낫지 않을까
+    
     // 게임 리셋
     private void ResetToTitle()
     {
@@ -379,7 +412,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        Debug.Log($"Cursor State : {Cursor.lockState}");
     }
     // ----------------------------------------------
 }

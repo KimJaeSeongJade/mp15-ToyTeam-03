@@ -11,6 +11,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     [SerializeField] private float _prepareTime = 30f;
     [SerializeField] private TextMeshProUGUI _prepareTimeUI;
     [SerializeField] private TextMeshProUGUI _goldUI;
+    [SerializeField] private TextMeshProUGUI _castleHealthUI;
     
     [SerializeField] private GameManager _gameManager;
     
@@ -197,6 +198,8 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
         StartCoroutine(PrepareNextWave());
     }
+
+
 
     private void PrintClearText()
     {
