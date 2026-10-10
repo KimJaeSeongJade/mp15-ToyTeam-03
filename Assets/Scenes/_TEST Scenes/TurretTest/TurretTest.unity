@@ -1990,63 +1990,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d94220718b9254c88f5fa1f225d1ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &8457962466118698220
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5846798055471559158, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5846798055471559158, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5846798055471559158, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5846798055471559158, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5846798055471559158, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5846798055471559158, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5846798055471559158, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5846798055471559158, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5846798055471559158, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5846798055471559158, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8379886193293361952, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
-      propertyPath: m_Name
-      value: T2DA_ReflactionTurret
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2062,4 +2005,3 @@ SceneRoots:
   - {fileID: 1062174971}
   - {fileID: 765541318}
   - {fileID: 366972876}
-  - {fileID: 8457962466118698220}

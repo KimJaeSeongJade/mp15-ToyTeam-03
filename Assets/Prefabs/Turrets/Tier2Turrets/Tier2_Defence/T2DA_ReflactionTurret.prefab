@@ -464,7 +464,7 @@ MonoBehaviour:
   _reflectionRange: 3
   _enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!1 &8986239002936482946
 GameObject:
   m_ObjectHideFlags: 0
