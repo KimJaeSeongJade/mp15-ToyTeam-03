@@ -22,7 +22,6 @@ public class TitleSceneChecker : MonoBehaviour
         SceneFade.Instance._destinationScene = NextScenename;
     }
 
-#if UNITY_EDITOR
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.R))
@@ -32,5 +31,4 @@ public class TitleSceneChecker : MonoBehaviour
         }
     }
 
-#endif
 }

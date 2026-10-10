@@ -83,8 +83,8 @@ public class TutorialUI : MonoBehaviour
         FocusTargets[(int)TutorialFocus.Sell] = Find(root, "SellTurretUI") as RectTransform;
         BuildPointTurretUI information = game.PlayerStatus.GetComponentInChildren<BuildPointTurretUI>(true);
         FocusTargets[(int)TutorialFocus.Information] = information != null ? information.GetComponent<RectTransform>() : null;
+#if UNITY_EDITOR
         if (Gold == null || _buildTarget == null)
-            #if UNITY_EDITOR
             Debug.LogError("TutorialUI: 기존 HUD의 GoldText / Turret1UI 연결을 확인하세요.", this);
 #endif
     }
