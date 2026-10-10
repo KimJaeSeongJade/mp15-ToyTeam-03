@@ -93,9 +93,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5935722795521177340}
   - component: {fileID: -821864348800557443}
-  - component: {fileID: -3960424433200850205}
   m_Layer: 0
-  m_Name: DefenceBullet
+  m_Name: Bullet02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,24 +135,3 @@ MonoBehaviour:
   speed: 15
   _lifeTime: 3
   _returnPoint: {fileID: 0}
---- !u!65 &-3960424433200850205
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599137970048280179}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.39237183, y: 0.44847006, z: 0.80675465}
-  m_Center: {x: 0, y: 0, z: 0.096622676}
