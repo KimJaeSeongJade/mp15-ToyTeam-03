@@ -63,6 +63,12 @@ public class MonsterHealth : MonoBehaviour, IDamageableturret, ISloowable ,IHeal
             Instantiate(Cacheenemy.IsDeadImpack, transform.position, Quaternion.identity);
 
             Cacheenemy.GiveToExpPlayer();
+<<<<<<< Updated upstream
+=======
+            //#if UNITY_EDITOR
+            //Debug.Log($"Exp{Cacheenemy.MonExp}");
+            //#endif
+>>>>>>> Stashed changes
 
             goldPool.PopAll();
             Cacheenemy.ReturnToPool();

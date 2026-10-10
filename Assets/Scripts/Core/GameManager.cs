@@ -39,7 +39,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField] private TextMeshProUGUI _skillCooldownText; // 스킬 쿨타임 텍스트
 
     [SerializeField] private Image _cursorImage;
-    [SerializeField] private Sprite[]  _cursorSprites;
+    [SerializeField] private GameObject[]  _cursorSprites;
     [SerializeField] private GameObject _crosshair;
     
     [Serializable]

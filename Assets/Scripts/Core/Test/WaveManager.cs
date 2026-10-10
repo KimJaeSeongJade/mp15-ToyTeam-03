@@ -12,6 +12,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     [SerializeField] private TextMeshProUGUI _prepareTimeUI;
     [SerializeField] private TextMeshProUGUI _goldUI;
     [SerializeField] private TextMeshProUGUI _castleHealthUI;
+    [SerializeField] private float _waveClearShowTime = 3f;
     
     [SerializeField] private GameManager _gameManager;
     
@@ -20,10 +21,11 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     // 정보 받아와야하면 추후에 수정
 
+    private float _clearRemainingTime;
     private int _currentWave = 0;
     private bool _isWaveEnded = false;
+    private float _remainingTime;
     
-    [SerializeField] private float _remainingTime;
     [SerializeField] private int _aliveMonsterCount;
     [SerializeField] private bool _isSpawnFinished;
 
@@ -55,6 +57,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         PrepareWaveUI();
         RefreshGoldUI();
+        ShowClearUI();
     }
 
     // 게임 매니저 게임 시작 -> 이벤트 구독 처리
@@ -283,10 +286,43 @@ public class WaveManager : SingletonBehaviour<WaveManager>
 
     private void PrintClearText()
     {
+        Debug.Log(1);
         _stageClearText.gameObject.SetActive(true);
-        _stageClearText.text = "Wave CLEAR!!";
+        StartCoroutine(PrintWaveClear());
+    }
+    
+    private IEnumerator PrintWaveClear()
+    {
+        _clearRemainingTime = _waveClearShowTime;
+        
+        _stageClearText.gameObject.SetActive(true);
+        while (_clearRemainingTime > 0f)
+        {
+            OnPrepareTimeChanged?.Invoke(_clearRemainingTime);
+            _clearRemainingTime -= Time.deltaTime;
+            yield return null;
+        }
+        _stageClearText.gameObject.SetActive(false);
     }
 
+    private void ShowClearUI()
+    {
+        // 만약 게임 시작 됐으면 UI 처리한다.
+        // 조건식 추후에 고민
+        if (_clearRemainingTime > 0f)
+        {
+            _stageClearText.text =
+                $"{_currentWave} Wave Clear!!";
+        }
+        else
+        {
+            _stageClearText.gameObject.SetActive(false);
+        }
+    }
+
+
+    
+    
     private void CacheComponents()
     {
         // _player = GetComponent<>(Player); 
