@@ -26,6 +26,17 @@ public class MonsterMove : MonoBehaviour
     {
         Move();
     }
+    public void Reset()
+    {
+        waypoints = null;
+        arrivePoint = 0;
+        _agent.speed = reenemy.MonSpeed;
+        originalSpeed = _agent.speed;
+        _turretDis = false;
+
+        _agent.velocity = Vector3.zero;
+        _agent.isStopped = true;
+    }
 
 
     // 경로 정보 받아오기
