@@ -24,6 +24,12 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField] private TextMeshProUGUI _gameResultText;
     //---------------------
     
+    // --- 플레이어 경험치 / 레벨 UI -------------------
+    [SerializeField] private TextMeshProUGUI _levelText;
+    [SerializeField] private TextMeshProUGUI _expText;
+    [SerializeField] private Image _expBarImage;
+    // ------------------------------------------------
+    
     // --- 인게임 UI -----------------------------------------------
     [SerializeField] private GameObject _inGameUI;      // 인게임 UI
     [SerializeField] private GameObject _buildModeUI;   // 빌드모드 UI
@@ -107,6 +113,11 @@ public class GameManager : SingletonBehaviour<GameManager>
         BindPlayerModeUI();
         ChangeState(GameState.Ready);
         RefreshCastleHealthUI(_castleHp.CurrentHP,_castleHp.MaxHp);
+        // 플레이어 초기 레벨 UI
+        RefreshLevelUI(PlayerStatus.Level);
+
+        // 플레이어 초기 경험치 UI
+        RefreshExpUI(PlayerStatus.Exp, PlayerStatus.RequiredExp);
     }
 
     private void Update()
@@ -117,6 +128,31 @@ public class GameManager : SingletonBehaviour<GameManager>
     // --------------------------------------------------------
     
     public event Action OnWaveStarted; // 추후에 TODO REFACTOR
+    
+    // 플레이어 레벨 변경 시 UI 갱신
+    private void RefreshLevelUI(int level)
+    {
+        _levelText.text = $"Lv.{level}";
+    }
+    
+    // 플레이어 경험치 변경 시 UI 갱신
+    private void RefreshExpUI(float currentExp, float requiredExp)
+    {
+        // 최대 레벨일 경우 (필요 경험치 0)
+        if (requiredExp <= 0f)
+        {
+            _expText.text = "MAX";
+            _expBarImage.fillAmount = 1f;
+            return;
+        }
+
+        // 현재 경험치 / 필요 경험치 텍스트 갱신
+        _expText.text = $"{currentExp:F0}/{requiredExp:F0}";
+
+        // 경험치 바 fillAmount 갱신
+        _expBarImage.fillAmount =
+            Mathf.Clamp01(currentExp / requiredExp);
+    }
     
     private void PauseManager()
     {
@@ -180,6 +216,11 @@ public class GameManager : SingletonBehaviour<GameManager>
         PlayerStatus.OnSkillCooldownStarted += SetPlayerSkillCooldownUI;
         PlayerStatus.OnBuildCooldownStarted += SetPlayerBuildCooldownUI;
         PlayerStatus.OnCursorChanged += SetCrosshair;
+        // ----------------------------------------
+        
+        // 플레이어 경험치 / 레벨 UI -------------------
+        PlayerStatus.OnExpChanged += RefreshExpUI;
+        PlayerStatus.OnLevelChanged += RefreshLevelUI;
         // ----------------------------------------
         
         // 게임 오버 판정 체크 --------------
