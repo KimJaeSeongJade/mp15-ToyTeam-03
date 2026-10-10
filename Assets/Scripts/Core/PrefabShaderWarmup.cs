@@ -9,6 +9,9 @@ using UnityEngine.UI;
 [AddComponentMenu("Loading/Prefab Shader Warmup")]
 public class PrefabShaderWarmup : MonoBehaviour
 {
+    public const string CompletionKey = "Cache.Completed.v1";
+    public static bool HasCompleted => PlayerPrefs.GetInt(CompletionKey, 0) == 1;
+
     public GameObject[] Prefabs = new GameObject[0];
     [Tooltip("로딩 카메라가 실제로 볼 수 있는 위치에 배치합니다.")]
     public Transform SpawnPoint;
@@ -107,6 +110,10 @@ public class PrefabShaderWarmup : MonoBehaviour
             IsLoading = false;
             if (_staging != null) Destroy(_staging);
         }
+
+        PlayerPrefs.SetInt(CompletionKey, 1);
+        PlayerPrefs.Save();
+
         OnCompleted.Invoke();
     }
 
