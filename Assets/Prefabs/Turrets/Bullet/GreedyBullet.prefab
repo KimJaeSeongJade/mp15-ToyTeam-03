@@ -74,6 +74,7 @@ MonoBehaviour:
   speed: 15
   _lifeTime: 3
   _returnPoint: {fileID: 0}
+  _ownerTurret: {fileID: 0}
 --- !u!1 &8257554377172053657
 GameObject:
   m_ObjectHideFlags: 0

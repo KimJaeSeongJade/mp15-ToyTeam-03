@@ -979,7 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03abf3f0eaa8964fbf1a93f9fb4f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monHp: 20
+  _monHp: 50
   _monDefend: 5
   _monSpeed: 3
   _monGlod: 100
@@ -1055,7 +1055,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 2.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1094,8 +1094,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1.2}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1, y: 3, z: 1.2}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &7874917303163966125
 GameObject:
   m_ObjectHideFlags: 0

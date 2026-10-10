@@ -788,18 +788,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3970ac6e2cad7f3498f69012ce88d46a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monHp: 20
-  _monDefend: 5
-  _monSpeed: 3
+  _monHp: 125
+  _monDefend: 2.5
+  _monSpeed: 3.5
   _monGlod: 100
-  _monExp: 0
+  _monExp: 125
   _monCastleDam: 10
   _IsDeadImpack: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
   _hitImpact: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
   _spawnImpact: {fileID: 4809171458859421548, guid: 4e91ed1a8efe7044785b9bd97a47d87f, type: 3}
   _maxMonHp: 0
-  _damage: 10
-  _attackSpeed: 3
+  _damage: 35
+  _attackSpeed: 3.5
   _TurretMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -842,7 +842,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 2.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -869,8 +869,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 2, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 1.5, y: 4, z: 1}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!135 &470641443899618589
 SphereCollider:
   m_ObjectHideFlags: 0
