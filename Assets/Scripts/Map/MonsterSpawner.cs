@@ -88,7 +88,6 @@ public class MonsterSpawner : MonoBehaviour
         
     }
     
-    public int TotalWaveCount => _waypointPath.Length;
     
     
     private void HandleSpawnEnd()

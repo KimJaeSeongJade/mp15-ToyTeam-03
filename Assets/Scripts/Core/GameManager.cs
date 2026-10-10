@@ -444,6 +444,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private void ShowGameResult(string resultMessage)
     {
+        _inGameUI.gameObject.SetActive(false);
         _gameResultText.text = resultMessage;
         _gameResultPanel.SetActive(true);
     }
@@ -454,7 +455,6 @@ public class GameManager : SingletonBehaviour<GameManager>
         if (currentState == GameState.GameOver ||
             currentState == GameState.GameClear)
             return;
-
         ChangeState(GameState.GameClear);
     }
 
@@ -550,6 +550,8 @@ public class GameManager : SingletonBehaviour<GameManager>
         // 스킬 쿨타임 반영 ui 꺼짐 상태
         _skillCooldownImage.gameObject.SetActive(false);
         _skillCooldownText.gameObject.SetActive(false);
+        // 결과 출력 판넬 꺼진 상태
+        _gameResultPanel.SetActive(false);
     }
 
     
