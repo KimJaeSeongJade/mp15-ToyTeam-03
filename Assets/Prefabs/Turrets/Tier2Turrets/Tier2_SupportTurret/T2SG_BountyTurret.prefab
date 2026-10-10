@@ -111,8 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba6c893d07cf904794ff13232d6a7f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  _info: 
+  _name: "\uD2F0\uC5B42 \uD604\uC0C1\uAE08 \uD130\uB81B"
+  _info: "\uBAAC\uC2A4\uD130\uC5D0\uAC8C \uD604\uC0C1\uAE08 \uD45C\uC2DD \uBD80\uC5EC
+    \uCC98\uCE58 \uC2DC \uCD94\uAC00 \uACE8\uB4DC \uB4DC\uB78D"
   _preview: {fileID: 3144472408716035280}
   _maxHp: 0
   _goldCost: 0

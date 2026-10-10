@@ -119,6 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84694f66548f65040a85ec567ce0e2e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
+  _info: 
   _preview: {fileID: 1829456937399446890}
   _maxHp: 200
   _goldCost: 200
@@ -355,6 +357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0362b982f6c003142a379a89067e0c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: "\uD2F0\uC5B42 \uAC70\uC778 \uD130\uB81B"
+  _info: "\uC77C\uC815 \uBC94\uC704 \uB0B4\uC5D0 \uBAAC\uC2A4\uD130 \uC815\uC9C0"
   _preview: {fileID: 8425421416552523665}
   _maxHp: 500
   _goldCost: 300

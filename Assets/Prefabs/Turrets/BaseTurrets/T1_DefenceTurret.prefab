@@ -163,11 +163,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e05c9d67130920448013e330a617877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: "\uAE30\uBCF8 \uBC29\uC5B4 \uD130\uB81B"
+  _info: "\uC801 \uC2AC\uB85C\uC6B0 \uACF5\uACA9"
   _preview: {fileID: 8500655535360023629}
   _maxHp: 800
   _goldCost: 150
   _turretType: 1
   _baseDamage: 10
+  _buildCooldown: 1
   _defenceRange: 0
   _targetMask:
     serializedVersion: 2

@@ -353,8 +353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0536c06407fabda40bde08a28f1cd06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  _info: 
+  _name: "\uD2F0\uC5B42 \uC544\uC774\uC2A4 \uACF5\uACA8 \uD130\uB81B"
+  _info: "\uC77C\uC815 \uBC94\uC704 \uB0B4 \uC2AC\uB85C\uC6B0 \uC9C0\uB300 \uC0DD\uC131"
   _preview: {fileID: 7954733569185653698}
   _maxHp: 0
   _goldCost: 0

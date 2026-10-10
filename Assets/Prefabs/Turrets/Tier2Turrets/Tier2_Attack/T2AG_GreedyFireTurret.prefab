@@ -270,6 +270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c045f5099f1b10540ba4dc85fa78a61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: "\uD2F0\uC5B42 \uAE30\uAD00\uCD1D \uD130\uB81B"
+  _info: "\uC801 \uACF5\uACA9 \uC2DC \uACF5\uACA9\uB825 \uC99D\uAC00 \uBBF8\uACF5\uACA9
+    \uC2DC \uCD94\uAC00 \uACF5\uACA9\uB825 \uBC18\uD658"
   _preview: {fileID: 6221484448432722798}
   _maxHp: 0
   _goldCost: 0
@@ -284,9 +287,11 @@ MonoBehaviour:
   _bullets: {fileID: 7423141231352279377, guid: 978897c471225134eb8a5d0d33ee33d6, type: 3}
   _bulletCoolTime: 3
   _target: {fileID: 0}
-  _baseAttackCoolTime: 1
-  _speedBonusPerKill: 0.02
-  _maxSpeedBonus: 1
+  _damageBonusPerShot: 1
+  _maxDamageBonus: 20
+  _stackDecayDelay: 2
+  _stackDecaySpeed: 5
+  _currentDamageBonus: 0
 --- !u!1 &8652083985267311596
 GameObject:
   m_ObjectHideFlags: 0

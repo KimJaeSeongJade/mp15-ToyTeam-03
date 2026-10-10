@@ -499,8 +499,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e8bc93088c2914c9ff2e81cefe6813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  _info: 
+  _name: "\uD2F0\uC5B42 \uCC98\uD615 \uD130\uB81B"
+  _info: "\uC77C\uC815 \uBC94\uC704 \uB0B4 \uC77C\uC815 \uCCB4\uB825 \uC774\uD558\uC758
+    \uBAAC\uC2A4\uD130 \uCC98\uD615"
   _preview: {fileID: 4424710206229425437}
   _maxHp: 0
   _goldCost: 0

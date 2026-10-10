@@ -165,8 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 909d7ce4a885a9d4f9bbfa949a9212ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  _info: 
+  _name: "\uAE30\uBCF8 \uACE8\uB4DC \uD130\uB81B"
+  _info: "\uACE8\uB4DC \uC0DD\uC131"
   _preview: {fileID: 7693613485966695973}
   _maxHp: 500
   _goldCost: 200

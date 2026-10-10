@@ -98,11 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbaf4e7d6991730418353f0fb86e05c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: "\uAE30\uBCF8 \uC9C0\uC6D0 \uD130\uB81B"
+  _info: "\uC8FC\uBCC0 \uD130\uB81B \uACF5\uACA9\uB825 \uBC84\uD504"
   _preview: {fileID: 5677532433276509232}
   _maxHp: 400
   _goldCost: 200
   _turretType: 2
   _baseDamage: 10
+  _buildCooldown: 1
   _buffDamage: 0
   _buffRange: 0
   _turretMask:

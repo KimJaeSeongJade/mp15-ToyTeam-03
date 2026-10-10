@@ -452,8 +452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84694f66548f65040a85ec567ce0e2e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  _info: 
+  _name: "\uD2F0\uC5B42 \uBC18\uACA9 \uD130\uB81B"
+  _info: "\uD53C\uACA9 \uC2DC \uBC18\uC0AC\uB370\uBBF8\uC9C0"
   _preview: {fileID: 5291505604357346395}
   _maxHp: 0
   _goldCost: 0

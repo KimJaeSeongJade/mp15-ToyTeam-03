@@ -86,3 +86,15 @@ MonoBehaviour:
   - ExistType: 2
     AddedType: 3
     ResultTurret: {fileID: 8956890685768784375, guid: 0bc8b55a3a04e2f4a839eba4e932cfe5, type: 3}
+  - ExistType: 3
+    AddedType: 0
+    ResultTurret: {fileID: 8917986843478375946, guid: 437e3d8c40954879a444edd578fec5ec, type: 3}
+  - ExistType: 3
+    AddedType: 1
+    ResultTurret: {fileID: 8917986843478375946, guid: f5f55795c65e48a1a9eae52eb2832efa, type: 3}
+  - ExistType: 3
+    AddedType: 2
+    ResultTurret: {fileID: 8917986843478375946, guid: 4d12cde5285340c4b0bd9281872f7242, type: 3}
+  - ExistType: 3
+    AddedType: 3
+    ResultTurret: {fileID: 8917986843478375946, guid: 90336dcc70e94957a7e6aa10ec059ef3, type: 3}
