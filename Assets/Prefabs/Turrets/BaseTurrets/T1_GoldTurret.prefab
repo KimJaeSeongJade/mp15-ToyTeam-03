@@ -99,6 +99,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4608280963793158992}
     m_Modifications:
+    - target: {fileID: 1791118126790580348, guid: 4ab1245392b27734f95ca1fef925f9bf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 86d713ea886fef141a35c7db06546464, type: 2}
     - target: {fileID: 2665047764002152825, guid: 4ab1245392b27734f95ca1fef925f9bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -139,10 +143,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4453166592894407151, guid: 4ab1245392b27734f95ca1fef925f9bf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 86d713ea886fef141a35c7db06546464, type: 2}
+    - target: {fileID: 5293700759324681327, guid: 4ab1245392b27734f95ca1fef925f9bf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 86d713ea886fef141a35c7db06546464, type: 2}
     - target: {fileID: 5746865719641170120, guid: 4ab1245392b27734f95ca1fef925f9bf, type: 3}
       propertyPath: m_Name
       value: GoldTurret
       objectReference: {fileID: 0}
+    - target: {fileID: 6150660756213410279, guid: 4ab1245392b27734f95ca1fef925f9bf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 86d713ea886fef141a35c7db06546464, type: 2}
     m_RemovedComponents:
     - {fileID: -3037077997730432447, guid: 4ab1245392b27734f95ca1fef925f9bf, type: 3}
     - {fileID: 1710827236713179177, guid: 4ab1245392b27734f95ca1fef925f9bf, type: 3}

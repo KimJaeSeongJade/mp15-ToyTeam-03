@@ -263,7 +263,7 @@ public class WaveManager : SingletonBehaviour<WaveManager>
     {
         OnWaveEnded?.Invoke();
         // 웨이브 클리어 UI 출력
-        PrintClearText();
+        
         
         // 다음 웨이브 없으면 클리어
         if (_currentWave >= _monsterSpawner.TotalWaveCount)

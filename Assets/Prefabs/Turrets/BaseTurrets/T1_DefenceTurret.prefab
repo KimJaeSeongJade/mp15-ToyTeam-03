@@ -178,10 +178,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 819571871089772674, guid: 17401d5d0140af044a3ff6976331327f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d77316fbec6b8942a13d629fa03bfe1, type: 2}
     - target: {fileID: 1636086858188251480, guid: 17401d5d0140af044a3ff6976331327f, type: 3}
       propertyPath: m_Name
       value: DefenceTurret
       objectReference: {fileID: 0}
+    - target: {fileID: 7003506195211643038, guid: 17401d5d0140af044a3ff6976331327f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d77316fbec6b8942a13d629fa03bfe1, type: 2}
+    - target: {fileID: 7526716856824633468, guid: 17401d5d0140af044a3ff6976331327f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d77316fbec6b8942a13d629fa03bfe1, type: 2}
+    - target: {fileID: 8330182438117939916, guid: 17401d5d0140af044a3ff6976331327f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d77316fbec6b8942a13d629fa03bfe1, type: 2}
     m_RemovedComponents:
     - {fileID: 5466491203104743065, guid: 17401d5d0140af044a3ff6976331327f, type: 3}
     - {fileID: 3948341175797632354, guid: 17401d5d0140af044a3ff6976331327f, type: 3}

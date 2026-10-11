@@ -176,10 +176,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3740910028356263492, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b83db712d1dba0e4b81e8498a7cb8276, type: 2}
+    - target: {fileID: 6548348923766650184, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b83db712d1dba0e4b81e8498a7cb8276, type: 2}
     - target: {fileID: 7224494018387954264, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
       propertyPath: m_Name
       value: AttackTurret
       objectReference: {fileID: 0}
+    - target: {fileID: 7977382747165702924, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b83db712d1dba0e4b81e8498a7cb8276, type: 2}
     m_RemovedComponents:
     - {fileID: 8497655396227700380, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
     - {fileID: 173408800482432190, guid: 22face6def62f84488af37dfa90d3cbb, type: 3}
