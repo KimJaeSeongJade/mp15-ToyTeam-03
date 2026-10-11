@@ -10,11 +10,8 @@ public class TutorialGoldStep : TutorialStep
 
     public override IEnumerator Execute(TutorialContext context)
     {
-        if (context.GoldDelivery == null) { context.Fail("골드 배달 컴포넌트를 연결하세요."); yield break; }
         context.Input.InputEnabled = false;
-        Bounds bounds = new Bounds(context.Player.transform.position, Vector3.zero);
-        foreach (GoldDrop drop in UnityEngine.Object.FindObjectsOfType<GoldDrop>())
-            if (drop.gameObject.scene == context.Player.gameObject.scene) bounds.Encapsulate(drop.transform.position);
+        Bounds bounds = context.GoldDelivery.GetBounds(context.Player.transform.position);
         float distance = Mathf.Max(10f, bounds.extents.magnitude * 1.6f + 5f);
         Vector3 offset = -context.Player.transform.forward * distance + context.Player.transform.right * distance * 0.3f
             + Vector3.up * distance * 0.65f;

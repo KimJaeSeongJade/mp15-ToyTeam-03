@@ -25,13 +25,13 @@ public class TutorialManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Context != null && Context.Game != null) Context.Game.enabled = false;
+        Context.Game.enabled = false;
     }
 
     private IEnumerator Start()
     {
         yield return null;
-        if (Context == null || !Context.Initialize(this)) yield break;
+        Context.Initialize(this);
         _initialized = true;
         Context.UI.SkipButton.onClick.AddListener(Skip);
         Context.UI.ContinueButton.onClick.AddListener(CancelSkip);
@@ -40,12 +40,10 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator Run()
     {
-        if (Steps == null || Steps.Count == 0) { Context.Fail("실행할 단계 목록이 비어 있습니다."); yield break; }
         for (int i = 0; i < Steps.Count; i++)
         {
             CurrentStepIndex = i;
             TutorialStep step = Steps[i];
-            if (step == null) { Context.Fail($"{i + 1}번째 단계 데이터가 없습니다."); yield break; }
             if (!step.Enabled) continue;
             yield return new WaitUntil(() => !IsPaused);
             Context.SetStepCrosshair(step.ShowCrosshair);
@@ -130,7 +128,11 @@ public class TutorialManager : MonoBehaviour
         SceneFade.Instance.TransitionToScene();
     }
 
-    public void NotifyPracticeShot() { if (_initialized && !_completed) Context.NotifyShot(); }
+    public void NotifyPracticeShot()
+    {
+        if (!_initialized || _completed) return;
+        Context.NotifyShot();
+    }
 
     private void OnDestroy()
     {

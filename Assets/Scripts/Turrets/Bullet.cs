@@ -78,7 +78,7 @@ using UnityEngine;
     {
         // 💡 [요청 사항 반영 2] 타깃이 존재하더라도 이미 사망했거나 비활성화(오브젝트 풀 반환) 상태라면 
         // 유령을 계속 추적하지 않도록 실시간 가드 처리를 거쳐 타깃을 null로 밀어버립니다.
-        if (_target != null && !_target.gameObject.activeInHierarchy)
+        if (!TurretTargetList.IsAlive(_target))
         {
             _target = null;
         }

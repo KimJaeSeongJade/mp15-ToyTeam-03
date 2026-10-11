@@ -17,7 +17,11 @@ public class Tier2BaseTurret : BaseTurret
 
     public Transform Target
     {
-        get { return _target; }
+        get
+        {
+            if (!TurretTargetList.IsAlive(_target)) _target = null;
+            return _target;
+        }
         set
         {
             _target = value;

@@ -12,10 +12,12 @@ public class DefenceTurret : BaseTurret
     [SerializeField] private float _shield;
     
     [SerializeField] private Transform _target;
+    private readonly TurretTargetList _targets = new TurretTargetList();
     private float _lastAttackTime;
 
     private void Update()
     {
+        _target = _targets.GetTarget(_target);
         if (_target == null) return;
 
         // 쿨타임 체크 후 공격
@@ -28,38 +30,42 @@ public class DefenceTurret : BaseTurret
     }
     public override void Attack()
     {
+        _target = _targets.GetTarget(_target);
+        if (_target == null) return;
+
         if (_bullets != null && _muzzlePoint != null)
         {
             Instantiate(_bullets, _muzzlePoint.position, _muzzlePoint.rotation);
         }
     }
 
-    // 공격 대상 감지
     private void OnTriggerEnter(Collider other)
     {
-        if (IsTargetLayer(other.gameObject.layer))
-        {
-            if (_target == null)
-            {
-                _target = other.transform;
-            }
-        }
+        RegisterTarget(other);
     }
 
-    // 공격 대상 범위 벗어남
+    private void OnTriggerStay(Collider other)
+    {
+        RegisterTarget(other);
+    }
+
+    private void RegisterTarget(Collider other)
+    {
+        if (!IsTargetLayer(other.gameObject.layer)) return;
+        _targets.Register(other);
+    }
+
     private void OnTriggerExit(Collider other)
     {
-        if (IsTargetLayer(other.gameObject.layer))
-        {
-            // 벗어난 오브젝트가 현재 타겟인 경우에만 해제
-            if (_target == other.transform)
-            {
-                _target = null;
-            }
-        }
+        _targets.Remove(other);
     }
 
-    // 레이어마스크 검사 공통 함수
+    private void OnDisable()
+    {
+        _targets.Clear();
+        _target = null;
+    }
+
     private bool IsTargetLayer(int layer)
     {
         return (_targetMask.value & (1 << layer)) != 0;

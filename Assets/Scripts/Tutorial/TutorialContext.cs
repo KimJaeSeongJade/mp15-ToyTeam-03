@@ -16,6 +16,8 @@ public class TutorialContext
     public CastleHp Castle;
     public GameObject MovementBoundary;
     public BasicAttack PracticeAttackTemplate;
+    public SkillAttack PracticeSkillTemplate;
+    public BuildPoint[] BuildPoints;
     [Header("가이드 프리팹 (비어 있으면 기존 표시 사용)")]
     public TutorialGuideStyle BuildGuideStyle = new TutorialGuideStyle();
     public TutorialGuideStyle EnemyGuideStyle = new TutorialGuideStyle();
@@ -41,27 +43,27 @@ public class TutorialContext
     [NonSerialized] private float _castleMaxHp;
     private readonly List<BaseEnemy> _enemies = new List<BaseEnemy>();
     private readonly Dictionary<string, List<BaseEnemy>> _waves = new Dictionary<string, List<BaseEnemy>>();
+    private readonly List<TutorialSkillLifetime> _skills = new List<TutorialSkillLifetime>();
 
-    public bool Initialize(TutorialManager owner)
+    public void Initialize(TutorialManager owner)
     {
         _owner = owner;
-        if (Player == null || Game == null || Input == null || UI == null)
-        { Fail("공통 참조 Player / Game / Input / UI가 필요합니다."); return false; }
         Reader = Player.GetComponent<PlayerInputReader>();
         Wallet = Player.GetComponent<PlayerWallet>();
-        if (Reader == null || Wallet == null) { Fail("플레이어 입력/지갑이 없습니다."); return false; }
-        Game.StartGame();
-        UI.BindExistingHUD(Game);
+        // 본게임 웨이브를 시작하지 않고 튜토리얼 HUD와 입력만 준비한다.
+        Game.Run();
+        UI.BindExistingHUD(Game, Castle);
         UI.SetGold(Wallet.Gold);
         Wallet.OnGoldChanged += OnGoldChanged;
         Player.OnSkillCooldownStarted += OnSkillUsed;
         Input.PromptAccepted += OnPromptAccepted;
         Camera = owner.gameObject.AddComponent<TutorialSpawnCutscene>();
         BuildAreas = owner.gameObject.AddComponent<TutorialBuildAreaFilter>();
-        BuildAreas.Initialize();
+        BuildAreas.Initialize(BuildPoints);
         BuildAreas.Allow(null);
         _walls = MovementBoundary != null ? MovementBoundary.GetComponentsInChildren<Collider>() : new Collider[0];
-        if (Castle != null) Castle.OnCastleHealthChanged += OnCastleHealthChanged;
+        Castle.OnCastleHealthChanged += OnCastleHealthChanged;
+        OnCastleHealthChanged(Castle.CurrentHP, Castle.MaxHp);
         if (PracticeAttackTemplate != null)
         {
             GameObject root = new GameObject("TutorialAttackTemplate");
@@ -72,7 +74,13 @@ public class TutorialContext
             template.gameObject.AddComponent<TutorialPracticeShot>().Owner = owner;
             Player.GetComponent<PlayerAttackMode>().SetBasicAttack(template);
         }
-        return true;
+        PlayerAttackMode attackMode = Player.GetComponent<PlayerAttackMode>();
+        GameObject skillRoot = new GameObject("TutorialSkillTemplate");
+        skillRoot.transform.SetParent(owner.transform, false);
+        skillRoot.SetActive(false);
+        SkillAttack skillTemplate = UnityEngine.Object.Instantiate(PracticeSkillTemplate, skillRoot.transform);
+        skillTemplate.gameObject.AddComponent<TutorialSkillLifetime>().Owner = owner;
+        attackMode.SetSkillAttack(skillTemplate);
     }
 
     public void SetStepCrosshair(bool visible)
@@ -92,8 +100,8 @@ public class TutorialContext
     {
         return (text ?? "").Replace("{현재횟수}", current.ToString()).Replace("{목표횟수}", target.ToString())
             .Replace("{키}", key).Replace("{시간}", seconds.ToString("0.##"))
-            .Replace("{레벨}", Player != null ? Player.Level.ToString() : "")
-            .Replace("{골드}", Wallet != null ? Wallet.Gold.ToString() : "")
+            .Replace("{레벨}", Player.Level.ToString())
+            .Replace("{골드}", Wallet.Gold.ToString())
             .Replace("{캐슬HP}", _castleHp.ToString("0")).Replace("{최대캐슬HP}", _castleMaxHp.ToString("0"));
     }
 
@@ -119,9 +127,17 @@ public class TutorialContext
 
     public bool HasActiveSkill()
     {
-        foreach (SkillAttack skill in UnityEngine.Object.FindObjectsOfType<SkillAttack>())
-            if (skill.gameObject.scene == _owner.gameObject.scene) return true;
-        return false;
+        return _skills.Count > 0;
+    }
+
+    public void RegisterSkill(TutorialSkillLifetime skill)
+    {
+        _skills.Add(skill);
+    }
+
+    public void UnregisterSkill(TutorialSkillLifetime skill)
+    {
+        _skills.Remove(skill);
     }
 
     public void GuideBuild(BuildPoint point, string label)
@@ -193,12 +209,10 @@ public class TutorialContext
 
     public BaseEnemy Spawn(TutorialEnemyDefinition definition)
     {
-        if (definition == null || definition.Prefab == null || definition.SpawnPoint == null || definition.Destination == null)
-        { Fail("몬스터 프리팹 / 등장 / 도착 Transform을 지정하세요."); return null; }
         if (!NavMesh.SamplePosition(definition.SpawnPoint.position, out NavMeshHit spawn, 5f, NavMesh.AllAreas)
             || !NavMesh.SamplePosition(definition.Destination.position, out NavMeshHit destination, 5f, NavMesh.AllAreas))
         { Fail("등장/전투 지점이 NavMesh 위에 없습니다."); return null; }
-        var path = new NavMeshPath();
+        NavMeshPath path = new NavMeshPath();
         if (!NavMesh.CalculatePath(spawn.position, destination.position, NavMesh.AllAreas, path)
             || path.status != NavMeshPathStatus.PathComplete)
         { Fail("몬스터 등장 지점에서 목적지까지 이동할 수 없습니다."); return null; }
@@ -216,6 +230,7 @@ public class TutorialContext
         enemy.MonSpeed = definition.Speed;
         staging.SetActive(true);
         enemy.InitData();
+        GoldDelivery.Register(enemy);
         MonsterMove movement = enemy.GetComponent<MonsterMove>();
         if (movement != null) movement.enabled = false;
         NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
@@ -223,17 +238,20 @@ public class TutorialContext
         { UnityEngine.Object.Destroy(staging); Fail("몬스터 NavMeshAgent 배치를 확인하세요."); return null; }
         agent.speed = definition.Speed;
         foreach (Collider body in enemy.GetComponentsInChildren<Collider>())
+        {
             foreach (Collider wall in _walls) Physics.IgnoreCollision(body, wall);
+            // 본게임 캐슬 트리거와 튜토리얼 시연이 피해를 중복 적용하지 않는다.
+            foreach (Collider goal in Castle.GetComponentsInChildren<Collider>())
+                Physics.IgnoreCollision(body, goal);
+        }
         agent.isStopped = false;
         agent.SetPath(path);
         _enemies.Add(enemy);
         if (definition.Route != null && definition.Route.Length > 0)
         {
-            if (Castle == null) { Fail("캐슬 참조가 필요합니다."); return null; }
-            var points = new List<Vector3> { definition.Destination.position };
+            List<Vector3> points = new List<Vector3> { definition.Destination.position };
             foreach (Transform point in definition.Route)
             {
-                if (point == null) { Fail("몬스터 경유 Transform이 비어 있습니다."); return null; }
                 points.Add(point.position);
             }
             if (!enemy.gameObject.AddComponent<TutorialEnemyRoute>().Initialize(enemy, points, Castle, definition.HoldAtGoal))
@@ -248,26 +266,39 @@ public class TutorialContext
         #if UNITY_EDITOR
         Debug.LogError($"TutorialManager: {reason}", _owner);
 #endif
-        if (UI != null) { FailureText.Show(this); UI.SetSpotlight(false); }
-        if (Input != null) Input.CancelPrompt();
+        FailureText.Show(this);
+        UI.SetSpotlight(false);
+        Input.CancelPrompt();
     }
 
     public void NotifyShot()
     {
         if (!Paused && Input.InputEnabled && Time.timeScale > 0f) ShotFired?.Invoke();
     }
-    private void OnSkillUsed(float duration) { if (!Paused && Input.InputEnabled) SkillUsed?.Invoke(); }
+    private void OnSkillUsed(float duration)
+    {
+        if (!Paused && Input.InputEnabled) SkillUsed?.Invoke();
+    }
     private void OnGoldChanged(int total, int amount) => UI.SetGold(total);
     private void OnPromptAccepted() => UI.SetSpotlight(false);
-    private void OnCastleHealthChanged(float current, float max) { _castleHp = current; _castleMaxHp = max; }
+    private void OnCastleHealthChanged(float current, float max)
+    {
+        _castleHp = current;
+        _castleMaxHp = max;
+    }
 
     public void StopWorld()
     {
         if (Camera != null) Camera.RestoreCamera();
         HideBuildGuide();
         HideEnemyGuide();
+        foreach (TutorialSkillLifetime skill in _skills.ToArray())
+        {
+            if (skill != null) UnityEngine.Object.Destroy(skill.gameObject);
+        }
         foreach (BaseEnemy enemy in _enemies)
             if (IsAlive(enemy)) enemy.ReturnToPool();
+        if (GoldDelivery != null) GoldDelivery.StopDelivery();
     }
 
     public void Dispose()

@@ -14,6 +14,7 @@ public class AttackTurret : BaseTurret, IBuffable
     
     
     [SerializeField] private Transform _target;
+    private readonly TurretTargetList _targets = new TurretTargetList();
     private float _lastAttackTime;
 
     protected virtual void Start()
@@ -23,6 +24,7 @@ public class AttackTurret : BaseTurret, IBuffable
 
     protected virtual void Update()
     {
+        _target = _targets.GetTarget(_target);
         if (_target == null) return;
 
         // 쿨타임 체크 후 공격
@@ -36,6 +38,9 @@ public class AttackTurret : BaseTurret, IBuffable
 
     public override void Attack()
     {
+        _target = _targets.GetTarget(_target);
+        if (_target == null) return;
+
         if (_bullets != null && _muzzlePoint != null)
         {
             // 총알 오브젝트를 생성합니다.
@@ -68,28 +73,31 @@ public class AttackTurret : BaseTurret, IBuffable
 #endif
     }
 
-    // 공격 대상 감지
     private void OnTriggerEnter(Collider other)
     {
-        if (IsTargetLayer(other.gameObject.layer))
-        {
-            if (_target == null)
-            {
-                _target = other.transform;
-            }
-        }
+        RegisterTarget(other);
     }
 
-    // 공격 대상 범위 벗어남
+    private void OnTriggerStay(Collider other)
+    {
+        RegisterTarget(other);
+    }
+
+    private void RegisterTarget(Collider other)
+    {
+        if (!IsTargetLayer(other.gameObject.layer)) return;
+        _targets.Register(other);
+    }
+
     private void OnTriggerExit(Collider other)
     {
-        if (IsTargetLayer(other.gameObject.layer))
-        {
-            if (_target == other.transform)
-            {
-                _target = null;
-            }
-        }
+        _targets.Remove(other);
+    }
+
+    protected virtual void OnDisable()
+    {
+        _targets.Clear();
+        _target = null;
     }
 
     private bool IsTargetLayer(int layer)

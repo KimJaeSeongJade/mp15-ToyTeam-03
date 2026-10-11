@@ -63,6 +63,5 @@ public class TutorialEnemyRoute : MonoBehaviour
         _castle.CastleTakeDamage(_enemy.MonCastleDam);
         if (_enemy.HitImpact != null) Instantiate(_enemy.HitImpact, transform.position, Quaternion.identity);
         _enemy.ReachGoal();
-        _enemy.ReturnToPool();
     }
 }

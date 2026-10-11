@@ -1498,6 +1498,7 @@ MonoBehaviour:
     MovementBoundary: {fileID: 1350300142020862644}
     PracticeAttackTemplate: {fileID: 4035207203642884785, guid: 8ef67b2133eccdd469c22f872dcb3df8, type: 3}
     BuildGuideStyle:
+      MarkerShader: {fileID: 4800000, guid: 914c245a3da949489c1f344e864301ba, type: 3}
       WorldArrowPrefab: {fileID: 4074968304161450777, guid: b78297bc22e2f2f4d8e193702ff0c3c8, type: 3}
       WorldRingPrefab: {fileID: 0}
       ScreenGuidePrefab: {fileID: 0}
@@ -1513,6 +1514,7 @@ MonoBehaviour:
       LabelFormat: "{\uC774\uB984} \uC704\uCE58"
       DistanceFormat: 
     EnemyGuideStyle:
+      MarkerShader: {fileID: 4800000, guid: 914c245a3da949489c1f344e864301ba, type: 3}
       WorldArrowPrefab: {fileID: 4074968304161450777, guid: b78297bc22e2f2f4d8e193702ff0c3c8, type: 3}
       WorldRingPrefab: {fileID: 0}
       ScreenGuidePrefab: {fileID: 0}

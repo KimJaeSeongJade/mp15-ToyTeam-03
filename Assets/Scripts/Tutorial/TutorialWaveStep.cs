@@ -109,7 +109,7 @@ public class TutorialWaveStep : TutorialStep
                     if (wave.Exists(RouteFailed)) { context.Fail($"웨이브 {WaveId}의 이동 경로가 끊겼습니다."); yield break; }
                     if (ShowMarker)
                     {
-                        BaseEnemy next = wave.Find(TutorialContext.IsAlive);
+                        BaseEnemy next = GetLivingEnemy(wave);
                         if (next != null) context.GuideEnemy(next, MarkerLabel);
                     }
                     yield return null;
@@ -128,7 +128,7 @@ public class TutorialWaveStep : TutorialStep
 
         if (Completion == TutorialWaveCompletion.FirstRemoved && ShowMarker)
         {
-            BaseEnemy next = wave.Find(TutorialContext.IsAlive);
+            BaseEnemy next = GetLivingEnemy(wave);
             if (next != null) context.GuideEnemy(next, MarkerLabel);
             else context.HideEnemyGuide();
         }
@@ -140,6 +140,15 @@ public class TutorialWaveStep : TutorialStep
     {
         return Completion == TutorialWaveCompletion.FirstRemoved
             ? !TutorialContext.IsAlive(wave[0]) : wave.TrueForAll(enemy => !TutorialContext.IsAlive(enemy));
+    }
+
+    private BaseEnemy GetLivingEnemy(List<BaseEnemy> wave)
+    {
+        foreach (BaseEnemy enemy in wave)
+        {
+            if (TutorialContext.IsAlive(enemy)) return enemy;
+        }
+        return null;
     }
 
     private static bool RouteFailed(BaseEnemy enemy)

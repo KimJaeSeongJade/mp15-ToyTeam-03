@@ -4,6 +4,7 @@ using System;
 [Serializable]
 public class TutorialGuideStyle
 {
+    public Shader MarkerShader;
     [Tooltip("대상 위에 표시할 3D 모델 / 월드 스페이스 UI / 이펙트 프리팹")]
     public GameObject WorldArrowPrefab;
     [Tooltip("빌드포인트 바닥의 링 / 이펙트 프리팹. 몬스터 안내에는 사용하지 않습니다.")]
@@ -109,7 +110,7 @@ public class TutorialBuildPointGuide : MonoBehaviour
         GameObject child = new GameObject(name);
         child.transform.SetParent(_marker.transform, false);
         LineRenderer line = child.AddComponent<LineRenderer>();
-        if (_material == null) _material = new Material(Shader.Find("Sprites/Default"));
+        if (_material == null) _material = new Material(_style.MarkerShader);
         line.sharedMaterial = _material;
         line.startColor = line.endColor = color;
         line.startWidth = line.endWidth = 0.12f;

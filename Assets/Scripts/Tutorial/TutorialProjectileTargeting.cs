@@ -32,8 +32,10 @@ public class TutorialProjectileTargeting : MonoBehaviour
         float radius = range.radius * Mathf.Max(Mathf.Abs(scale.x), Mathf.Abs(scale.y), Mathf.Abs(scale.z));
         BaseEnemy nearest = null;
         float nearestDistance = float.PositiveInfinity;
-        foreach (BaseEnemy enemy in FindObjectsOfType<BaseEnemy>())
+        foreach (Collider collider in Physics.OverlapSphere(center, radius))
         {
+            BaseEnemy enemy = collider.GetComponentInParent<BaseEnemy>();
+            if (enemy == null) continue;
             if (enemy.gameObject.scene != gameObject.scene || enemy.MonHp <= 0f) continue;
             Collider body = enemy.GetComponent<Collider>();
             Vector3 closest = body != null ? body.ClosestPoint(center) : enemy.transform.position;

@@ -11,7 +11,7 @@ public class TutorialUI : MonoBehaviour
     public TMP_Text Message;
     public TMP_Text Progress;
     public TMP_Text Gold;
-    [Tooltip("크로스헤어 오브젝트. 비어 있으면 기존 HUD의 Crosshair를 자동 연결합니다.")]
+    [Tooltip("튜토리얼 씬의 기존 HUD 크로스헤어를 연결합니다.")]
     public GameObject Crosshair;
     public RectTransform[] FocusTargets;
     public RectTransform Highlight;
@@ -32,9 +32,24 @@ public class TutorialUI : MonoBehaviour
 
     private RectTransform _canvasRect;
     private RectTransform _target;
+    [SerializeField] private GameObject _inGameUI;
+    [SerializeField] private GameObject _attackModeUI;
+    [SerializeField] private GameObject _buildModeUI;
+    [SerializeField] private GameObject[] _hiddenPanels;
+    [SerializeField] private TMP_Text _levelText;
+    [SerializeField] private TMP_Text _expText;
+    [SerializeField] private Image _expFill;
+    [SerializeField] private TMP_Text _castleText;
+    [SerializeField] private Image _castleFill;
+    [SerializeField] private Image _skillCooldownImage;
+    [SerializeField] private TMP_Text _skillCooldownText;
+    [SerializeField] private Image[] _turretCooldownImages;
+    [SerializeField] private TMP_Text[] _turretCooldownTexts;
+    private PlayerStatus _player;
+    private CastleHp _castle;
     private RectTransform _buildTarget;
     private RectTransform _exitBuildTarget;
-    private TMP_Text _waveText;
+    [SerializeField] private TMP_Text _waveText;
     private RectTransform _spotlightRoot;
     private readonly Image[] _spotlightPanels = new Image[4];
     private readonly Vector3[] _corners = new Vector3[4];
@@ -48,7 +63,7 @@ public class TutorialUI : MonoBehaviour
     private string _lastInstructionMessage;
 
     // 원본 프리팹은 수정하지 않고 이 씬에 있는 기존 HUD에만 연결한다.
-    public void BindExistingHUD(GameManager game)
+    public void BindExistingHUD(GameManager game, CastleHp castle)
     {
         foreach (Transform child in _canvasRect)
         {
@@ -61,45 +76,83 @@ public class TutorialUI : MonoBehaviour
             canvas.gameObject.SetActive(true);
             canvas.enabled = true;
         }
-        Transform root = game.transform;
-        if (Crosshair == null) Crosshair = Find(root, "Crosshair")?.gameObject;
-        foreach (TMP_Text text in root.GetComponentsInChildren<TMP_Text>(true)) ApplyTutorialFont(text);
-        foreach (TMP_Text text in game.PlayerStatus.GetComponentsInChildren<TMP_Text>(true)) ApplyTutorialFont(text);
-        SetActive(root, "PausePanel", false);
-        SetActive(root, "StageClearText", false);
-        SetActive(root, "WaveTimerBackGround", false);
-        Gold = Find(root, "GoldText")?.GetComponent<TMP_Text>();
-        _waveText = Find(root, "PrepareTimeUI")?.GetComponent<TMP_Text>();
-        _buildTarget = Find(root, "Turret1UI") as RectTransform;
-        _exitBuildTarget = Find(root, "ExitBuildModeUI") as RectTransform;
-        FocusTargets = new RectTransform[12];
-        FocusTargets[(int)TutorialFocus.Experience] = Find(root, "ExpBarBackGround") as RectTransform;
-        FocusTargets[(int)TutorialFocus.Attack] = Find(root, "BasicAttackUI") as RectTransform;
-        FocusTargets[(int)TutorialFocus.Skill] = Find(root, "SpecialAttackUI") as RectTransform;
-        FocusTargets[(int)TutorialFocus.Build] = _buildTarget;
-        FocusTargets[(int)TutorialFocus.Gold] = Gold != null ? Gold.rectTransform : null;
-        FocusTargets[(int)TutorialFocus.ExitBuild] = _exitBuildTarget;
-        FocusTargets[(int)TutorialFocus.BuildSecond] = Find(root, "Turret2UI") as RectTransform;
-        FocusTargets[(int)TutorialFocus.Sell] = Find(root, "SellTurretUI") as RectTransform;
-        BuildPointTurretUI information = game.PlayerStatus.GetComponentInChildren<BuildPointTurretUI>(true);
-        FocusTargets[(int)TutorialFocus.Information] = information != null ? information.GetComponent<RectTransform>() : null;
-#if UNITY_EDITOR
-        if (Gold == null || _buildTarget == null)
-            Debug.LogError("TutorialUI: 기존 HUD의 GoldText / Turret1UI 연결을 확인하세요.", this);
-#endif
+        foreach (GameObject panel in _hiddenPanels)
+        {
+            panel.SetActive(false);
+        }
+        _inGameUI.SetActive(true);
+        _skillCooldownImage.gameObject.SetActive(false);
+        _skillCooldownText.gameObject.SetActive(false);
+        foreach (Image image in _turretCooldownImages) image.gameObject.SetActive(false);
+        foreach (TMP_Text text in _turretCooldownTexts) text.gameObject.SetActive(false);
+        foreach (TMP_Text text in game.GetComponentsInChildren<TMP_Text>(true)) ApplyTutorialFont(text);
+
+        _player = game.PlayerStatus;
+        _castle = castle;
+        _player.OnPlayerModeChanged += SetPlayerMode;
+        _player.OnLevelChanged += SetLevel;
+        _player.OnExpChanged += SetExperience;
+        _player.OnSkillCooldownStarted += StartSkillCooldown;
+        _player.OnBuildCooldownStarted += StartBuildCooldown;
+        _castle.OnCastleHealthChanged += SetCastleHealth;
+        SetPlayerMode(true);
+        SetLevel(_player.Level);
+        SetExperience(_player.Exp, _player.RequiredExp);
+        SetCastleHealth(_castle.CurrentHP, _castle.MaxHp);
+        _buildTarget = FocusTargets[(int)TutorialFocus.Build];
+        _exitBuildTarget = FocusTargets[(int)TutorialFocus.ExitBuild];
+        BuildPointTurretUI information = _player.GetComponentInChildren<BuildPointTurretUI>(true);
+        if (information != null)
+            FocusTargets[(int)TutorialFocus.Information] = information.GetComponent<RectTransform>();
     }
 
-    private static Transform Find(Transform root, string name)
+    private void SetPlayerMode(bool attackMode)
     {
-        foreach (Transform child in root.GetComponentsInChildren<Transform>(true))
-            if (child.name.Trim() == name) return child;
-        return null;
+        _attackModeUI.SetActive(attackMode);
+        _buildModeUI.SetActive(!attackMode);
     }
 
-    private static void SetActive(Transform root, string name, bool value)
+    private void SetLevel(int level)
     {
-        Transform child = Find(root, name);
-        if (child != null) child.gameObject.SetActive(value);
+        _levelText.text = $"Lv. {level}";
+    }
+
+    private void SetExperience(float experience, float required)
+    {
+        _expText.text = $"{experience:0}/{required:0}";
+        _expFill.fillAmount = required > 0f ? experience / required : 1f;
+    }
+
+    private void SetCastleHealth(float health, float maximum)
+    {
+        _castleText.text = $"{health:0}/{maximum:0}";
+        _castleFill.fillAmount = health / maximum;
+    }
+
+    private void StartSkillCooldown(float duration)
+    {
+        StartCoroutine(CooldownRoutine(_skillCooldownImage, _skillCooldownText, duration));
+    }
+
+    private void StartBuildCooldown(int slot, float duration)
+    {
+        StartCoroutine(CooldownRoutine(_turretCooldownImages[slot], _turretCooldownTexts[slot], duration));
+    }
+
+    private System.Collections.IEnumerator CooldownRoutine(Image image, TMP_Text text, float duration)
+    {
+        image.gameObject.SetActive(true);
+        text.gameObject.SetActive(true);
+        float remaining = duration;
+        while (remaining > 0f)
+        {
+            remaining -= Time.deltaTime;
+            image.fillAmount = Mathf.Clamp01(remaining / duration);
+            text.text = Mathf.CeilToInt(remaining).ToString();
+            yield return null;
+        }
+        image.gameObject.SetActive(false);
+        text.gameObject.SetActive(false);
     }
 
     private void Awake()
@@ -327,6 +380,15 @@ public class TutorialUI : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (_player != null)
+        {
+            _player.OnPlayerModeChanged -= SetPlayerMode;
+            _player.OnLevelChanged -= SetLevel;
+            _player.OnExpChanged -= SetExperience;
+            _player.OnSkillCooldownStarted -= StartSkillCooldown;
+            _player.OnBuildCooldownStarted -= StartBuildCooldown;
+        }
+        if (_castle != null) _castle.OnCastleHealthChanged -= SetCastleHealth;
         if (_tutorialFont == null) return;
         foreach (Texture2D atlas in _tutorialFont.atlasTextures)
             if (atlas != null) Destroy(atlas);
