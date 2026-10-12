@@ -533,6 +533,12 @@ public class GameManager : SingletonBehaviour<GameManager>
         IsPause = true;
     }
 
+    // 일시정지 상태에서 게임 재개
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     private void CacheComponents()
     {
         _wallet = PlayerStatus.GetComponent<PlayerWallet>();
