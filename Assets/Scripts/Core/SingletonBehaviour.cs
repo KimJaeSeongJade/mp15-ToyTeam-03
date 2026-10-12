@@ -3,7 +3,7 @@ using UnityEngine;
 // 상속 클래스의 Awake/OnDestroy에서는 base를 호출한다.
 public abstract class SingletonBehaviour<T> : MonoBehaviour where T : SingletonBehaviour<T>
 {
-    public static T Instance { get; private set; }
+    public static T Instance { get; protected set; }
 
     protected virtual void Awake()
     {

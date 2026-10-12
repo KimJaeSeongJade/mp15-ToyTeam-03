@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test_Turret : MonoBehaviour
+public class Test_Turret : MonoBehaviour, IDamageable
 {
     [SerializeField] private float _hp = 100f;
     [SerializeField] private float _slowRate = 0.2f;
@@ -10,6 +10,10 @@ public class Test_Turret : MonoBehaviour
     [SerializeField] private float _range = 10f;
     private bool _isDead;
 
+    private void Awake()
+    {
+        IDamageable damage = GetComponent<IDamageable>();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -28,7 +32,9 @@ public class Test_Turret : MonoBehaviour
 
         if (targets.Length == 0)
         {
+            #if UNITY_EDITOR
             Debug.Log("못찾음");
+#endif
         }
 
         IDamageable target = targets[0].GetComponent<IDamageable>();
@@ -38,7 +44,9 @@ public class Test_Turret : MonoBehaviour
 
         target.SlowSpeed(0.2f);
 
+        #if UNITY_EDITOR
         Debug.Log("느려는 공격");
+#endif
     }
 
     public void TakeDamage(float damage)
@@ -50,12 +58,20 @@ public class Test_Turret : MonoBehaviour
         if (_hp <= 0)
         {
             _isDead = true;
+            #if UNITY_EDITOR
             Debug.Log("터렛 파괴");
+#endif
+            Destroy(gameObject);
         }
     }
 
     public void SlowSpeed(float speed)
     {
         
+    }
+
+    public bool CheckExecution(float thresholdRatio)
+    {
+        return false;
     }
 }

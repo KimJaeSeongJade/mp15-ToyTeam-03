@@ -2,38 +2,87 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.AI;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField] private WayPointPath _waypointPath;
-    [SerializeField] private int _count;
-    [SerializeField] private BaseEnemy _monsterPrefab;
-
-    private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
-    private int _correntCount;
+    [SerializeField] private WayPointPath[] _waypointPath;
+    [SerializeField] private WaveManager _waveManager;
+    [SerializeField] private GameObject[] PortalEffect;
+    private ObjectPool<BaseEnemy> _monsterGroupPool;
+    [SerializeField] private List<MonsterGroup> _monsterGroupList;
+    public int TotalWaveCount => _monsterGroupList.Count; // 게임 오버 판정을 확인하기 위해 읽기 전용 프로퍼티 추가
     
-    public void SpawnWave(int waveNumber, Action<BaseEnemy> onMonsterSpawn, Action onSpawnEnd)
-    {        
-        StartCoroutine(WaveStartRoutine(onMonsterSpawn, onSpawnEnd));
+    private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
+    private BaseEnemy _monster;
+    private bool _isSpawnEnd;
+    
+    
+    private void Start()
+    {
+        Init();
+    } 
+
+    private void Init()
+    {
+        _monsterGroupPool = new ObjectPool<BaseEnemy>(
+            _monsterGroupList[0].GetInitMonsterDataPools(),
+            transform,
+            monster => monster.InitData());
     }
     
-    private IEnumerator WaveStartRoutine(Action<BaseEnemy> onMonsterSpawn, Action onSpawnEnd)
+    public void SpawnWave(int waveNumber, Action<BaseEnemy> onMonsterSpawn, Action onSpawnEnd)
     {
-        _correntCount = 0;
+        StartCoroutine(WaveStartRoutine(waveNumber,onMonsterSpawn, onSpawnEnd));
+    }
+    
+    private IEnumerator WaveStartRoutine(int waveNumber,Action<BaseEnemy> onMonsterSpawn, Action onSpawnEnd)
+    {
+        _isSpawnEnd = true;
+        MonsterGroup _localMonsterGroup = _monsterGroupList[waveNumber-1];
+        _localMonsterGroup.ResetSpwan();
 
-        while (_count > _correntCount)
+        while (_localMonsterGroup.TryGetNext(out MonsterGroup.MonsterData resultData))
         {
-            Debug.Log("생성");
-            BaseEnemy _monster = Instantiate(_monsterPrefab, transform.position, transform.rotation);
-            // 몬스터한테 waypointPath posititon전달
-            _monster.GetComponent<MonsterMove>().Initialize(_waypointPath);
-            onMonsterSpawn?.Invoke(_monster); //몬스터 생성값을 어떻게 할 것인지 waveManager&monster상의
-            _correntCount++;
+            int pathNum = resultData.waypointNum;
+            WayPointPath targetPath = _waypointPath[pathNum-1];
 
-            yield return _wait;
+        
+            _monster = _monsterGroupPool.Pop(resultData.monster);
+
+            IMonsterMoveable _moveableMonster = _monster.GetComponent<IMonsterMoveable>();
+                
+            _moveableMonster.ResetPath(transform.position);
+            _moveableMonster.Initialize(targetPath);
+
+            onMonsterSpawn?.Invoke(_monster);
+            yield return _wait;   
+            
         }
-
+        
+        #if UNITY_EDITOR
         Debug.Log("생성 끝");
+#endif
+        PortaleffectFalse();
         onSpawnEnd?.Invoke();
+        
+    }
+    
+    private void HandleSpawnEnd()
+    {
+        _isSpawnEnd = false;
+        Debug.Log("HandleSpawnEnd");
+    }
+    
+    private void PortaleffectFalse()
+    {
+        PortalEffect[0].SetActive(false);
+        PortalEffect[1].SetActive(false);
+    }
+
+    private void PortaleffectTure()
+    {
+        PortalEffect[0].SetActive(true);
+        PortalEffect[1].SetActive(true);
     }
 }

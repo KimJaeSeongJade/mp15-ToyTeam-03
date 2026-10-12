@@ -329,10 +329,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f9408d57b624849b8880abcad09ae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 100
-  _goldCost: 100
-  _turretType: 4
   _preview: {fileID: 4488544871564652059}
+  _maxHp: 100
+  _goldCost: 200
+  _turretType: 4
+  _baseDamage: 10
   _target: {fileID: 0}
   _muzzle: {fileID: 4051701524224538376}
   _bullet: {fileID: 3665352360426747353, guid: 4b037b23b977ad0449c5c162174d170a, type: 3}

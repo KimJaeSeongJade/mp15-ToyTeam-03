@@ -1,52 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Object = System.Object;
 
-/*public class MonsterPool : MonoBehaviour
+public class MonsterPool : MonoBehaviour
 {
-    [SerializeField] private int _waveMonstersCount;
-    [SerializeField] private GameObject _monsterPrefab;
-    //생성한 것을 다시 죽을 때 회수
-    private GameObject[] _monsters;
+    [SerializeField] private BaseEnemy _monsterPrabas;
+    [SerializeField] private MonsterGroup  _monsterGroup;
     
-    //prefab를 list안에 저장
-    private int _count;
-    //하나 생성할 때마다 --;
+    private ObjectPool<BaseEnemy> monsterPool;
 
+    
+    private int _count = 10;
 
-    private void Start() => FillPool();
-
-    public void Pop()
+    private void Awake()
     {
-        if (_count > 0)
-        {
-            GameObject monster = _monsters[_count - 1];
-            monster.SetActive(true);
-            //yield return; coroutine
-            
-        }
+        monsterPool = new ObjectPool<BaseEnemy>(
+            _monsterPrabas,
+            (int)_count,
+            _monsterGroup.transform,
+            _monsterPrabas =>
+            {
+                _monsterPrabas.InitData();
+            });
     }
     
-    
-    public void FillPool() //몬스터를 배열에 저장
-    {
-        _monsters = new GameObject[_waveMonstersCount];
-
-        for (int i = 0; i < _waveMonstersCount; i++)
-        {
-            GameObject monster = Instantiate(_monsterPrefab);
-            monster.SetActive(false);
-            
-            _monsters[i] = monster;
-        }
-        _count = _waveMonstersCount;
-        
-        Debug.Log($"이번 Wave 생성 예정 몬스터 수:{_waveMonstersCount}");
+    public BaseEnemy Pop()
+    { 
+        return monsterPool.Pop();
     }
 
-    
-    
-
-
-}*/
+   
+}

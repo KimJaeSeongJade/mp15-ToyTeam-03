@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SkillAttack : MonoBehaviour
 {
-    [SerializeField] private LayerMask _targetMask;
-    [SerializeField] private float _damage = 10f;
-    [SerializeField] private float _damageDelay = 0.5f;
-    [SerializeField] private float _capsuleRadius = 1f;
-    [SerializeField] private float _capsuleHeight = 3f;
+    [SerializeField] protected LayerMask _targetMask;
+    [SerializeField] protected float _damage = 10f;
+    [SerializeField] protected float _damageDelay = 0.5f;
+    [SerializeField] protected float _capsuleRadius = 1f;
+    [SerializeField] protected float _capsuleHeight = 3f;
 
     protected virtual void Start()
     {

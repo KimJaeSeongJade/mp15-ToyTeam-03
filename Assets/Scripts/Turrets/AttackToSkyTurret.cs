@@ -14,10 +14,12 @@ public class AttackToSkyTurret : BaseTurret
     private int _goldCost; 
 
     [SerializeField] private Transform _target; 
+    private readonly TurretTargetList _targets = new TurretTargetList();
     private float _lastAttackTime; 
 
     private void Update() 
     { 
+        _target = _targets.GetTarget(_target);
         if (_target == null) return; 
 
         // 쿨타임 체크 후 공격 
@@ -31,43 +33,44 @@ public class AttackToSkyTurret : BaseTurret
     } 
 
     public override void Attack() 
-    { 
+    {
+        _target = _targets.GetTarget(_target);
+        if (_target == null) return;
+
         if (_bullets != null && _muzzlePoint != null) 
         { 
             Instantiate(_bullets, _muzzlePoint.position, _muzzlePoint.rotation); 
         } 
     } 
 
-    // 공격 대상 감지 
-    private void OnTriggerEnter(Collider other) 
-    { 
-        if (IsTargetLayer(other.gameObject.layer)) 
-        { 
-            // 💡 오브젝트가 공중 몬스터 인터페이스(IAirMonster)를 가지고 있는지 검사
-            if (other.TryGetComponent<IAirMonster>(out IAirMonster airMonster))
-            {
-                if (_target == null) 
-                { 
-                    _target = other.transform; 
-                } 
-            }
-        } 
-    } 
+    private void OnTriggerEnter(Collider other)
+    {
+        RegisterTarget(other);
+    }
 
-    // 공격 대상 범위 벗어남 
-    private void OnTriggerExit(Collider other) 
-    { 
-        if (IsTargetLayer(other.gameObject.layer)) 
-        { 
-            // 벗어난 오브젝트가 현재 타겟인 경우에만 해제 
-            if (_target != null && _target == other.transform) 
-            { 
-                _target = null; 
-            } 
-        } 
-    } 
+    private void OnTriggerStay(Collider other)
+    {
+        RegisterTarget(other);
+    }
 
-    // 레이어마스크 검사 공통 함수 
+    private void RegisterTarget(Collider other)
+    {
+        if (!IsTargetLayer(other.gameObject.layer)) return;
+        if (other.GetComponentInParent<IAirMonster>() == null) return;
+        _targets.Register(other);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _targets.Remove(other);
+    }
+
+    private void OnDisable()
+    {
+        _targets.Clear();
+        _target = null;
+    }
+
     private bool IsTargetLayer(int layer) 
     { 
         return (_targetMask.value & (1 << layer)) != 0; 

@@ -1,37 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
+[DefaultExecutionOrder(-100)]
 public class TurretDetectTarget : MonoBehaviour
 {
     [SerializeField] private Tier2BaseTurret _baseTurret;
     [SerializeField] private LayerMask _targetMask;
 
+    private readonly TurretTargetList _targets = new TurretTargetList();
+
+    private void Update()
+    {
+        _baseTurret.Target = _targets.GetTarget(_baseTurret.Target);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (IsTargetLayer(other.gameObject.layer))
-        {
-            if (_baseTurret.Target == null)
-            {
-                _baseTurret.Target = other.transform;
-            }
-        }
+        RegisterTarget(other);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        RegisterTarget(other);
+    }
+
+    private void RegisterTarget(Collider other)
+    {
+        if ((_targetMask.value & (1 << other.gameObject.layer)) == 0) return;
+        _targets.Register(other);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (IsTargetLayer(other.gameObject.layer))
-        {
-            if (_baseTurret.Target == other.transform)
-            {
-                _baseTurret.Target = null;
-            }
-        }
+        _targets.Remove(other);
     }
 
-    private bool IsTargetLayer(int layer)
+    private void OnDisable()
     {
-        return (_targetMask.value & (1 << layer)) != 0;
+        _targets.Clear();
+        _baseTurret.Target = null;
     }
 }

@@ -19,7 +19,7 @@ public class ThunderTurret : Tier2BaseTurret
 
     public override void Attack()
     {
-        if (!canFire || _target == null) return;
+        if (!canFire || Target == null) return;
 
         _bullet = _bulletPool.Pop();
 

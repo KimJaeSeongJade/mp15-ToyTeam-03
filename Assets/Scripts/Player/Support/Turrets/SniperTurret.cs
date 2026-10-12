@@ -22,7 +22,7 @@ public class SniperTurret : Tier2BaseTurret
 
     public override void Attack()
     {
-        if (!canFire || _target == null) return;
+        if (!canFire || Target == null) return;
 
         _bullet = _bulletPool.Pop();
 
@@ -31,7 +31,7 @@ public class SniperTurret : Tier2BaseTurret
 
     private void TurretRotate()
     {
-        if (_target == null) return;
+        if (Target == null) return;
 
         Vector3 targetPosition = new Vector3(_target.position.x, transform.position.y, _target.position.z);
 

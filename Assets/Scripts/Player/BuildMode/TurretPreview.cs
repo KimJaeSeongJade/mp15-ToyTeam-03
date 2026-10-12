@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TurretPreview : MonoBehaviour
 {
@@ -57,6 +58,49 @@ public class TurretPreview : MonoBehaviour
 
         foreach (Collider collider in _previewTurret.GetComponentsInChildren<Collider>(true))
             collider.enabled = false;
+
+        foreach (NavMeshObstacle obstacle in _previewTurret.GetComponentsInChildren<NavMeshObstacle>(true))
+            obstacle.enabled = false;
+
+        foreach (Animator animator in _previewTurret.GetComponentsInChildren<Animator>(true))
+            animator.enabled = false;
+
+        foreach (Animation animation in _previewTurret.GetComponentsInChildren<Animation>(true))
+        {
+            animation.playAutomatically = false;
+            animation.Stop();
+            animation.enabled = false;
+        }
+
+        foreach (ParticleSystem particles in _previewTurret.GetComponentsInChildren<ParticleSystem>(true))
+        {
+            var main = particles.main;
+            main.playOnAwake = false;
+            main.stopAction = ParticleSystemStopAction.None;
+            particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            foreach (ParticleSystemRenderer renderer in particles.GetComponents<ParticleSystemRenderer>())
+                renderer.enabled = false;
+        }
+
+        foreach (TrailRenderer trail in _previewTurret.GetComponentsInChildren<TrailRenderer>(true))
+        {
+            trail.emitting = false;
+            trail.Clear();
+            trail.enabled = false;
+        }
+
+        foreach (LineRenderer line in _previewTurret.GetComponentsInChildren<LineRenderer>(true))
+            line.enabled = false;
+
+        foreach (Light light in _previewTurret.GetComponentsInChildren<Light>(true))
+            light.enabled = false;
+
+        foreach (AudioSource audio in _previewTurret.GetComponentsInChildren<AudioSource>(true))
+        {
+            audio.playOnAwake = false;
+            audio.Stop();
+            audio.enabled = false;
+        }
 
         foreach (Rigidbody body in _previewTurret.GetComponentsInChildren<Rigidbody>(true))
         {
