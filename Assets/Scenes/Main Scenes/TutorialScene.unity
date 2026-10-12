@@ -25763,6 +25763,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2587156182966324022, guid: d71fb8fdd7564124591ae9173367da6e, type: 3}
   m_PrefabInstance: {fileID: 612108519}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &612166978
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 50, g: 50, b: 0, a: 0}
+    - _r: {r: 15, g: 15, b: 15, a: 15}
+    - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
+  m_BuildTextureStacks: []
 --- !u!1001 &612841211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26680,48 +26722,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5445221899388881597, guid: e7bcd806d53514149b0036f83ed84409, type: 3}
   m_PrefabInstance: {fileID: 634116982}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &635431697
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 50, g: 50, b: 0, a: 0}
-    - _r: {r: 15, g: 15, b: 15, a: 15}
-    - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
-  m_BuildTextureStacks: []
 --- !u!4 &635438209 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2587156182966324022, guid: d71fb8fdd7564124591ae9173367da6e, type: 3}
@@ -33905,46 +33905,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0adec37576c4c941857686854a52dd0, type: 3}
---- !u!21 &829896787
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _WidthHeightRadius: {r: 100, g: 100, b: 40, a: 0}
-  m_BuildTextureStacks: []
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -33994,48 +33954,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1045300659}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &833995831
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 50, g: 50, b: 0, a: 0}
-    - _r: {r: 15, g: 15, b: 15, a: 15}
-    - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
-  m_BuildTextureStacks: []
 --- !u!4 &838838408 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 262397163519151147, guid: 782fa981bd8405b40ab8e052261c014c, type: 3}
@@ -35183,6 +35101,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7318671460919949246, guid: 135b122a307315242b9e5fb6c2262e48, type: 3}
   m_PrefabInstance: {fileID: 874320018}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &874660197
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0.0023787655, g: 0, b: 1, a: 0.99916404}
+    - _halfSize: {r: 50, g: 50, b: 0, a: 0}
+    - _r: {r: 15, g: 15, b: 15, a: 15}
+    - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
+  m_BuildTextureStacks: []
 --- !u!4 &875411962 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2587156182966324022, guid: d71fb8fdd7564124591ae9173367da6e, type: 3}
@@ -37061,48 +37021,6 @@ Material:
     - _r: {r: 15, g: 15, b: 15, a: 15}
     - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
   m_BuildTextureStacks: []
---- !u!21 &917782789
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 50, g: 50, b: 0, a: 0}
-    - _r: {r: 15, g: 15, b: 15, a: 15}
-    - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
-  m_BuildTextureStacks: []
 --- !u!1001 &918106014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38784,6 +38702,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5969857643194630098, guid: c8a972a3290c3fe41bf04b529f7f73dd, type: 3}
   m_PrefabInstance: {fileID: 1027041255}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &972393991
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 50, g: 50, b: 0, a: 0}
+    - _r: {r: 15, g: 15, b: 15, a: 15}
+    - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
+  m_BuildTextureStacks: []
 --- !u!1001 &973681284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44361,48 +44321,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3452592442541445356, guid: 41e7419f7d451bf499c81662ce079949, type: 3}
   m_PrefabInstance: {fileID: 1075296507}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &1077028442
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0.03208597, g: 0.03208597, b: 0.96791404, a: 0.93666404}
-    - _halfSize: {r: 50, g: 50, b: 0, a: 0}
-    - _r: {r: 15, g: 15, b: 15, a: 15}
-    - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
-  m_BuildTextureStacks: []
 --- !u!1001 &1078001715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47108,6 +47026,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5445221899388881597, guid: e7bcd806d53514149b0036f83ed84409, type: 3}
   m_PrefabInstance: {fileID: 2080324926}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1132737002
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0.03208597, g: 0.03208597, b: 0.96791404, a: 0.93666404}
+    - _halfSize: {r: 50, g: 50, b: 0, a: 0}
+    - _r: {r: 15, g: 15, b: 15, a: 15}
+    - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
+  m_BuildTextureStacks: []
 --- !u!1001 &1138268730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52408,46 +52368,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0adec37576c4c941857686854a52dd0, type: 3}
---- !u!21 &1266379643
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _WidthHeightRadius: {r: 100, g: 100, b: 40, a: 0}
-  m_BuildTextureStacks: []
 --- !u!4 &1266431534 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2587156182966324022, guid: d71fb8fdd7564124591ae9173367da6e, type: 3}
@@ -53525,6 +53445,46 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1519188697402770169, guid: a90bc75212a7dce42b961e277b470f8e, type: 3}
   m_PrefabInstance: {fileID: 1300312168}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1301270196
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 100, g: 100, b: 40, a: 0}
+  m_BuildTextureStacks: []
 --- !u!1001 &1303493206
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56208,46 +56168,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2587156182966324022, guid: d71fb8fdd7564124591ae9173367da6e, type: 3}
   m_PrefabInstance: {fileID: 1350422285}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &1350745986
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _WidthHeightRadius: {r: 100, g: 100, b: 40, a: 0}
-  m_BuildTextureStacks: []
 --- !u!1001 &1351750092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63149,6 +63069,48 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 780d5ee3450b092408f1e19e2693461b, type: 3}
+--- !u!21 &1528624050
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 50, g: 50, b: 0, a: 0}
+    - _r: {r: 15, g: 15, b: 15, a: 15}
+    - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
+  m_BuildTextureStacks: []
 --- !u!4 &1529101273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2587156182966324022, guid: d71fb8fdd7564124591ae9173367da6e, type: 3}
@@ -67003,48 +66965,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca1bb55a188cd8e4c96e36f5692dd66a, type: 3}
---- !u!21 &1625570951
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 50, g: 50, b: 0, a: 0}
-    - _r: {r: 15, g: 15, b: 15, a: 15}
-    - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
-  m_BuildTextureStacks: []
 --- !u!1001 &1625911124
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68285,6 +68205,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2587156182966324022, guid: d71fb8fdd7564124591ae9173367da6e, type: 3}
   m_PrefabInstance: {fileID: 1536811537}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1652844107
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 50, g: 50, b: 0, a: 0}
+    - _r: {r: 15, g: 15, b: 15, a: 15}
+    - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
+  m_BuildTextureStacks: []
 --- !u!1001 &1653040935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69817,6 +69779,46 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2587156182966324022, guid: d71fb8fdd7564124591ae9173367da6e, type: 3}
   m_PrefabInstance: {fileID: 1690735207}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1695246742
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 100, g: 100, b: 40, a: 0}
+  m_BuildTextureStacks: []
 --- !u!1001 &1695807455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78142,6 +78144,46 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7318671460919949246, guid: 135b122a307315242b9e5fb6c2262e48, type: 3}
   m_PrefabInstance: {fileID: 1890583576}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1892526889
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 100, g: 100, b: 40, a: 0}
+  m_BuildTextureStacks: []
 --- !u!1001 &1894311054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85911,48 +85953,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2587156182966324022, guid: d71fb8fdd7564124591ae9173367da6e, type: 3}
   m_PrefabInstance: {fileID: 2069941734}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &2069977789
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0.0023787655, g: 0, b: 1, a: 0.99916404}
-    - _halfSize: {r: 50, g: 50, b: 0, a: 0}
-    - _r: {r: 15, g: 15, b: 15, a: 15}
-    - _rect2props: {r: 0.0000038146973, g: -0.0000076293945, b: 60.10408, a: 60.10408}
-  m_BuildTextureStacks: []
 --- !u!4 &2070193953 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2587156182966324022, guid: d71fb8fdd7564124591ae9173367da6e, type: 3}
@@ -88478,6 +88478,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1256063819}
     - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: Steps.Array.size
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
       propertyPath: Steps.Array.data[0]
       value: 1001
       objectReference: {fileID: 0}
@@ -88538,6 +88542,10 @@ PrefabInstance:
       value: 1015
       objectReference: {fileID: 0}
     - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: Steps.Array.data[28]
+      value: 8089259055616622593
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
       propertyPath: managedReferences[1007].Name
       value: "\uC2A4\uD0AC 3\uD68C"
       objectReference: {fileID: 0}
@@ -88590,6 +88598,14 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: Context.BuildGuideStyle.MarkerShader
+      value: 
+      objectReference: {fileID: 4800000, guid: 914c245a3da949489c1f344e864301ba, type: 3}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: Context.EnemyGuideStyle.MarkerShader
+      value: 
+      objectReference: {fileID: 4800000, guid: 914c245a3da949489c1f344e864301ba, type: 3}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
       propertyPath: managedReferences[1006].Text.Message
       value: "{\uD0A4}\uB97C \uB204\uB974\uAC70\uB098 \uC720\uC9C0\uD574 \uAE30\uBCF8\uACF5\uACA9\uC744
         \uBC1C\uC0AC \uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.      {\uD604\uC7AC\uD69F\uC218}
@@ -88602,9 +88618,21 @@ PrefabInstance:
         {\uD604\uC7AC\uD69F\uC218} / {\uBAA9\uD45C\uD69F\uC218}"
       objectReference: {fileID: 0}
     - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1020].ExpectedGold
+      value: 2400
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
       propertyPath: managedReferences[1012].ExpectedTurret
       value: 
       objectReference: {fileID: 8189752361921450186, guid: da4a62dd926064649aaca61200b5ee24, type: 3}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1014].Controls.Skill
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1015].Controls.Skill
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
       propertyPath: managedReferences[1017].ExpectedTurret
       value: 
@@ -88616,39 +88644,539 @@ PrefabInstance:
     - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
       propertyPath: managedReferences[1025].ExpectedTurret
       value: 
-      objectReference: {fileID: 6739040549583069518, guid: 850e14efdce06314a9ad0bd7e3f52dc8, type: 3}
+      objectReference: {fileID: 1781218806896001097, guid: a2ce73f0610ea2a4bbcaec4b058d8771, type: 3}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592]
+      value: Assembly-CSharp TutorialWaveStep
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593]
+      value: Assembly-CSharp TutorialMessageStep
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1014].Controls.Attack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1015].Controls.Attack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Name
+      value: "\uBAAC\uC2A4\uD130 \uC6E8\uC774\uBE0C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Name
+      value: "\uC124\uBA85 / UI \uAC15\uC870"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].WaveId
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Duration
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].AfterWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Completion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].ShowMarker
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Text.Focus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Text.Title
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Text.Focus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Text.Title
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1008].Enemies.Array.data[0].Gold
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1008].Enemies.Array.data[1].Gold
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1008].Enemies.Array.data[2].Gold
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].BeforeSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].MarkerLabel
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Text.Message
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Text.Message
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1015].Enemies.Array.data[0].Health
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1019].Enemies.Array.data[0].Health
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1019].Enemies.Array.data[1].Health
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1027].Enemies.Array.data[0].Health
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1027].Enemies.Array.data[3].Health
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].RetryIfLeaked
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].ShowCrosshair
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].SpawnInterval
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].DarkenOutside
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].ShowCrosshair
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1019].Enemies.Array.data[0].Defence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1019].Enemies.Array.data[1].Defence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1027].Enemies.Array.data[0].Defence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[1027].Enemies.Array.data[3].Defence
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].AfterCastleHit
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Controls.Build
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Controls.Skill
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Text.Crosshair
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Controls.Build
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Controls.Skill
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Text.Crosshair
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].BeforeCastleHit
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Controls.Attack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].ShowSpawnCamera
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Controls.Attack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].CastleText.Focus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].CastleText.Title
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].ArrivalText.Focus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].ArrivalText.Title
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].CastleText.Message
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Controls.BuildSlot
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Controls.ExitBuild
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Text.FocusOverride
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Controls.BuildSlot
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Controls.ExitBuild
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Text.FocusOverride
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
       propertyPath: OnCompleted.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].ArrivalText.Message
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].AvailableBuildPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].CastleText.Crosshair
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].ContinueExistingWave
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
       propertyPath: OnCompleted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 334253726754724495}
     - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].ArrivalText.Crosshair
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Controls.InputEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622593].Controls.InputEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].BeforeCastleText.Focus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].BeforeCastleText.Title
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].BeforeCastleText.Message
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].CastleText.FocusOverride
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
       propertyPath: OnCompleted.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GoToNextScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].ArrivalText.FocusOverride
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].BeforeCastleText.Crosshair
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[0].Gold
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[1].Gold
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[2].Gold
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].Gold
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[0].Speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[1].Speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[2].Speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].Speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[0].Health
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[0].Prefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[1].Health
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[1].Prefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[2].Health
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[2].Prefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].Health
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].Prefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[0].Defence
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[1].Defence
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[2].Defence
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].Defence
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].BeforeCastleText.FocusOverride
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[0].Experience
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[0].HoldAtGoal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[0].SpawnPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[1].Experience
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[1].HoldAtGoal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[1].SpawnPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[2].Experience
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[2].HoldAtGoal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[2].SpawnPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].Experience
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].HoldAtGoal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].SpawnPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[0].Destination
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[1].Destination
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[2].Destination
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].Destination
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[0].CastleDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[1].CastleDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[2].CastleDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].CastleDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[0].GrantNextLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[1].GrantNextLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[2].GrantNextLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].GrantNextLevel
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
       propertyPath: OnCompleted.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: TutorialManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[0].Route.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[1].Route.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[2].Route.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].Route.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
       propertyPath: OnCompleted.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: MainScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].Route.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].Route.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].Route.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
+      propertyPath: managedReferences[8089259055616622592].Enemies.Array.data[3].Route.Array.data[3]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9046908005530580192, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
       propertyPath: m_Name
       value: Tutorial
       objectReference: {fileID: 0}
-    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
-      propertyPath: Context.BuildGuideStyle.MarkerShader
-      value:
-      objectReference: {fileID: 4800000, guid: 914c245a3da949489c1f344e864301ba, type: 3}
-    - target: {fileID: 5938036125414880380, guid: c8b8c766ac83eeb43b046105e1589f64, type: 3}
-      propertyPath: Context.EnemyGuideStyle.MarkerShader
-      value:
-      objectReference: {fileID: 4800000, guid: 914c245a3da949489c1f344e864301ba, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
