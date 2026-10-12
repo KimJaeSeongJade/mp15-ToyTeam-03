@@ -100,7 +100,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  bulletDamage: 10
+  bulletDamage: 25
   speed: 15
   _lifeTime: 3
   _returnPoint: {fileID: 0}
