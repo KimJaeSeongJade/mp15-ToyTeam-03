@@ -33,10 +33,11 @@ public int CurrentHealth
 {
     get { return _currentHealth; }
 }
-
+```
 외부에서 값을 읽기만 하면 되는 경우에는 get만 제공한다.
 
 외부에서 값을 직접 변경해야 하는 경우에만 set을 추가한다.
+```csharp
 private int _currentHealth;
 
 public int CurrentHealth
@@ -44,8 +45,9 @@ public int CurrentHealth
     get { return _currentHealth; }
     set { _currentHealth = value; }
 }
-
+```
 set 안에서 외부에서 전달된 값은 value라는 이름으로 사용할 수 있다.
+```csharp
 public int CurrentHealth
 {
     get { return _currentHealth; }
@@ -54,13 +56,15 @@ public int CurrentHealth
         _currentHealth = value;
     }
 }
-
+```
 프로퍼티 사용 시 기본 원칙은 다음과 같다.
 - 단순히 외부에서 값을 확인할 목적이라면 get만 사용한다.
 - 외부에서 값을 변경해야 할 이유가 명확한 경우에만 set을 사용한다.
 - 불필요하게 public 필드를 사용하지 않는다.
 - 값 변경 시 추가 검사가 필요한 경우 set 내부에서 처리할 수 있다.
+
 예:
+```csharp
 private int _currentHealth;
 
 public int CurrentHealth
@@ -77,5 +81,5 @@ public int CurrentHealth
         _currentHealth = value;
     }
 }
-
+```
 외부에서 직접 수정할 필요가 없는 값은 읽기 전용 프로퍼티로 유지한다.
