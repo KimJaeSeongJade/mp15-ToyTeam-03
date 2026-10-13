@@ -4,6 +4,7 @@
 
 현재 프로젝트의 Assets 폴더 구조는 다음과 같다.
 
+```text
 Assets
 ├─ Animations
 ├─ Fonts
@@ -18,7 +19,7 @@ Assets
 ├─ Resources
 ├─ Shaders
 └─ Sprites  
-
+```
 ===
 
 각 작업자는 업무일지에 지정된 본인 담당 업무를 기준으로
@@ -31,6 +32,7 @@ Assets
 
 ## 2. 폴더별 사용
 
+```text
 Animations
 └─ Animation Clip, Animator 관련 파일
 
@@ -51,6 +53,7 @@ Scripts
 
 TextMesh Pro
 └─ TextMesh Pro 관련 기본 리소스
+```
 
 필요한 하위 폴더가 새로 필요한 경우
 팀원과 공유 후 생성한다.
