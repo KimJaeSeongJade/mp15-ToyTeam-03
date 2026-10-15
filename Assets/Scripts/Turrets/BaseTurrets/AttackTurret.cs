@@ -15,7 +15,7 @@ public class AttackTurret : BaseTurret, IBuffable
     
     [SerializeField] private Transform _target;
     private readonly TurretTargetList _targets = new TurretTargetList();
-    private float _lastAttackTime;
+    protected float _lastAttackTime;
 
     protected virtual void Start()
     {

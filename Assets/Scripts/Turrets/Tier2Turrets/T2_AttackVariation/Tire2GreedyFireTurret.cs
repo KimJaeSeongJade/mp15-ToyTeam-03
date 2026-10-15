@@ -11,7 +11,6 @@ public class Tire2GreedyFireTurret : AttackTurret
     [SerializeField] private float _stackDecaySpeed = 5f;    // 식을 때 초당 감소하는 대미지 수치
 
     [SerializeField]private float _currentDamageBonus = 0f; // 현재 누적된 추가 대미지 보너스 (총알이 읽어감)
-    private float _lastAttackTime;
 
     // 💡 총알이 피격 시점에 나의 누적 대미지를 실시간으로 조회할 수 있도록 열어둡니다.
     public float CurrentDamageBonus => _currentDamageBonus;

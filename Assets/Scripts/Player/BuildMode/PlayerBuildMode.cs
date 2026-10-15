@@ -1,7 +1,13 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerBuildMode : MonoBehaviour
 {
+    [SerializeField] private InputActionReference _buildAction;
+    [SerializeField] private InputActionReference _sellAction;
+    [SerializeField] private InputActionReference _endAction;
+    [SerializeField] private InputActionReference _selectTurretAction;
+
     [SerializeField] private BaseTurret _selectedTurret;
     [SerializeField] private LayerMask _targetMask;
     [SerializeField] private float _rayDistance;
@@ -11,7 +17,6 @@ public class PlayerBuildMode : MonoBehaviour
 
     private Camera mainCamera;
     private BuildPoint _buildPoint;
-    private PlayerInputReader _inputReader;
     private PlayerStatus _status;
     private PlayerAttackMode _attackMode;
     private PlayerWallet _wallet;
@@ -28,19 +33,41 @@ public class PlayerBuildMode : MonoBehaviour
         }
     }
     private void Start() => Init();
+    private void OnEnable()
+    {
+        _buildAction.action.Enable();
+        _buildAction.action.started += TurretBuild;
+        
+        _sellAction.action.Enable();
+        _sellAction.action.started += TurretSell;
+         
+        _endAction.action.Enable();
+        _endAction.action.started += BuildModeEnd;
+        
+        _selectTurretAction.action.Enable();
+        _selectTurretAction.action.started += SelectInputTurretKey;
+    }
     private void OnDisable() => ClearSelectedBuildTarget();
     private void OnDestroy()
     {
         if (_turretInfoUI != null) Destroy(_turretInfoUI.gameObject);
+
+        _buildAction.action.Disable();
+        _buildAction.action.started -= TurretBuild;
+
+        _sellAction.action.Disable();
+        _sellAction.action.started -= TurretSell;
+
+        _endAction.action.Disable();
+        _endAction.action.started -= BuildModeEnd;
+
+        _selectTurretAction.action.Disable();
+        _selectTurretAction.action.started -= SelectInputTurretKey;
     }
 
     private void Update()
     {
-        SetSelectedTurret();
         RayToBuildPoint();
-        TurretBuild();
-        TurretSell();
-        BuildModeEnd();
     }
 
     private void RayToBuildPoint()
@@ -111,10 +138,17 @@ public class PlayerBuildMode : MonoBehaviour
         }
     }
 
-    // 일반 공격 모드에서는 PlayerAttackMode가 선택 번호를 넘겨준다.
-    public bool SetSelectedTurret()
+    public void SelectInputTurretKey(InputAction.CallbackContext context)
     {
-        int selectedNum = _inputReader.GetSelectedTurretIndex();
+        int selectedNum = (int)context.ReadValue<float>();
+        Debug.Log(context.ReadValue<float>());
+
+        SetSelectedTurret(selectedNum);
+    }
+
+    // 일반 공격 모드에서는 PlayerAttackMode가 선택 번호를 넘겨준다.
+    public bool SetSelectedTurret(int selectedNum)
+    {
         if (selectedNum < 0) return false;
 
         BaseTurret selected = TurretCombinationTable.Instance.GetSelectedTurret(selectedNum);
@@ -129,9 +163,9 @@ public class PlayerBuildMode : MonoBehaviour
         return true;
     }
 
-    private void TurretBuild()
+    private void TurretBuild(InputAction.CallbackContext context)
     {
-        if (!_inputReader.isPressedAttackDown || _buildPoint == null || _selectedTurret == null || _selectedSlot < 0) return;
+        if (_buildPoint == null || _selectedTurret == null || _selectedSlot < 0) return;
         if (!TurretCombinationTable.Instance.IsBuildReady(_selectedSlot)) return;
 
         if (!_buildPoint.TryGetResultTurret(_selectedTurret, out BaseTurret resultTurret)
@@ -151,9 +185,9 @@ public class PlayerBuildMode : MonoBehaviour
         return;
     }
 
-    private void TurretSell()
+    private void TurretSell(InputAction.CallbackContext context)
     {
-        if (!_inputReader.isPressedSkillDown || _buildPoint == null) return;
+        if (_buildPoint == null) return;
 
         // 판매 성공시 프리뷰 색을 다시 정한다
         if (_buildPoint.TrySellTurret(_wallet))
@@ -164,9 +198,8 @@ public class PlayerBuildMode : MonoBehaviour
         }
     }
 
-    private void BuildModeEnd()
+    private void BuildModeEnd(InputAction.CallbackContext context)
     {
-        if (!_inputReader.isPressedExitBuild) return;
         SoundManager.Instance.Play(_sound.ExitBuild);
 
         ClearSelectedBuildTarget();
@@ -183,7 +216,6 @@ public class PlayerBuildMode : MonoBehaviour
 
     private void CacheComponent()
     {
-        _inputReader = GetComponent<PlayerInputReader>();
         _attackMode = GetComponent<PlayerAttackMode>();
         _status = GetComponent<PlayerStatus>();
         _wallet = GetComponent<PlayerWallet>();

@@ -1,19 +1,23 @@
+
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerGroundChecker))]
 public class PlayerJump : MonoBehaviour
 {
-    private PlayerInputReader _inputReader;
+    [SerializeField] private InputActionReference _jumpAction;
+
     private PlayerGroundChecker _groundChecker;
     private PlayerSound _sound;
+    private Rigidbody _rb;
+
     private bool _wasGrounded = true;
 
-    [SerializeField] private float _jumpForece;
+    [SerializeField] private float _jumpForece = 5f;
     [SerializeField] private float _coyoteTime = 0.1f;
     [SerializeField] private float _bufferTime = 0.1f;
     [SerializeField] private float _groundedAfterJumpIgnoreTime = 0.12f;
 
-    private Rigidbody _rb;
     private bool _jumpConsumed;
     private float _coyoteElapseTimer;
     private float _bufferElapseTimer;
@@ -26,22 +30,38 @@ public class PlayerJump : MonoBehaviour
     private bool _isCanJump => _canCoyote && _canBuffer && !_jumpConsumed;
 
     private void Awake() => CacheComponent();
-    private void Update() => JumpBuffer();
+    private void OnEnable()
+    {
+        _jumpAction.action.Enable();
+        _jumpAction.action.performed += OnJump;
+    }
+
     private void FixedUpdate()
     {
         _groundChecker.CheckGround();
+
         UpdateJumpIgnoreTimer();
         ResetJumpWhenLanded();
         CoyoteTime();
-        JumpCorrection();
+        JumpBuffer();
+        ExecuteJump();
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        _bufferElapseTimer = _bufferTime;
     }
 
     private void ExecuteJump()
     {
+        if (!_isCanJump) return;
+
         _jumpConsumed = true;
         IsJumping = true;
+
         _coyoteElapseTimer = 0f;
         _bufferElapseTimer = 0f;
+
         _groundedAfterJumpIgnoreTimer = _groundedAfterJumpIgnoreTime;
 
         Vector3 velocity = _rb.velocity;
@@ -49,7 +69,9 @@ public class PlayerJump : MonoBehaviour
         _rb.velocity = velocity;
 
         _rb.AddForce(Vector3.up * _jumpForece, ForceMode.Impulse);
+
         _wasGrounded = false;
+
         SoundManager.Instance.Play(_sound.Jump);
     }
 
@@ -63,38 +85,31 @@ public class PlayerJump : MonoBehaviour
 
         if (_coyoteElapseTimer <= 0f) return;
 
-        _coyoteElapseTimer -= Time.fixedDeltaTime;
+        _coyoteElapseTimer = Mathf.Max(0f, _coyoteElapseTimer - Time.fixedDeltaTime);
     }
 
     private void JumpBuffer()
     {
-        if (_inputReader.isPressedJumpKey)
-        {
-            _bufferElapseTimer = _bufferTime;
-            return;
-        }
-
         if (_bufferElapseTimer <= 0f) return;
 
-        _bufferElapseTimer -= Time.deltaTime;
-    }
-
-    private void JumpCorrection()
-    {
-        if (!_isCanJump) return;
-
-        ExecuteJump();
+        _bufferElapseTimer = Mathf.Max(0f, _bufferElapseTimer - Time.fixedDeltaTime);
     }
 
     private void ResetJumpWhenLanded()
     {
         if (_groundedAfterJumpIgnoreTimer > 0f) return;
+
         if (!_groundChecker.IsGrounded)
         {
             _wasGrounded = false;
             return;
         }
-        if (!_wasGrounded) SoundManager.Instance.Play(_sound.Land);
+
+        if (!_wasGrounded)
+        {
+            SoundManager.Instance.Play(_sound.Land);
+        }
+
         _wasGrounded = true;
 
         IsJumping = false;
@@ -105,19 +120,13 @@ public class PlayerJump : MonoBehaviour
     {
         if (_groundedAfterJumpIgnoreTimer <= 0f) return;
 
-        _groundedAfterJumpIgnoreTimer -= Time.fixedDeltaTime;
+        _groundedAfterJumpIgnoreTimer = Mathf.Max( 0f, _groundedAfterJumpIgnoreTimer - Time.fixedDeltaTime);
     }
 
     private void CacheComponent()
     {
         _rb = GetComponent<Rigidbody>();
-        _inputReader = GetComponent<PlayerInputReader>();
         _groundChecker = GetComponent<PlayerGroundChecker>();
         _sound = GetComponent<PlayerSound>();
-
-        if (_groundChecker == null)
-        {
-            _groundChecker = gameObject.AddComponent<PlayerGroundChecker>();
-        }
     }
 }

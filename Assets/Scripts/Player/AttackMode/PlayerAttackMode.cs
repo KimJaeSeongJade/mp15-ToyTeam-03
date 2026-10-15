@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAttackMode : MonoBehaviour
 {
+    [SerializeField] private InputActionReference _attackAction;
+    [SerializeField] private InputActionReference _skillAction;
+    [SerializeField] private InputActionReference _buildAction;
+
     [SerializeField] private BasicAttack _basicAttack;
     [SerializeField] private ObjectPool<BasicAttack> _attackPools;
     [SerializeField] private SkillAttack _skillAttack;
@@ -14,7 +19,6 @@ public class PlayerAttackMode : MonoBehaviour
     [SerializeField] private float _skillTime;
     [SerializeField] private float _skillRandge;
 
-    private PlayerInputReader _inputReader;
     private PlayerStatus _status;
     private PlayerBuildMode _buildMode;
     private PlayerAnimation _animation;
@@ -30,6 +34,18 @@ public class PlayerAttackMode : MonoBehaviour
     private bool isAttackMode = true;
 
     private void Awake() => CacheComponenet();
+    private void OnEnable()
+    {
+        _attackAction.action.Enable();
+        _skillAction.action.Enable();
+        _buildAction.action.Enable();
+    }
+    private void OnDisable()
+    {
+        _attackAction.action.Disable();
+        _skillAction.action.Disable();
+        _buildAction.action.Disable();
+    }
     private void Start() => Init();
 
     private void Update()
@@ -54,6 +70,8 @@ public class PlayerAttackMode : MonoBehaviour
 
     private void Attack()
     {
+        if (!_attackAction.action.IsPressed()) return;
+
         if (_chargingAttack != null)
         {
             if (_chargingAttack.IsCharging)
@@ -66,7 +84,7 @@ public class PlayerAttackMode : MonoBehaviour
             _chargingAttack = null;
         }
 
-        if (!canFire || !_inputReader.isPressedAttack) return;
+        if (!canFire) return;
 
         BasicAttack attack = _attackPools.Pop();
         _chargingAttack = attack as IChargeable;
@@ -86,7 +104,7 @@ public class PlayerAttackMode : MonoBehaviour
 
     private void SkillCasting()
     {
-        if (!canSkill || !_inputReader.isPressedSkill)
+        if (!canSkill || !_skillAction.action.IsPressed())
         {
             _animation.SetCharging(false);
             _skillIndicator.SetActive(false);
@@ -114,7 +132,7 @@ public class PlayerAttackMode : MonoBehaviour
     }
     private void SkillInit()
     {
-        if (!canSkill || !_inputReader.isPressedSkillUp || !_skillIndicator.activeInHierarchy) return;
+        if (!canSkill || !_skillAction.action.IsPressed() || !_skillIndicator.activeInHierarchy) return;
 
         Instantiate(_skillAttack, hit.point, Quaternion.identity);
         _animation.SetCharging(false);
@@ -127,7 +145,7 @@ public class PlayerAttackMode : MonoBehaviour
 
     private void AttackModeEnd()
     {
-        if (!_buildMode.SetSelectedTurret()) return;
+        if (!_buildAction.action.IsPressed()) return;
 
         isAttackMode = false;
 
@@ -168,7 +186,6 @@ public class PlayerAttackMode : MonoBehaviour
 
     private void CacheComponenet()
     {
-        _inputReader = GetComponent<PlayerInputReader>();
         _status = GetComponent<PlayerStatus>();
         _buildMode = GetComponent<PlayerBuildMode>();
         _animation = GetComponent<PlayerAnimation>();

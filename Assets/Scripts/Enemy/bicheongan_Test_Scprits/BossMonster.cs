@@ -10,7 +10,7 @@ public class BossMonster : BaseEnemy
     [Header("공격 퍼센트 예 1.7f면 70% 공력력 업")]
     [SerializeField] private float _upDamage;
 
-    private BossMove _move;
+    private BossMove _bossMove;
     private BossAnim _bossAnim;
     private MonsterHealth _hP;
     private Transform _targetTurret;
@@ -42,7 +42,7 @@ public class BossMonster : BaseEnemy
                 _isTurretInSight = true;
                 Debug.Log("터렛 발견");
 
-                _move.MoveToTurret(_targetTurret);
+                _bossMove.MoveToTurret(_targetTurret);
                 StartCoroutine(Delay());
             }
         }
@@ -53,7 +53,7 @@ public class BossMonster : BaseEnemy
         if (_isTurretInSight == false || _targetTurret != null) return;
         _isTurretInSight = false;
         _targetTurret = null;
-        _move.ReturnMove();
+        _bossMove.ReturnMove();
     }
 
     public void Attack()
@@ -90,7 +90,7 @@ public class BossMonster : BaseEnemy
         if(HpPersent <= 0.5f  && _phase == 2)
         {
             _phase = 3;
-            _move.UpSpeed();
+            _bossMove.UpSpeed();
             _bossAnim.Run();
             Debug.Log("이동속도 강화");
         }
@@ -100,7 +100,7 @@ public class BossMonster : BaseEnemy
             _isTurretInSight = false;
             _targetTurret = null;
 
-            _move.TurretIngnore();
+            _bossMove.TurretIngnore();
             Debug.Log("터렛 무시");
         }
     }
@@ -117,12 +117,12 @@ public class BossMonster : BaseEnemy
     private IEnumerator Delay()
     {
         yield return new WaitForSeconds(0.5f);
-        _move.MoveStop(_targetTurret);
+        _bossMove.MoveStop(_targetTurret);
     }
     protected override void CaCheComponents()
     {
         base.CaCheComponents();
-        _move = GetComponent<BossMove>();
+        _bossMove = GetComponent<BossMove>();
         _hP = GetComponent<MonsterHealth>();
         _bossAnim = GetComponent<BossAnim>();
     }
